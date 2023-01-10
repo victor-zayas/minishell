@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/01/10 20:14:47 by jaizpuru         ###   ########.fr       */
+/*   Created: 2022/05/02 16:12:39 by jaizpuru          #+#    #+#             */
+/*   Updated: 2022/05/02 16:43:16 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"minishell.h"
+#include "libft.h"
 
-void	ft_chopeadito(char	*prompt, char	**env)
+unsigned int	ft_module_fd(int n)
 {
-	char		**args;
-	char		*path;
-	char		*aux;
-
-	aux = prompt;
-	args = ft_split(aux, ' ');
-	path = get_cmd(*args, env);
-	execve(path, args, env);
-	add_history(aux);
-	free(prompt);
+	if (n < 0)
+		return (n * (-1));
+	else
+		return (n);
 }
 
-int	main(int argc, char **argv, char	**env)
+void	ft_putnbr_fd(int n, int fd)
 {
-	char	*prompt;
+	unsigned int	num;
 
-	while (1 && argc && argv)
+	if (n < 0)
+		ft_putchar_fd('-', fd);
+	num = ft_module_fd(n);
+	if (num >= 10)
 	{
-		prompt = readline("Shootgun =>");
-		if (prompt)
-			ft_chopeadito(prompt, env);
+		ft_putnbr_fd(num / 10, fd);
+		ft_putnbr_fd(num % 10, fd);
 	}
-	return (0);
+	else
+		ft_putchar_fd(num + '0', fd);
 }
