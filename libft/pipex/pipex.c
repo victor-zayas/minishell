@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:11:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2022/10/26 12:21:17 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/01/10 20:23:05 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ void	pipex(int f_1, int f_2, char	**args, char	**env)
 {
 	pid_t	pid;
 	int		fd[2];
-	int		check;
 
-	check = 0;
 	if (pipe(fd) == -1)
 		error ("pipe");
 	pid = fork();

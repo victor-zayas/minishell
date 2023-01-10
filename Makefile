@@ -6,7 +6,7 @@
 #    By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 12:33:28 by vzaya-s           #+#    #+#              #
-#    Updated: 2023/01/10 20:19:43 by jaizpuru         ###   ########.fr        #
+#    Updated: 2023/01/10 20:23:42 by jaizpuru         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = minishell
 
 # COMPILATION #
 CC = gcc
-CFLAGS = #-Wall -Wextra -Werror -g3 #$-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 #$-fsanitize=address
 RM = /bin/rm -rf
 READLINE_PATH = ~/.brew/opt/readline
 READLINE = -I$(READLINE_PATH)/include -lreadline -L $(READLINE_PATH)/lib 
@@ -34,8 +34,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	make -C libft all
 	make -C libft/pipex all
-	cp libft/libft.a .
-	$(CC) $(CFLAGS) $(OBJS) libft.a $(READLINE)-o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) libft/libft.a $(READLINE)-o $(NAME)
 	echo "$(BLUE)༺ library created༻$(END)"
 
 clean:
@@ -47,7 +46,6 @@ clean:
 fclean: clean
 	make -C libft fclean
 	make -C libft/pipex fclean
-	rm -r libft.a
 	$(RM) $(NAME)
 		echo "$(YELLOW)༺ Executable deleted༻$(END)"
 
