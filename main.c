@@ -3,10 +3,10 @@
 
 int	main(int argc, char **argv)
 {
-	if (argc >= 2)
-	{
-		while (1)
-			readline(argv[1]);
-		return (0);
-	}
+	char	*prompt;
+
+	prompt = NULL;
+	while (1 && argc && argv)
+		prompt = readline("Shootgun =>");
+	return (0);
 }

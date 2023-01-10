@@ -6,7 +6,7 @@
 #    By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 12:33:28 by vzaya-s           #+#    #+#              #
-#    Updated: 2022/12/28 12:37:16 by vzaya-s          ###   ########.fr        #
+#    Updated: 2023/01/10 19:00:02 by vzaya-s          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ READLINE = -I$(READLINE_PATH)/include -lreadline -L $(READLINE_PATH)/lib
 OBJS = $(SRCS:.c=.o)
 
 # SRC #
-SRCS = main.c	\
+SRCS = main.c
 
 # MAKEFILE ART #
 # COLORS #
@@ -39,7 +39,8 @@ WHITE=\033[0;37m
 PAPYRUS=\033[38;5;223m
 END=\033[0m
 
-define PHILO
+#Env variable
+define SHELL
 $(MAG)
 
 ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗     
@@ -51,7 +52,7 @@ $(MAG)
                                                                                                                              
 $(END)
 endef
-export PHILO
+export SHELL
 
 # RULES #
 .SILENT:
@@ -61,7 +62,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(READLINE)-o $(NAME)
 	echo "$(BLUE)༺ library created༻$(END)"
-	echo "$$PHILO"
+	echo "$$SHELL"
 
 clean: 
 	$(RM) $(OBJS)
