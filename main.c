@@ -6,35 +6,65 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/01/10 20:14:47 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/01/11 19:05:13 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
-void	ft_chopeadito(char	*prompt, char	**env)
+void	ft_chopeadito(char	*prompt, char	**env, t_cmd	*args)
 {
-	char		**args;
-	char		*path;
 	char		*aux;
 
 	aux = prompt;
-	args = ft_split(aux, ' ');
-	path = get_cmd(*args, env);
-	execve(path, args, env);
+	
+	args->quotes = get_quotes(args, aux);
+	printf("args->quotes: %d\n", args->quotes);
+	
+	args->double_quotes = get_double_quotes(args, aux);
+	printf("args->double_quotes: %d\n", args->double_quotes);
+
+	args->pipes = get_pipes(args, aux);
+	printf("args->pipes: %d\n", args->pipes);
+
+	get_token(args, aux);
+	
 	add_history(aux);
+	env = 0;
 	free(prompt);
+}
+
+void	my_signal(int sig)
+{
+	if (sig == 2)
+	{
+		//rl_replace_line();
+		rl_on_new_line();
+		//rl_redisplay();
+	}
+	else if (sig == 3)
+	{
+		rl_redisplay();
+	}
+	return ;
 }
 
 int	main(int argc, char **argv, char	**env)
 {
+	t_cmd		args;
 	char	*prompt;
 
+	init_args(&args);
+	/* signal(SIGINT, my_signal);
+	signal(SIGQUIT, my_signal); */
 	while (1 && argc && argv)
 	{
 		prompt = readline("Shootgun =>");
-		if (prompt)
-			ft_chopeadito(prompt, env);
+		if (!prompt)
+			break ;
+		if (!prompt[0])
+			continue ;
+		ft_chopeadito(prompt, env, &args);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 12:33:28 by vzaya-s           #+#    #+#              #
-#    Updated: 2023/01/10 20:23:42 by jaizpuru         ###   ########.fr        #
+#    Updated: 2023/01/12 15:34:20 by jaizpuru         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ READLINE = -I$(READLINE_PATH)/include -lreadline -L $(READLINE_PATH)/lib
 OBJS = $(SRCS:.c=.o)
 
 # SRC #
-SRCS = main.c utils.c
+SRCS = main.c utils.c lexer.c counter.c
 
 # RULES #
 .SILENT:
@@ -41,7 +41,7 @@ clean:
 	make -C libft clean
 	make -C libft/pipex clean
 	$(RM) $(OBJS)
-	echo "$(RED)༺ Objs deleted༻$(END)"
+		echo "$(RED)༺ Objs deleted༻$(END)"
 
 fclean: clean
 	make -C libft fclean
