@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:33:36 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/12 15:34:12 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/01/12 18:52:07 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ int	get_quotes(t_cmd	*args, char	*line)
 	while (line[i])
 	{
 		if (line[i] == ('\''))
-			checker += 1;
+			checker++;
 		i++;
 	}
 	if ((checker % 2) == 0 && checker != 0)
-		return (2);
+		return (checker);
 	else if ((checker % 2) == 1 && checker != 0)
-		return (1);
+		return (checker);
 	else
-		return (0);
+		return (checker);
 }
 
 int	get_double_quotes(t_cmd	*args, char	*line)
@@ -45,15 +45,15 @@ int	get_double_quotes(t_cmd	*args, char	*line)
 	while (line[i])
 	{
 		if (line[i] == ('"'))
-			checker += 1;
+			checker++;
 		i++;
 	}
 	if ((checker % 2) == 0 && checker != 0)
-		return (2);
+		return (checker);
 	else if ((checker % 2) == 1 && checker != 0)
-		return (1);
+		return (checker);
 	else
-		return (0);
+		return (checker);
 }
 
 int	get_pipes(t_cmd	*args, char	*line)
@@ -67,13 +67,13 @@ int	get_pipes(t_cmd	*args, char	*line)
 	while (line[i])
 	{
 		if (line[i] == ('|'))
-			checker += 1;
+			checker++;
 		i++;
 	}
 	if ((checker % 2) == 0 && checker != 0)
-		return (2);
+		return (checker);
 	else if ((checker % 2) == 1 && checker != 0)
-		return (1);
+		return (checker);
 	else
-		return (0);
+		return (checker);
 }

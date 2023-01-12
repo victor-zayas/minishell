@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/01/11 19:05:13 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/01/12 18:38:35 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,10 @@ void	ft_chopeadito(char	*prompt, char	**env, t_cmd	*args)
 	aux = prompt;
 	
 	args->quotes = get_quotes(args, aux);
-	printf("args->quotes: %d\n", args->quotes);
 	
 	args->double_quotes = get_double_quotes(args, aux);
-	printf("args->double_quotes: %d\n", args->double_quotes);
 
 	args->pipes = get_pipes(args, aux);
-	printf("args->pipes: %d\n", args->pipes);
 
 	get_token(args, aux);
 	
@@ -55,8 +52,8 @@ int	main(int argc, char **argv, char	**env)
 	char	*prompt;
 
 	init_args(&args);
-	/* signal(SIGINT, my_signal);
-	signal(SIGQUIT, my_signal); */
+	signal(SIGINT, my_signal);
+	signal(SIGQUIT, my_signal);
 	while (1 && argc && argv)
 	{
 		prompt = readline("Shootgun =>");

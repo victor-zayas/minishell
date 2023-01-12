@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/12 15:34:24 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/01/12 18:57:12 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,17 @@ void	get_token(t_cmd	*cmd, char	*line)
 			line = double_quotes_lexer(cmd, line, i);
 			i = 0;
 		}
-		if (line[i++] == '|' && line[i]) 
+		if (line[i] == '|' && line[i]) 
 		{
 			line = pipes_lexer(cmd, line, i);
-			i = 0;
+			i = 1;
 		}
 	}
-	cmd->args[j] = NULL;
+	cmd->args[cmd->size] = NULL;
+	cmd->size = 0;
 	i = 0;
-	while((cmd->args)[i])
-	{
-		printf("I got this: %s\n", cmd->args[i]);
-		i++;
-	}
+	while((cmd->args)[i] != NULL)
+		printf("Token n.%d: %s\n", j++, cmd->args[i++]);
 }
 
 char	*ft_path(char	**enviroment_path)
