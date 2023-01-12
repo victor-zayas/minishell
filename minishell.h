@@ -3,7 +3,6 @@
 
 #include <stdlib.h>
 #include "libft/libft.h"
-#include "libft/pipex/pipex.h"
 #include <readline/readline.h>
 #include <readline/history.h>
 
