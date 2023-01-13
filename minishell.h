@@ -2,6 +2,7 @@
 # define MINISHELL_H
 
 #include <stdlib.h>
+#include <stdio.h>
 #include "libft/libft.h"
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -15,21 +16,34 @@ typedef	struct s_cmd
 	int		pipes;
 }		t_cmd;
 
+	// MAIN
 void	init_args(t_cmd	*new);
+void	print(t_cmd	*cmd);
 void	ft_chopeadito(char	*prompt, char	**env, t_cmd	*args);
 
+	// GET_TOKEN
 void	get_token(t_cmd	*cmd, char	*line);
-int	get_quotes(t_cmd	*args, char	*line);
-int	get_double_quotes(t_cmd	*args, char	*line);
-int	get_pipes(t_cmd	*args, char	*line);
+
+	// GET_DATA
+int		get_quotes(t_cmd	*args, char	*line);
+int		get_double_quotes(t_cmd	*args, char	*line);
+int		get_pipes(t_cmd	*args, char	*line);
 
 	// LEXER
-char	*pipes_lexer(t_cmd	*cmd, char	*line, int	pos);
-char	*quotes_lexer(t_cmd	*cmd, char	*line, int	pos);
-char	*double_quotes_lexer(t_cmd	*cmd, char	*line, int	pos);
+char	*quotes_lexer(t_cmd	*cmd, char	*line, int	*pos);
+char	*double_quotes_lexer(t_cmd	*cmd, char	*line, int	*pos);
+char	*pipes_lexer(t_cmd	*cmd, char	*line, int	*pos);
 
 	// PIPEX
+void	exec(t_cmd	*token, char	**env);
+char	*ft_path(char	**enviroment_path);
 char	*get_cmd(char	*arguments, char	**enviroment);
+
+	// FREE_ARGS
+void	free_args(t_cmd	*args);
+
+
+
 
 	// TO _ DO
 

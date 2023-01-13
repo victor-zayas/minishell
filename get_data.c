@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   counter.c                                          :+:      :+:    :+:   */
+/*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:33:36 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/12 18:52:07 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/01/13 12:33:03 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,17 @@ int	get_pipes(t_cmd	*args, char	*line)
 		return (checker);
 	else
 		return (checker);
+}
+
+void	print(t_cmd	*cmd)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	printf("\n				ARGS INSIDE THE STRUCTURE:\n");
+	while(cmd->args[i])
+		printf("				ARG N.%d ->> %s\n", j++, cmd->args[i++]);
+	printf("\n				\n");
 }

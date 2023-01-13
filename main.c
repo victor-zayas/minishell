@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/01/12 19:26:53 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/01/13 13:25:00 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,20 @@ void	ft_chopeadito(char	*prompt, char	**env, t_cmd	*args)
 	char		*aux;
 
 	aux = prompt;
-	
+	// get_data
 	args->quotes = get_quotes(args, aux);
-	
 	args->double_quotes = get_double_quotes(args, aux);
-
 	args->pipes = get_pipes(args, aux);
-
+	// get_token
 	get_token(args, aux);
-	
+	// print
+	print(args);
+	// get_cmd
+	// exec(args, env);
+	// get_history
 	add_history(aux);
 	env = 0;
+	free_args(args);
 	free(prompt);
 }
 

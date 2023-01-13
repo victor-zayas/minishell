@@ -1,57 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   get_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/12 18:57:12 by jaizpuru         ###   ########.fr       */
+/*   Created: 2023/01/13 11:32:03 by jaizpuru          #+#    #+#             */
+/*   Updated: 2023/01/13 12:26:15 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
-void	init_args(t_cmd	*new)
+void	exec(t_cmd	*token, char	**env)
 {
-	new->args = NULL;
-	new->size = 0;
-	new->quotes = 0;
-}
-
-void	get_token(t_cmd	*cmd, char	*line)
-{
-	int	i;
-	int	start;
-	int	j;
+	char	**args;
+	char	*path;
+	int		i;
 
 	i = -1;
-	j = 0;
-	start = 0;
-	cmd->args = (char	**)malloc(sizeof(char	*) * (cmd->quotes + cmd->double_quotes + cmd->pipes + 1)); // IMPORTANT!
-	while(line[++i])
-	{
-		if((line[i] == '\'') && line[i])
-		{
-			line = quotes_lexer(cmd, line, i);
-			i = 0;
-		}
-		if (line[i] == '"' && line[i])
-		{
-			line = double_quotes_lexer(cmd, line, i);
-			i = 0;
-		}
-		if (line[i] == '|' && line[i]) 
-		{
-			line = pipes_lexer(cmd, line, i);
-			i = 1;
-		}
-	}
-	cmd->args[cmd->size] = NULL;
-	cmd->size = 0;
-	i = 0;
-	while((cmd->args)[i] != NULL)
-		printf("Token n.%d: %s\n", j++, cmd->args[i++]);
+	args  = NULL;
+	if(ft_strchr(*token->args, '\'') != NULL)
+		args = ft_split(*token->args, '\'');
+	else if(ft_strchr(*token->args, '"') != NULL)
+		args = ft_split(*token->args, '"');
+	else
+		args = ft_split(*token->args, ' ');
+	path = get_cmd(*args, env);
+	/* printf("\n\nEXEC FUNCTION: Cual es el resultado de path -> %s\n", path); */
+	execve(path, args, env);
 }
 
 char	*ft_path(char	**enviroment_path)
