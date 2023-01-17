@@ -10,6 +10,7 @@
 typedef	struct s_cmd
 {
 	char	**args;
+	char	**cmds;
 	int		size;
 
 	int		words;

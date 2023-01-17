@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/17 15:55:31 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:17:25 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	init_args(t_cmd	*cmd)
 {
-	cmd->args = NULL;
 	cmd->size = 0;
 	cmd->words = 0;
 	cmd->quotes = 0;
@@ -30,9 +29,11 @@ void	ft_lexer(t_cmd	*args, char	*prompt)
 	(*i) = -1;
 	while(prompt[++(*i)])
 	{
-		if((prompt[(*i)] != '\'') && (prompt[(*i)] != '"') && (prompt[(*i)] != '|'))
+		if((prompt[(*i)] != '\'') && (prompt[(*i)] != '"') &&
+				(prompt[(*i)] != '>')  && (prompt[(*i)] != '<') 
+					&& (prompt[(*i)] != '|'))
 			prompt = clean_words(args, prompt, i);
-		if((prompt[(*i)] == '\'') && prompt[(*i)])
+		if((prompt[(*i)] == '\'') && prompt[(*i)] && args->quotes > 0)
 			prompt = quotes_lexer(args, prompt, i);
 		if (prompt[(*i)] == '"' && prompt[(*i)])
 			prompt = double_quotes_lexer(args, prompt, i);

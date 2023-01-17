@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/01/17 12:05:56 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:57:47 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,10 @@ void	ft_chopeadito(t_cmd	*args, char	*prompt, char	**env)
 
 void	my_signal()
 {
-		ft_putstr_fd("Shootgun=▸  ", 2);
-		write(2, "\n", 1);
-		rl_reset_line_state();
-		rl_on_new_line();
+		write(1, "Shootgun=▸  ", 15);
+		write(1, "\n", 1);
 		rl_replace_line("", 0);
+		rl_on_new_line();
 		rl_redisplay();
 }
 

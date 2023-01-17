@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:33:36 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/17 16:10:41 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/01/17 18:37:59 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	get_words(char	*prompt)
 		}
 		i++;
 	}
-	printf("						CLEAN WORDS -> %d\n", checker);
 	return (checker);
 }
 
