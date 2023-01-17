@@ -6,7 +6,7 @@
 #    By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 12:33:28 by vzaya-s           #+#    #+#              #
-#    Updated: 2023/01/13 11:35:56 by jaizpuru         ###   ########.fr        #
+#    Updated: 2023/01/17 12:19:31 by jaizpuru         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,13 @@ READLINE = -I/Users/$(USER)/.brew/opt/readline/include/
 OBJS = $(SRCS:.c=.o)
 
 # SRC #
-SRCS = main.c get_data.c tokens.c lexer.c get_exec.c
+SRCS = main.c \
+	get_data.c \
+	get_data2.c \
+	tokens.c \
+	lexer.c \
+	lexer2.c \
+	get_exec.c
 
 # MAKEFILE ART #
 # COLORS #

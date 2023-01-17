@@ -6,47 +6,48 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/01/13 13:25:00 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/01/17 12:05:56 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
-void	ft_chopeadito(char	*prompt, char	**env, t_cmd	*args)
+void	print(t_cmd	*cmd)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	printf("\n				ARGS INSIDE THE STRUCTURE:\n");
+	while(cmd->args[i])
+		printf("				ARG N.%d ->> %s\n", j++, cmd->args[i++]);
+	printf("\n				\n");
+}
+
+void	ft_chopeadito(t_cmd	*args, char	*prompt, char	**env)
 {
 	char		*aux;
 
 	aux = prompt;
-	// get_data
-	args->quotes = get_quotes(args, aux);
-	args->double_quotes = get_double_quotes(args, aux);
-	args->pipes = get_pipes(args, aux);
-	// get_token
+	get_data(args, aux);
 	get_token(args, aux);
-	// print
 	print(args);
-	// get_cmd
 	// exec(args, env);
-	// get_history
 	add_history(aux);
 	env = 0;
 	free_args(args);
 	free(prompt);
 }
 
-void	my_signal(int sig)
+void	my_signal()
 {
-	if (sig == 2)
-	{
-		rl_replace_line("", 0);
+		ft_putstr_fd("Shootgun=▸  ", 2);
+		write(2, "\n", 1);
+		rl_reset_line_state();
 		rl_on_new_line();
-		//rl_redisplay();
-	}
-	else if (sig == 3)
-	{
+		rl_replace_line("", 0);
 		rl_redisplay();
-	}
-	return ;
 }
 
 int	main(int argc, char **argv, char	**env)
@@ -56,15 +57,15 @@ int	main(int argc, char **argv, char	**env)
 
 	init_args(&args);
 	signal(SIGINT, my_signal);
-	signal(SIGQUIT, my_signal);
+	signal(SIGQUIT, SIG_IGN);
 	while (1 && argc && argv)
 	{
-		prompt = readline("Shootgun =>");
+		prompt = readline("Shootgun=▸");
 		if (!prompt)
 			break ;
 		if (!prompt[0])
 			continue ;
-		ft_chopeadito(prompt, env, &args);
+		ft_chopeadito(&args, prompt, env);
 	}
 	return (0);
 }
