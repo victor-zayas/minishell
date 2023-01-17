@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:16:59 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/17 13:36:18 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/01/17 16:15:41 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,13 @@ char	*quotes_lexer(t_cmd	*cmd, char	*prompt, int	*pos)
 				aux++;
 	}
 	cmd->args[cmd->size++] = ft_substr(prompt, start, aux - start + 1);
-	printf("cmd->args -> %s\n", cmd->args[cmd->size - 1]);
 	char *tmp = ft_substr(prompt, aux, ft_strlen(prompt) - aux + 1);
 	prompt = ft_strdup(tmp);
-	free(tmp);
-	if(prompt[aux + 2] == '\'')
+	if(prompt[aux + 1] != ' ' && prompt[aux + 1])
 		*pos = 0;
 	else
 		*pos = 1;
+	free(tmp);
 	return (prompt);
 }
 
@@ -80,7 +79,7 @@ char	*double_quotes_lexer(t_cmd	*cmd, char	*prompt, int	*pos)
 	char *tmp = ft_substr(prompt, aux + 1, ft_strlen(prompt) - aux + 1);
 	prompt = ft_strdup(tmp);
 	free(tmp);
-	if(prompt[aux + 1] != ' ')
+	if(prompt[aux + 1] != ' ' && prompt[aux + 1])
 		*pos = 0;
 	else
 		*pos = 1;
@@ -93,11 +92,9 @@ char	*pipes_lexer(t_cmd	*cmd, char	*prompt, int	*pos)
 	char 	*tmp;
 
 	aux = (*pos);
-	printf("			POS -> %d\n", aux);
-	printf("			FINISH POS -> %lu\n", ft_strlen(prompt) - aux);
 	cmd->args[cmd->size++] = ft_substr(prompt, aux, 1);
 	tmp = ft_substr(prompt, aux, ft_strlen(prompt) - aux + 1);
-	if(prompt[aux + 1] != ' ')
+	if(prompt[aux + 1] != ' ' && prompt[aux + 1])
 		*pos = 0;
 	else
 		*pos = 1;
