@@ -10,29 +10,42 @@
 typedef	struct s_cmd
 {
 	char	**args;
+	char	**cmds;
 	int		size;
+
+	int		words;
 	int		quotes;
 	int		double_quotes;
 	int		pipes;
+
+	int		lesser;
+	int		greater;
 }		t_cmd;
 
 	// MAIN
 void	init_args(t_cmd	*new);
 void	print(t_cmd	*cmd);
-void	ft_chopeadito(char	*prompt, char	**env, t_cmd	*args);
+void	ft_chopeadito(t_cmd	*args, char	*prompt, char	**env);
 
 	// GET_TOKEN
-void	get_token(t_cmd	*cmd, char	*line);
+void	get_token(t_cmd	*cmd, char	*prompt);
 
 	// GET_DATA
-int		get_quotes(t_cmd	*args, char	*line);
-int		get_double_quotes(t_cmd	*args, char	*line);
-int		get_pipes(t_cmd	*args, char	*line);
+void	get_data(t_cmd	*args, char	*prompt);
+int		get_words(char	*prompt);
+int		get_quotes(char	*prompt);
+int		get_double_quotes(char	*prompt);
+int		get_pipes(char	*prompt);
+int		get_lesser(char	*prompt);
+int		get_greater(char	*prompt);
 
 	// LEXER
-char	*quotes_lexer(t_cmd	*cmd, char	*line, int	*pos);
-char	*double_quotes_lexer(t_cmd	*cmd, char	*line, int	*pos);
-char	*pipes_lexer(t_cmd	*cmd, char	*line, int	*pos);
+char	*clean_words(t_cmd	*cmd, char	*prompt, int	*pos);
+char	*quotes_lexer(t_cmd	*cmd, char	*prompt, int	*pos);
+char	*double_quotes_lexer(t_cmd	*cmd, char	*prompt, int	*pos);
+char	*pipes_lexer(t_cmd	*cmd, char	*prompt, int	*pos);
+char	*out_lexer(t_cmd	*cmd, char	*prompt, int	*pos);
+char	*in_lexer(t_cmd	*cmd, char	*prompt, int	*pos);
 
 	// PIPEX
 void	exec(t_cmd	*token, char	**env);
@@ -48,6 +61,7 @@ void	free_args(t_cmd	*args);
 	// TO _ DO
 
 	//lexer(); //optional //comillas simples, comillas dobles, pipes
+	// 1.er paso
 		//encuentro comilla, leo hasta la siguiente comilla (si no hay doy error), lo meto en un token
 			//p.e.: ls 'hola buenas "tardes $hehe"' pwd token 1 = ls, token 2 = 'hola buenas "tardes $hehe"' token 3 = pwd
 			//while (prompt)
