@@ -6,7 +6,7 @@
 #    By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 12:33:28 by vzaya-s           #+#    #+#              #
-#    Updated: 2023/01/18 12:13:03 by jaizpuru         ###   ########.fr        #
+#    Updated: 2023/01/18 13:19:51 by jaizpuru         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS = main.c \
 	get_data.c \
 	get_data2.c \
 	utils_iterator.c \
+	utils_data_iterator.c \
 	tokens.c \
 	lexer.c \
 	lexer2.c \

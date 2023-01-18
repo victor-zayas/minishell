@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/01/17 17:57:47 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/01/18 13:27:20 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ void	print(t_cmd	*cmd)
 	while(cmd->args[i])
 		printf("				ARG N.%d ->> %s\n", j++, cmd->args[i++]);
 	printf("\n				\n");
+	printf("\n				DATA INSIDE THE STRUCTURE:\n");
+	printf("				Clean words		: %d\n", cmd->words);
+	printf("				Quotes	   		: %d\n", cmd->quotes);
+	printf("				Double quotes	: %d\n", cmd->double_quotes);
+	printf("				Pipes			: %d\n", cmd->pipes);
+	printf("				Output Redirect	: %d\n", cmd->greater);
+	printf("				Input Redirect	: %d\n", cmd->lesser);
 }
 
 void	ft_chopeadito(t_cmd	*args, char	*prompt, char	**env)
@@ -30,6 +37,7 @@ void	ft_chopeadito(t_cmd	*args, char	*prompt, char	**env)
 	char		*aux;
 
 	aux = prompt;
+	init_args(args);
 	get_data(args, aux);
 	get_token(args, aux);
 	print(args);

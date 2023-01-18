@@ -6,13 +6,44 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:33:36 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/17 18:37:59 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/01/18 13:49:39 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 void	get_data(t_cmd	*args, char	*prompt)
+{
+	int	*i;
+	int	check;
+	
+	i = malloc(sizeof(int *));
+	(*i) = 0;
+	check = 0;
+	while(prompt[(*i)])
+	{
+		if((prompt[(*i)] != '\'') && (prompt[(*i)] != '"') &&
+				(prompt[(*i)] != '>')  && (prompt[(*i)] != '<')
+					&& (prompt[(*i)] != '|'))
+			check = di_cwords(args, prompt, i);
+		if((prompt[(*i)] == '\'') && prompt[(*i)])
+			check = di_qwords(args, prompt, i);
+		if (prompt[(*i)] == '"' && prompt[(*i)])
+			check = di_dqwords(args, prompt, i);
+		if (prompt[(*i)] == '|' && prompt[(*i)])
+			args->pipes += 1;
+		if (prompt[(*i)] == '<' && prompt[(*i)])
+			args->lesser += 1;
+		if (prompt[(*i)] == '>' && prompt[(*i)])
+			args->greater += 1;
+		(*i)++;
+	}
+	if(check == -1)
+		exit (EXIT_FAILURE);
+	free(i);
+}
+
+/* void	get_data(t_cmd	*args, char	*prompt)
 {
 	args->words = get_words(prompt);
 	args->quotes = get_quotes(prompt);
@@ -27,12 +58,7 @@ void	get_data(t_cmd	*args, char	*prompt)
 		printf("Error\n");
 		exit (EXIT_FAILURE);
 	}
-	args->pipes = get_pipes(prompt);
-	args->lesser = get_lesser(prompt);
-	args->greater = get_greater(prompt);
-	args->quotes /= 2;
-	args->double_quotes /= 2;
-}
+} */
 
 int	get_words(char	*prompt)
 {
