@@ -67,6 +67,7 @@ void	free_args(t_cmd	*args);
 
 
 	// TO _ DO
+	// REMOVE POINTERS OF ITERATORS IN GET_DATA
 
 	//lexer(); //optional //comillas simples, comillas dobles, pipes
 	// 1.er paso
