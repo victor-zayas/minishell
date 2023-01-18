@@ -39,6 +39,10 @@ int		get_pipes(char	*prompt);
 int		get_lesser(char	*prompt);
 int		get_greater(char	*prompt);
 
+void	i_cwords(char	*prompt, int	*pos);
+void	i_qwords(char	*prompt, int	*pos);
+void	i_dqwords(char	*prompt, int	*pos);
+
 	// LEXER
 char	*clean_words(t_cmd	*cmd, char	*prompt, int	*pos);
 char	*quotes_lexer(t_cmd	*cmd, char	*prompt, int	*pos);
