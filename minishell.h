@@ -43,6 +43,10 @@ void	i_cwords(char	*prompt, int	*pos);
 void	i_qwords(char	*prompt, int	*pos);
 void	i_dqwords(char	*prompt, int	*pos);
 
+int		di_cwords(t_cmd	*args, char	*prompt, int	*pos);
+int		di_qwords(t_cmd	*args, char	*prompt, int	*pos);
+int		di_dqwords(t_cmd	*args, char	*prompt, int	*pos);
+
 	// LEXER
 char	*clean_words(t_cmd	*cmd, char	*prompt, int	*pos);
 char	*quotes_lexer(t_cmd	*cmd, char	*prompt, int	*pos);

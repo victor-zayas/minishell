@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/18 12:26:14 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/01/18 13:42:10 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	init_args(t_cmd	*cmd)
 	cmd->quotes = 0;
 	cmd->double_quotes = 0;
 	cmd->pipes = 0;
+	cmd->lesser = 0;
+	cmd->greater = 0;
 }
 
 void	ft_lexer(t_cmd	*args, char	*prompt)
