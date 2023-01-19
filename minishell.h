@@ -48,12 +48,12 @@ int		di_qwords(t_cmd	*args, char	*prompt, int	*pos);
 int		di_dqwords(t_cmd	*args, char	*prompt, int	*pos);
 
 	// LEXER
-char	*clean_words(t_cmd	*cmd, char	*prompt, int	*pos);
-char	*quotes_lexer(t_cmd	*cmd, char	*prompt, int	*pos);
-char	*double_quotes_lexer(t_cmd	*cmd, char	*prompt, int	*pos);
-char	*pipes_lexer(t_cmd	*cmd, char	*prompt, int	*pos);
-char	*out_lexer(t_cmd	*cmd, char	*prompt, int	*pos);
-char	*in_lexer(t_cmd	*cmd, char	*prompt, int	*pos);
+char	*clean_words(t_cmd	*cmd, char	*prompt, int	pos);
+char	*quotes_lexer(t_cmd	*cmd, char	*prompt, int	pos);
+char	*double_quotes_lexer(t_cmd	*cmd, char	*prompt, int	pos);
+char	*pipes_lexer(t_cmd	*cmd, char	*prompt, int	pos);
+char	*out_lexer(t_cmd	*cmd, char	*prompt, int	pos);
+char	*in_lexer(t_cmd	*cmd, char	*prompt, int	pos);
 
 	// PIPEX
 void	exec(t_cmd	*token, char	**env);
@@ -67,11 +67,14 @@ void	free_args(t_cmd	*args);
 
 
 	// TO _ DO
+	// REMOVE POINTERS OF ITERATORS IN GET_DATA
 
 	//lexer(); //optional //comillas simples, comillas dobles, pipes
 	// 1.er paso
 		//encuentro comilla, leo hasta la siguiente comilla (si no hay doy error), lo meto en un token
 			//p.e.: ls 'hola buenas "tardes $hehe"' pwd token 1 = ls, token 2 = 'hola buenas "tardes $hehe"' token 3 = pwd
+			//p.e.: ls -la  'h''u'
+			//p.e.:               ls    ' '  -l a  'h'
 			//while (prompt)
 				//if (prompt[i] == '\'') -> else if (prompt[i] == '"') else if (prompt[i] == '|') else
 	//parser();
