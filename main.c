@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hedgedog <hedgedog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/01/18 13:27:20 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:08:35 by hedgedog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print(t_cmd	*cmd)
 	j = 0;
 	printf("\n				ARGS INSIDE THE STRUCTURE:\n");
 	while(cmd->args[i])
-		printf("				ARG N.%d ->> %s\n", j++, cmd->args[i++]);
+		printf("				ARG N.%d ->> [%s]\n", j++, cmd->args[i++]);
 	printf("\n				\n");
 	printf("\n				DATA INSIDE THE STRUCTURE:\n");
 	printf("				Clean words		: %d\n", cmd->words);
@@ -32,7 +32,7 @@ void	print(t_cmd	*cmd)
 	printf("				Input Redirect	: %d\n", cmd->lesser);
 }
 
-void	ft_chopeadito(t_cmd	*args, char	*prompt, char	**env)
+void	ft_chopeadito(t_cmd	*args, char	*prompt)
 {
 	char		*aux;
 
@@ -43,7 +43,6 @@ void	ft_chopeadito(t_cmd	*args, char	*prompt, char	**env)
 	print(args);
 	// exec(args, env);
 	add_history(aux);
-	env = 0;
 	free_args(args);
 	free(prompt);
 }
@@ -57,7 +56,8 @@ void	my_signal()
 		rl_redisplay();
 }
 
-int	main(int argc, char **argv, char	**env)
+// int	main(int argc, char **argv, char	**env)
+int	main(int argc, char **argv)
 {
 	t_cmd		args;
 	char	*prompt;
@@ -72,7 +72,8 @@ int	main(int argc, char **argv, char	**env)
 			break ;
 		if (!prompt[0])
 			continue ;
-		ft_chopeadito(&args, prompt, env);
+		ft_chopeadito(&args, prompt);
+		// ft_chopeadito(&args, prompt, env);
 	}
 	return (0);
 }

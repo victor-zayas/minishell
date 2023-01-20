@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hedgedog <hedgedog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:33:36 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/18 13:49:39 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:04:40 by hedgedog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,125 +14,35 @@
 
 void	get_data(t_cmd	*args, char	*prompt)
 {
-	int	*i;
-	int	check;
-	
-	i = malloc(sizeof(int *));
-	(*i) = 0;
-	check = 0;
-	while(prompt[(*i)])
-	{
-		if((prompt[(*i)] != '\'') && (prompt[(*i)] != '"') &&
-				(prompt[(*i)] != '>')  && (prompt[(*i)] != '<')
-					&& (prompt[(*i)] != '|'))
-			check = di_cwords(args, prompt, i);
-		if((prompt[(*i)] == '\'') && prompt[(*i)])
-			check = di_qwords(args, prompt, i);
-		if (prompt[(*i)] == '"' && prompt[(*i)])
-			check = di_dqwords(args, prompt, i);
-		if (prompt[(*i)] == '|' && prompt[(*i)])
-			args->pipes += 1;
-		if (prompt[(*i)] == '<' && prompt[(*i)])
-			args->lesser += 1;
-		if (prompt[(*i)] == '>' && prompt[(*i)])
-			args->greater += 1;
-		(*i)++;
-	}
-	if(check == -1)
-		exit (EXIT_FAILURE);
-	free(i);
-}
-
-/* void	get_data(t_cmd	*args, char	*prompt)
-{
-	args->words = get_words(prompt);
-	args->quotes = get_quotes(prompt);
-	if(args->quotes % 2 != 0)
-	{
-		printf("Error\n");
-		exit (EXIT_FAILURE);
-	}
-	args->double_quotes = get_double_quotes(prompt);
-	if(args->double_quotes % 2 != 0)
-	{
-		printf("Error\n");
-		exit (EXIT_FAILURE);
-	}
-} */
-
-int	get_words(char	*prompt)
-{
 	int	i;
-	int	checker;
-	int	sp;
 
-	sp = 0;
 	i = 0;
-	checker = 0;
-	while(prompt[i] == ' ' && prompt[i] >= '0' && prompt[i] <= '9' && prompt[i] != '\t')
-		i++;
 	while(prompt[i])
 	{
-		if((prompt[i] == '\'' || prompt[i] == '"' || prompt[i] == '|') && prompt[i + 1])
+		while(prompt[i] == ' ' && prompt[i])
+			i++;
+		if((prompt[i] != '\'') && (prompt[i] != '"') &&
+				(prompt[i] != '>')  && (prompt[i] != '<') 
+					&& (prompt[i] != '|') && prompt[i])
+			i = i_cwords(args, prompt, i);
+		if((prompt[i] == '\'') && prompt[i])
+			i = i_qwords(args, prompt, i);
+		if (prompt[i] == '"' && prompt[i])
+			i = i_dqwords(args, prompt, i);
+		if (prompt[i] == '|' && prompt[i])
 		{
-			sp += 1;
+			args->pipes += 1;
 			i++;
 		}
-		if(prompt[i] >= 'a' && prompt[i] <= 'z' && (sp % 2) == 0)
+		if (prompt[i] == '<' && prompt[i])
 		{
-			checker++;
-			while (prompt[i] >= 'a' && prompt[i] <= 'z' && (sp % 2) == 0)
-				i++;
+			args->lesser += 1;
+			i++;
 		}
-		i++;
+		if (prompt[i] == '>' && prompt[i])
+		{
+			args->greater += 1;
+			i++;
+		}
 	}
-	return (checker);
-}
-
-int	get_quotes(char	*prompt)
-{
-	int	i;
-	int	checker;
-
-	checker = 0;
-	i = 0;
-	while (prompt[i])
-	{
-		if (prompt[i] == ('\''))
-			checker++;
-		i++;
-	}
-	return (checker);
-}
-
-int	get_double_quotes(char	*prompt)
-{
-	int	i;
-	int	checker;
-
-	checker = 0;
-	i = 0;
-	while (prompt[i])
-	{
-		if (prompt[i] == ('"'))
-			checker++;
-		i++;
-	}
-	return (checker);
-}
-
-int	get_pipes(char	*prompt)
-{
-	int	i;
-	int	checker;
-
-	checker = 0;
-	i = 0;
-	while (prompt[i])
-	{
-		if (prompt[i] == ('|'))
-			checker++;
-		i++;
-	}
-	return (checker);
 }

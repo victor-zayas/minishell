@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+         #
+#    By: hedgedog <hedgedog@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 12:33:28 by vzaya-s           #+#    #+#              #
-#    Updated: 2023/01/18 19:06:42 by jaizpuru         ###   ########.fr        #
+#    Updated: 2023/01/20 15:07:25 by hedgedog         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,9 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
 RM = /bin/rm -rf
 #READLINE_PATH = /Users/$(USER)/.brew/opt/readline
-LREADLINE_FLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib/
-READLINE = -I/Users/$(USER)/.brew/opt/readline/include/
+#LREADLINE_FLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib/
+#READLINE = -I/Users/$(USER)/.brew/opt/readline/include/
+LINUX_READLINE = -lreadline -L/usr/lib/x86_64-linux-gnu/
 
 # OBJS #
 OBJS = $(SRCS:.c=.o)
@@ -27,9 +28,7 @@ OBJS = $(SRCS:.c=.o)
 # SRC #
 SRCS = main.c \
 	get_data.c \
-	get_data2.c \
 	utils_iterator.c \
-	utils_data_iterator.c \
 	tokens.c \
 	lexer.c \
 	lexer2.c \
@@ -68,11 +67,12 @@ export MINISHELL
 all: $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(READLINE) -c $^ -o $@
+	$(CC) $(CFLAGS) $(LINUX_READLINE) -c $^ -o $@
 
 $(NAME): $(OBJS)
 	make -C libft all
-	$(CC) $(CFLAGS) $(LREADLINE_FLAGS) $(READLINE) libft/libft.a $^ -o $(NAME)
+#	 $(CC) $(CFLAGS) $(LREADLINE_FLAGS) $(LINUX_READLINE) libft/libft.a $^ -o $(NAME)
+	$(CC) $(CFLAGS) $^ $(LREADLINE_FLAGS) $(LINUX_READLINE) libft/libft.a -o $(NAME)
 	echo "$(BLUE)༺ library created༻$(END)"
 	echo "$$MINISHELL"
 

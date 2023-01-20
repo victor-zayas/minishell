@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hedgedog <hedgedog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 11:32:03 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/13 12:26:15 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:08:50 by hedgedog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ void	exec(t_cmd	*token, char	**env)
 {
 	char	**args;
 	char	*path;
-	int		i;
 
-	i = -1;
 	args  = NULL;
 	if(ft_strchr(*token->args, '\'') != NULL)
 		args = ft_split(*token->args, '\'');

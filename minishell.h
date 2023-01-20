@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <signal.h>
 #include "libft/libft.h"
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -25,27 +26,16 @@ typedef	struct s_cmd
 	// MAIN
 void	init_args(t_cmd	*new);
 void	print(t_cmd	*cmd);
-void	ft_chopeadito(t_cmd	*args, char	*prompt, char	**env);
+void	ft_chopeadito(t_cmd	*args, char	*prompt);
 
 	// GET_TOKEN
 void	get_token(t_cmd	*cmd, char	*prompt);
 
 	// GET_DATA
 void	get_data(t_cmd	*args, char	*prompt);
-int		get_words(char	*prompt);
-int		get_quotes(char	*prompt);
-int		get_double_quotes(char	*prompt);
-int		get_pipes(char	*prompt);
-int		get_lesser(char	*prompt);
-int		get_greater(char	*prompt);
-
-void	i_cwords(char	*prompt, int	*pos);
-void	i_qwords(char	*prompt, int	*pos);
-void	i_dqwords(char	*prompt, int	*pos);
-
-int		di_cwords(t_cmd	*args, char	*prompt, int	*pos);
-int		di_qwords(t_cmd	*args, char	*prompt, int	*pos);
-int		di_dqwords(t_cmd	*args, char	*prompt, int	*pos);
+int		i_cwords(t_cmd	*cmd, char	*prompt, int pos);
+int		i_qwords(t_cmd	*cmd, char	*prompt, int pos);
+int		i_dqwords(t_cmd	*cmd, char	*prompt, int pos);
 
 	// LEXER
 char	*clean_words(t_cmd	*cmd, char	*prompt, int	pos);

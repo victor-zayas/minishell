@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hedgedog <hedgedog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:16:59 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/18 19:06:10 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/01/20 14:33:08 by hedgedog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,16 @@ char	*clean_words(t_cmd	*cmd, char	*prompt, int	pos)
 {
 	char *tmp;
 	int	start;
-	int	aux;
 
-	aux = (pos);
 	start = (pos);
-	while (prompt[aux + 1] == ' ')
-                aux += 1;
-	i_cwords(prompt, &aux);
-	cmd->args[cmd->size++] = ft_substr(prompt, start, aux - start + 1);
-	tmp = ft_substr(prompt, aux, ft_strlen(prompt) - aux + 1);
-	if(prompt[aux + 1] != ' ' && prompt[aux + 1])
-		pos = 0;
-	else
-		pos = 1;
+	while (prompt[pos] != '\'' && prompt[pos] != '"'
+			&& prompt[pos] != '|' && prompt[pos] != '>' && prompt[pos] &&
+				prompt[pos] != '<' && prompt[pos] != ' ')
+		pos++;
+	if (prompt[pos] == '\0' && prompt[pos - 1] == ' ')
+		return (ft_strdup(""));
+	cmd->args[cmd->size++] = ft_substr(prompt, start, pos - start);
+	tmp = ft_substr(prompt, pos, ft_strlen(prompt) - pos);
 	prompt = ft_strdup(tmp);
 	free(tmp);
 	return (prompt);
@@ -38,38 +35,29 @@ char	*quotes_lexer(t_cmd	*cmd, char	*prompt, int	pos)
 {
 	char *tmp;
 	int	start;
-	int	aux;
 
-	aux = (pos);
 	start = (pos);
-	i_qwords(prompt, &aux);
-	cmd->args[cmd->size++] = ft_substr(prompt, start, aux - start + 1);
-	tmp = ft_substr(prompt, aux, ft_strlen(prompt) - aux + 1);
-	if(prompt[aux + 1] != ' ' && prompt[aux + 1])
-		pos = 0;
-	else
-		pos = 1;
+	(pos)++;
+	while (prompt[pos] != '\'' && prompt[pos])
+				(pos)++;
+	cmd->args[cmd->size++] = ft_substr(prompt, start, pos - start + 1);
+	tmp = ft_substr(prompt, (pos + 1), ft_strlen(prompt) - pos + 1);
 	prompt = ft_strdup(tmp);
 	free(tmp);
-	free(prompt);
 	return (prompt);
 }
 
 char	*double_quotes_lexer(t_cmd	*cmd, char	*prompt, int	pos)
 {
-	int	start;
-	int	aux;
 	char *tmp;
+	int	start;
 
-	aux = (pos);
 	start = (pos);
-	i_dqwords(prompt, &aux);
-	cmd->args[cmd->size++] = ft_substr(prompt, start, aux - start + 1);
-	tmp = ft_substr(prompt, aux, ft_strlen(prompt) - aux + 1);
-	if(prompt[aux + 1] != ' ' && prompt[aux + 1])
-		pos = 0;
-	else
-		pos = 1;
+	(pos)++;
+	while (prompt[pos] != '"' && prompt[pos])
+				(pos)++;
+	cmd->args[cmd->size++] = ft_substr(prompt, start, pos - start + 1);
+	tmp = ft_substr(prompt, (pos + 1), ft_strlen(prompt) - pos + 1);
 	prompt = ft_strdup(tmp);
 	free(tmp);
 	return (prompt);
@@ -82,11 +70,7 @@ char	*pipes_lexer(t_cmd	*cmd, char	*prompt, int	pos)
 
 	aux = (pos);
 	cmd->args[cmd->size++] = ft_substr(prompt, aux, 1);
-	tmp = ft_substr(prompt, aux, ft_strlen(prompt) - aux + 1);
-	if(prompt[aux + 1] != ' ' && prompt[aux + 1])
-		pos = 0;
-	else
-		pos = 1;
+	tmp = ft_substr(prompt, (aux + 1), ft_strlen(prompt) - aux + 1);
 	prompt = ft_strdup(tmp);
 	free(tmp);
 	return (prompt);
