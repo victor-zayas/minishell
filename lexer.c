@@ -6,7 +6,7 @@
 /*   By: hedgedog <hedgedog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:16:59 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/20 14:33:08 by hedgedog         ###   ########.fr       */
+/*   Updated: 2023/01/20 18:40:00 by hedgedog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*quotes_lexer(t_cmd	*cmd, char	*prompt, int	pos)
 	(pos)++;
 	while (prompt[pos] != '\'' && prompt[pos])
 				(pos)++;
-	cmd->args[cmd->size++] = ft_substr(prompt, start, pos - start + 1);
+	cmd->args[cmd->size++] = ft_substr(prompt, (start), pos - start + 1);
 	tmp = ft_substr(prompt, (pos + 1), ft_strlen(prompt) - pos + 1);
 	prompt = ft_strdup(tmp);
 	free(tmp);

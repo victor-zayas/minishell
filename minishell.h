@@ -65,6 +65,7 @@ void	free_args(t_cmd	*args);
 			//p.e.: ls 'hola buenas "tardes $hehe"' pwd token 1 = ls, token 2 = 'hola buenas "tardes $hehe"' token 3 = pwd
 			//p.e.: ls -la  'h''u'
 			//p.e.:               ls    ' '  -l a  'h'
+			//p.e.:   - l a a'' a 
 			//while (prompt)
 				//if (prompt[i] == '\'') -> else if (prompt[i] == '"') else if (prompt[i] == '|') else
 	//parser();

@@ -6,7 +6,7 @@
 /*   By: hedgedog <hedgedog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/20 14:59:09 by hedgedog         ###   ########.fr       */
+/*   Updated: 2023/01/20 18:40:08 by hedgedog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ void	ft_lexer(t_cmd	*args, char	*prompt)
 				(prompt[i] != '>')  && (prompt[i] != '<') 
 					&& (prompt[i] != '|'))
 			prompt = clean_words(args, prompt, i);
-		if((prompt[i] == '\'') && prompt[i])
+		else if((prompt[i] == '\'') && prompt[i])
 			prompt = quotes_lexer(args, prompt, i);
-		if (prompt[i] == '"' && prompt[i])
+		else if (prompt[i] == '"' && prompt[i])
 			prompt = double_quotes_lexer(args, prompt, i);
-		if (prompt[i] == '|' && prompt[i])
+		else if (prompt[i] == '|' && prompt[i])
 			prompt = pipes_lexer(args, prompt, i);
-		if (prompt[i] == '<' && prompt[i])
+		else if (prompt[i] == '<' && prompt[i])
 			prompt = in_lexer(args, prompt, i);
-		if (prompt[i] == '>' && prompt[i])
+		else if (prompt[i] == '>' && prompt[i])
 			prompt = out_lexer(args, prompt, i);
 		i = 0;
 	}
