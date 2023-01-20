@@ -6,16 +6,16 @@
 /*   By: hedgedog <hedgedog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:18:09 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/20 12:55:23 by hedgedog         ###   ########.fr       */
+/*   Updated: 2023/01/20 19:26:20 by hedgedog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*in_lexer(t_cmd	*cmd, char	*prompt, int	pos)
+char	*in_lexer(t_cmd	*cmd, char	*prompt, int pos)
 {
 	int		aux;
-	char 	*tmp;
+	char	*tmp;
 
 	aux = (pos);
 	cmd->args[cmd->size++] = ft_substr(prompt, aux, 1);
@@ -24,10 +24,11 @@ char	*in_lexer(t_cmd	*cmd, char	*prompt, int	pos)
 	free(tmp);
 	return (prompt);
 }
-char	*out_lexer(t_cmd	*cmd, char	*prompt, int	pos)
+
+char	*out_lexer(t_cmd	*cmd, char	*prompt, int pos)
 {
 	int		aux;
-	char 	*tmp;
+	char	*tmp;
 
 	aux = (pos);
 	cmd->args[cmd->size++] = ft_substr(prompt, aux, 1);

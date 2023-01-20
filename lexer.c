@@ -6,23 +6,24 @@
 /*   By: hedgedog <hedgedog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:16:59 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/20 18:40:00 by hedgedog         ###   ########.fr       */
+/*   Updated: 2023/01/20 19:19:31 by hedgedog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*clean_words(t_cmd	*cmd, char	*prompt, int	pos)
+char	*clean_words(t_cmd	*cmd, char *prompt, int pos)
 {
-	char *tmp;
-	int	start;
+	char	*tmp;
+	int		start;
 
 	start = (pos);
-	while (prompt[pos] != '\'' && prompt[pos] != '"'
-			&& prompt[pos] != '|' && prompt[pos] != '>' && prompt[pos] &&
-				prompt[pos] != '<' && prompt[pos] != ' ')
+	while (prompt[pos] != '\'' && prompt[pos] != '"' && prompt[pos] != '<'
+		&& prompt[pos] != '|' && prompt[pos] != '>' && prompt[pos]
+		&& prompt[pos] != ' ' && prompt[pos] != '\t')
 		pos++;
-	if (prompt[pos] == '\0' && prompt[pos - 1] == ' ')
+	if (prompt[pos] == '\0' && (prompt[pos - 1] == ' '
+			|| prompt[pos - 1] == '\t'))
 		return (ft_strdup(""));
 	cmd->args[cmd->size++] = ft_substr(prompt, start, pos - start);
 	tmp = ft_substr(prompt, pos, ft_strlen(prompt) - pos);
@@ -31,10 +32,10 @@ char	*clean_words(t_cmd	*cmd, char	*prompt, int	pos)
 	return (prompt);
 }
 
-char	*quotes_lexer(t_cmd	*cmd, char	*prompt, int	pos)
+char	*quotes_lexer(t_cmd	*cmd, char	*prompt, int pos)
 {
-	char *tmp;
-	int	start;
+	char	*tmp;
+	int		start;
 
 	start = (pos);
 	(pos)++;
@@ -47,10 +48,10 @@ char	*quotes_lexer(t_cmd	*cmd, char	*prompt, int	pos)
 	return (prompt);
 }
 
-char	*double_quotes_lexer(t_cmd	*cmd, char	*prompt, int	pos)
+char	*double_quotes_lexer(t_cmd	*cmd, char	*prompt, int pos)
 {
-	char *tmp;
-	int	start;
+	char	*tmp;
+	int		start;
 
 	start = (pos);
 	(pos)++;
@@ -63,10 +64,10 @@ char	*double_quotes_lexer(t_cmd	*cmd, char	*prompt, int	pos)
 	return (prompt);
 }
 
-char	*pipes_lexer(t_cmd	*cmd, char	*prompt, int	pos)
+char	*pipes_lexer(t_cmd	*cmd, char	*prompt, int pos)
 {
 	int		aux;
-	char 	*tmp;
+	char	*tmp;
 
 	aux = (pos);
 	cmd->args[cmd->size++] = ft_substr(prompt, aux, 1);

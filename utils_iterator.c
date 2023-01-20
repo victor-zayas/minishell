@@ -6,18 +6,18 @@
 /*   By: hedgedog <hedgedog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:10:57 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/20 14:55:15 by hedgedog         ###   ########.fr       */
+/*   Updated: 2023/01/20 19:20:08 by hedgedog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	i_cwords(t_cmd	*cmd, char	*prompt, int	pos)
+int	i_cwords(t_cmd	*cmd, char	*prompt, int pos)
 {
 	pos++;
 	while (prompt[pos] != '\'' && prompt[pos] != '"' && prompt[pos] != ' '
-			&& prompt[pos] != '|' && prompt[pos] != '>' 
-				&& prompt[pos] != '<' && prompt[pos] != '\0')
+		&& prompt[pos] != '|' && prompt[pos] != '>' && prompt[pos] != '\t'
+		&& prompt[pos] != '<' && prompt[pos] != '\0')
 				pos++;
 	if (prompt[pos - 2] == ' ' && prompt[pos - 1] == '\0')
 		return (pos);
@@ -26,12 +26,12 @@ int	i_cwords(t_cmd	*cmd, char	*prompt, int	pos)
 	return (pos);
 }
 
-int	i_qwords(t_cmd	*cmd, char	*prompt, int	pos)
+int	i_qwords(t_cmd	*cmd, char	*prompt, int pos)
 {
 	(pos)++;
 	while (prompt[pos] != '\'' && prompt[pos])
 				pos++;
-	if(prompt[pos] == '\'')
+	if (prompt[pos] == '\'')
 		cmd->quotes += 1;
 	else
 		exit (EXIT_FAILURE);
@@ -39,12 +39,12 @@ int	i_qwords(t_cmd	*cmd, char	*prompt, int	pos)
 	return (pos);
 }
 
-int	i_dqwords(t_cmd	*cmd, char	*prompt, int	pos)
+int	i_dqwords(t_cmd	*cmd, char	*prompt, int pos)
 {
 	(pos)++;
 	while (prompt[pos] != '"' && prompt[pos])
 				pos++;
-	if(prompt[pos] == '"')
+	if (prompt[pos] == '"')
 		cmd->double_quotes += 1;
 	else
 		exit (EXIT_FAILURE);

@@ -6,7 +6,7 @@
 /*   By: hedgedog <hedgedog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/01/20 15:08:35 by hedgedog         ###   ########.fr       */
+/*   Updated: 2023/01/20 19:28:09 by hedgedog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print(t_cmd	*cmd)
 	i = 0;
 	j = 0;
 	printf("\n				ARGS INSIDE THE STRUCTURE:\n");
-	while(cmd->args[i])
+	while (cmd->args[i])
 		printf("				ARG N.%d ->> [%s]\n", j++, cmd->args[i++]);
 	printf("\n				\n");
 	printf("\n				DATA INSIDE THE STRUCTURE:\n");
@@ -47,20 +47,23 @@ void	ft_chopeadito(t_cmd	*args, char	*prompt)
 	free(prompt);
 }
 
-void	my_signal()
+void	my_signal(int sig)
 {
+	if (sig == 2)
+	{
 		write(1, "Shootgun=▸  ", 15);
 		write(1, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
+	}
 }
 
 // int	main(int argc, char **argv, char	**env)
 int	main(int argc, char **argv)
 {
 	t_cmd		args;
-	char	*prompt;
+	char		*prompt;
 
 	init_args(&args);
 	signal(SIGINT, my_signal);

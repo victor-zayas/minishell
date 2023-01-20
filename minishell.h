@@ -1,14 +1,16 @@
+
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <signal.h>
-#include "libft/libft.h"
-#include <readline/readline.h>
-#include <readline/history.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <signal.h>
+# include "libft/libft.h"
+# include <readline/readline.h>
+# include <readline/history.h>
 
-typedef	struct s_cmd
+typedef struct s_cmd
 {
 	char	**args;
 	char	**cmds;
@@ -36,14 +38,17 @@ void	get_data(t_cmd	*args, char	*prompt);
 int		i_cwords(t_cmd	*cmd, char	*prompt, int pos);
 int		i_qwords(t_cmd	*cmd, char	*prompt, int pos);
 int		i_dqwords(t_cmd	*cmd, char	*prompt, int pos);
+int		i_pipes(t_cmd	*cmd, int i);
+int		i_in(t_cmd	*cmd, int i);
+int		i_out(t_cmd	*cmd, int i);
 
 	// LEXER
-char	*clean_words(t_cmd	*cmd, char	*prompt, int	pos);
-char	*quotes_lexer(t_cmd	*cmd, char	*prompt, int	pos);
-char	*double_quotes_lexer(t_cmd	*cmd, char	*prompt, int	pos);
-char	*pipes_lexer(t_cmd	*cmd, char	*prompt, int	pos);
-char	*out_lexer(t_cmd	*cmd, char	*prompt, int	pos);
-char	*in_lexer(t_cmd	*cmd, char	*prompt, int	pos);
+char	*clean_words(t_cmd	*cmd, char	*prompt, int pos);
+char	*quotes_lexer(t_cmd	*cmd, char	*prompt, int pos);
+char	*double_quotes_lexer(t_cmd	*cmd, char	*prompt, int pos);
+char	*pipes_lexer(t_cmd	*cmd, char	*prompt, int pos);
+char	*out_lexer(t_cmd	*cmd, char	*prompt, int pos);
+char	*in_lexer(t_cmd	*cmd, char	*prompt, int pos);
 
 	// PIPEX
 void	exec(t_cmd	*token, char	**env);
@@ -52,9 +57,6 @@ char	*get_cmd(char	*arguments, char	**enviroment);
 
 	// FREE_ARGS
 void	free_args(t_cmd	*args);
-
-
-
 
 	// TO _ DO
 	// REMOVE POINTERS OF ITERATORS IN GET_DATA
@@ -65,7 +67,8 @@ void	free_args(t_cmd	*args);
 			//p.e.: ls 'hola buenas "tardes $hehe"' pwd token 1 = ls, token 2 = 'hola buenas "tardes $hehe"' token 3 = pwd
 			//p.e.: ls -la  'h''u'
 			//p.e.:               ls    ' '  -l a  'h'
-			//p.e.:   - l a a'' a 
+			//p.e.:   - l a a'' a
+			//p.e: && prompt[i] == '\t'
 			//while (prompt)
 				//if (prompt[i] == '\'') -> else if (prompt[i] == '"') else if (prompt[i] == '|') else
 	//parser();
