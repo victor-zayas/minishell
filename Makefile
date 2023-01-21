@@ -6,7 +6,7 @@
 #    By: hedgedog <hedgedog@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 12:33:28 by vzaya-s           #+#    #+#              #
-#    Updated: 2023/01/20 15:07:25 by hedgedog         ###   ########.fr        #
+#    Updated: 2023/01/21 18:19:25 by hedgedog         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = minishell
 
 # COMPILATION #
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror # -g3 -fsanitize=address
 RM = /bin/rm -rf
 #READLINE_PATH = /Users/$(USER)/.brew/opt/readline
 #LREADLINE_FLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib/
