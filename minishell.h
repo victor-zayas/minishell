@@ -69,6 +69,7 @@ void	free_args(t_cmd	*args);
 			//p.e.:               ls    ' '  -l a  'h'
 			//p.e.:   - l a a'' a
 			//p.e: && prompt[i] == '\t'
+			//$ recive numeros o letras no caracteres especiales. if $en mstring cortar.
 			//while (prompt)
 				//if (prompt[i] == '\'') -> else if (prompt[i] == '"') else if (prompt[i] == '|') else
 	//parser();

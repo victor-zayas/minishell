@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hedgedog <hedgedog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/20 19:17:55 by hedgedog         ###   ########.fr       */
+/*   Updated: 2023/01/24 19:45:57 by vzaya-s          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_lexer(t_cmd	*args, char	*prompt)
 		if ((prompt[i] != '\'') && (prompt[i] != '"')
 			&& (prompt[i] != '>') && (prompt[i] != '<')
 			&& (prompt[i] != '|'))
-			prompt = clean_words(args, prompt, i);
+				prompt = clean_words(args, prompt, i);
 		else if ((prompt[i] == '\'') && prompt[i])
 			prompt = quotes_lexer(args, prompt, i);
 		else if (prompt[i] == '"' && prompt[i])
@@ -48,16 +48,14 @@ void	ft_lexer(t_cmd	*args, char	*prompt)
 			prompt = out_lexer(args, prompt, i);
 		i = 0;
 	}
+	free(prompt);
 }
 
 void	get_token(t_cmd	*cmd, char	*prompt)
 {
 	cmd->args = (char **)malloc(sizeof(char *) * (cmd->words + cmd->quotes
 				+ cmd->double_quotes + cmd->pipes + cmd->lesser
-				+ cmd->greater + 1));
-	// printf("\n\n				TOKENS: %d\n\n", (cmd->words + cmd->quotes
-	//		 + cmd->double_quotes + cmd->pipes + cmd->lesser + 
-	//		 	cmd->greater + 1));
+				+ cmd->greater + 2));
 	ft_lexer(cmd, prompt);
 	cmd->args[cmd->size] = NULL;
 	cmd->size = 0;

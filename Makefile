@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hedgedog <hedgedog@student.42.fr>          +#+  +:+       +#+         #
+#    By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 12:33:28 by vzaya-s           #+#    #+#              #
-#    Updated: 2023/01/20 15:07:25 by hedgedog         ###   ########.fr        #
+#    Updated: 2023/01/24 19:59:59 by vzaya-s          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = minishell
 
 # COMPILATION #
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 RM = /bin/rm -rf
 #READLINE_PATH = /Users/$(USER)/.brew/opt/readline
 #LREADLINE_FLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib/
@@ -75,6 +75,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $^ $(LREADLINE_FLAGS) $(LINUX_READLINE) libft/libft.a -o $(NAME)
 	echo "$(BLUE)༺ library created༻$(END)"
 	echo "$$MINISHELL"
+	echo "credits to $(GREEN)༺ HELECHOS༻$(END)".
 
 clean:
 	make -C libft clean

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hedgedog <hedgedog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/01/20 19:28:09 by hedgedog         ###   ########.fr       */
+/*   Updated: 2023/01/24 19:22:21 by vzaya-s          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,12 @@ void	ft_chopeadito(t_cmd	*args, char	*prompt)
 
 	aux = prompt;
 	init_args(args);
+	add_history(aux);
 	get_data(args, aux);
 	get_token(args, aux);
 	print(args);
 	// exec(args, env);
-	add_history(aux);
 	free_args(args);
-	free(prompt);
 }
 
 void	my_signal(int sig)
@@ -64,7 +63,7 @@ int	main(int argc, char **argv)
 {
 	t_cmd		args;
 	char		*prompt;
-
+	
 	init_args(&args);
 	signal(SIGINT, my_signal);
 	signal(SIGQUIT, SIG_IGN);
