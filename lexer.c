@@ -6,7 +6,7 @@
 /*   By: hedgedog <hedgedog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:16:59 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/21 18:18:02 by hedgedog         ###   ########.fr       */
+/*   Updated: 2023/01/20 19:19:31 by hedgedog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ char	*clean_words(t_cmd	*cmd, char *prompt, int pos)
 {
 	char	*tmp;
 	int		start;
-	int		size;
 
 	start = (pos);
-	size = ft_strlen(prompt);
 	while (prompt[pos] != '\'' && prompt[pos] != '"' && prompt[pos] != '<'
 		&& prompt[pos] != '|' && prompt[pos] != '>' && prompt[pos]
 		&& prompt[pos] != ' ' && prompt[pos] != '\t')
@@ -28,9 +26,8 @@ char	*clean_words(t_cmd	*cmd, char *prompt, int pos)
 			|| prompt[pos - 1] == '\t'))
 		return (ft_strdup(""));
 	cmd->args[cmd->size++] = ft_substr(prompt, start, pos - start);
-	tmp = ft_substr(prompt, pos, size - pos);
-	if(tmp)
-		prompt = tmp;
+	tmp = ft_substr(prompt, pos, ft_strlen(prompt) - pos);
+	prompt = ft_strdup(tmp);
 	free(tmp);
 	return (prompt);
 }
@@ -46,7 +43,7 @@ char	*quotes_lexer(t_cmd	*cmd, char	*prompt, int pos)
 				(pos)++;
 	cmd->args[cmd->size++] = ft_substr(prompt, (start), pos - start + 1);
 	tmp = ft_substr(prompt, (pos + 1), ft_strlen(prompt) - pos + 1);
-	prompt = tmp;
+	prompt = ft_strdup(tmp);
 	free(tmp);
 	return (prompt);
 }
@@ -62,7 +59,7 @@ char	*double_quotes_lexer(t_cmd	*cmd, char	*prompt, int pos)
 				(pos)++;
 	cmd->args[cmd->size++] = ft_substr(prompt, start, pos - start + 1);
 	tmp = ft_substr(prompt, (pos + 1), ft_strlen(prompt) - pos + 1);
-	prompt = tmp;
+	prompt = ft_strdup(tmp);
 	free(tmp);
 	return (prompt);
 }
@@ -75,7 +72,7 @@ char	*pipes_lexer(t_cmd	*cmd, char	*prompt, int pos)
 	aux = (pos);
 	cmd->args[cmd->size++] = ft_substr(prompt, aux, 1);
 	tmp = ft_substr(prompt, (aux + 1), ft_strlen(prompt) - aux + 1);
-	prompt = tmp;
+	prompt = ft_strdup(tmp);
 	free(tmp);
 	return (prompt);
 }
