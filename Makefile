@@ -6,7 +6,7 @@
 #    By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 12:33:28 by vzaya-s           #+#    #+#              #
-#    Updated: 2023/01/24 19:59:59 by vzaya-s          ###   ########.fr        #
+#    Updated: 2023/01/26 17:17:48 by vzaya-s          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $^ $(LREADLINE_FLAGS) $(LINUX_READLINE) libft/libft.a -o $(NAME)
 	echo "$(BLUE)༺ library created༻$(END)"
 	echo "$$MINISHELL"
-	echo "credits to $(GREEN)༺ HELECHOS༻$(END)".
+	echo "Special thanks to $(GREEN)༺ HELECHOS༻$(END)".
 
 clean:
 	make -C libft clean

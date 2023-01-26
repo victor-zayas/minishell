@@ -6,6 +6,8 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <signal.h>
+# include <unistd.h>
+# include <stdbool.h>
 # include "libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -24,6 +26,13 @@ typedef struct s_cmd
 	int		lesser;
 	int		greater;
 }		t_cmd;
+
+typedef struct s_env
+{
+	char	*oldpwd;
+	char	*pwd;
+	char	**env;
+}	t_env;
 
 	// MAIN
 void	init_args(t_cmd	*new);
@@ -57,6 +66,11 @@ char	*get_cmd(char	*arguments, char	**enviroment);
 
 	// FREE_ARGS
 void	free_args(t_cmd	*args);
+
+	// CD_utils
+char	**ft_bid_strdup(char **str);
+int		ft_bid_strlen(char **str);
+void	ft_bid_free(char **str);
 
 	// TO _ DO
 	// REMOVE POINTERS OF ITERATORS IN GET_DATA
