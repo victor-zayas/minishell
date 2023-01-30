@@ -6,7 +6,7 @@
 #    By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 12:33:28 by vzaya-s           #+#    #+#              #
-#    Updated: 2023/01/26 17:17:48 by vzaya-s          ###   ########.fr        #
+#    Updated: 2023/01/30 17:42:32 by vzaya-s          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,9 @@ SRCS = main.c \
 	tokens.c \
 	lexer.c \
 	lexer2.c \
-	get_exec.c
+	get_exec.c \
+	builtings.c \
+	pwd.c
 
 # MAKEFILE ART #
 # COLORS #

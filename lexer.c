@@ -6,7 +6,7 @@
 /*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:16:59 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/24 19:44:36 by vzaya-s          ###   ########.fr       */
+/*   Updated: 2023/01/30 17:45:00 by vzaya-s          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ char	*pipes_lexer(t_cmd	*cmd, char	*prompt, int pos)
 	int		aux;
 	char	*tmp;
 
-	printf("pipaslexer: %s\n", prompt);
 	aux = (pos);
 	cmd->args[cmd->size++] = ft_substr(prompt, aux, 1);
 	tmp = ft_substr(prompt, (aux + 1), ft_strlen(prompt) - aux + 1);

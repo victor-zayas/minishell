@@ -72,6 +72,14 @@ char	**ft_bid_strdup(char **str);
 int		ft_bid_strlen(char **str);
 void	ft_bid_free(char **str);
 
+	//PWD
+void	ft_pwd(void);
+int		g_exit;
+
+	//BUILTINGS
+void ft_builtings(t_cmd	*args);
+
+
 	// TO _ DO
 	// REMOVE POINTERS OF ITERATORS IN GET_DATA
 
