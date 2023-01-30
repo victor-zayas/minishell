@@ -7,6 +7,8 @@
 # include <stdio.h>
 # include <signal.h>
 # include <unistd.h>
+# include <string.h>
+# include <errno.h>
 # include <stdbool.h>
 # include "libft/libft.h"
 # include <readline/readline.h>
@@ -37,7 +39,7 @@ typedef struct s_env
 	// MAIN
 void	init_args(t_cmd	*new);
 void	print(t_cmd	*cmd);
-void	ft_chopeadito(t_cmd	*args, char	*prompt);
+void	ft_chopeadito(t_cmd	*args, t_env *env, char	*prompt);
 
 	// GET_TOKEN
 void	get_token(t_cmd	*cmd, char	*prompt);
@@ -67,17 +69,15 @@ char	*get_cmd(char	*arguments, char	**enviroment);
 	// FREE_ARGS
 void	free_args(t_cmd	*args);
 
-	// CD_utils
-char	**ft_bid_strdup(char **str);
-int		ft_bid_strlen(char **str);
-void	ft_bid_free(char **str);
-
 	//PWD
 void	ft_pwd(void);
 int		g_exit;
 
+	//ENV
+void	ft_env(t_env *env);
+
 	//BUILTINGS
-void ft_builtings(t_cmd	*args);
+void ft_builtings(t_cmd	*args, t_env *env);
 
 
 	// TO _ DO

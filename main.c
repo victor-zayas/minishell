@@ -6,7 +6,7 @@
 /*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/01/30 17:41:45 by vzaya-s          ###   ########.fr       */
+/*   Updated: 2023/01/30 18:49:55 by vzaya-s          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	print(t_cmd	*cmd)
 	printf("				Input Redirect	: %d\n", cmd->lesser);
 }
 
-void	ft_chopeadito(t_cmd	*args, char	*prompt)
+void	ft_chopeadito(t_cmd	*args, t_env *env, char	*prompt)
 {
 	char		*aux;
 
@@ -41,7 +41,7 @@ void	ft_chopeadito(t_cmd	*args, char	*prompt)
 	add_history(aux);
 	get_data(args, aux);
 	get_token(args, aux);
-	ft_builtings(args);
+	ft_builtings(args, env);
 	print(args);
 	// exec(args, env);
 	free_args(args);
@@ -59,12 +59,15 @@ void	my_signal(int sig)
 	}
 }
 
-// int	main(int argc, char **argv, char	**env)
-int	main(int argc, char **argv)
+//int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
+	t_env		env;
 	t_cmd		args;
 	char		*prompt;
 	
+	env.env = ft_env_strdup(envp);
+	env.oldpwd = NULL;
 	init_args(&args);
 	signal(SIGINT, my_signal);
 	signal(SIGQUIT, SIG_IGN);
@@ -75,8 +78,9 @@ int	main(int argc, char **argv)
 			break ;
 		if (!prompt[0])
 			continue ;
-		ft_chopeadito(&args, prompt);
+		ft_chopeadito(&args, &env, prompt);
 		// ft_chopeadito(&args, prompt, env);
 	}
+	ft_bid_free(env.env);
 	return (0);
 }

@@ -25,6 +25,10 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+void    ft_bid_free(char **str);
+char    **ft_bid_strdup(char **str);
+char    **ft_env_strdup(char **str);
+int		ft_bid_strlen(char **str);
 int		ft_isalnum(int number);
 int		ft_isalpha(int number);
 int		ft_isascii(int number);
