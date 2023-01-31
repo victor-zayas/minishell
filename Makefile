@@ -6,7 +6,7 @@
 #    By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 12:33:28 by vzaya-s           #+#    #+#              #
-#    Updated: 2023/01/30 18:22:34 by vzaya-s          ###   ########.fr        #
+#    Updated: 2023/01/31 18:35:21 by vzaya-s          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRCS = main.c \
 	get_exec.c \
 	builtings.c \
 	pwd.c \
-	env.c
+	env.c \
+	echo.c 
 
 # MAKEFILE ART #
 # COLORS #

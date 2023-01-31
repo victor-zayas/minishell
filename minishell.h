@@ -73,6 +73,9 @@ void	free_args(t_cmd	*args);
 void	ft_pwd(void);
 int		g_exit;
 
+	//ECHO
+void	ft_echo(t_cmd *args);
+
 	//ENV
 void	ft_env(t_env *env);
 
