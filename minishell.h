@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
+/*   Updated: 2023/02/02 09:41:11 by vzaya-s          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -97,6 +107,7 @@ void ft_builtings(t_cmd	*args, t_env *env);
 			//$ recive numeros o letras no caracteres especiales. if $en mstring cortar.
 			//while (prompt)
 				//if (prompt[i] == '\'') -> else if (prompt[i] == '"') else if (prompt[i] == '|') else
+	//builtings();
 	//parser();
 	//redirs();
 	//execute();
