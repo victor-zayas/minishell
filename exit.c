@@ -1,34 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtings.c                                        :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/30 17:25:36 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/06 11:40:05 by vzaya-s          ###   ########.fr       */
+/*   Created: 2023/02/06 09:43:15 by vzaya-s           #+#    #+#             */
+/*   Updated: 2023/02/06 11:48:34 by vzaya-s          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_builtings(t_cmd	*args, t_env *env)
+//no funca
+int	ft_exit(t_cmd *args)
 {
 	int	i;
-	
-	i = -1;
-	while (args->args[++i])
+
+	i = 0;
+	while(args->args[i])
+		i++;
+	args->n_cmd = i;
+	if (i != args->size - 1)
+		return (1);
+	if (args->size == 1)
+		write(1, "exit\n", 5);
+	i = 0;
+	while (args->args[args->n_cmd])
+		i++;
+	if (i > 2)
 	{
-		if (ft_strncmp(args->args[i], "pwd", 3) == 0)
-			ft_pwd();
-		if (ft_strncmp(args->args[i], "env", 3) == 0)
-			ft_env(env);
-		if (ft_strncmp(args->args[i], "echo", 4) == 0)
-			ft_echo(args);
-		if (ft_strncmp(args->args[i], "exit", 4) == 0)
-			ft_exit(args);
-		if (ft_strncmp(args->args[i], "cd", 2) == 0)
-			ft_cd(args, env);
+		printf("Shootgun=▸ Too many arguments\n");
+		g_exit = 1;
+		return (0);
 	}
-	
+	if (args->n_cmd == 1)
+	{
+		free_args(args);
+		g_exit = 0;
+		exit(0);
+	}
+	return (0);
 }

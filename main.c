@@ -6,7 +6,7 @@
 /*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/01/31 18:53:54 by vzaya-s          ###   ########.fr       */
+/*   Updated: 2023/02/06 11:38:18 by vzaya-s          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	my_signal(int sig)
 	}
 }
 
-//int	main(int argc, char **argv)
 int	main(int argc, char **argv, char **envp)
 {
 	t_env		env;
@@ -79,7 +78,6 @@ int	main(int argc, char **argv, char **envp)
 		if (!prompt[0])
 			continue ;
 		ft_chopeadito(&args, &env, prompt);
-		// ft_chopeadito(&args, prompt, env);
 	}
 	ft_bid_free(env.env);
 	return (0);

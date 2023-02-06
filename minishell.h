@@ -6,7 +6,7 @@
 /*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/02 09:41:11 by vzaya-s          ###   ########.fr       */
+/*   Updated: 2023/02/06 11:50:58 by vzaya-s          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 typedef struct s_cmd
 {
 	char	**args;
-	char	**cmds;
+	int		n_cmd;
 	int		size;
 
 	int		words;
@@ -51,6 +51,7 @@ void	init_args(t_cmd	*new);
 void	print(t_cmd	*cmd);
 void	ft_chopeadito(t_cmd	*args, t_env *env, char	*prompt);
 
+	//LEXER
 	// GET_TOKEN
 void	get_token(t_cmd	*cmd, char	*prompt);
 
@@ -79,6 +80,9 @@ char	*get_cmd(char	*arguments, char	**enviroment);
 	// FREE_ARGS
 void	free_args(t_cmd	*args);
 
+	//BUILTINGS
+void ft_builtings(t_cmd	*args, t_env *env);
+
 	//PWD
 void	ft_pwd(void);
 int		g_exit;
@@ -89,14 +93,17 @@ void	ft_echo(t_cmd *args);
 	//ENV
 void	ft_env(t_env *env);
 
-	//BUILTINGS
-void ft_builtings(t_cmd	*args, t_env *env);
+	//EXIT
+int		ft_exit(t_cmd *args);
+
+	//CD
+bool	ft_cd(t_cmd *args, t_env *env);
 
 
 	// TO _ DO
-	// REMOVE POINTERS OF ITERATORS IN GET_DATA
+	// BUILTINGS EXIT & CD
 
-	//lexer(); //optional //comillas simples, comillas dobles, pipes
+	//lexer(); //comillas simples, comillas dobles, pipes, redirecciones
 	// 1.er paso
 		//encuentro comilla, leo hasta la siguiente comilla (si no hay doy error), lo meto en un token
 			//p.e.: ls 'hola buenas "tardes $hehe"' pwd token 1 = ls, token 2 = 'hola buenas "tardes $hehe"' token 3 = pwd
@@ -113,7 +120,6 @@ void ft_builtings(t_cmd	*args, t_env *env);
 	//execute();
 
 	// PIPEX
-
 	//args = ft_split(aux, ' ');
 	//printf("cual es el resultado de args -> %s\n", *args);
 	//path = get_cmd(*args, env);
