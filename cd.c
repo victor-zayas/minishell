@@ -6,7 +6,7 @@
 /*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:20:31 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/06 18:20:52 by vzaya-s          ###   ########.fr       */
+/*   Updated: 2023/02/06 18:44:53 by vzaya-s          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void	ft_rewrite_pwd(t_env *env)
 bool	ft_cd(t_cmd *args, t_env *env)
 {
 	get_oldpwd(env);
+	printf("Cd arg: %s\n", args->args[1]);
 	if (chdir(args->args[1]) == -1)
 	{
 		printf("cd: %s: No such file or directory\n", args->args[1]);
