@@ -6,7 +6,7 @@
 /*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:24:50 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/01/30 19:08:47 by vzaya-s          ###   ########.fr       */
+/*   Updated: 2023/02/06 17:54:38 by vzaya-s          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char    **ft_env_strdup(char **str)
     {
         if (ft_strncmp(str[i], "OLDPWD=", 7) == 0)
         {
-            aux = (char **)malloc(sizeof(char *) * (ft_bid_strlen(str)));   
+            aux = (char **)malloc(sizeof(char *) * (ft_bid_strlen(str)));
             if (!aux)
                 return (NULL);
             i = -1;
@@ -32,7 +32,7 @@ char    **ft_env_strdup(char **str)
                 if (ft_strncmp(str[i], "OLDPWD=", 7) != 0)
                     aux[i] = ft_strdup(str[i]);
             }
-            aux[i - 1] = '\0';
+            aux[i - 2] = '\0';
             return (aux);
         }
     }
