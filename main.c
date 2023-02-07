@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/06 17:45:09 by vzaya-s          ###   ########.fr       */
+/*   Updated: 2023/02/07 18:33:17 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd		args;
 	char		*prompt;
 	
-	env.env = ft_env_strdup(envp); //TODO leak
+	env.env = ft_env_strdup(envp);
 	env.oldpwd = NULL;
 	init_args(&args);
 	signal(SIGINT, my_signal);
@@ -80,6 +80,6 @@ int	main(int argc, char **argv, char **envp)
 		ft_chopeadito(&args, &env, prompt);
 	}
 	ft_bid_free(env.env);
-	free(env.oldpwd);
+	//free(env.oldpwd);
 	return (0);
 }

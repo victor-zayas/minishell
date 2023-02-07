@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:20:31 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/06 18:44:53 by vzaya-s          ###   ########.fr       */
+/*   Updated: 2023/02/07 18:43:12 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	get_oldpwd(t_env *env)
+/* void	get_oldpwd(t_env *env)
 {
 	char	*var;
 	int		i;
@@ -22,21 +22,41 @@ static void	get_oldpwd(t_env *env)
 	{
 		if(env->env[i] && !ft_strncmp(env->env[i], "OLDPWD=", 7))
 		{
+			printf("entro");
 			var = ft_strjoin("PWD=", env->pwd);
 			if (ft_strncmp(env->env[i + 1], var, ft_strlen(var)))
 			{
 				free(env->env[i]);
 				env->env[i] = ft_strjoin("OLDPWD=", env->oldpwd);
+				printf("oldpwd:  %s\n", env->oldpwd);
 			}
 			free(var);
 			return ;
 		}
 	}
+} */
+
+void    get_oldpwd(t_env *env)
+{
+    int        i;
+    char    *aux;
+
+    i = -1;
+    while (env->env[++i])
+    {
+        if (!env->env[i + 1])
+        {
+            aux = getcwd(NULL, 0);
+            env->env[i] = ft_strjoin("OLDPWD=", aux);
+            free(aux);
+            break ;
+        }
+    }
 }
 
-static void	ft_rewrite_pwd(t_env *env)
+static void    ft_rewrite_pwd(t_env *env)
 {
-	int	i;
+	int    i;
 
 	i = -1;
 	env->pwd = getcwd(NULL, 0);
@@ -48,6 +68,7 @@ static void	ft_rewrite_pwd(t_env *env)
 			env->env[i] = ft_strjoin("PWD=", env->pwd);
 		}
 	}
+	free(env->pwd);
 }
 
 bool	ft_cd(t_cmd *args, t_env *env)
@@ -64,4 +85,3 @@ bool	ft_cd(t_cmd *args, t_env *env)
 	ft_rewrite_pwd(env);
 	return (0);
 }
-
