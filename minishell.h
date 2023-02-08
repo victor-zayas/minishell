@@ -97,7 +97,7 @@ int		ft_exit(t_cmd *args);
 
 	//CD
 bool	ft_cd(t_cmd *args, t_env *env);
-
+void	ft_export(t_env	*env, char *content);
 	// TO _ DO
 
 	//lexer(); //comillas simples, comillas dobles, pipes, redirecciones
