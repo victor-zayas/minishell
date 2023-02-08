@@ -12,19 +12,23 @@
 
 #include "minishell.h"
 
-void	ft_export(t_cmd	*args, t_env	*env)
+void	ft_export(t_env	*env, char *content)
 {
-	int i;
+	int 	i;
+	char	**aux;
 
 	i = -1;
-	if(args->args[1])
-	{
-		while(env->env[i + 1])
-			i++;
-		//env->env = malloc(sizeof(env->env) + 1);
-		env->env[i + 1] = args->args[1];
-		env->env[i + 2] = '\0';
-	}
+	if (!content)
+		return ;
+	aux = malloc(sizeof(char * ) * ft_bid_strlen(env->env) + 2);
+	if (!aux)
+		return ;
+	while (env->env[++i])
+		aux[i] = ft_strdup(env->env[i]);
+	aux[i] = ft_strdup(content);
+	aux[i + 1] = '\0';
+	free(env->env);
+	env->env = aux;
 }
 
 void	ft_unset(t_cmd	*args, t_env	*env)
