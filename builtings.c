@@ -29,5 +29,7 @@ void ft_builtings(t_cmd	*args, t_env *env)
 			ft_exit(args);
 		if (ft_strncmp(args->args[i], "cd", 2) == 0)
 			ft_cd(args, env);
+		if (ft_strncmp(args->args[i], "export", 6) == 0)
+			ft_export(env, args->args[1]);
 	}
 }
