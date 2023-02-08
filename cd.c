@@ -3,35 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:20:31 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/06 18:44:53 by vzaya-s          ###   ########.fr       */
+/*   Updated: 2023/02/07 19:12:55 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	get_oldpwd(t_env *env)
+void    get_oldpwd(t_env *env)
 {
-	char	*var;
-	int		i;
-	
-	i = -1;
-	while (env->env[++i])
-	{
-		if(env->env[i] && !ft_strncmp(env->env[i], "OLDPWD=", 7))
-		{
-			var = ft_strjoin("PWD=", env->pwd);
-			if (ft_strncmp(env->env[i + 1], var, ft_strlen(var)))
-			{
-				free(env->env[i]);
-				env->env[i] = ft_strjoin("OLDPWD=", env->oldpwd);
-			}
-			free(var);
-			return ;
-		}
-	}
+    int        i;
+    char    *aux;
+
+    i = -1;
+    while (env->env[++i])
+    {
+        if (!env->env[i + 1])
+        {
+			aux = getcwd(NULL, 0);
+			free(env->env[i]);
+            env->env[i] = ft_strjoin("OLDPWD=", aux);
+			free(aux);
+            break ;
+        }
+    }
 }
 
 static void	ft_rewrite_pwd(t_env *env)
@@ -58,7 +55,6 @@ bool	ft_cd(t_cmd *args, t_env *env)
 	{
 		printf("cd: %s: No such file or directory\n", args->args[1]);
 		free(env->oldpwd);
-		g_exit = 1;
 		return (1);
 	}
 	ft_rewrite_pwd(env);

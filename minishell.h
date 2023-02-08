@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/06 11:50:58 by vzaya-s          ###   ########.fr       */
+/*   Updated: 2023/02/07 18:20:55 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void ft_builtings(t_cmd	*args, t_env *env);
 
 	//PWD
 void	ft_pwd(void);
-int		g_exit;
 
 	//ECHO
 void	ft_echo(t_cmd *args);
