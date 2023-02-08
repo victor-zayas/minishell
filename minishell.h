@@ -98,9 +98,7 @@ int		ft_exit(t_cmd *args);
 	//CD
 bool	ft_cd(t_cmd *args, t_env *env);
 
-
 	// TO _ DO
-	// BUILTINGS EXIT & CD
 
 	//lexer(); //comillas simples, comillas dobles, pipes, redirecciones
 	// 1.er paso

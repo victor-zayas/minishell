@@ -60,4 +60,3 @@ bool	ft_cd(t_cmd *args, t_env *env)
 	ft_rewrite_pwd(env);
 	return (0);
 }
-

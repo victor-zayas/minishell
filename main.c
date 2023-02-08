@@ -65,7 +65,7 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd		args;
 	char		*prompt;
 	
-	env.env = ft_env_strdup(envp); //TODO leak
+	env.env = ft_env_strdup(envp);
 	env.oldpwd = NULL;
 	init_args(&args);
 	signal(SIGINT, my_signal);

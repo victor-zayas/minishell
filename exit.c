@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-//no funca
 int	ft_exit(t_cmd *args)
 {
 	int	i;
