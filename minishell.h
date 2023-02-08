@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/07 17:37:27 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/07 18:20:55 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void ft_builtings(t_cmd	*args, t_env *env);
 
 	//PWD
 void	ft_pwd(void);
-int		g_exit;
 
 	//ECHO
 void	ft_echo(t_cmd *args);
@@ -98,11 +97,8 @@ int		ft_exit(t_cmd *args);
 
 	//CD
 bool	ft_cd(t_cmd *args, t_env *env);
-void	get_oldpwd(t_env *env);
-
 
 	// TO _ DO
-	// BUILTINGS env
 
 	//lexer(); //comillas simples, comillas dobles, pipes, redirecciones
 	// 1.er paso

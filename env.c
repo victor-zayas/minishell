@@ -19,5 +19,3 @@ void	ft_env(t_env *env)
 	i = -1;
 	while (env->env[++i])
 		printf("%s\n", env->env[i]);
-	g_exit = 0;
-}

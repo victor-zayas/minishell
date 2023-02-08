@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/07 18:33:17 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/08 17:22:16 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_chopeadito(t_cmd	*args, t_env *env, char	*prompt)
 	get_data(args, aux);
 	get_token(args, aux);
 	ft_builtings(args, env);
-	print(args);
+	//print(args);
 	// exec(args, env);
 	free_args(args);
 }
@@ -80,6 +80,6 @@ int	main(int argc, char **argv, char **envp)
 		ft_chopeadito(&args, &env, prompt);
 	}
 	ft_bid_free(env.env);
-	//free(env.oldpwd);
+	free(env.oldpwd);
 	return (0);
 }
