@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:24:50 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/07 19:06:59 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/08 17:23:13 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,18 @@ char    **ft_env_strdup(char **str)
     aux = NULL;
     while (str[++i])
     {
-        if (ft_strncmp(str[i], "OLDPWD=", 7) == 0)
-        {
-            aux = (char **)malloc(sizeof(char *) * (ft_bid_strlen(str)) + 1);
-            if (!aux)
-                return (NULL);
-            i = -1;
-            while (str[++i])
-            {
-                if (ft_strncmp(str[i], "OLDPWD=", 7) != 0)
-                    aux[i] = ft_strdup(str[i]);
-            }
-            aux[i - 1] = '\0';
-            return (aux);
-        }
-    }
-    if (!aux)
-    {
-        aux = (char **)malloc(sizeof(char *) * (ft_bid_strlen(str) + 1));
+        aux = (char **)malloc(sizeof(char *) * (ft_bid_strlen(str)) + 1);
         if (!aux)
             return (NULL);
         i = -1;
         while (str[++i])
+        {
+            if (!ft_strncmp(str[i], "OLDPWD=", 7) && str[i])
+                break ;
             aux[i] = ft_strdup(str[i]);
-        aux[i] = '\0';   
+        }
+        aux[i - 1] = '\0';
+        return (aux);
     }
     return (aux);
 }
