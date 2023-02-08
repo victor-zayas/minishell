@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+         #
+#    By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 12:33:28 by vzaya-s           #+#    #+#              #
-#    Updated: 2023/02/06 11:37:48 by vzaya-s          ###   ########.fr        #
+#    Updated: 2023/02/08 18:51:21 by vzayas-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ SRCS = main.c \
 	echo.c \
 	exit.c \
 	cd.c \
-	export.c
+	export_unset.c
 
 # MAKEFILE ART #
 # COLORS #

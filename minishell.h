@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/07 18:20:55 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/08 18:49:02 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,13 @@ int		ft_exit(t_cmd *args);
 
 	//CD
 bool	ft_cd(t_cmd *args, t_env *env);
+
+	//EXPORT
 void	ft_export(t_env	*env, char *content);
+
+	//UNSET
+void    ft_unset(t_env *env, char *content);
+
 	// TO _ DO
 
 	//lexer(); //comillas simples, comillas dobles, pipes, redirecciones
