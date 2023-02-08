@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/06 17:45:09 by vzaya-s          ###   ########.fr       */
+/*   Updated: 2023/02/08 17:22:16 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_chopeadito(t_cmd	*args, t_env *env, char	*prompt)
 	get_data(args, aux);
 	get_token(args, aux);
 	ft_builtings(args, env);
-	print(args);
+	//print(args);
 	// exec(args, env);
 	free_args(args);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:20:31 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/07 19:12:55 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/08 17:33:21 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ static void	ft_rewrite_pwd(t_env *env)
 			env->env[i] = ft_strjoin("PWD=", env->pwd);
 		}
 	}
+	free(env->pwd);
 }
 
 bool	ft_cd(t_cmd *args, t_env *env)
 {
 	get_oldpwd(env);
-	printf("Cd arg: %s\n", args->args[1]);
 	if (chdir(args->args[1]) == -1)
 	{
 		printf("cd: %s: No such file or directory\n", args->args[1]);
