@@ -38,7 +38,8 @@ SRCS = main.c \
 	env.c \
 	echo.c \
 	exit.c \
-	cd.c 
+	cd.c \
+	export.c
 
 # MAKEFILE ART #
 # COLORS #
