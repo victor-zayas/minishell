@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/09 16:18:26 by vzaya-s          ###   ########.fr       */
+/*   Updated: 2023/02/09 18:31:06 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	ft_export(t_env	*env, char *content);
 void    ft_unset(t_env *env, char *content);
 
 	// TO _ DO
-
+		//leak dup env
 	//lexer(); //comillas simples, comillas dobles, pipes, redirecciones
 	// 1.er paso
 		//encuentro comilla, leo hasta la siguiente comilla (si no hay doy error), lo meto en un token
