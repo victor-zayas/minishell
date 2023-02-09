@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:36:07 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/08 18:19:47 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:25:20 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_env(t_env *env)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (env->env[++i])

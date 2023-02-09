@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+         #
+#    By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 12:33:28 by vzaya-s           #+#    #+#              #
-#    Updated: 2023/02/08 18:51:21 by vzayas-s         ###   ########.fr        #
+#    Updated: 2023/02/09 19:16:52 by jaizpuru         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = minishell
 
 # COMPILATION #
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
 RM = /bin/rm -rf
 #READLINE_PATH = /Users/$(USER)/.brew/opt/readline
 #LREADLINE_FLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib/
