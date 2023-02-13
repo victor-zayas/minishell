@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_strdup.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:24:50 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/09 19:18:47 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/13 18:40:50 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	**ft_env_strdup(char **str)
 				break ;
 			aux[i] = ft_strdup(str[i]);
 		}
-		aux[i] = '\0';
+		aux[i] = NULL;
 		return (aux);
 	}
 	return (aux);

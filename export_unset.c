@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_unset.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/02/13 18:13:25 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/13 18:41:36 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ void	ft_export(t_env	*env, char *content)
 	while (env->env[++i])
 		aux[i] = ft_strdup(env->env[i]);
 	aux[i] = ft_strdup(content);
-	aux[i + 1] = '\0';
+	aux[i + 1] = NULL;
 	free_arstr(env->env);
 	i = -1;
 	while (aux[++i])
 		env->env[i] = ft_strdup(aux[i]);
-	env->env[i] = '\0';
+	env->env[i] = NULL;
 	free_arstr(aux);
 }
 
@@ -85,11 +85,11 @@ void	ft_unset(t_env	*env, char *content)
 		}
 		aux[i] = ft_strdup(env->env[i]);
 	}
-	aux[i] = '\0';
+	aux[i] = NULL;
 	free_arstr(env->env);
 	i = -1;
 	while (aux[++i])
 		env->env[i] = ft_strdup(aux[i]);
-	env->env[i] = '\0';
+	env->env[i] = NULL;
 	free_arstr(aux);
 }
