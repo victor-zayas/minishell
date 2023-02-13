@@ -3,32 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:20:31 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/08 17:33:21 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:22:22 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    get_oldpwd(t_env *env)
+void	get_oldpwd(t_env *env)
 {
-    int        i;
-    char    *aux;
+	int		i;
+	char	*aux;
 
-    i = -1;
-    while (env->env[++i])
-    {
-        if (!env->env[i + 1])
-        {
+	i = -1;
+	while (env->env[++i])
+	{
+		if (!env->env[i + 1])
+		{
 			aux = getcwd(NULL, 0);
 			free(env->env[i]);
-            env->env[i] = ft_strjoin("OLDPWD=", aux);
+			env->env[i] = ft_strjoin("OLDPWD=", aux);
 			free(aux);
-            break ;
-        }
-    }
+			break ;
+		}
+	}
 }
 
 static void	ft_rewrite_pwd(t_env *env)

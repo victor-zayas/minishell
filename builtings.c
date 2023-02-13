@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:25:36 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/08 18:45:49 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:22:37 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_builtings(t_cmd	*args, t_env *env)
+void	ft_builtings(t_cmd	*args, t_env *env)
 {
 	int	i;
-	
+
 	i = -1;
 	while (args->args[++i])
 	{

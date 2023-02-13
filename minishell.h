@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/09 18:31:06 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/13 18:13:02 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*get_cmd(char	*arguments, char	**enviroment);
 void	free_args(t_cmd	*args);
 
 	//BUILTINGS
-void ft_builtings(t_cmd	*args, t_env *env);
+void	ft_builtings(t_cmd	*args, t_env *env);
 
 	//PWD
 void	ft_pwd(void);
@@ -102,7 +102,7 @@ bool	ft_cd(t_cmd *args, t_env *env);
 void	ft_export(t_env	*env, char *content);
 
 	//UNSET
-void    ft_unset(t_env *env, char *content);
+void	ft_unset(t_env *env, char *content);
 
 	// TO _ DO
 		//leak dup env

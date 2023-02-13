@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 09:43:15 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/07 18:21:44 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:25:05 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_exit(t_cmd *args)
 	int	i;
 
 	i = 0;
-	while(args->args[i])
+	while (args->args[i])
 		i++;
 	args->n_cmd = i;
 	if (args->size == 1)
