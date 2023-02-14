@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/24 19:45:57 by vzaya-s          ###   ########.fr       */
+/*   Updated: 2023/02/14 18:09:33 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_args(t_cmd	*cmd)
 	cmd->pipes = 0;
 	cmd->lesser = 0;
 	cmd->greater = 0;
+	cmd->dollars = 0;
 }
 
 void	ft_lexer(t_cmd	*args, char	*prompt)

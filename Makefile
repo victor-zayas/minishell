@@ -6,7 +6,7 @@
 #    By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 12:33:28 by vzaya-s           #+#    #+#              #
-#    Updated: 2023/02/14 16:04:23 by jaizpuru         ###   ########.fr        #
+#    Updated: 2023/02/14 18:43:26 by jaizpuru         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = minishell
 
 # COMPILATION #
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 RM = /bin/rm -rf
 LREADLINE_FLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib/
 READLINE = -I/Users/$(USER)/.brew/opt/readline/include/
@@ -38,7 +38,8 @@ SRCS = main.c \
 	echo.c \
 	exit.c \
 	cd.c \
-	export_unset.c
+	export_unset.c \
+	inter.c
 
 # MAKEFILE ART #
 # COLORS #

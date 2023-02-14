@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/09 19:23:41 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/14 18:51:46 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ void	print(t_cmd	*cmd)
 	printf("\n				DATA INSIDE THE STRUCTURE:\n");
 	printf("				Clean words		: %d\n", cmd->words);
 	printf("				Quotes	   		: %d\n", cmd->quotes);
-	printf("				Double quotes	: %d\n", cmd->double_quotes);
+	printf("				Double quotes		: %d\n", cmd->double_quotes);
 	printf("				Pipes			: %d\n", cmd->pipes);
-	printf("				Output Redirect	: %d\n", cmd->greater);
-	printf("				Input Redirect	: %d\n", cmd->lesser);
+	printf("				Output Redirect		: %d\n", cmd->greater);
+	printf("				Input Redirect		: %d\n", cmd->lesser);
+	printf("				Dollars			: %d\n", cmd->dollars);
 }
 
 void	ft_chopeadito(t_cmd	*args, t_env *env, char	*prompt)
@@ -41,8 +42,9 @@ void	ft_chopeadito(t_cmd	*args, t_env *env, char	*prompt)
 	add_history(aux);
 	get_data(args, aux);
 	get_token(args, aux);
+	get_inter(args, env);
 	ft_builtings(args, env);
-	//print(args);
+	print(args);
 	// exec(args, env);
 	free_args(args);
 }

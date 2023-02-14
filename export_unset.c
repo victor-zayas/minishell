@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:22:45 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/14 16:23:22 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/14 17:55:53 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void	ft_unset(t_env	*env, char *content)
 	}
 	aux[i] = NULL;
 	ft_bid_free(env->env);
+	env->env = malloc(sizeof(char *) * (ft_bid_strlen(aux)) + 1);
 	i = -1;
 	while (aux[++i])
 		env->env[i] = ft_strdup(aux[i]);

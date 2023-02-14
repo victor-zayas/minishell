@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hedgedog <hedgedog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:33:36 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/20 19:24:43 by hedgedog         ###   ########.fr       */
+/*   Updated: 2023/02/14 18:10:44 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	get_data(t_cmd	*args, char	*prompt)
 			i++;
 		if ((prompt[i] != '\'') && (prompt[i] != '"')
 			&& (prompt[i] != '>') && (prompt[i] != '<')
-			&& (prompt[i] != '|') && prompt[i])
+			&& (prompt[i] != '|') && (prompt[i] != '$')
+			&& prompt[i])
 			i = i_cwords(args, prompt, i);
 		if ((prompt[i] == '\'') && prompt[i])
 			i = i_qwords(args, prompt, i);
@@ -35,6 +36,8 @@ void	get_data(t_cmd	*args, char	*prompt)
 			i = i_pipes(args, i);
 		if (prompt[i] == '>' && prompt[i])
 			i = i_pipes(args, i);
+		if (prompt[i] == '$' && prompt[i])
+			i = i_dollars(args, prompt, i);
 	}
 }
 
