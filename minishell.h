@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/13 19:52:21 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/14 16:21:35 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ void	ft_unset(t_env *env, char *content);
 #endif
 
 	// TO _ DO
-		// leak export
 		// create and expand dollar token
 		// repiping -> pipes
 	//lexer(); //comillas simples, comillas dobles, pipes, redirecciones

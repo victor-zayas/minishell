@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/02/13 19:50:42 by jaizpuru         ###   ########.fr       */
+/*   Created: 2023/02/14 16:22:45 by jaizpuru          #+#    #+#             */
+/*   Updated: 2023/02/14 16:23:22 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -32,12 +31,12 @@ int	content_check(t_env	*env, char	*content)
 	}
 	if (!content[len])
 		return (1);
-	while(env->env[++i])
+	while (env->env[++i])
 	{
 		if (!ft_strncmp(env->env[i], content, len))
 			return (i);
 	}
-	return (0);
+	return (-2);
 }
 
 void	print_export(char	**env)
@@ -58,9 +57,9 @@ void	ft_export(t_env	*env, char *content)
 	i = -1;
 	flag = content_check(env, content);
 	printf("				FLAG -> %d\n", flag);
-	if (flag == 1)
+	if (flag == -1)
 		return ;
-	if (flag == 0)
+	if (flag == -2)
 		aux = malloc(sizeof(char *) * (ft_bid_strlen(env->env) + 2));
 	else
 		aux = malloc(sizeof(char *) * (ft_bid_strlen(env->env) + 1));
@@ -68,25 +67,22 @@ void	ft_export(t_env	*env, char *content)
 		return ;
 	while (env->env[++i])
 	{
-		if(i == flag && i > 1)
-		{
-			aux[i] = ft_strdup(content);
-			printf("				AUX[I] -> %s\n", aux[i]);
-			if (env->env[i + 1])
-				i++;
-			else
-				break ;
-		}
 		aux[i] = ft_strdup(env->env[i]);
+		if (i == flag && flag >= 0 && ft_strncmp(env->env[i], content, ft_strlen(env->env[i])))
+		{
+			free(aux[i]);
+			aux[i] = ft_strdup(content);
+		}
 	}
-	if (flag == 0)
+	if (flag == -2)
 	{
 		aux[i] = ft_strdup(content);
 		aux[i + 1] = NULL;
 	}
 	else
-		aux[i + 1] = NULL;
-	//ft_bid_free(env->env);
+		aux[i] = NULL;
+	ft_bid_free(env->env);
+	env->env = malloc(sizeof(char *) * (ft_bid_strlen(aux)) + 1);
 	i = -1;
 	while (aux[++i])
 		env->env[i] = ft_strdup(aux[i]);
