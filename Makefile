@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+         #
+#    By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 12:33:28 by vzaya-s           #+#    #+#              #
-#    Updated: 2023/02/06 11:37:48 by vzaya-s          ###   ########.fr        #
+#    Updated: 2023/02/15 12:56:40 by jaizpuru         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,11 @@ NAME = minishell
 
 # COMPILATION #
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
 RM = /bin/rm -rf
-#READLINE_PATH = /Users/$(USER)/.brew/opt/readline
-#LREADLINE_FLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib/
-#READLINE = -I/Users/$(USER)/.brew/opt/readline/include/
-LINUX_READLINE = -lreadline -L/usr/lib/x86_64-linux-gnu/
+LREADLINE_FLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib/
+READLINE = -I/Users/$(USER)/.brew/opt/readline/include/
+#LINUX_READLINE = -lreadline -L/usr/lib/x86_64-linux-gnu/
 
 # OBJS #
 OBJS = $(SRCS:.c=.o)
@@ -38,7 +37,9 @@ SRCS = main.c \
 	env.c \
 	echo.c \
 	exit.c \
-	cd.c 
+	cd.c \
+	export_unset.c \
+	inter.c
 
 # MAKEFILE ART #
 # COLORS #
@@ -73,12 +74,12 @@ export MINISHELL
 all: $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(LINUX_READLINE) -c $^ -o $@
+	$(CC) $(CFLAGS) $(READLINE) -c $^ -o $@
 
 $(NAME): $(OBJS)
 	make -C libft all
-#	 $(CC) $(CFLAGS) $(LREADLINE_FLAGS) $(LINUX_READLINE) libft/libft.a $^ -o $(NAME)
-	$(CC) $(CFLAGS) $^ $(LREADLINE_FLAGS) $(LINUX_READLINE) libft/libft.a -o $(NAME)
+	 $(CC) $(CFLAGS) $(LREADLINE_FLAGS) $(READLINE) libft/libft.a $^ -o $(NAME)
+#	$(CC) $(CFLAGS) $^ $(LREADLINE_FLAGS) $(LINUX_READLINE) libft/libft.a -o $(NAME)
 	echo "$(BLUE)༺ library created༻$(END)"
 	echo "$$MINISHELL"
 	echo "Special thanks to $(GREEN)༺ HELECHOS༻$(END)".

@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bid_strlen.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:26:59 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/01/30 18:27:14 by vzaya-s          ###   ########.fr       */
+/*   Updated: 2023/02/09 19:20:11 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int    ft_bid_strlen(char **str)
+int	ft_bid_strlen(char **str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    if (!str)
-        return (0);
-    while (str[i])
-        i++;
-    return (i);
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+		i++;
+	return (i);
 }

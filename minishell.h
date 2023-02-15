@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/07 18:20:55 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/15 15:08:35 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ typedef struct s_cmd
 	int		quotes;
 	int		double_quotes;
 	int		pipes;
-
 	int		lesser;
 	int		greater;
+	int		dollars;
 }		t_cmd;
 
 typedef struct s_env
@@ -54,6 +54,7 @@ void	ft_chopeadito(t_cmd	*args, t_env *env, char	*prompt);
 	//LEXER
 	// GET_TOKEN
 void	get_token(t_cmd	*cmd, char	*prompt);
+void	get_inter(t_cmd *cmd, t_env *env);
 
 	// GET_DATA
 void	get_data(t_cmd	*args, char	*prompt);
@@ -63,6 +64,7 @@ int		i_dqwords(t_cmd	*cmd, char	*prompt, int pos);
 int		i_pipes(t_cmd	*cmd, int i);
 int		i_in(t_cmd	*cmd, int i);
 int		i_out(t_cmd	*cmd, int i);
+int		i_dollars(t_cmd	*cmd, char	*prompt, int pos);
 
 	// LEXER
 char	*clean_words(t_cmd	*cmd, char	*prompt, int pos);
@@ -81,7 +83,7 @@ char	*get_cmd(char	*arguments, char	**enviroment);
 void	free_args(t_cmd	*args);
 
 	//BUILTINGS
-void ft_builtings(t_cmd	*args, t_env *env);
+void	ft_builtings(t_cmd	*args, t_env *env);
 
 	//PWD
 void	ft_pwd(void);
@@ -98,8 +100,23 @@ int		ft_exit(t_cmd *args);
 	//CD
 bool	ft_cd(t_cmd *args, t_env *env);
 
-	// TO _ DO
+	//EXPORT
+void	ft_export(t_env	*env, char *content);
+int		content_check(t_env	*env, char	*content);
+void	print_export(char	**env);
 
+	//UNSET
+void	ft_unset(t_env *env, char *content);
+
+#endif
+
+	//  __unused -> Variables not used
+	//  __attribute__((unused)) -> Variables not used
+
+	// TO _ DO
+		// repiping -> pipes
+		// PARSEO
+		// Execv	
 	//lexer(); //comillas simples, comillas dobles, pipes, redirecciones
 	// 1.er paso
 		//encuentro comilla, leo hasta la siguiente comilla (si no hay doy error), lo meto en un token
@@ -122,4 +139,63 @@ bool	ft_cd(t_cmd *args, t_env *env);
 	//path = get_cmd(*args, env);
 	//execve(path, args, env);
 
-#endif
+//EXAMPLE expan $
+/* c4r6s2:~ jaizpuru$ $PWD
+bash: /Users/jaizpuru: is a directory
+c4r6s2:~ jaizpuru$ env
+TERM_PROGRAM=vscode
+TERM=xterm-256color
+HOMEBREW_TEMP=/tmp/jaizpuru/Homebrew/Temp
+SHELL=/bin/zsh
+TMPDIR=/var/folders/zz/zyxvpxvq6csfxvn_n000cbsw0032yg/T/
+TERM_PROGRAM_VERSION=1.74.0
+OLDPWD=/Users/jaizpuru/minishell
+ORIGINAL_XDG_CURRENT_DESKTOP=undefined
+MallocNanoZone=0
+USER=jaizpuru
+COMMAND_MODE=unix2003
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.VtdN9AeX7m/Listeners
+__CF_USER_TEXT_ENCODING=0x18BCF:0x0:0x0
+HOMEBREW_CACHE=/tmp/jaizpuru/Homebrew/Caches
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/jaizpuru/.brew/bin
+LaunchInstanceID=2F6E4AB0-C50B-46E0-95BE-E893CEB83AC5
+a=0
+c4r6s2:~ jaizpuru$ $pwd
+c4r6s2:~ jaizpuru$ $PWD
+bash: /Users/jaizpuru: is a directory
+c4r6s2:~ jaizpuru$ env
+TERM_PROGRAM=vscode
+TERM=xterm-256color
+HOMEBREW_TEMP=/tmp/jaizpuru/Homebrew/Temp
+SHELL=/bin/zsh
+TMPDIR=/var/folders/zz/zyxvpxvq6csfxvn_n000cbsw0032yg/T/
+TERM_PROGRAM_VERSION=1.74.0
+OLDPWD=/Users/jaizpuru/minishell
+ORIGINAL_XDG_CURRENT_DESKTOP=undefined
+MallocNanoZone=0
+USER=jaizpuru
+COMMAND_MODE=unix2003
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.VtdN9AeX7m/Listeners
+__CF_USER_TEXT_ENCODING=0x18BCF:0x0:0x0
+HOMEBREW_CACHE=/tmp/jaizpuru/Homebrew/Caches
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/jaizpuru/.brew/bin
+LaunchInstanceID=2F6E4AB0-C50B-46E0-95BE-E893CEB83AC5
+a=0
+PWD=/Users/jaizpuru
+LANG=es_ES.UTF-8
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=--ms-enable-electron-run-as-node
+XPC_FLAGS=0x0
+XPC_SERVICE_NAME=0
+SHLVL=1
+HOME=/Users/jaizpuru
+VSCODE_GIT_ASKPASS_MAIN=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js
+LOGNAME=jaizpuru
+VSCODE_GIT_IPC_HANDLE=/var/folders/zz/zyxvpxvq6csfxvn_n000cbsw0032yg/T/vscode-git-b7a04e0640.sock
+VSCODE_GIT_ASKPASS_NODE=/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper.app/Contents/MacOS/Code Helper
+GIT_ASKPASS=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh
+SECURITYSESSIONID=186a6
+COLORTERM=truecolor
+_=/usr/bin/env
+c4r6s2:~ jaizpuru$ $PWD=
+bash: /Users/jaizpuru=: No such file or directory
+c4r6s2:~ jaizpuru$  */
