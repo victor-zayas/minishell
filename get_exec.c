@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hedgedog <hedgedog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 11:32:03 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/01/20 15:08:50 by hedgedog         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:39:08 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec(t_cmd	*token, char	**env)
+/* void	exec(t_cmd	*token, char	**env)
 {
 	char	**args;
 	char	*path;
@@ -25,7 +25,6 @@ void	exec(t_cmd	*token, char	**env)
 	else
 		args = ft_split(*token->args, ' ');
 	path = get_cmd(*args, env);
-	/* printf("\n\nEXEC FUNCTION: Cual es el resultado de path -> %s\n", path); */
 	execve(path, args, env);
 }
 
@@ -76,4 +75,4 @@ char	*get_cmd(char	*arguments, char	**enviroment)
 		free (path[i]);
 	free (path);
 	return (0);
-}
+} */

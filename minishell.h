@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/15 15:08:35 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:38:00 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,13 @@ char	*out_lexer(t_cmd	*cmd, char	*prompt, int pos);
 char	*in_lexer(t_cmd	*cmd, char	*prompt, int pos);
 
 	// PIPEX
-void	exec(t_cmd	*token, char	**env);
+void	ft_pipes(t_cmd	*cmd, t_env	*env);
+void	exec(t_cmd	*token, char	**env, int	pos);
+void	ft_child(t_cmd	*cmd, char	**enviroment1, int	*fds1, int	i);
+void	ft_adult(t_cmd	*cmd, char	**enviroment2, int	*fds2, int	i);
 char	*ft_path(char	**enviroment_path);
 char	*get_cmd(char	*arguments, char	**enviroment);
+void	error(char	*error);
 
 	// FREE_ARGS
 void	free_args(t_cmd	*args);

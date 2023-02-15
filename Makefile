@@ -6,7 +6,7 @@
 #    By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 12:33:28 by vzaya-s           #+#    #+#              #
-#    Updated: 2023/02/15 12:56:40 by jaizpuru         ###   ########.fr        #
+#    Updated: 2023/02/15 16:29:38 by jaizpuru         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,9 @@ SRCS = main.c \
 	exit.c \
 	cd.c \
 	export_unset.c \
-	inter.c
+	inter.c \
+	pipes.c \
+	utils_pipes.c
 
 # MAKEFILE ART #
 # COLORS #
