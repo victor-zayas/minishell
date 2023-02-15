@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/14 18:55:42 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/15 15:08:35 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,13 @@ void	ft_unset(t_env *env, char *content);
 
 #endif
 
+	//  __unused -> Variables not used
+	//  __attribute__((unused)) -> Variables not used
+
 	// TO _ DO
-		//expand dollar token
 		// repiping -> pipes
+		// PARSEO
+		// Execv	
 	//lexer(); //comillas simples, comillas dobles, pipes, redirecciones
 	// 1.er paso
 		//encuentro comilla, leo hasta la siguiente comilla (si no hay doy error), lo meto en un token
