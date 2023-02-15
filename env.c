@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:36:07 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/15 15:28:02 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/15 15:28:16 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,3 +19,4 @@ void	ft_env(t_env *env)
 	i = -1;
 	while (env->env[++i])
 		printf("%s\n", env->env[i]);
+}
