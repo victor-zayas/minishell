@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/15 17:45:05 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:34:51 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,46 +24,57 @@ void	error(char	*error)
 	exit(EXIT_FAILURE);
 }
 
-void	exec(t_cmd	*cmd, char	**enviroment, int	pos)
+void	exec(char	**cmd, char	**enviroment)
 {
 	char	**path;
-	char	**arg_join;
 	int		i;
 
 	i = 0;
+	if (!cmd)
+		return ;
 	path = ft_split(ft_path(enviroment), ':');
-	arg_join = ft_split(cmd->args[pos], ' ');
+	/*for (int i = 0; cmd[i]; i++)
+	{
+		write(2, cmd[i], ft_strlen(cmd[i]));
+		write(2, "\n", 1);
+	}*/
+	path[i] = ft_strjoin(path[i], "/");
+	path[i] = ft_strjoin(path[i], *cmd);
 	while (path[i])
 	{
-		path[i] = ft_strjoin(path[i], "/");
-		path[i] = ft_strjoin(path[i], *arg_join);
-		execve(path[i], arg_join, enviroment);
+		//coger aqui el path;
 		i++;
 	}
+	execve(path[i], cmd, enviroment);
 	perror("zsh: command not found");
+	exit(1);
 }
 
-void	ft_child(t_cmd	*cmd, char	**enviroment1, int	*fds1, int	pos)
+void	ft_child(char	**cmd, char	**enviroment1, int	*fds1)
 {
-	if (cmd->n_cmd == 1)
-		exec(cmd, enviroment1, pos - 1);
-	//pwd |<-[1]fd[0]->| pwd |<-[1]fd[0]->| pwd
-	close(fds1[FD_READ_END]);
-	printf("		Child Command: %s\n", cmd->args[pos - 1]);
 	dup2(fds1[FD_WRITE_END], STDOUT_FILENO);
-	exec(cmd, enviroment1, pos - 1);
+	close(fds1[FD_READ_END]);
 	close(fds1[FD_WRITE_END]);
+	exec(cmd, enviroment1);
 }
 
-void	ft_adult(t_cmd	*cmd, char	**enviroment2, int	*fds2, int	pos)
+//HIJO
+//pipe(fd)
+//dup2(fds[WRITE_END], 1)
+//close(fd[WRITE_END])
+//close(fd[READ_END])
+
+//PADRE
+//DUP2(fds[READ_END], 0)
+//close(fd[WRITE_END])
+//close(fd[READ_END])
+
+void	ft_adult(char	**cmd, char	**enviroment2, __unused int	*fds2)
 {
-	close(fds2[FD_WRITE_END]);
-	dup2(fds2[FD_READ_END], STDIN_FILENO);
-	free(cmd->args[pos]);
-	cmd->args[pos] = ft_strtrim(cmd->args[pos], "|");
-	printf("		Adult Command: %s\n", cmd->args[pos]);
-	exec(cmd, enviroment2, pos);
-	close(fds2[FD_READ_END]);
+	dup2(1, fds2[FD_WRITE_END]);
+	//close(fds2[FD_WRITE_END]);
+	//close(fds2[FD_READ_END]);
+	exec(cmd, enviroment2);
 }
 
 char	*ft_path(char	**enviroment_path)

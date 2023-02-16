@@ -6,13 +6,13 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/15 17:31:36 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:27:39 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_fd(t_cmd	*cmd, t_env	*env, int	i)
+void	ft_fd(t_cmd	*cmd, t_env	*env)
 {
 	pid_t	pid;
 	pid_t	pid2;
@@ -24,25 +24,21 @@ void	ft_fd(t_cmd	*cmd, t_env	*env, int	i)
 	if (pid < 0)
 		error("fork");
 	if (pid == 0)
-		ft_child(cmd, env->env, fd, i);
+		ft_child(cmd->cmd, env->env, fd);
+	else {
+		waitpid (pid, NULL, 0);
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[1]);
+		close(fd[0]);
+	}
 	pid2 = fork();
 	if (pid2 == 0)
-		ft_adult (cmd, env->env, fd, i);
-	waitpid (pid, NULL, 0);
-	waitpid (pid2, NULL, 0);
+		ft_adult(cmd->atrb, env->env, fd);
+	else
+	{
+		waitpid (pid2, NULL, 0);	
+	}
 	close(fd[0]);
 	close(fd[1]);
 	return ;
-}
-
-void	ft_pipes(t_cmd	*cmd, t_env	*env)
-{
-	int	i;
-
-	i = -1;
-	while(cmd->args[++i])
-	{
-		if(!ft_strncmp(cmd->args[i], "|", 1))
-			ft_fd(cmd, env, i);
-	}
 }

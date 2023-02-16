@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/15 16:38:00 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:57:23 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 typedef struct s_cmd
 {
 	char	**args;
+	char	**cmd;
+	char	**atrb;
 	int		n_cmd;
 	int		size;
 
@@ -75,13 +77,13 @@ char	*out_lexer(t_cmd	*cmd, char	*prompt, int pos);
 char	*in_lexer(t_cmd	*cmd, char	*prompt, int pos);
 
 	// PIPEX
-void	ft_pipes(t_cmd	*cmd, t_env	*env);
-void	exec(t_cmd	*token, char	**env, int	pos);
-void	ft_child(t_cmd	*cmd, char	**enviroment1, int	*fds1, int	i);
-void	ft_adult(t_cmd	*cmd, char	**enviroment2, int	*fds2, int	i);
+void	exec(char	**cmd, char	**env);
+void	ft_child(char	**cmd, char	**enviroment1, int	*fds1);
+void	ft_adult(char	**cmd, char	**enviroment2, int	*fds2);
 char	*ft_path(char	**enviroment_path);
 char	*get_cmd(char	*arguments, char	**enviroment);
 void	error(char	*error);
+void	ft_fd(t_cmd	*cmd, t_env	*env);
 
 	// FREE_ARGS
 void	free_args(t_cmd	*args);
@@ -111,6 +113,12 @@ void	print_export(char	**env);
 
 	//UNSET
 void	ft_unset(t_env *env, char *content);
+
+	// CMD
+void	ft_selector(t_cmd	*cmd, t_env	*env);
+void	exec_cmd(char	**cmd, char	**enviroment);
+char	*ft_stephen_jokin(t_cmd	*cmd, char	*str, int	i);
+int		find_pipe(char	**args, int i);
 
 #endif
 
