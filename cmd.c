@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/17 13:05:11 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/17 16:06:56 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,12 @@ void	ft_selector(t_cmd	*cmd, t_env	*env)
 				j++;
 			}
 			cmd->atrb[j] = NULL;
-			ft_pipe(cmd, env);
+			ft_pipe(cmd, env, i);
 			ft_bid_free(cmd->atrb);
-			i = j + i;
-			if (!cmd->args[i])
-				return ;
+			return ;
 		}
 		cmd->cmd[i] = ft_stephen_jokin(cmd, cmd->cmd[i], i);
 	}
-	//exec_cmd(cmd->cmd, env->env);
+	exec_cmd(cmd->cmd, env->env);
 	ft_bid_free(cmd->cmd);
 }
