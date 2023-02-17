@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/16 20:34:51 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:57:47 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,54 +27,37 @@ void	error(char	*error)
 void	exec(char	**cmd, char	**enviroment)
 {
 	char	**path;
+	char	*aux;
 	int		i;
 
 	i = 0;
 	if (!cmd)
 		return ;
-	path = ft_split(ft_path(enviroment), ':');
-	/*for (int i = 0; cmd[i]; i++)
+	aux = ft_path(enviroment);
+	path = ft_split(aux, ':');
+	free (aux);
+	while (path[i] != NULL)
 	{
-		write(2, cmd[i], ft_strlen(cmd[i]));
-		write(2, "\n", 1);
-	}*/
-	path[i] = ft_strjoin(path[i], "/");
-	path[i] = ft_strjoin(path[i], *cmd);
-	while (path[i])
-	{
-		//coger aqui el path;
-		i++;
+		aux = ft_strjoin(path[i], "/");
+		free (path[i]);
+		path[i] = ft_strjoin(aux, *cmd);
+		free (aux);
+		aux = ft_strdup(path[i++]);
+		if (access(aux, X_OK) == 0)
+			break ;
+		free (aux);
 	}
-	execve(path[i], cmd, enviroment);
+	if (aux)
+		execve(aux, cmd, enviroment);
 	perror("zsh: command not found");
-	exit(1);
 }
 
-void	ft_child(char	**cmd, char	**enviroment1, int	*fds1)
+void	ft_child(char	**cmd, char	**enviroment1, int	*fd)
 {
-	dup2(fds1[FD_WRITE_END], STDOUT_FILENO);
-	close(fds1[FD_READ_END]);
-	close(fds1[FD_WRITE_END]);
+	close(fd[0]);
+	dup2(fd[1], STDOUT_FILENO);
+	close(fd[1]);
 	exec(cmd, enviroment1);
-}
-
-//HIJO
-//pipe(fd)
-//dup2(fds[WRITE_END], 1)
-//close(fd[WRITE_END])
-//close(fd[READ_END])
-
-//PADRE
-//DUP2(fds[READ_END], 0)
-//close(fd[WRITE_END])
-//close(fd[READ_END])
-
-void	ft_adult(char	**cmd, char	**enviroment2, __unused int	*fds2)
-{
-	dup2(1, fds2[FD_WRITE_END]);
-	//close(fds2[FD_WRITE_END]);
-	//close(fds2[FD_READ_END]);
-	exec(cmd, enviroment2);
 }
 
 char	*ft_path(char	**enviroment_path)

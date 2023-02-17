@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/16 20:29:12 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/17 13:05:11 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	exec_cmd(char	**cmd, char	**enviroment)
 {
 	char	**path;
+	char	*aux;
 	int		i;
 	pid_t	pid;
 
@@ -25,18 +26,27 @@ void	exec_cmd(char	**cmd, char	**enviroment)
 	else if (pid == 0)
 	{
 		if (!cmd)
-			return ;
-		path = ft_split(ft_path(enviroment), ':');
-		while (path[i])
+		return ;
+		aux = ft_path(enviroment);
+		path = ft_split(aux, ':');
+		free (aux);
+		while (path[i] != NULL)
 		{
-			path[i] = ft_strjoin(path[i], "/");
-			path[i] = ft_strjoin(path[i], *cmd);
-			execve(path[i], cmd, enviroment);
-			i++;
+			aux = ft_strjoin(path[i], "/");
+			free (path[i]);
+			path[i] = ft_strjoin(aux, *cmd);
+			free (aux);
+			aux = ft_strdup(path[i++]);
+			if (access(aux, X_OK) == 0)
+				break ;
+			free (aux);
 		}
-		perror("bash: command not found");
+		if (aux)
+			execve(aux, cmd, enviroment);
+		perror("zsh: command not found");
+		exit (1);
 	}
-	waitpid(pid, NULL, 0);;
+	waitpid(pid, NULL, 0);
 	return ;
 }
 
@@ -56,31 +66,31 @@ void	ft_selector(t_cmd	*cmd, t_env	*env)
 	int	j;
 
 	i = -1;
-	j = -1;
+	j = 0;
 	cmd->cmd = (char **)malloc(sizeof(char *) * find_pipe(cmd->args, 0) + 1);
 	if (!cmd->cmd)
 		return ;
-	cmd->atrb = (char **)malloc(sizeof(char *) * (find_pipe(cmd->args, find_pipe(cmd->args, 0))) + 2);
+	cmd->atrb = (char **)malloc(sizeof(char *) * (find_pipe(cmd->args, find_pipe(cmd->args, 0))) + 1);
 	if (!cmd->atrb)
 		return ;
 	while(cmd->args[++i])
 	{
 		if(!ft_strncmp(cmd->args[i], "|", 1))
 		{
-			//cmd->cmd[i] = ft_stephen_jokin(cmd, cmd->cmd[i], i);
 			while (cmd->args[++i])
 			{
 				cmd->atrb[j] = ft_stephen_jokin(cmd, cmd->atrb[j], i);
-				//printf("			ATR -> %s\n", cmd->atrb[j]);
 				j++;
 			}
-			//cmd->atrb[i] = NULL;
-			ft_fd(cmd, env);
-			return ;
+			cmd->atrb[j] = NULL;
+			ft_pipe(cmd, env);
+			ft_bid_free(cmd->atrb);
+			i = j + i;
+			if (!cmd->args[i])
+				return ;
 		}
 		cmd->cmd[i] = ft_stephen_jokin(cmd, cmd->cmd[i], i);
-		//printf("			CMD -> %s\n", cmd->cmd[i]);
 	}
-	exec_cmd(cmd->cmd, env->env);
+	//exec_cmd(cmd->cmd, env->env);
 	ft_bid_free(cmd->cmd);
 }

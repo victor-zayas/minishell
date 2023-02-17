@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/16 20:27:39 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:46:20 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	ft_fd(t_cmd	*cmd, t_env	*env)
 {
 	pid_t	pid;
-	pid_t	pid2;
 	int		fd[2];
 
 	if (pipe(fd) == -1)
@@ -25,20 +24,29 @@ void	ft_fd(t_cmd	*cmd, t_env	*env)
 		error("fork");
 	if (pid == 0)
 		ft_child(cmd->cmd, env->env, fd);
-	else {
-		waitpid (pid, NULL, 0);
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[1]);
-		close(fd[0]);
-	}
-	pid2 = fork();
-	if (pid2 == 0)
-		ft_adult(cmd->atrb, env->env, fd);
 	else
 	{
-		waitpid (pid2, NULL, 0);	
+		waitpid (pid, NULL, 0);
+		close(fd[1]);
+		dup2(fd[0], STDIN_FILENO);
+		exec(cmd->atrb, env->env);
+		close(fd[0]);
 	}
-	close(fd[0]);
-	close(fd[1]);
 	return ;
+}
+
+void	ft_pipe(t_cmd	*cmd, t_env	*env)
+{
+	pid_t	pid;
+
+
+	pid = fork();
+	if (pid < 0)
+		perror("Error");
+	if (pid == 0)
+	{
+		ft_fd(cmd, env);
+	}
+	else
+		waitpid(pid, NULL, 0);
 }
