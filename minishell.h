@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/17 15:57:30 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/20 12:43:26 by vzaya-s          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <string.h>
 # include <errno.h>
 # include <stdbool.h>
+# include <sys/wait.h>
 # include "libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -76,6 +77,13 @@ char	*pipes_lexer(t_cmd	*cmd, char	*prompt, int pos);
 char	*out_lexer(t_cmd	*cmd, char	*prompt, int pos);
 char	*in_lexer(t_cmd	*cmd, char	*prompt, int pos);
 
+	// CMD
+void	ft_selector(t_cmd	*cmd, t_env	*env);
+void	exec_cmd(char	**cmd, char	**enviroment);
+char	*ft_stephen_jokin(t_cmd	*cmd, char	*str, int	i);
+int		find_pipe(char	**args, int i);
+void	ft_pipe(t_cmd	*cmd, t_env	*env, int	pos);
+
 	// PIPEX
 void	exec(char	**cmd, char	**env);
 void	ft_child(char	**cmd, char	**enviroment1, int	*fds1);
@@ -113,13 +121,6 @@ void	print_export(char	**env);
 
 	//UNSET
 void	ft_unset(t_env *env, char *content);
-
-	// CMD
-void	ft_selector(t_cmd	*cmd, t_env	*env);
-void	exec_cmd(char	**cmd, char	**enviroment);
-char	*ft_stephen_jokin(t_cmd	*cmd, char	*str, int	i);
-int		find_pipe(char	**args, int i);
-void	ft_pipe(t_cmd	*cmd, t_env	*env, int	pos);
 
 #endif
 

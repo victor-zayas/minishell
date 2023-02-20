@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/17 16:05:07 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/20 12:32:38 by vzaya-s          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_fd(t_cmd	*cmd, t_env	*env)
 	return ;
 }
 
-void    ft_pipe(t_cmd   *cmd, t_env *env, int __unused pos)
+void    ft_pipe(t_cmd   *cmd, t_env *env, int pos)
 {
     pid_t   pid;
 	int		i;

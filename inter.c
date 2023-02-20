@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:55 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/16 15:25:59 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/20 12:32:01 by vzaya-s          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,8 @@ void	find_env(char	*str, int	pos, t_env	*env, t_cmd	*cmd, int	len)
 void	expand_dollars(char	*str, t_env *env, int	pos, t_cmd	*cmd)
 {
 	int	i;
-	int	j;	
 	
 	i = -1;
-	j = 0;
 	while (str[++i])
 	{
 		if (str[i] == '$')
