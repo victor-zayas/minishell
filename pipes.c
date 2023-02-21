@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/21 16:38:23 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/21 16:51:43 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pos)
 	if (pid == 0)
 	{
 		ft_fd(cmd, env);
-		printf("			POS -> %d\n", pos);
 		while (cmd->args[pos])
 		{
 			pos++;

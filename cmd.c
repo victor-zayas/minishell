@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/21 16:21:13 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/21 17:00:25 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,14 @@ void	exec_cmd(char	**cmd, char	**enviroment)
 
 char	*ft_stephen_jokin(t_cmd *cmd, char *str, int i)
 {
-	str = (char *)malloc(sizeof(ft_strlen(cmd->args[i]) + ft_strlen(str)) + 1);
+	char	*aux;
+
+	aux = (char *)malloc(sizeof(ft_strlen(cmd->args[i]) + ft_strlen(str)) + 1);
 	if (ft_strchr(cmd->args[i], '|') || ft_strchr(cmd->args[i], '<')
 		|| ft_strchr(cmd->args[i], '>'))
 		return (NULL);
-	str = ft_strjoin(str, cmd->args[i]);
+	str = ft_strjoin(aux, cmd->args[i]);
+	free(aux);
 	return (str);
 }
 
@@ -86,10 +89,12 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 			cmd->atrb[j] = NULL;
 			ft_pipe(cmd, env, i);
 			ft_bid_free(cmd->atrb);
+			ft_bid_free(cmd->cmd);
 			return ;
 		}
 		cmd->cmd[i] = ft_stephen_jokin(cmd, cmd->cmd[i], i);
 	}
+	ft_bid_free(cmd->atrb);
 	exec_cmd(cmd->cmd, env->env);
 	ft_bid_free(cmd->cmd);
 }

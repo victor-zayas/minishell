@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/21 16:44:31 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/21 17:10:32 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ void	exec(char	**cmd, char	**enviroment)
 	}
 	if (aux)
 		execve(aux, cmd, enviroment);
-	perror("zsh: command not found");
+	write(2, "bash:", 6);
+	write(2, *cmd, ft_strlen(*cmd));
+	write(2, ": command not found\n", 21);
 }
 
 void	ft_child(char	**cmd, char	**enviroment1, int	*fd)
