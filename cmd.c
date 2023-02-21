@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/17 16:06:56 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/21 16:21:13 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	exec_cmd(char	**cmd, char	**enviroment)
 	else if (pid == 0)
 	{
 		if (!cmd)
-		return ;
+			return ;
 		aux = ft_path(enviroment);
 		path = ft_split(aux, ':');
 		free (aux);
@@ -50,17 +50,17 @@ void	exec_cmd(char	**cmd, char	**enviroment)
 	return ;
 }
 
-char	*ft_stephen_jokin(t_cmd	*cmd, char	*str, int	i)
+char	*ft_stephen_jokin(t_cmd *cmd, char *str, int i)
 {
 	str = (char *)malloc(sizeof(ft_strlen(cmd->args[i]) + ft_strlen(str)) + 1);
-	if (ft_strchr(cmd->args[i], '|') || ft_strchr(cmd->args[i], '<') 
+	if (ft_strchr(cmd->args[i], '|') || ft_strchr(cmd->args[i], '<')
 		|| ft_strchr(cmd->args[i], '>'))
 		return (NULL);
 	str = ft_strjoin(str, cmd->args[i]);
 	return (str);
 }
 
-void	ft_selector(t_cmd	*cmd, t_env	*env)
+void	ft_selector(t_cmd *cmd, t_env *env)
 {
 	int	i;
 	int	j;
@@ -70,14 +70,15 @@ void	ft_selector(t_cmd	*cmd, t_env	*env)
 	cmd->cmd = (char **)malloc(sizeof(char *) * find_pipe(cmd->args, 0) + 1);
 	if (!cmd->cmd)
 		return ;
-	cmd->atrb = (char **)malloc(sizeof(char *) * (find_pipe(cmd->args, find_pipe(cmd->args, 0))) + 1);
+	cmd->atrb = (char **)malloc(sizeof(char *)
+			* (find_pipe(cmd->args, find_pipe(cmd->args, 0))) + 1);
 	if (!cmd->atrb)
 		return ;
-	while(cmd->args[++i])
+	while (cmd->args[++i])
 	{
-		if(!ft_strncmp(cmd->args[i], "|", 1))
+		if (!ft_strncmp(cmd->args[i], "|", 1))
 		{
-			while (cmd->args[++i])
+			while (cmd->args[++i] && ft_strncmp(cmd->args[i], "|", 1))
 			{
 				cmd->atrb[j] = ft_stephen_jokin(cmd, cmd->atrb[j], i);
 				j++;
