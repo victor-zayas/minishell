@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_unset.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:22:45 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/14 17:55:53 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/21 16:48:48 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ void	ft_export(t_env	*env, char *content)
 	while (env->env[++i])
 	{
 		aux[i] = ft_strdup(env->env[i]);
-		if (i == flag && flag >= 0 && ft_strncmp(env->env[i], content, ft_strlen(env->env[i])))
+		if (i == flag && flag >= 0
+			&& ft_strncmp(env->env[i], content, ft_strlen(env->env[i])))
 		{
 			free(aux[i]);
 			aux[i] = ft_strdup(content);

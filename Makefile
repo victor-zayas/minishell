@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+         #
+#    By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 12:33:28 by vzaya-s           #+#    #+#              #
-#    Updated: 2023/02/21 15:10:50 by jaizpuru         ###   ########.fr        #
+#    Updated: 2023/02/21 16:46:29 by vzayas-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ SRCS = main.c \
 	tokens.c \
 	lexer.c \
 	lexer2.c \
-	get_exec.c \
 	builtings.c \
 	pwd.c \
 	env.c \

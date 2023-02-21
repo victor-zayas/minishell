@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/21 16:31:21 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/21 16:38:23 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,6 @@ void	ft_fd(t_cmd	*cmd, t_env	*env)
 	}
 	return ;
 }
-
-/*  cmd->args -> buscar pipe
-				Si pipe es encontrado -> hacer 2 veces la vuelta
-				Si pipe no es encontrado -> hacer 1 vez la vuelta
-				ls -l | wc -l | cat -e
-*/
 
 void	ft_pipe(t_cmd *cmd, t_env *env, int pos)
 {

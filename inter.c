@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzaya-s <vzaya-s@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:55 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/20 12:32:01 by vzaya-s          ###   ########.fr       */
+/*   Updated: 2023/02/21 16:45:59 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	get_name_len(char	*str)
 	return (0);
 }
 
-void	find_env(char	*str, int	pos, t_env	*env, t_cmd	*cmd, int	len)
+void	find_env(char *str, int pos, t_env *env, t_cmd *cmd, int len)
 {
 	char	*aux;
 	int		start;
@@ -47,7 +47,8 @@ void	find_env(char	*str, int	pos, t_env	*env, t_cmd	*cmd, int	len)
 			free(aux);
 			free(cmd->args[len]);
 			str = ft_substr(env->env[start], 0, ft_strlen(env->env[start]));
-			aux = ft_substr(env->env[start], 0, get_name_len(env->env[start]) + 1);
+			aux = ft_substr(env->env[start], 0,
+					get_name_len(env->env[start]) + 1);
 			cmd->args[len] = ft_strtrim(str, aux);
 			free (str);
 			free (aux);
@@ -57,10 +58,10 @@ void	find_env(char	*str, int	pos, t_env	*env, t_cmd	*cmd, int	len)
 	free(aux);
 }
 
-void	expand_dollars(char	*str, t_env *env, int	pos, t_cmd	*cmd)
+void	expand_dollars(char	*str, t_env *env, int pos, t_cmd	*cmd)
 {
 	int	i;
-	
+
 	i = -1;
 	while (str[++i])
 	{
@@ -82,12 +83,12 @@ void	get_inter(t_cmd *cmd, t_env *env)
 		if (ft_strchr(cmd->args[i], '\''))
 		{
 			free(cmd->args[i]);
-			cmd->args[i] = ft_strtrim(cmd->args[i], "\'");	
+			cmd->args[i] = ft_strtrim(cmd->args[i], "\'");
 		}
 		else if (ft_strchr(cmd->args[i], '\"'))
 		{
 			free(cmd->args[i]);
-			cmd->args[i] = ft_strtrim(cmd->args[i], "\'");	
+			cmd->args[i] = ft_strtrim(cmd->args[i], "\'");
 			expand_dollars(cmd->args[i], env, i, cmd);
 		}
 		else
