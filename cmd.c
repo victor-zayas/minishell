@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/22 19:36:06 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/22 20:26:19 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	exec_cmd(char	**cmd, char	**enviroment)
 			path[i] = ft_strjoin(aux, *cmd);
 			free (aux);
 			aux = ft_strdup(path[i++]);
-			write(2, aux, ft_strlen(aux));
 			if (access(aux, X_OK) == 0)
 				break ;
 			free (aux);
@@ -48,21 +47,19 @@ void	exec_cmd(char	**cmd, char	**enviroment)
 		write(2, ": command not found\n", 21);
 	}
 	waitpid(pid, NULL, 0);
-	//ft_bid_free(cmd);
+	ft_bid_free(cmd);
 	return ;
 }
 
-char	*ft_stephen_jokin(t_cmd *cmd, char *str, int i)
+char	*ft_stephen_jokin(t_cmd *cmd, int i)
 {
 	char	*aux;
 
-	aux = (char *)malloc(sizeof(ft_strlen(cmd->args[i]) + ft_strlen(str)) + 1);
 	if (ft_strchr(cmd->args[i], '|') || ft_strchr(cmd->args[i], '<')
 		|| ft_strchr(cmd->args[i], '>'))
 		return (NULL);
-	str = ft_strjoin(aux, cmd->args[i]);
-	free(aux);
-	return (str);
+	aux = ft_strdup(cmd->args[i]);
+	return (aux);
 }
 
 void	ft_selector(t_cmd *cmd, t_env *env)
@@ -72,11 +69,12 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 
 	i = -1;
 	j = 0;
-	cmd->cmd = (char **)malloc(sizeof(char *) * find_pipe(cmd->args, 0) + 1);
+	cmd->cmd = (char **)malloc(sizeof(char *) * (find_pipe(cmd->args, 0) + 1));
+	//printf("i: %d\n", );
 	if (!cmd->cmd)
 		return ;
 	cmd->atrb = (char **)malloc(sizeof(char *)
-			* (find_pipe(cmd->args, find_pipe(cmd->args, 0))) + 1);
+			* (find_pipe(cmd->args, find_pipe(cmd->args, 0)) + 1));
 	if (!cmd->atrb)
 		return ;
 	while (cmd->args[++i])
@@ -85,17 +83,17 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 		{
 			while (cmd->args[++i] && ft_strncmp(cmd->args[i], "|", 1))
 			{
-				cmd->atrb[j] = ft_stephen_jokin(cmd, cmd->atrb[j], i);
+				cmd->atrb[j] = ft_stephen_jokin(cmd, i);
 				j++;
 			}
 			cmd->atrb[j] = NULL;
 			ft_pipe(cmd, env, i);
 			ft_bid_free(cmd->atrb);
-			ft_bid_free(cmd->cmd);
-			return ;
+			exit (1);
 		}
-		cmd->cmd[i] = ft_stephen_jokin(cmd, cmd->cmd[i], i);
+		cmd->cmd[i] = ft_stephen_jokin(cmd, i);
 	}
-	ft_bid_free(cmd->atrb);
+	cmd->cmd[i] = NULL;
+	free(cmd->atrb);
 	exec_cmd(cmd->cmd, env->env);
 }

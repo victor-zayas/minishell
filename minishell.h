@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/22 19:37:32 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/22 20:06:22 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*in_lexer(t_cmd	*cmd, char *prompt, int pos);
 	// CMD
 void	ft_selector(t_cmd *cmd, t_env *env);
 void	exec_cmd(char **cmd, char **enviroment);
-char	*ft_stephen_jokin(t_cmd	*cmd, char *str, int i);
+char	*ft_stephen_jokin(t_cmd	*cmd, int i);
 int		find_pipe(char **args, int i);
 void	ft_pipe(t_cmd *cmd, t_env *env, int pos);
 
@@ -127,7 +127,6 @@ void	ft_unset(t_env *env, char *content);
 	//  __attribute__((unused)) -> Variables not used
 
 	// TO _ DO
-		// leaks in pipes
 		// rebuild commad without spaces and add one between cmds;
 		// add int in exec funct to controll cmd error, if 1 fail, pipes stop.
 		// exit value estatus

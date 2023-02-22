@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/22 19:34:53 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/22 20:06:42 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pos)
 			while (cmd->args[pos + i]
 				&& ft_strncmp(cmd->args[pos + i], "|", 1))
 			{
-				cmd->atrb[i] = ft_stephen_jokin(cmd, cmd->atrb[i], pos + i);
+				cmd->atrb[i] = ft_stephen_jokin(cmd, pos + i);
 				i++;
 			}
 			cmd->atrb[i] = NULL;
