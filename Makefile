@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+         #
+#    By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 12:33:28 by vzaya-s           #+#    #+#              #
-#    Updated: 2023/02/22 17:56:09 by vzayas-s         ###   ########.fr        #
+#    Updated: 2023/02/22 18:37:24 by jaizpuru         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = minishell
 
 # COMPILATION #
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 RM = /bin/rm -rf
 LREADLINE_FLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib/
 READLINE = -I/Users/$(USER)/.brew/opt/readline/include/
@@ -190,9 +190,9 @@ $(NAME): $(OBJS)
 	echo "$(BLUE)༺ library created༻$(END)"
 	echo "$$MINISHELL"
 	echo "Special thanks to $(GREEN)༺ HELECHOS༻$(END)".
-	ifeq ($(USER), $(filter $(USER), jaizpuru))
+ifeq ($(USER), $(filter $(USER), jaizpuru))
 		echo $$JOKIN
-	endif
+endif
 #	osascript -e set Volume 10
 #	say quiero un tig voluntario
 

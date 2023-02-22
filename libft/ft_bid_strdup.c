@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:24:50 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/13 18:40:57 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/22 18:38:58 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,28 @@ char	**ft_bid_strdup(char **str)
 	int		i;
 
 	i = -1;
-	aux = (char **)malloc(sizeof(char *) * (ft_bid_strlen(str) + 1));
+	while (str[++i]) {
+		if (!ft_strncmp(str[i], "OLDPWD=", 7))
+		{
+			aux = (char **)malloc(sizeof(char *) * (ft_bid_strlen(str) + 1));
+			if (!aux)
+				return (NULL);
+			i = -1;
+			while (str[++i]) 
+				aux[i] = ft_strdup(str[i]);
+			aux[i] = NULL;
+			return (aux);
+		}
+	}
+	aux = (char **)malloc(sizeof(char *) * (ft_bid_strlen(str)));
 	if (!aux)
 		return (NULL);
+	i = -1;
 	while (str[++i])
-		aux[i] = ft_strdup(str[i]);
-	aux[i] = NULL;
+	{
+		if (ft_strncmp(str[i], "OLDPWD=", 7))
+			aux[i] = ft_strdup(str[i]);
+	}
+	aux[i - 1] = NULL;
 	return (aux);
 }
