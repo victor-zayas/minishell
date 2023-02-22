@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/21 16:51:43 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/22 19:34:53 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,18 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pos)
 			i = 0;
 			cmd->atrb = (char **)malloc(sizeof(char *)
 					* (find_pipe(cmd->args, find_pipe(cmd->args, pos))) + 1);
-			while (cmd->args[pos + i])
+			while (cmd->args[pos + i]
+				&& ft_strncmp(cmd->args[pos + i], "|", 1))
 			{
 				cmd->atrb[i] = ft_stephen_jokin(cmd, cmd->atrb[i], pos + i);
 				i++;
 			}
 			cmd->atrb[i] = NULL;
 			ft_fd(cmd, env);
-			pos++;
 			pos = find_pipe(cmd->args, pos);
 		}
 		exec(cmd->atrb, env->env);
+		return ;
 	}
 	else
 		waitpid(pid, NULL, 0);

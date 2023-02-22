@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/22 18:38:17 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/22 19:36:06 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	exec_cmd(char	**cmd, char	**enviroment)
 			execve(aux, cmd, enviroment);
 		write(2, "bash:", 6);
 		write(2, ": command not found\n", 21);
-		exit (1);
 	}
 	waitpid(pid, NULL, 0);
+	//ft_bid_free(cmd);
 	return ;
 }
 
@@ -96,5 +96,6 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 		}
 		cmd->cmd[i] = ft_stephen_jokin(cmd, cmd->cmd[i], i);
 	}
+	ft_bid_free(cmd->atrb);
 	exec_cmd(cmd->cmd, env->env);
 }

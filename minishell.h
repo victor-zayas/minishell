@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/22 16:52:57 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/22 19:37:32 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,8 @@ void	ft_unset(t_env *env, char *content);
 	//  __attribute__((unused)) -> Variables not used
 
 	// TO _ DO
-		// falta la ultima linea del env al copiarla
+		// leaks in pipes
+		// rebuild commad without spaces and add one between cmds;
 		// add int in exec funct to controll cmd error, if 1 fail, pipes stop.
 		// exit value estatus
 		// redirections
