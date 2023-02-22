@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/16 18:20:20 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:50:26 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_chopeadito(t_cmd	*args, t_env *env, char	*prompt)
 	get_inter(args, env);
 	//print(args);
 	ft_selector(args, env);
-	ft_builtings(args, env);
+	//ft_builtings(args, env);
 	free_args(args);
 }
 
@@ -67,7 +67,8 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd		args;
 	char		*prompt;
 
-	env.env = ft_env_strdup(envp);
+	env.env = ft_bid_strdup(envp);
+	ft_unset(&env, "OLDPWD=");
 	env.oldpwd = NULL;
 	init_args(&args);
 	signal(SIGINT, my_signal);
