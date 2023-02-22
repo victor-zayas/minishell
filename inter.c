@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:55 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/21 16:45:59 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/22 23:21:19 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,24 @@ void	expand_dollars(char	*str, t_env *env, int pos, t_cmd	*cmd)
 void	get_inter(t_cmd *cmd, t_env *env)
 {
 	int			i;
+	char		*aux;
 
 	i = -1;
 	while (cmd->args[++i])
 	{
 		if (ft_strchr(cmd->args[i], '\''))
 		{
+			aux = ft_strdup(cmd->args[i]);
 			free(cmd->args[i]);
-			cmd->args[i] = ft_strtrim(cmd->args[i], "\'");
+			cmd->args[i] = ft_strtrim(aux, "\'");
+			free(aux);
 		}
 		else if (ft_strchr(cmd->args[i], '\"'))
 		{
+			aux = ft_strdup(cmd->args[i]);
 			free(cmd->args[i]);
-			cmd->args[i] = ft_strtrim(cmd->args[i], "\'");
+			cmd->args[i] = ft_strtrim(aux, "\"");
+			free(aux);
 			expand_dollars(cmd->args[i], env, i, cmd);
 		}
 		else
