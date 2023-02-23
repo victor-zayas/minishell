@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/23 19:24:50 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:33:14 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+//# include <sys/wait.h>
 
 typedef struct s_cmd
 {
@@ -39,6 +40,7 @@ typedef struct s_cmd
 	int		lesser;
 	int		greater;
 	int		dollars;
+	int		double_redir;
 }		t_cmd;
 
 typedef struct s_env
@@ -71,8 +73,8 @@ char	*clean_words(t_cmd *cmd, char *prompt, int pos);
 char	*quotes_lexer(t_cmd	*cmd, char *prompt, int pos);
 char	*double_quotes_lexer(t_cmd *cmd, char *prompt, int pos);
 char	*pipes_lexer(t_cmd *cmd, char *prompt, int pos);
-char	*out_lexer(t_cmd *cmd, char *prompt, int pos);
-char	*in_lexer(t_cmd	*cmd, char *prompt, int pos);
+char	*one_lexer(t_cmd	*cmd, char	*prompt, int pos);
+char	*two_lexer(t_cmd	*cmd, char	*prompt, int pos);
 
 	// CMD
 void	ft_selector(t_cmd *cmd, t_env *env);

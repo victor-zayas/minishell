@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/23 20:04:18 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:24:39 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_args(t_cmd	*cmd)
 	cmd->lesser = 0;
 	cmd->greater = 0;
 	cmd->dollars = 0;
+	cmd->double_redir = 0;
 }
 
 void	ft_lexer(t_cmd	*args, char	*prompt)
@@ -42,11 +43,12 @@ void	ft_lexer(t_cmd	*args, char	*prompt)
 		else if (prompt[i] == '"' && prompt[i])
 			prompt = double_quotes_lexer(args, prompt, i);
 		else if (prompt[i] == '|' && prompt[i])
-			prompt = pipes_lexer(args, prompt, i);
-		else if (prompt[i] == '<' && prompt[i])
-			prompt = in_lexer(args, prompt, i);
-		else if (prompt[i] == '>' && prompt[i])
-			prompt = out_lexer(args, prompt, i);
+			prompt = one_lexer(args, prompt, i);
+		else if (((prompt[i] == '<' && prompt[i + 1] == '<')
+				|| (prompt[i] == '>' && prompt[i + 1] == '>')) && prompt[i])
+			prompt = two_lexer(args, prompt, i);
+		else if ((prompt[i] == '<' || prompt[i] == '>') && prompt[i])
+			prompt = one_lexer(args, prompt, i);
 		i = 0;
 	}
 	free(prompt);
@@ -56,7 +58,7 @@ void	get_token(t_cmd	*cmd, char	*prompt)
 {
 	cmd->args = (char **)malloc(sizeof(char *) * (cmd->words + cmd->quotes
 				+ cmd->double_quotes + cmd->pipes + cmd->lesser
-				+ cmd->greater + cmd->dollars + 1));
+				+ cmd->greater + cmd->dollars + cmd->double_redir + 1));
 	ft_lexer(cmd, prompt);
 	cmd->args[cmd->size] = NULL;
 	cmd->size = 0;

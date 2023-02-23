@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/23 19:14:41 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:32:42 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	print(t_cmd	*cmd)
 	printf("				Output Redirect		: %d\n", cmd->greater);
 	printf("				Input Redirect		: %d\n", cmd->lesser);
 	printf("				Dollars			: %d\n", cmd->dollars);
+	printf("				Double Redirections		: %d\n", cmd->double_redir);
 }
 
 void	ft_chopeadito(t_cmd	*args, t_env *env, char	*prompt)
