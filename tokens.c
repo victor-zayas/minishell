@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/23 16:13:49 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/23 18:49:44 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	get_token(t_cmd	*cmd, char	*prompt)
 {
 	cmd->args = (char **)malloc(sizeof(char *) * (cmd->words + cmd->quotes
 				+ cmd->double_quotes + cmd->pipes + cmd->lesser
-				+ cmd->greater + 1));
+				+ cmd->greater + cmd->dollars + 1));
 	ft_lexer(cmd, prompt);
 	cmd->args[cmd->size] = NULL;
 	cmd->size = 0;

@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:22:45 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/23 15:43:08 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/23 18:52:42 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_export(t_env	*env, char *content)
 
 	i = -1;
 	flag = content_check(env, content);
-	printf("				FLAG -> %d\n", flag);
+	//printf("				FLAG -> %d\n", flag);
 	if (flag == -1)
 		return ;
 	if (flag == -2)
@@ -83,7 +83,7 @@ void	ft_export(t_env	*env, char *content)
 	else
 		aux[i] = NULL;
 	ft_doublefree(env->env);
-	env->env = malloc(sizeof(char *) * (ft_doublestrlen(aux)) + 1);
+	env->env = malloc(sizeof(char *) * (ft_doublestrlen(aux) + 1));
 	i = -1;
 	while (aux[++i])
 		env->env[i] = ft_strdup(aux[i]);
