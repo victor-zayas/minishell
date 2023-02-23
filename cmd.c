@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/23 16:32:37 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:05:24 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 	}
 	cmd->cmd[i] = NULL;
 	free(cmd->atrb);
-	exec_cmd(cmd->cmd, env->env);
+	if (ft_builtings(cmd, env, 1))
+		exec_cmd(cmd->cmd, env->env);
 }

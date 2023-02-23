@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/23 16:05:06 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:07:44 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pos)
 			ft_fd(cmd, env);
 			pos = find_pipe(cmd->args, pos);
 		}
-		exec(cmd->atrb, env->env);
+		if (ft_builtings(cmd, env, 1))
+			exec(cmd->atrb, env->env);
 		return ;
 	}
 	else

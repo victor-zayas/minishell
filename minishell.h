@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/23 16:19:15 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:24:50 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,7 @@ void	get_data(t_cmd *args, char *prompt);
 int		i_cwords(t_cmd *cmd, char *prompt, int pos);
 int		i_qwords(t_cmd *cmd, char *prompt, int pos);
 int		i_dqwords(t_cmd	*cmd, char *prompt, int pos);
-int		i_pipes(t_cmd *cmd, int i);
-int		i_in(t_cmd *cmd, int i);
-int		i_out(t_cmd	*cmd, int i);
+int		i_sp(t_cmd	*cmd, char	*prompt, int i);
 int		i_dollars(t_cmd	*cmd, char *prompt, int pos);
 
 	// LEXER
@@ -96,7 +94,7 @@ void	ft_fd(t_cmd	*cmd, t_env	*env);
 void	free_args(t_cmd	*args);
 
 	//BUILTINGS
-void	ft_builtings(t_cmd *args, t_env *env);
+int	ft_builtings(t_cmd	*args, t_env *env, int i);
 
 	//PWD
 void	ft_pwd(void);
@@ -129,8 +127,6 @@ void	ft_unset(t_env *env, char *content);
 	//  __attribute__((unused)) -> Variables not used
 
 	// TO _ DO
-		// new comments ins cmd.c
-		//
 		// rebuild commad without spaces and add one between cmds;
 		// add int in exec funct to controll cmd error, if 1 fail, pipes stop.
 		// exit value estatus

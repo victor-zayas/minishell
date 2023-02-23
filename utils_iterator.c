@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_iterator.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:10:57 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/15 15:42:57 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:27:08 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	i_cwords(t_cmd	*cmd, char	*prompt, int pos)
 {
-	if (prompt[pos + 1] && prompt[pos + 1] != ' ')
-		pos++;
 	while (prompt[pos] != '\'' && prompt[pos] != '"' && prompt[pos] != ' '
 		&& prompt[pos] != '|' && prompt[pos] != '>' && prompt[pos] != '\t'
 		&& prompt[pos] != '<' && prompt[pos] != '$' && prompt[pos] != '\0')
