@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/23 15:44:24 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:32:37 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 			}
 			cmd->atrb[j] = NULL;
 			ft_pipe(cmd, env, i);
-			//ft_doublefree(cmd->atrb); //checkear esto que no se si tiene que estar aqui
-			//ft_doublefree(cmd->cmd); //checkear esto que no se si tiene que estar aqui
+			ft_doublefree(cmd->atrb);
+			ft_doublefree(cmd->cmd);
 			return ;
 		}
 		cmd->cmd[i] = ft_stephen_jokin(cmd, i);

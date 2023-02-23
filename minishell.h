@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/23 15:33:19 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:19:15 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ void	print_export(char **env);
 void	ft_unset(t_env *env, char *content);
 
 #endif
+
+// ls -l | wc | cat -e | wc -l | cat -e
 
 	//  __unused -> Variables not used
 	//  __attribute__((unused)) -> Variables not used

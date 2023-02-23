@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/23 15:43:49 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:05:06 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pos)
 		while (cmd->args[pos])
 		{
 			pos++;
-			ft_doublefree(cmd->cmd);
 			cmd->cmd = ft_doublestrdup(cmd->atrb);
 			ft_doublefree(cmd->atrb);
 			i = 0;

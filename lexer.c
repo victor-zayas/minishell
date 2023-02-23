@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:16:59 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/15 17:48:02 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:22:19 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*clean_words(t_cmd	*cmd, char *prompt, int pos)
 			|| prompt[pos - 1] == '\t'))
 		return (free(prompt), ft_strdup(""));
 	cmd->args[cmd->size++] = ft_substr(prompt, start, pos - start);
-	tmp = ft_substr(prompt, pos, ft_strlen(prompt) - pos);
+	tmp = ft_substr(prompt, pos, ft_strlen(prompt) - pos + 1);
 	free(prompt);
 	return (tmp);
 }
