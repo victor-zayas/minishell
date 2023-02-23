@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:33:36 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/23 19:30:54 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:03:36 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	get_data(t_cmd	*args, char	*prompt)
 	i = 0;
 	while (prompt[i])
 	{
-		printf("i -> %d\n", i);
 		while (prompt[i] == ' ' || prompt[i] == '\t')
 			i++;
 		if ((prompt[i] != '\'') && (prompt[i] != '"')
@@ -47,5 +46,5 @@ int	i_sp(t_cmd	*cmd, char	*prompt, int i)
 	cmd->pipes += 1;
 	if (prompt[i] == '|')
 		cmd->pipes += 1;
-	return (i);
+	return (i + 1);
 }

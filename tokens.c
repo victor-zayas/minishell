@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/23 19:16:13 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:04:18 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,6 @@ void	get_token(t_cmd	*cmd, char	*prompt)
 				+ cmd->double_quotes + cmd->pipes + cmd->lesser
 				+ cmd->greater + cmd->dollars + 1));
 	ft_lexer(cmd, prompt);
-	printf("Size -> %d\n", (cmd->words + cmd->quotes
-				+ cmd->double_quotes + cmd->pipes + cmd->lesser
-				+ cmd->greater + cmd->dollars + 1));
 	cmd->args[cmd->size] = NULL;
 	cmd->size = 0;
 }
