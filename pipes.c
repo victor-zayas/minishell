@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/22 23:42:16 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/23 15:43:49 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pos)
 		while (cmd->args[pos])
 		{
 			pos++;
-			ft_bid_free(cmd->cmd);
-			cmd->cmd = ft_bid_strdup(cmd->atrb);
-			ft_bid_free(cmd->atrb);
+			ft_doublefree(cmd->cmd);
+			cmd->cmd = ft_doublestrdup(cmd->atrb);
+			ft_doublefree(cmd->atrb);
 			i = 0;
 			cmd->atrb = (char **)malloc(sizeof(char *)
 					* (find_pipe(cmd->args, find_pipe(cmd->args, pos))) + 1);

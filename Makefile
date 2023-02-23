@@ -6,7 +6,7 @@
 #    By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 12:33:28 by vzaya-s           #+#    #+#              #
-#    Updated: 2023/02/23 00:01:42 by vzayas-s         ###   ########.fr        #
+#    Updated: 2023/02/23 15:13:42 by vzayas-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -190,7 +190,7 @@ $(NAME): $(OBJS)
 	echo "$(BLUE)༺ library created༻$(END)"
 	echo "$$MINISHELL"
 	echo "Special thanks to $(GREEN)༺ HELECHOS༻$(END)".
-ifeq ($(USER), $(filter $(USER), vzayas-s))
+ifeq ($(USER), $(filter $(USER), jaizpuru))
 		echo $$JOKIN
 		osascript -e "set Volume 2"
 		say --voice="Luciana" você é uma pessoa maravilhosa e um grande amigo.

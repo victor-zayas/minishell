@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:22:45 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/21 16:48:48 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/23 15:43:08 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void	ft_export(t_env	*env, char *content)
 	if (flag == -1)
 		return ;
 	if (flag == -2)
-		aux = malloc(sizeof(char *) * (ft_bid_strlen(env->env) + 2));
+		aux = malloc(sizeof(char *) * (ft_doublestrlen(env->env) + 2));
 	else
-		aux = malloc(sizeof(char *) * (ft_bid_strlen(env->env) + 1));
+		aux = malloc(sizeof(char *) * (ft_doublestrlen(env->env) + 1));
 	if (!aux)
 		return ;
 	while (env->env[++i])
@@ -82,13 +82,13 @@ void	ft_export(t_env	*env, char *content)
 	}
 	else
 		aux[i] = NULL;
-	ft_bid_free(env->env);
-	env->env = malloc(sizeof(char *) * (ft_bid_strlen(aux)) + 1);
+	ft_doublefree(env->env);
+	env->env = malloc(sizeof(char *) * (ft_doublestrlen(aux)) + 1);
 	i = -1;
 	while (aux[++i])
 		env->env[i] = ft_strdup(aux[i]);
 	env->env[i] = NULL;
-	ft_bid_free(aux);
+	ft_doublefree(aux);
 }
 
 void	ft_unset(t_env	*env, char *content)
@@ -99,7 +99,7 @@ void	ft_unset(t_env	*env, char *content)
 
 	if (!content)
 		return ;
-	aux = malloc(sizeof(char *) * (ft_bid_strlen(env->env) + 1) - 1);
+	aux = malloc(sizeof(char *) * (ft_doublestrlen(env->env) + 1) - 1);
 	i = -1;
 	mem = NULL;
 	if (!content)
@@ -119,11 +119,11 @@ void	ft_unset(t_env	*env, char *content)
 		aux[i] = ft_strdup(env->env[i]);
 	}
 	aux[i] = NULL;
-	ft_bid_free(env->env);
-	env->env = malloc(sizeof(char *) * (ft_bid_strlen(aux)) + 1);
+	ft_doublefree(env->env);
+	env->env = malloc(sizeof(char *) * (ft_doublestrlen(aux)) + 1);
 	i = -1;
 	while (aux[++i])
 		env->env[i] = ft_strdup(aux[i]);
 	env->env[i] = NULL;
-	ft_bid_free(aux);
+	ft_doublefree(aux);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/22 18:38:26 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/23 15:41:35 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd		args;
 	char		*prompt;
 
-	env.env = ft_bid_strdup(envp);
+	env.env = ft_env_strdup(envp);
 	env.oldpwd = NULL;
 	init_args(&args);
 	signal(SIGINT, my_signal);
@@ -81,7 +81,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		ft_chopeadito(&args, &env, prompt);
 	}
-	ft_bid_free(env.env);
+	ft_doublefree(env.env);
 	free(env.oldpwd);
 	return (0);
 }
