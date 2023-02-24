@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/23 20:33:14 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/24 01:14:40 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 //# include <sys/wait.h>
+# include <fcntl.h>
 
 typedef struct s_cmd
 {
@@ -96,7 +97,7 @@ void	ft_fd(t_cmd	*cmd, t_env	*env);
 void	free_args(t_cmd	*args);
 
 	//BUILTINGS
-int	ft_builtings(t_cmd	*args, t_env *env, int i);
+int		ft_builtings(t_cmd	*args, t_env *env, int i);
 
 	//PWD
 void	ft_pwd(void);
@@ -121,6 +122,10 @@ void	print_export(char **env);
 	//UNSET
 void	ft_unset(t_env *env, char *content);
 
+	// REDIRECTIONS
+void	ft_output(t_cmd	*cmd, int i);
+void	ft_input(t_cmd	*cmd, int i);
+
 #endif
 
 // ls -l | wc | cat -e | wc -l | cat -e
@@ -129,11 +134,18 @@ void	ft_unset(t_env *env, char *content);
 	//  __attribute__((unused)) -> Variables not used
 
 	// TO _ DO
-		// rebuild commad without spaces and add one between cmds;
-		// add int in exec funct to controll cmd error, if 1 fail, pipes stop.
 		// exit value estatus
 		// redirections
+			//format : "[in_command / out_command] [output / input]"
 		// PARSEO
+
+	// DONE
+		// add int in exec funct to controll cmd error, if 1 fail, pipes stop.
+			// Not needed anymore!
+			// Bash executes the last command no matter 
+			// what the input it is given by a pipe!
+			// So we have it as we should -> Check.
+
 	//lexer(); //comillas simples, comillas dobles, pipes, redirecciones
 	// 1.er paso
 		//encuentro comilla, leo hasta la siguiente comilla 

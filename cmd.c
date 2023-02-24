@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/23 19:05:24 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/24 01:14:31 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,6 @@ char	*ft_stephen_jokin(t_cmd *cmd, int i)
 {
 	char	*aux;
 
-	if (ft_strchr(cmd->args[i], '|') || ft_strchr(cmd->args[i], '<')
-		|| ft_strchr(cmd->args[i], '>'))
-		return (NULL);
 	aux = ft_strdup(cmd->args[i]);
 	return (aux);
 }
@@ -91,6 +88,17 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 			ft_doublefree(cmd->atrb);
 			ft_doublefree(cmd->cmd);
 			return ;
+		}
+		else if (!ft_strncmp(cmd->args[i], ">", 1)
+			|| !ft_strncmp(cmd->args[i], "<", 1))
+		{
+			if (!cmd->args[i + 1])
+				return ;
+			if (!ft_strncmp(cmd->args[i], ">", 1))
+				ft_output(cmd, i + 1);
+			if (!ft_strncmp(cmd->args[i], "<", 1))
+				ft_input(cmd, i + 1);
+			exit (1);
 		}
 		cmd->cmd[i] = ft_stephen_jokin(cmd, i);
 	}
