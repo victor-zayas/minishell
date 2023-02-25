@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/24 01:14:31 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:19:09 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void	exec_cmd(char	**cmd, char	**enviroment)
 	{
 		if (!cmd)
 			return ;
+		dup2(i, STDOUT_FILENO);
+		close (i);
+		i = 0;
 		aux = ft_path(enviroment);
 		path = ft_split(aux, ':');
 		free (aux);
@@ -94,11 +97,11 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 		{
 			if (!cmd->args[i + 1])
 				return ;
-			if (!ft_strncmp(cmd->args[i], ">", 1))
+/* 			if (!ft_strncmp(cmd->args[i], ">", 1))
 				ft_output(cmd, i + 1);
 			if (!ft_strncmp(cmd->args[i], "<", 1))
-				ft_input(cmd, i + 1);
-			exit (1);
+				ft_input(cmd, i + 1); */
+			break ;
 		}
 		cmd->cmd[i] = ft_stephen_jokin(cmd, i);
 	}

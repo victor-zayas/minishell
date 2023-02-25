@@ -6,16 +6,16 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/24 01:15:03 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/25 23:40:44 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"minishell.h"
+#include "minishell.h"
 
-void	print(t_cmd	*cmd)
+void print(t_cmd *cmd)
 {
-	int	i;
-	int	j;
+	int i;
+	int j;
 
 	i = 0;
 	j = 0;
@@ -34,22 +34,22 @@ void	print(t_cmd	*cmd)
 	printf("				Double Redirections		: %d\n", cmd->double_redir);
 }
 
-void	ft_chopeadito(t_cmd	*args, t_env *env, char	*prompt)
+void ft_chopeadito(t_cmd *args, t_env *env, char *prompt)
 {
-	char		*aux;
+	char *aux;
 
 	aux = prompt;
 	init_args(args);
 	add_history(aux);
 	get_data(args, aux);
 	get_token(args, aux);
-	get_inter(args, env);
 	//print(args);
+	get_inter(args, env);
 	ft_selector(args, env);
 	free_args(args);
 }
 
-void	my_signal(int sig)
+void my_signal(int sig)
 {
 	if (sig == 2)
 	{
@@ -61,11 +61,11 @@ void	my_signal(int sig)
 	}
 }
 
-int	main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **envp)
 {
-	t_env		env;
-	t_cmd		args;
-	char		*prompt;
+	t_env env;
+	t_cmd args;
+	char *prompt;
 
 	env.env = ft_env_strdup(envp);
 	env.oldpwd = NULL;
@@ -76,9 +76,9 @@ int	main(int argc, char **argv, char **envp)
 	{
 		prompt = readline("Shootgun=▸");
 		if (!prompt)
-			break ;
+			break;
 		if (!prompt[0])
-			continue ;
+			continue;
 		ft_chopeadito(&args, &env, prompt);
 	}
 	ft_doublefree(env.env);

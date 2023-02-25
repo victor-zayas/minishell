@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/24 01:14:40 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/25 23:38:46 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,26 @@
 //# include <sys/wait.h>
 # include <fcntl.h>
 
+typedef struct s_it
+{
+	int	i1;
+	int	i2;
+	int	i3;
+	int	i4;
+	int	i5;
+	int	i6;
+	int	i7;
+}	t_it;
+
 typedef struct s_cmd
 {
+	t_it	i;
 	char	**args;
 	char	**cmd;
 	char	**atrb;
 	int		n_cmd;
 	int		size;
+	int		flag;
 
 	int		words;
 	int		quotes;
@@ -50,6 +63,7 @@ typedef struct s_env
 	char	*pwd;
 	char	**env;
 }	t_env;
+
 
 	// MAIN
 void	init_args(t_cmd	*new);
@@ -92,6 +106,7 @@ char	*ft_path(char **enviroment_path);
 char	*get_cmd(char *arguments, char **enviroment);
 void	error(char *error);
 void	ft_fd(t_cmd	*cmd, t_env	*env);
+int		find_env(int p_ar, int p_str, t_cmd	*cmd, t_env	*env);
 
 	// FREE_ARGS
 void	free_args(t_cmd	*args);

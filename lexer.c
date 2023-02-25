@@ -6,11 +6,54 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:16:59 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/23 20:17:42 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/25 23:40:14 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*ft_append2(char	*str, int i)
+{
+	char	*aux;
+	int		pos;
+	int		start;
+
+	start = i;
+	pos = -1;
+	while (str[i] && str[i] != '"')
+		i++;
+	aux = (char *)malloc(sizeof(char) * (i + 2));
+	aux[++pos] = '\"';
+	while(i >= start)
+		aux[++pos] = str[start++];
+	aux[pos] = '\"';
+	aux[pos + 1] = '\0';
+	return (aux);
+}
+
+int	ft_append(t_cmd	*cmd, char	*str, int i)
+{
+	char	*aux;
+	int		pos;
+	int		i2;
+
+	i2 = 0;
+	pos = i;
+	pos++;
+	aux = (char *)malloc(sizeof(char) * (ft_strlen(str) + 3));
+	while (str[pos] != '\'' && str[pos] != '"' && str[pos] != ' '
+		&& str[pos] != '|' && str[pos] != '>' && str[pos] != '\t'
+		&& str[pos] != '<' && str[pos] != '$' && str[pos] != '\0')
+				pos++;
+	aux[i2] = '\"';
+	while(pos >= i)
+		aux[++i2] = str[i++];
+	aux[i2] = '\"';
+	aux[i2 + 1] = '\0';
+	cmd->args[cmd->size++] = ft_strdup(aux);
+	free (aux);
+	return (pos);
+}
 
 char	*clean_words(t_cmd	*cmd, char *prompt, int pos)
 {
@@ -54,7 +97,21 @@ char	*double_quotes_lexer(t_cmd	*cmd, char	*prompt, int pos)
 	start = (pos);
 	(pos)++;
 	while (prompt[pos] != '"' && prompt[pos])
-				(pos)++;
+	{
+		if (prompt[pos] == '$' && prompt[pos])
+		{
+			pos = ft_append(cmd, prompt, pos);
+			if (!prompt[pos + 1])
+			{
+				free(prompt);
+				return (ft_strdup(""));
+			}
+			tmp = ft_append2(prompt, pos);
+			free(prompt);
+			return (tmp);
+		}
+		(pos)++;
+	}
 	cmd->args[cmd->size++] = ft_substr(prompt, start, pos - start + 1);
 	tmp = ft_substr(prompt, (pos + 1), ft_strlen(prompt) - pos + 1);
 	free(prompt);

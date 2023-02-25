@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:10:57 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/23 20:03:16 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/25 23:06:35 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,31 +37,32 @@ int	i_qwords(t_cmd	*cmd, char	*prompt, int pos)
 
 int	i_dqwords(t_cmd	*cmd, char	*prompt, int pos)
 {
-	(pos)++;
-	while (prompt[pos] != '"' && prompt[pos])
-				pos++;
+	cmd->flag = 1;
+	while (prompt[++pos] != '"' && prompt[pos])
+	{
+		if (prompt[pos] == '$')
+		{
+			if (cmd->flag == 0)
+				cmd->dollars++;
+			else
+				cmd->flag = 0;
+		}
+	}
 	if (prompt[pos] == '"')
 		cmd->double_quotes += 1;
 	else
 		exit (EXIT_FAILURE);
 	pos++;
+	cmd->flag = 0;
 	return (pos);
 }
 
 int	i_dollars(t_cmd	*cmd, char	*prompt, int pos)
 {
-	if (prompt[pos + 1] && prompt[pos + 1] != ' ')
-		pos++;
 	while (prompt[pos] != '\'' && prompt[pos] != '"' && prompt[pos] != ' '
 		&& prompt[pos] != '|' && prompt[pos] != '>' && prompt[pos] != '\t'
 		&& prompt[pos] != '<' && prompt[pos] != '\0')
 				pos++;
-	if (prompt[pos] && prompt[pos] != ' ')
-	{
-		if (prompt[pos - 2] == ' ' && prompt[pos - 1] == '\0')
-			return (pos);
-	}
-	else
-		cmd->dollars += 1;
+	cmd->dollars += 1;
 	return (pos);
 }

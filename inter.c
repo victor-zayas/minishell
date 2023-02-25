@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:55 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/22 23:21:19 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/25 22:38:39 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,51 +25,44 @@ int	get_name_len(char	*str)
 	return (0);
 }
 
-void	find_env(char *str, int pos, t_env *env, t_cmd *cmd, int len)
+int	find_env(int p_ar, int p_str, t_cmd	*cmd, t_env	*env)
 {
 	char	*aux;
 	int		start;
 
-	start = pos;
-	if (str[pos + 1] && str[pos + 1] != ' ')
-		pos++;
-	while (str[pos] != '\'' && str[pos] != '"' && str[pos] != ' '
-		&& str[pos] != '|' && str[pos] != '>' && str[pos] != '\t'
-		&& str[pos] != '<' && str[pos] != '$' && str[pos] != '\0')
-				pos++;
-	aux = ft_substr(str, start + 1, pos);
+	start = p_str;
+	if (cmd->args[p_ar][p_str + 1] && cmd->args[p_ar][p_str + 1] != ' ')
+		p_str++;
+	p_str = i_cwords(cmd, cmd->args[p_ar], p_str);
+	cmd->words--;
+	if (cmd->args[p_ar][p_str])
+		p_str--;
+	aux = ft_substr(cmd->args[p_ar], start + 1, p_str);
 	start = -1;
 	while (env->env[++start])
 	{
 		if (!ft_strncmp(env->env[start], aux, get_name_len(env->env[start]))
 			&& (int)ft_strlen(aux) == get_name_len(env->env[start]))
 		{
-			free(aux);
-			free(cmd->args[len]);
-			str = ft_substr(env->env[start], 0, ft_strlen(env->env[start]));
-			aux = ft_substr(env->env[start], 0,
-					get_name_len(env->env[start]) + 1);
-			cmd->args[len] = ft_strtrim(str, aux);
-			free (str);
-			free (aux);
-			return ;
+			free(cmd->args[p_ar]);
+			cmd->args[p_ar] = ft_substr(env->env[start],
+				get_name_len(env->env[start]) + 1, ft_strlen(env->env[start]));
+			break ;
 		}
 	}
 	free(aux);
+	return (p_str);
 }
 
-void	expand_dollars(char	*str, t_env *env, int pos, t_cmd	*cmd)
+void	expand_dollars(int	p_ar, t_cmd	*cmd, t_env	*env)
 {
 	int	i;
 
 	i = -1;
-	while (str[++i])
+	while (cmd->args[p_ar][++i])
 	{
-		if (str[i] == '$')
-		{
-			find_env(str, i, env, cmd, pos);
-			break ;
-		}
+		if (cmd->args[p_ar][i] == '$')
+			i = find_env(p_ar, i, cmd, env);
 	}
 }
 
@@ -81,22 +74,23 @@ void	get_inter(t_cmd *cmd, t_env *env)
 	i = -1;
 	while (cmd->args[++i])
 	{
-		if (ft_strchr(cmd->args[i], '\''))
+		if (ft_strchr(cmd->args[i], '\'') || ft_strchr(cmd->args[i], '\"'))
 		{
+			if (ft_strchr(cmd->args[i], '\"'))
+				cmd->flag = 1;
+			else
+				cmd->flag = 0;
 			aux = ft_strdup(cmd->args[i]);
 			free(cmd->args[i]);
-			cmd->args[i] = ft_strtrim(aux, "\'");
+			if (cmd->flag == 1)
+				cmd->args[i] = ft_strtrim(aux, "\"");
+			else
+				cmd->args[i] = ft_strtrim(aux, "\'");
 			free(aux);
-		}
-		else if (ft_strchr(cmd->args[i], '\"'))
-		{
-			aux = ft_strdup(cmd->args[i]);
-			free(cmd->args[i]);
-			cmd->args[i] = ft_strtrim(aux, "\"");
-			free(aux);
-			expand_dollars(cmd->args[i], env, i, cmd);
+			if (cmd->flag == 1)
+				expand_dollars(i, cmd, env);
 		}
 		else
-			expand_dollars(cmd->args[i], env, i, cmd);
+			expand_dollars(i, cmd, env);
 	}
 }

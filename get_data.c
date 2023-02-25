@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:33:36 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/23 20:32:04 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/25 12:22:35 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,27 @@
 
 void	get_data(t_cmd	*args, char	*prompt)
 {
-	int	i;
-
-	i = 0;
-	while (prompt[i])
+	while (prompt[args->i.i1])
 	{
-		while (prompt[i] == ' ' || prompt[i] == '\t')
-			i++;
-		if ((prompt[i] != '\'') && (prompt[i] != '"')
-			&& (prompt[i] != '>') && (prompt[i] != '<')
-			&& (prompt[i] != '|') && (prompt[i] != '$')
-			&& prompt[i])
-			i = i_cwords(args, prompt, i);
-		if ((prompt[i] == '\'') && prompt[i])
-			i = i_qwords(args, prompt, i);
-		if (prompt[i] == '"' && prompt[i])
-			i = i_dqwords(args, prompt, i);
-		if (prompt[i] == '|' && prompt[i])
-			i = i_sp(args, prompt, i);
-		if (prompt[i] == '<' && prompt[i])
-			i = i_sp(args, prompt, i);
-		if (prompt[i] == '>' && prompt[i])
-			i = i_sp(args, prompt, i);
-		if (prompt[i] == '$' && prompt[i])
-			i = i_dollars(args, prompt, i);
+		while (prompt[args->i.i1] == ' ' || prompt[args->i.i1] == '\t')
+			args->i.i1++;
+		if ((prompt[args->i.i1] != '\'') && (prompt[args->i.i1] != '"')
+			&& (prompt[args->i.i1] != '>') && (prompt[args->i.i1] != '<')
+			&& (prompt[args->i.i1] != '|') && (prompt[args->i.i1] != '$')
+			&& prompt[args->i.i1])
+			args->i.i1 = i_cwords(args, prompt, args->i.i1);
+		if ((prompt[args->i.i1] == '\'') && prompt[args->i.i1])
+			args->i.i1 = i_qwords(args, prompt, args->i.i1);
+		if (prompt[args->i.i1] == '"' && prompt[args->i.i1])
+			args->i.i1 = i_dqwords(args, prompt, args->i.i1);
+		if (prompt[args->i.i1] == '|' && prompt[args->i.i1])
+			args->i.i1 = i_sp(args, prompt, args->i.i1);
+		if (prompt[args->i.i1] == '<' && prompt[args->i.i1])
+			args->i.i1 = i_sp(args, prompt, args->i.i1);
+		if (prompt[args->i.i1] == '>' && prompt[args->i.i1])
+			args->i.i1 = i_sp(args, prompt, args->i.i1);
+		if (prompt[args->i.i1] == '$' && prompt[args->i.i1])
+			args->i.i1 = i_dollars(args, prompt, args->i.i1);
 	}
 }
 

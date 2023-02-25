@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/23 20:24:39 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/25 19:33:30 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,33 +23,39 @@ void	init_args(t_cmd	*cmd)
 	cmd->greater = 0;
 	cmd->dollars = 0;
 	cmd->double_redir = 0;
+	cmd->flag = 0,
+
+	cmd->i.i1 = 0;
+	cmd->i.i2 = 0;
+	cmd->i.i3 = 0;
+	cmd->i.i4 = 0;
+	cmd->i.i5 = 0;
 }
 
 void	ft_lexer(t_cmd	*args, char	*prompt)
 {
-	int	i;
-
-	i = 0;
-	while (prompt[i])
+	while (prompt[args->i.i2])
 	{
-		while (prompt[i] == ' ' || prompt[i] == '\t')
-			i++;
-		if ((prompt[i] != '\'') && (prompt[i] != '"')
-			&& (prompt[i] != '>') && (prompt[i] != '<')
-			&& (prompt[i] != '|'))
-				prompt = clean_words(args, prompt, i);
-		else if ((prompt[i] == '\'') && prompt[i])
-			prompt = quotes_lexer(args, prompt, i);
-		else if (prompt[i] == '"' && prompt[i])
-			prompt = double_quotes_lexer(args, prompt, i);
-		else if (prompt[i] == '|' && prompt[i])
-			prompt = one_lexer(args, prompt, i);
-		else if (((prompt[i] == '<' && prompt[i + 1] == '<')
-				|| (prompt[i] == '>' && prompt[i + 1] == '>')) && prompt[i])
-			prompt = two_lexer(args, prompt, i);
-		else if ((prompt[i] == '<' || prompt[i] == '>') && prompt[i])
-			prompt = one_lexer(args, prompt, i);
-		i = 0;
+		while (prompt[args->i.i2] == ' ' || prompt[args->i.i2] == '\t')
+			args->i.i2++;
+		if ((prompt[args->i.i2] != '\'') && (prompt[args->i.i2] != '"')
+			&& (prompt[args->i.i2] != '>') && (prompt[args->i.i2] != '<')
+			&& (prompt[args->i.i2] != '|'))
+				prompt = clean_words(args, prompt, args->i.i2);
+		else if ((prompt[args->i.i2] == '\'') && prompt[args->i.i2])
+			prompt = quotes_lexer(args, prompt, args->i.i2);
+		else if (prompt[args->i.i2] == '"' && prompt[args->i.i2])
+			prompt = double_quotes_lexer(args, prompt, args->i.i2);
+		else if (prompt[args->i.i2] == '|' && prompt[args->i.i2])
+			prompt = one_lexer(args, prompt, args->i.i2);
+		else if (((prompt[args->i.i2] == '<' && prompt[args->i.i2 + 1] == '<')
+				|| (prompt[args->i.i2] == '>'
+					&& prompt[args->i.i2 + 1] == '>')) && prompt[args->i.i2])
+			prompt = two_lexer(args, prompt, args->i.i2);
+		else if ((prompt[args->i.i2] == '<'
+				|| prompt[args->i.i2] == '>') && prompt[args->i.i2])
+			prompt = one_lexer(args, prompt, args->i.i2);
+		args->i.i2 = 0;
 	}
 	free(prompt);
 }
