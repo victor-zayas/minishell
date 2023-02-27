@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/27 17:13:44 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/27 17:33:14 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ void ft_chopeadito(t_cmd *args, t_env *env, char *prompt)
 	aux = prompt;
 	init_args(args);
 	add_history(aux);
-	get_data(args, aux);
+	if (get_data(args, aux) == -1)
+	{
+		free(prompt);
+		return ;
+	}
 	get_token(args, aux);
 	//print(args);
 	get_inter(args, env);

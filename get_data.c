@@ -6,15 +6,15 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:33:36 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/25 12:22:35 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/27 17:31:32 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	get_data(t_cmd	*args, char	*prompt)
+int	get_data(t_cmd	*args, char	*prompt)
 {
-	while (prompt[args->i.i1])
+	while (prompt[args->i.i1] && args->i.i1 >= 0)
 	{
 		while (prompt[args->i.i1] == ' ' || prompt[args->i.i1] == '\t')
 			args->i.i1++;
@@ -36,6 +36,7 @@ void	get_data(t_cmd	*args, char	*prompt)
 		if (prompt[args->i.i1] == '$' && prompt[args->i.i1])
 			args->i.i1 = i_dollars(args, prompt, args->i.i1);
 	}
+	return (args->i.i1);
 }
 
 int	i_sp(t_cmd	*cmd, char	*prompt, int i)

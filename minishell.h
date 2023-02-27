@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/27 17:15:43 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/27 17:35:26 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	get_token(t_cmd	*cmd, char	*prompt);
 void	get_inter(t_cmd *cmd, t_env *env);
 
 	// GET_DATA
-void	get_data(t_cmd *args, char *prompt);
+int		get_data(t_cmd	*args, char	*prompt);
 int		i_cwords(t_cmd *cmd, char *prompt, int pos);
 int		i_qwords(t_cmd *cmd, char *prompt, int pos);
 int		i_dqwords(t_cmd	*cmd, char *prompt, int pos);
@@ -151,12 +151,9 @@ void	ft_input(t_cmd	*cmd, int i);
 	// TO _ DO
 		// 1. BUILTINGS
 		// 2. REDIRECCIONES
+			//format : "[in_command / out_command] [output / input]".
 		// 3. EXIT STATUS
 		// 4. PARSEO
-		//don't interpretate open quotes.
-		// open quotes crash.
-		// redirections:
-			//format : "[in_command / out_command] [output / input]".
 
 	// DONE
 		// add int in exec funct to controll cmd error, if 1 fail, pipes stop.

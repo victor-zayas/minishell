@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:10:57 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/25 23:06:35 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/27 17:27:04 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	i_qwords(t_cmd	*cmd, char	*prompt, int pos)
 	if (prompt[pos] == '\'')
 		cmd->quotes += 1;
 	else
-		exit (EXIT_FAILURE);
+		return (-1);
 	pos++;
 	return (pos);
 }
@@ -51,7 +51,7 @@ int	i_dqwords(t_cmd	*cmd, char	*prompt, int pos)
 	if (prompt[pos] == '"')
 		cmd->double_quotes += 1;
 	else
-		exit (EXIT_FAILURE);
+		return (-1);
 	pos++;
 	cmd->flag = 0;
 	return (pos);
