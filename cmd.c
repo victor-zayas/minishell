@@ -6,11 +6,22 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/27 17:30:58 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/27 17:46:48 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	init_cmd(t_cmd	*cmd)
+{
+	cmd->cmd = (char **)malloc(sizeof(char *) * (find_pipe(cmd->args, 0) + 1));
+	if (!cmd->cmd)
+		return ;
+	cmd->atrb = (char **)malloc(sizeof(char *)
+			* (find_pipe(cmd->args, find_pipe(cmd->args, 0)) + 1));
+	if (!cmd->atrb)
+		return ;
+}
 
 void	exec_cmd(char	**cmd, char	**enviroment)
 {
@@ -27,8 +38,6 @@ void	exec_cmd(char	**cmd, char	**enviroment)
 	{
 		if (!cmd)
 			return ;
-		dup2(i, STDOUT_FILENO);
-		close (i);
 		i = 0;
 		aux = ft_path(enviroment);
 		path = ft_split(aux, ':');
@@ -74,16 +83,10 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 
 	i = -1;
 	j = 0;
-	cmd->cmd = (char **)malloc(sizeof(char *) * (find_pipe(cmd->args, 0) + 1));
-	if (!cmd->cmd)
-		return ;
-	cmd->atrb = (char **)malloc(sizeof(char *)
-			* (find_pipe(cmd->args, find_pipe(cmd->args, 0)) + 1));
-	if (!cmd->atrb)
-		return ;
-	while (cmd->args[++i])
+	init_cmd(cmd);
+	while (cmd->args[++i]) // loop
 	{
-		if (!ft_strncmp(cmd->args[i], "|", 1))
+		if (!ft_strncmp(cmd->args[i], "|", 1)) // pipes
 		{
 			cmd->cmd[i] = NULL;
 			while (cmd->args[++i] && ft_strncmp(cmd->args[i], "|", 1))
@@ -97,7 +100,7 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 			ft_doublefree(cmd->cmd);
 			return ;
 		}
-		else if (!ft_strncmp(cmd->args[i], ">", 1)
+		else if (!ft_strncmp(cmd->args[i], ">", 1) // redir
 			|| !ft_strncmp(cmd->args[i], "<", 1))
 		{
 			if (!cmd->args[i + 1])
@@ -112,6 +115,10 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 	}
 	cmd->cmd[i] = NULL;
 	free(cmd->atrb);
-	if (ft_builtings(cmd, env, 1))
+
+	// -> ls -l -a / export JOKIN=42 VICTOR=4
+	if (ft_builtings(cmd, env, 0) == 1)
 		exec_cmd(cmd->cmd, env->env);
+	else
+		return ;
 }
