@@ -73,11 +73,11 @@ endef
 export MINISHELL
 
 define JOKIN
-──────▄▌▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌\n
-───▄▄██▌█ BEEP! BEEP!\n
-▄▄▄▌▐██▌█ -3 Evaluations points DELIVERY\n
+	  ▄▌▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌\n
+   ▄▄██▌█ BEEP! BEEP!					   \n
+▄▄▄▌▐██▌█ -3 Evaluations points DELIVERY   \n
 ███████▌█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌\n
-▀(⊙)▀▀▀▀▀▀▀(⊙)(⊙)▀▀▀▀▀▀▀▀▀▀(⊙)(⊙)▀▀▀▀▀(⊙)▀\n
+▀(⊙)▀▀▀▀▀▀▀(⊙)(⊙)▀▀▀▀▀▀▀▀▀▀(⊙)(⊙)▀▀▀▀▀(⊙)▀ \n
 endef
 export JOKIN
 
@@ -95,11 +95,11 @@ $(NAME): $(OBJS)
 #	$(CC) $(CFLAGS) $^ $(LREADLINE_FLAGS) $(LINUX_READLINE) libft/libft.a -o $(NAME)
 	echo "$(BLUE)༺ library created༻$(END)"
 	echo "$$MINISHELL"
-	echo "Special thanks to $(GREEN)༺ HELECHOS༻$(END)".
+	echo "Special thanks to $(GREEN)༺ HELECHOS༻$(END)  & $(GREEN)༺ xXMinecrafterXx༻$(END)"
 ifeq ($(USER), $(filter $(USER), jaizpuru))
 		echo $$JOKIN
 		osascript -e "set Volume 2"
-		say --voice="Luciana" você é uma pessoa maravilhosa e um grande amigo.
+		say --voice="Luciana" O líder do ginásio Jokin the calisthenics desafia você.
 endif
 
 clean:

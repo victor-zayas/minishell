@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/25 23:38:46 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/27 16:33:53 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,10 +149,12 @@ void	ft_input(t_cmd	*cmd, int i);
 	//  __attribute__((unused)) -> Variables not used
 
 	// TO _ DO
-		// exit value estatus
-		// redirections
-			//format : "[in_command / out_command] [output / input]"
-		// PARSEO
+		//don't interpretate open quotes.
+		// open quotes crash.
+		// exit value estatus.
+		// redirections:
+			//format : "[in_command / out_command] [output / input]".
+		// PARSEO.
 
 	// DONE
 		// add int in exec funct to controll cmd error, if 1 fail, pipes stop.
