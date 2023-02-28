@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_unset.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:22:45 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/23 18:52:42 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/28 13:53:49 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	ft_export(t_env	*env, char *content)
 
 	i = -1;
 	flag = content_check(env, content);
-	//printf("				FLAG -> %d\n", flag);
 	if (flag == -1)
 		return ;
 	if (flag == -2)
@@ -68,7 +67,7 @@ void	ft_export(t_env	*env, char *content)
 	while (env->env[++i])
 	{
 		aux[i] = ft_strdup(env->env[i]);
-		if (i == flag && flag >= 0
+		if (i == flag && flag >= 0 && env->env[i]
 			&& ft_strncmp(env->env[i], content, ft_strlen(env->env[i])))
 		{
 			free(aux[i]);

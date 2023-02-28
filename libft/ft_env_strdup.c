@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_strdup.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:24:50 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/23 15:47:21 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/02/28 13:51:56 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**ft_env_strdup(char **str)
 			return (aux);
 		}
 	}
-	aux = (char **)malloc(sizeof(char *) * (ft_doublestrlen(str)));
+	aux = (char **)malloc(sizeof(char *) * (ft_doublestrlen(str) + 1));
 	if (!aux)
 		return (NULL);
 	i = -1;

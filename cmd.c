@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/27 17:46:48 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/28 13:43:22 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	exec_cmd(char	**cmd, char	**enviroment)
 		exit (1);
 	}
 	waitpid(pid, NULL, 0);
-	ft_doublefree(cmd);
 	return ;
 }
 
@@ -84,9 +83,9 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 	i = -1;
 	j = 0;
 	init_cmd(cmd);
-	while (cmd->args[++i]) // loop
+	while (cmd->args[++i])
 	{
-		if (!ft_strncmp(cmd->args[i], "|", 1)) // pipes
+		if (!ft_strncmp(cmd->args[i], "|", 1))
 		{
 			cmd->cmd[i] = NULL;
 			while (cmd->args[++i] && ft_strncmp(cmd->args[i], "|", 1))
@@ -100,7 +99,7 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 			ft_doublefree(cmd->cmd);
 			return ;
 		}
-		else if (!ft_strncmp(cmd->args[i], ">", 1) // redir
+		else if (!ft_strncmp(cmd->args[i], ">", 1)
 			|| !ft_strncmp(cmd->args[i], "<", 1))
 		{
 			if (!cmd->args[i + 1])
@@ -115,10 +114,7 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 	}
 	cmd->cmd[i] = NULL;
 	free(cmd->atrb);
-
-	// -> ls -l -a / export JOKIN=42 VICTOR=4
-	if (ft_builtings(cmd, env, 0) == 1)
+	if (ft_builtings(cmd->cmd, cmd, env) == 1)
 		exec_cmd(cmd->cmd, env->env);
-	else
-		return ;
+	ft_doublefree(cmd->cmd);
 }

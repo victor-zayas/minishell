@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/27 17:35:26 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/28 13:53:13 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int		find_env(int p_ar, int p_str, t_cmd	*cmd, t_env	*env);
 void	free_args(t_cmd	*args);
 
 	//BUILTINGS
-int		ft_builtings(t_cmd	*args, t_env *env, int i);
+int	ft_builtings(char	**args, t_cmd	*cmd, t_env *env);
 
 	//PWD
 void	ft_pwd(void);

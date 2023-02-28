@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/24 00:45:23 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/28 13:36:07 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pos)
 			ft_fd(cmd, env);
 			pos = find_pipe(cmd->args, pos);
 		}
-		if (ft_builtings(cmd, env, 1))
+		if (ft_builtings(cmd->atrb, cmd, env))
 			exec(cmd->atrb, env->env);
 		return ;
 	}
