@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/28 13:44:48 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:30:31 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void ft_chopeadito(t_cmd *args, t_env *env, char *prompt)
 		return ;
 	}
 	get_token(args, aux);
-	//print(args);
 	get_inter(args, env);
+	//print(args);
 	ft_selector(args, env);
 	free_args(args);
 }

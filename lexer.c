@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:16:59 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/25 23:40:14 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:28:25 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,12 @@ char	*ft_append2(char	*str, int i)
 
 	start = i;
 	pos = -1;
-	while (str[i] && str[i] != '"')
+	while (str[i])
 		i++;
-	aux = (char *)malloc(sizeof(char) * (i + 2));
-	aux[++pos] = '\"';
+	aux = (char *)malloc(sizeof(char) * (i));
 	while(i >= start)
 		aux[++pos] = str[start++];
-	aux[pos] = '\"';
-	aux[pos + 1] = '\0';
+	aux[pos] = '\0';
 	return (aux);
 }
 
@@ -98,7 +96,7 @@ char	*double_quotes_lexer(t_cmd	*cmd, char	*prompt, int pos)
 	(pos)++;
 	while (prompt[pos] != '"' && prompt[pos])
 	{
-		if (prompt[pos] == '$' && prompt[pos])
+		/* if (prompt[pos] == '$' && prompt[pos])
 		{
 			pos = ft_append(cmd, prompt, pos);
 			if (!prompt[pos + 1])
@@ -106,10 +104,11 @@ char	*double_quotes_lexer(t_cmd	*cmd, char	*prompt, int pos)
 				free(prompt);
 				return (ft_strdup(""));
 			}
-			tmp = ft_append2(prompt, pos);
+			tmp = ft_append2(prompt, pos + 1);
+			printf("tmp -> %s\n", tmp);
 			free(prompt);
 			return (tmp);
-		}
+		} */
 		(pos)++;
 	}
 	cmd->args[cmd->size++] = ft_substr(prompt, start, pos - start + 1);

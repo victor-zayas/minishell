@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/28 16:09:47 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:30:23 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ void	ft_input(t_cmd	*cmd, int i);
 			//format : "[in_command / out_command] [output / input]".
 		// 3. EXIT STATUS
 		// 4. PARSEO
+			// lexer-> double quotes: [echo "$PWD $USER $TERM ..." | wc]
 
 	// DONE
 		// add int in exec funct to controll cmd error, if 1 fail, pipes stop.
