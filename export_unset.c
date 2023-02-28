@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:22:45 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/28 15:40:01 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:42:37 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_export(t_env	*env, char *content)
 	while (env->env[++i])
 	{
 		aux[i] = ft_strdup(env->env[i]); // aux is gonna copy every line of enviroment
-		if (i == flag && flag >= 0 &&
+		if (i == flag && flag >= 0
 			&& ft_strncmp(env->env[i], content, ft_strlen(env->env[i]))) // if content is found inside enviroment (i)
 		{
 			free(aux[i]); // free the line that was copied above in this iteration
