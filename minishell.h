@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/28 16:30:23 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/28 17:22:22 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_env
 	// MAIN
 void	init_args(t_cmd	*new);
 void	print(t_cmd	*cmd);
-void	ft_chopeadito(t_cmd	*args, t_env *env, char	*prompt);
+void	ft_choped(t_cmd	*args, t_env *env, char	*prompt);
 
 	//LEXER
 	// GET_TOKEN

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:16:59 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/28 16:28:25 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/28 17:21:20 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_append2(char	*str, int i)
 	while (str[i])
 		i++;
 	aux = (char *)malloc(sizeof(char) * (i));
-	while(i >= start)
+	while (i >= start)
 		aux[++pos] = str[start++];
 	aux[pos] = '\0';
 	return (aux);
@@ -44,7 +44,7 @@ int	ft_append(t_cmd	*cmd, char	*str, int i)
 		&& str[pos] != '<' && str[pos] != '$' && str[pos] != '\0')
 				pos++;
 	aux[i2] = '\"';
-	while(pos >= i)
+	while (pos >= i)
 		aux[++i2] = str[i++];
 	aux[i2] = '\"';
 	aux[i2 + 1] = '\0';

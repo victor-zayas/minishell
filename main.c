@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/28 16:30:31 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/28 17:22:16 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void print(t_cmd *cmd)
 	printf("				Double Redirections		: %d\n", cmd->double_redir);
 }
 
-void ft_chopeadito(t_cmd *args, t_env *env, char *prompt)
+void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 {
-	char *aux;
+	char	*aux;
 
 	aux = prompt;
 	init_args(args);
@@ -53,7 +53,7 @@ void ft_chopeadito(t_cmd *args, t_env *env, char *prompt)
 	free_args(args);
 }
 
-void my_signal(int sig)
+void	my_signal(int sig)
 {
 	if (sig == 2)
 	{
@@ -65,11 +65,11 @@ void my_signal(int sig)
 	}
 }
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	t_env env;
-	t_cmd args;
-	char *prompt;
+	t_env	env;
+	t_cmd	args;
+	char	*prompt;
 
 	env.env = ft_env_strdup(envp);
 	env.oldpwd = NULL;
@@ -80,10 +80,10 @@ int main(int argc, char **argv, char **envp)
 	{
 		prompt = readline("Shootgun=▸");
 		if (!prompt)
-			break;
+			break ;
 		if (!prompt[0])
-			continue;
-		ft_chopeadito(&args, &env, prompt);
+			continue ;
+		ft_choped(&args, &env, prompt);
 	}
 	ft_doublefree(env.env);
 	free(env.oldpwd);

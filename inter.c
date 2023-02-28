@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:55 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/28 16:14:30 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/28 17:20:37 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	find_env(int p_ar, int p_str, t_cmd	*cmd, t_env	*env)
 	return (p_str);
 }
 
-void	expand_dollars(int	p_ar, t_cmd	*cmd, t_env	*env)
+void	expand_dollars(int p_ar, t_cmd	*cmd, t_env	*env)
 {
 	int	i;
 

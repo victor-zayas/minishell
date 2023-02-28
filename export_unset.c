@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_unset.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:22:45 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/28 15:42:37 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/28 17:19:56 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,13 @@ int	content_check(t_env	*env, char	*content)
 		return (-1); // return value for exiting
 	}
 	while (content[++len]) // get length of content until '='
-	{
 		if (content[len] == '=') // if found '=' break
 			break ;
-	}
 	if (!content[len]) // if content was not found
 		return (-1); // return value for exiting
 	while (env->env[++i])
-	{
 		if (!ft_strncmp(env->env[i], content, len)) // if it is found any variable with the same name and length of content
 			return (i); // return the position of the string in the enviroment
-	}
 	return (-2); // if not found, return value for creating a new variable
 }
 
@@ -56,9 +52,9 @@ void	ft_export(t_env	*env, char *content)
 
 	i = -1;
 	flag = content_check(env, content); // function that clasifies content in three values
-		// -1 : Content is invalid, no '=' or not existant
-		// -2 : Content is valid, but does not exist inside enviroment
-		// (i) : Content is found inside the enviroment
+	// -1 : Content is invalid, no '=' or not existant
+	// -2 : Content is valid, but does not exist inside enviroment
+	// (i) : Content is found inside the enviroment
 	if (flag == -1)
 		return ;
 	if (flag == -2)
