@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/28 13:53:13 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:09:47 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,7 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pos);
 
 	// PIPEX
 void	exec(char **cmd, char **env);
-void	ft_child(char **cmd, char **enviroment1, int *fds1);
-void	ft_adult(char **cmd, char **enviroment2, int *fds2);
+void	ft_child(t_cmd	*cmd, t_env	*env, int	*fd);
 char	*ft_path(char **enviroment_path);
 char	*get_cmd(char *arguments, char **enviroment);
 void	error(char *error);
@@ -149,7 +148,8 @@ void	ft_input(t_cmd	*cmd, int i);
 	//  __attribute__((unused)) -> Variables not used
 
 	// TO _ DO
-		// 1. BUILTINGS
+		// 1. BUILTINGS:
+			// echo "$PWD" | wc -l
 		// 2. REDIRECCIONES
 			//format : "[in_command / out_command] [output / input]".
 		// 3. EXIT STATUS

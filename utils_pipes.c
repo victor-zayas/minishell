@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/24 00:47:02 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:06:42 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,14 @@ void	exec(char	**cmd, char	**enviroment)
 	exit(1);
 }
 
-void	ft_child(char	**cmd, char	**enviroment1, int	*fd)
+void	ft_child(t_cmd	*cmd, t_env	*env, int	*fd)
 {
 	close(fd[0]);
 	dup2(fd[1], STDOUT_FILENO);
 	close(fd[1]);
-	exec(cmd, enviroment1);
+	if (ft_builtings(cmd->cmd, cmd, env) == 1)
+		exec(cmd->cmd, env->env);
+	exit (1);
 }
 
 char	*ft_path(char	**enviroment_path)

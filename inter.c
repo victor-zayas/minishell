@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:55 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/25 22:38:39 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:03:20 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	get_inter(t_cmd *cmd, t_env *env)
 			if (cmd->flag == 1)
 				expand_dollars(i, cmd, env);
 		}
-		else
+		else if (!ft_strncmp(cmd->args[i], "$", 1))
 			expand_dollars(i, cmd, env);
 	}
 }
