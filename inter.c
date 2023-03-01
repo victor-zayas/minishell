@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:55 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/01 15:25:14 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/01 15:52:32 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,14 @@ void	expand_dollars(int p_ar, t_cmd	*cmd, t_env	*env)
 	int	i;
 
 	i = -1;
-	while (cmd->args[p_ar][++i])
+	while (cmd->args[p_ar][++i] && cmd->args[p_ar])
 	{
-		if (cmd->args[p_ar][i] == '$')
+		if (cmd->args[p_ar][i] == '$' && cmd->args[p_ar])
+		{
 			i = find_env(p_ar, i, cmd, env);
+			if (!cmd->args[p_ar][i])
+				return ;
+		}
 	}
 }
 

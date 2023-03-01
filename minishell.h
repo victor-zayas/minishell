@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/01 15:36:23 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/01 15:53:24 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,11 +191,9 @@ void	ft_input(t_cmd	*cmd, int i);
 	//execve(path, args, env);
 
 	//FALLOS QUE ENCUENTRA AINGERU
-	// CD al crear un fichero inaccesible dice: mensaje de error en vez de permiso denegado
-	// export caso vacio, no deberia exportarse es error, no actualiza la variable
+	// export error message with non-alphabetical characters
 	// cmd | and only | don't say syntax error
 	// can't open minishell on minishell
-	// echo $ hace bucle infinito, interrumppe procesos y señales
-	// variables inexistentes no se expanden. ej: echo $p. $p no existe y deberia mostrar un salto de linea
 	// ./ va al execve pero muestra error cmd en vez de error dir
 	// delete ctrl c on signal
+	

@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/01 15:00:06 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/01 15:50:08 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 	}
 	get_token(args, aux);
 	get_inter(args, env);
-	// print(args);
 	ft_selector(args, env);
 	free_args(args);
 }
@@ -57,7 +56,7 @@ void	my_signal(int sig)
 {
 	if (sig == 2)
 	{
-		write(1, "MiniHell=▸  ", 15);
+		write(1, "MiniHell=▸", 13);
 		write(1, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
