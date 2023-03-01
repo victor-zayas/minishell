@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/01 15:53:24 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:03:38 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ void	ft_input(t_cmd	*cmd, int i);
 	//path = get_cmd(*args, env);
 	//execve(path, args, env);
 
-	//FALLOS QUE ENCUENTRA AINGERU
+	//FALLOS
 	// export error message with non-alphabetical characters
 	// cmd | and only | don't say syntax error
 	// can't open minishell on minishell
