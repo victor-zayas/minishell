@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/28 17:22:22 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/01 00:55:28 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,29 +162,39 @@ void	ft_input(t_cmd	*cmd, int i);
 			// Bash executes the last command no matter 
 			// what the input it is given by a pipe!
 			// So we have it as we should -> Check.
-
-	//lexer(); //comillas simples, comillas dobles, pipes, redirecciones
-	// 1.er paso
-		//encuentro comilla, leo hasta la siguiente comilla 
-		//(si no hay doy error), lo meto en un token
-		//p.e.: ls 'hola buenas "tardes $hehe"' 
-		//pwd token 1 = ls, token 2 = 'hola buenas "tardes $hehe"' token 3 = pwd
-			//p.e.: ls -la  'h''u'
-			//p.e.:               ls    ' '  -l a  'h'
-			//p.e.:   - l a a'' a
-			//p.e: && prompt[i] == '\t'
-			//$ recive numeros o letras no caracteres especiales. 
-			//if $en mstring cortar.
-			//while (prompt)
-			//if (prompt[i] == '\'') -> else if 
-			//(prompt[i] == '"') else if (prompt[i] == '|') else
-	//builtings();
-	//parser();
-	//redirs();
-	//execute();
+	// STEPS TO MAKE MINISHELL
+		//lexer(); //comillas simples, comillas dobles, pipes, redirecciones
+		// 1.er paso
+			//encuentro comilla, leo hasta la siguiente comilla 
+			//(si no hay doy error), lo meto en un token
+			//p.e.: ls 'hola buenas "tardes $hehe"' | pwd 
+			//token 1 = ls, token 2 = 'hola buenas "tardes $hehe"' token 3 = pwd
+				//p.e.: ls -la  'h''u'
+				//p.e.:               ls    ' '  -l a  'h'
+				//p.e.:   - l a a'' a
+				//p.e: && prompt[i] == '\t'
+				//$ recive numeros o letras no caracteres especiales. 
+				//if $en mstring cortar.
+				//while (prompt)
+				//if (prompt[i] == '\'') -> else if 
+				//(prompt[i] == '"') else if (prompt[i] == '|') else
+		//builtings();
+		//parser();
+		//redirs();
+		//execute();
 
 	// PIPEX
 	//args = ft_split(aux, ' ');
 	//printf("cual es el resultado de args -> %s\n", *args);
 	//path = get_cmd(*args, env);
 	//execve(path, args, env);
+
+	//FALLOS QUE ENCUENTRA AINGERU
+	// unset path y ejecutar comando no muestra mensaje de error
+	// CD al crear un fichero inaccesible dice: mensaje de error en vez de permiso denegado
+	// export caso vacio, no deberia exportarse es error, no actualiza la variable
+	// cmd | and only | don't say syntax error
+	// can't open minishell on minishell
+	// echo $ hace bucle infinito, interrumppe procesos y señales
+	// variables inexistentes no se expanden. ej: echo $p. $p no existe y deberia mostrar un salto de linea
+	// ./ va al execve pero muestra error cmd en vez de error dir

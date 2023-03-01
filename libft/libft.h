@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 10:36:52 by jaizpuru          #+#    #+#             */
-/*   Updated: 2022/05/10 10:02:48 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/02/28 23:31:59 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,7 @@ void	ft_lstdelone(t_list	*lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+int		ft_isspace(unsigned char c);
+int		ft_isnot_empty_str(const char *str);
+int		ft_chr_in_set(char c, const char *set);
 #endif

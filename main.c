@@ -6,16 +6,16 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/28 17:22:16 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/01 00:53:29 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void print(t_cmd *cmd)
+void	print(t_cmd *cmd)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -48,7 +48,7 @@ void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 	}
 	get_token(args, aux);
 	get_inter(args, env);
-	//print(args);
+	// print(args);
 	ft_selector(args, env);
 	free_args(args);
 }
@@ -57,7 +57,7 @@ void	my_signal(int sig)
 {
 	if (sig == 2)
 	{
-		write(1, "Shootgun=▸  ", 15);
+		write(1, "MiniHell=▸  ", 15);
 		write(1, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
@@ -78,11 +78,16 @@ int	main(int argc, char **argv, char **envp)
 	signal(SIGQUIT, SIG_IGN);
 	while (1 && argc && argv)
 	{
-		prompt = readline("Shootgun=▸");
+		prompt = readline("MiniHell=▸");
 		if (!prompt)
 			break ;
 		if (!prompt[0])
 			continue ;
+		if (!ft_isnot_empty_str(prompt))
+			continue ;
+		if (ft_chr_in_set(';', prompt))
+			return (ft_doublefree(env.env), free(env.oldpwd),
+				ft_putstr_fd("Syntax error BRO U ARE STUPID\n", 2), 1);
 		ft_choped(&args, &env, prompt);
 	}
 	ft_doublefree(env.env);

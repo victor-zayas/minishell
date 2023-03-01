@@ -16,7 +16,7 @@ NAME = minishell
 
 # COMPILATION #
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 RM = /bin/rm -rf
 LREADLINE_FLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib/
 READLINE = -I/Users/$(USER)/.brew/opt/readline/include/
@@ -60,15 +60,15 @@ PAPYRUS=\033[38;5;223m
 END=\033[0m
 
 define MINISHELL
-$(MAG)
+$(RED)
 
-███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗     
-████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     
-██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║     
-██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║     
-██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗
-╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝       
-
+███╗   ███╗██╗███╗   ██╗██╗██╗  ██╗███████╗██╗     ██╗     
+████╗ ████║██║████╗  ██║██║██║  ██║██╔════╝██║     ██║     
+██╔████╔██║██║██╔██╗ ██║██║███████║█████╗  ██║     ██║     
+██║╚██╔╝██║██║██║╚██╗██║██║██╔══██║██╔══╝  ██║     ██║     
+██║ ╚═╝ ██║██║██║ ╚████║██║██║  ██║███████╗███████╗███████╗
+╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝
+                                                           
 $(END)
 endef
 export MINISHELL
@@ -96,7 +96,7 @@ $(NAME): $(OBJS)
 #	$(CC) $(CFLAGS) $^ $(LREADLINE_FLAGS) $(LINUX_READLINE) libft/libft.a -o $(NAME)
 	echo "$(BLUE)༺ library created༻$(END)"
 	echo "$$MINISHELL"
-	echo "Special thanks to $(GREEN)༺ HELECHOS༻$(END)  & $(GREEN)༺ xXMinecrafterXx༻$(END)"
+	echo "Special thanks to $(GREEN)༺ HELECHO༻$(END)  & $(GREEN)༺ Arteria༻$(END)"
 ifeq ($(USER), $(filter $(USER), jaizpuru))
 		echo $$JOKIN
 		osascript -e "set Volume 2"
