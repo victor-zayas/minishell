@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_unset.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:22:45 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/01 02:41:47 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/01 15:05:39 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	ft_export(t_env	*env, char *content)
 		aux = malloc(sizeof(char *) * (ft_doublestrlen(env->env) + 1));
 	if (!aux)
 		return ;
-	printf("flag -> %d\n", flag);
 	while (env->env[++i])
 	{
 		aux[i] = ft_strdup(env->env[i]); // aux is gonna copy every line of enviroment
@@ -72,8 +71,6 @@ void	ft_export(t_env	*env, char *content)
 		{
 			free(aux[i]); // free the line that was copied above in this iteration
 			aux[i] = ft_strdup(content); // copy actually the content (input) that the user wants it to be
-			if (!aux[i + 1])
-				i++;
 		}
 	}
 	// in this point enviroment is in the top bottom.

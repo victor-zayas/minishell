@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/01 02:42:05 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/01 15:36:23 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int		find_env(int p_ar, int p_str, t_cmd	*cmd, t_env	*env);
 void	free_args(t_cmd	*args);
 
 	//BUILTINGS
-int	ft_builtings(char	**args, t_cmd	*cmd, t_env *env);
+int		ft_builtings(char	**args, t_cmd	*cmd, t_env *env);
 
 	//PWD
 void	ft_pwd(void);
@@ -121,6 +121,8 @@ void	ft_echo(t_cmd *args);
 
 	//ENV
 void	ft_env(t_env *env);
+int		get_name_len(char	*str);
+char	*ft_find_home(char	*str, t_env	*env);
 
 	//EXIT
 int		ft_exit(t_cmd *args);
@@ -132,7 +134,6 @@ bool	ft_cd(t_cmd *args, t_env *env);
 void	ft_export(t_env	*env, char *content);
 int		content_check(t_env	*env, char *content);
 void	print_export(char **env);
-int		get_name_len(char	*str);
 
 	//UNSET
 void	ft_unset(t_env *env, char *content);
@@ -150,7 +151,7 @@ void	ft_input(t_cmd	*cmd, int i);
 
 	// TO _ DO
 		// 1. BUILTINGS:
-			// echo "$PWD" | wc -l
+			// echo "$PWD" | wc -l (Fixed).
 		// 2. REDIRECCIONES
 			//format : "[in_command / out_command] [output / input]".
 		// 3. EXIT STATUS
@@ -183,7 +184,6 @@ void	ft_input(t_cmd	*cmd, int i);
 		//parser();
 		//redirs();
 		//execute();
-
 	// PIPEX
 	//args = ft_split(aux, ' ');
 	//printf("cual es el resultado de args -> %s\n", *args);
@@ -191,7 +191,6 @@ void	ft_input(t_cmd	*cmd, int i);
 	//execve(path, args, env);
 
 	//FALLOS QUE ENCUENTRA AINGERU
-	// unset path y ejecutar comando no muestra mensaje de error
 	// CD al crear un fichero inaccesible dice: mensaje de error en vez de permiso denegado
 	// export caso vacio, no deberia exportarse es error, no actualiza la variable
 	// cmd | and only | don't say syntax error
@@ -199,3 +198,4 @@ void	ft_input(t_cmd	*cmd, int i);
 	// echo $ hace bucle infinito, interrumppe procesos y señales
 	// variables inexistentes no se expanden. ej: echo $p. $p no existe y deberia mostrar un salto de linea
 	// ./ va al execve pero muestra error cmd en vez de error dir
+	// delete ctrl c on signal

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/01 02:35:41 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/01 15:09:48 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,12 @@ void	exec_cmd(char	**cmd, char	**enviroment)
 				break ;
 			free (aux);
 		}
+		free(path);
 		if (aux)
 			execve(aux, cmd, enviroment);
 		write(2, "bash: ", 7);
 		write(2, *cmd, ft_strlen(*cmd));
-		if (chdir(*cmd))
+		if (!chdir(*cmd))
 			write(2, ": Is a directory\n", 18);
 		else
 			write(2, ": command not found\n", 21);
@@ -95,7 +96,7 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 	init_cmd(cmd);
 	while (cmd->args[++i])
 	{
-		if (!ft_strncmp(cmd->args[i], "|", 1) && i > 0)
+		if (!ft_strncmp(cmd->args[i], "|", 1))
 		{
 			cmd->cmd[i] = NULL;
 			while (cmd->args[++i] && ft_strncmp(cmd->args[i], "|", 1))
