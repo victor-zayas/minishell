@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/01 01:04:16 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/01 02:35:41 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,16 @@ void	exec_cmd(char	**cmd, char	**enviroment)
 			return ;
 		i = 0;
 		aux = ft_path(enviroment);
+		if (!aux)
+		{
+			write(2, "bash: ", 7);
+			write(2, *cmd, ft_strlen(*cmd));
+			if (!ft_strncmp(*cmd, "/", 1))
+				write(2, ": Is a directory\n", 18);
+			else
+				write(2, ": command not found\n", 21);
+			exit (1);
+		}
 		path = ft_split(aux, ':');
 		free (aux);
 		while (path[i] != NULL)
@@ -57,7 +67,7 @@ void	exec_cmd(char	**cmd, char	**enviroment)
 			execve(aux, cmd, enviroment);
 		write(2, "bash: ", 7);
 		write(2, *cmd, ft_strlen(*cmd));
-		if (!ft_strncmp(*cmd, "/", 1))
+		if (chdir(*cmd))
 			write(2, ": Is a directory\n", 18);
 		else
 			write(2, ": command not found\n", 21);
@@ -85,7 +95,7 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 	init_cmd(cmd);
 	while (cmd->args[++i])
 	{
-		if (!ft_strncmp(cmd->args[i], "|", 1))
+		if (!ft_strncmp(cmd->args[i], "|", 1) && i > 0)
 		{
 			cmd->cmd[i] = NULL;
 			while (cmd->args[++i] && ft_strncmp(cmd->args[i], "|", 1))

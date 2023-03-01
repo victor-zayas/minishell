@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_unset.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:22:45 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/28 17:19:56 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/01 02:41:47 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,17 @@ void	ft_export(t_env	*env, char *content)
 		aux = malloc(sizeof(char *) * (ft_doublestrlen(env->env) + 1));
 	if (!aux)
 		return ;
+	printf("flag -> %d\n", flag);
 	while (env->env[++i])
 	{
 		aux[i] = ft_strdup(env->env[i]); // aux is gonna copy every line of enviroment
 		if (i == flag && flag >= 0
-			&& ft_strncmp(env->env[i], content, ft_strlen(env->env[i]))) // if content is found inside enviroment (i)
+			&& !ft_strncmp(env->env[i], content, get_name_len(content))) // if content is found inside enviroment (i)
 		{
 			free(aux[i]); // free the line that was copied above in this iteration
 			aux[i] = ft_strdup(content); // copy actually the content (input) that the user wants it to be
+			if (!aux[i + 1])
+				i++;
 		}
 	}
 	// in this point enviroment is in the top bottom.
@@ -98,7 +101,7 @@ void	ft_unset(t_env	*env, char *content)
 
 	if (!content)
 		return ;
-	aux = malloc(sizeof(char *) * (ft_doublestrlen(env->env) + 1) - 1);
+	aux = malloc(sizeof(char *) * (ft_doublestrlen(env->env) + 1));
 	i = -1;
 	mem = NULL;
 	if (!content)
@@ -107,11 +110,12 @@ void	ft_unset(t_env	*env, char *content)
 	{
 		if (!strncmp(env->env[i], content, ft_strlen(content)) && env->env[i])
 		{
-			mem = env->env[i];
+			mem = ft_strdup(env->env[i]);
 			if (!env->env[i + 1])
 			{
 				break ;
 			}
+			free(env->env[i]);
 			env->env[i] = ft_strdup(env->env[i + 1]);
 			free(mem);
 		}
@@ -119,7 +123,7 @@ void	ft_unset(t_env	*env, char *content)
 	}
 	aux[i] = NULL;
 	ft_doublefree(env->env);
-	env->env = malloc(sizeof(char *) * (ft_doublestrlen(aux)) + 1);
+	env->env = malloc(sizeof(char *) * (ft_doublestrlen(aux) + 1));
 	i = -1;
 	while (aux[++i])
 		env->env[i] = ft_strdup(aux[i]);

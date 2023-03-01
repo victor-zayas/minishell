@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:55 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/28 17:20:37 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/01 02:27:26 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ void	get_inter(t_cmd *cmd, t_env *env)
 			if (cmd->flag == 1)
 				expand_dollars(i, cmd, env);
 		}
-		else if (!ft_strncmp(cmd->args[i], "$", 1))
+		else if (!ft_strncmp(cmd->args[i], "$", 1)
+			&& ft_strlen(cmd->args[i]) > 1)
 			expand_dollars(i, cmd, env);
 	}
 }

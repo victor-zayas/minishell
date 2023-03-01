@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:20:31 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/09 19:22:22 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/01 02:07:34 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,18 @@ static void	ft_rewrite_pwd(t_env *env)
 
 bool	ft_cd(t_cmd *args, t_env *env)
 {
+	if (!args->args[1])
+		return (1);
 	get_oldpwd(env);
-	if (chdir(args->args[1]) == -1)
+	args->flag = chdir(args->args[1]);
+	if (args->flag == -1)
 	{
-		printf("cd: %s: No such file or directory\n", args->args[1]);
+		if (errno == EACCES)
+			printf("bash: cd: %s: Permission denied\n", args->args[1]);
+		else if (errno == ENOENT)
+			printf("cd: %s: No such file or directory\n", args->args[1]);
+		else
+			printf("cd: %s: No such file or directory\n", args->args[1]);
 		free(env->oldpwd);
 		return (1);
 	}

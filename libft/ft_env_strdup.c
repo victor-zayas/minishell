@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:24:50 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/02/28 15:29:30 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/01 01:52:57 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**ft_env_strdup(char **str)
 			return (aux);
 		}
 	}
-	aux = (char **)malloc(sizeof(char *) * (ft_doublestrlen(str)));
+	aux = (char **)malloc(sizeof(char *) * (ft_doublestrlen(str) + 1));
 	if (!aux)
 		return (NULL);
 	i = -1;
