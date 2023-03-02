@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/01 16:03:38 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/02 11:39:52 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,5 +195,15 @@ void	ft_input(t_cmd	*cmd, int i);
 	// cmd | and only | don't say syntax error
 	// can't open minishell on minishell
 	// ./ va al execve pero muestra error cmd en vez de error dir
+	// ruta absoluta de comando env no va
+	// echo -n -n -n -n only do first one
+	// export test show test in export but not in env
+	// unset tes= delete var in env, shoul not | bash: unset: `prueba=': not a valid identifier
+	//
+
+	//OPTIONAL
 	// delete ctrl c on signal
+	// cmd options interpretate all exec options & ignore inextents
+	//
+	
 	
