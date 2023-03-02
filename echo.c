@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 18:24:42 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/01 15:50:16 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/02 20:49:52 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,17 @@ void	ft_echo(t_cmd *args)
 		printf("\n");
 		return ;
 	}
-	else if (args->args[i] && !ft_strncmp(args->args[1], "-n", 2))
+	else if (args->args[i] && !ft_strncmp(args->args[i], "-n", 2))
 	{
 		i++;
 		flag = 1;
 	}
 	while (args->args[i])
 	{
-		printf("%s", args->args[i]);
-		i++;
+		if (!ft_strncmp(args->args[i], "-n", 2))
+			i++;
+		else
+			printf("%s", args->args[i++]);
 	}
 	if (!flag)
 		printf("\n");
