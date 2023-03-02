@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/02 19:57:27 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/02 20:42:19 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	init_cmd(t_cmd	*cmd)
 	cmd->cmd = (char **)malloc(sizeof(char *) * (find_pipe(cmd->args, 0) + 1));
 	if (!cmd->cmd)
 		return ;
+	if (!cmd->args[find_pipe(cmd->args, (find_pipe(cmd->args, 0)))])
+	{
+		cmd->flag = 1;
+		return ;
+	}
 	cmd->atrb = (char **)malloc(sizeof(char *)
 			* (find_pipe(cmd->args, (find_pipe(cmd->args, 0) + 1)) + 1));
 	if (!cmd->atrb)
@@ -63,12 +68,11 @@ void	exec_cmd(char	**cmd, char	**enviroment)
 				break ;
 			free (aux);
 		}
-		free(path);
-		if (aux)
+		if (aux && path[i])
 			execve(aux, cmd, enviroment);
 		write(2, "bash: ", 7);
 		write(2, *cmd, ft_strlen(*cmd));
-		if (!chdir(*cmd))
+		if (chdir(*cmd))
 			write(2, ": Is a directory\n", 18);
 		else
 			write(2, ": command not found\n", 21);
@@ -96,7 +100,7 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 	init_cmd(cmd);
 	while (cmd->args[++i])
 	{
-		if (!ft_strncmp(cmd->args[i], "|", 1))
+		if (!ft_strncmp(cmd->args[i], "|", 1) && i > 0)
 		{
 			cmd->cmd[i] = NULL;
 			while (cmd->args[++i] && ft_strncmp(cmd->args[i], "|", 1))
@@ -124,7 +128,16 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 		cmd->cmd[i] = ft_stephen_jokin(cmd, i);
 	}
 	cmd->cmd[i] = NULL;
-	free(cmd->atrb);
+	if (!cmd->flag)
+		free(cmd->atrb);
+	if (!ft_strncmp(*cmd->cmd, "|", 1) && ft_strlen(*cmd->cmd) == 1)
+	{
+		write(2, "bash: syntax error near unexpected token ", 42);
+		write(2, *cmd->cmd, 1);
+		write(2, "\n", 2);
+		ft_doublefree(cmd->cmd);
+		return ;
+	}
 	if (ft_builtings(cmd->cmd, cmd, env) == 1)
 		exec_cmd(cmd->cmd, env->env);
 	ft_doublefree(cmd->cmd);

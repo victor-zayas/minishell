@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/02 19:58:44 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/02 20:44:23 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,8 +191,7 @@ void	ft_input(t_cmd	*cmd, int i);
 	//execve(path, args, env);
 
 	//FALLOS
-	// export error message with non-alphabetical characters
-	// cmd | and only | don't say syntax error
+	// export enviroment does not change when child process executes, we need to return a value from child process
 	// can't open minishell on minishell
 	// ./ va al execve pero muestra error cmd en vez de error dir
 	// ruta absoluta de comando env no va

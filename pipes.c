@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/28 16:06:12 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/02 20:37:41 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pos)
 		while (cmd->args[pos])
 		{
 			pos++;
+			ft_doublefree(cmd->cmd);
 			cmd->cmd = ft_doublestrdup(cmd->atrb);
 			ft_doublefree(cmd->atrb);
 			i = 0;
@@ -66,6 +67,7 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pos)
 		}
 		if (ft_builtings(cmd->atrb, cmd, env) == 1)
 			exec(cmd->atrb, env->env);
+		ft_doublefree(cmd->atrb);
 		exit (1);
 	}
 	else
