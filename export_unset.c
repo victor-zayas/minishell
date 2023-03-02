@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export_unset.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:22:45 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/01 15:05:39 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:51:49 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	content_check(t_env	*env, char	*content)
+int	content_check(t_env	*env, char	*content, char	*cmd)
 {
 	int	i;
 	int	len;
@@ -23,6 +23,14 @@ int	content_check(t_env	*env, char	*content)
 	{
 		print_export(env->env); // print declare -X ...
 		return (-1); // return value for exiting
+	}
+	if (ft_isdigit(*content))
+	{
+		write(2, "bash: ", 7);
+		write(2, cmd, ft_strlen(cmd));
+		write(2, ": `", 4);
+		write(2, content, ft_strlen(content));
+		write(2, "': not a valid identifier\n", 27);
 	}
 	while (content[++len]) // get length of content until '='
 		if (content[len] == '=') // if found '=' break
@@ -44,14 +52,14 @@ void	print_export(char	**env)
 		printf("declare -x %s\n", env[i]); // print all env along with 'declare -x'
 }
 
-void	ft_export(t_env	*env, char *content)
+void	ft_export(t_env	*env, char *content, char	*cmd)
 {
 	int		i;
 	int		flag;
 	char	**aux;
 
 	i = -1;
-	flag = content_check(env, content); // function that clasifies content in three values
+	flag = content_check(env, content, cmd); // function that clasifies content in three values
 	// -1 : Content is invalid, no '=' or not existant
 	// -2 : Content is valid, but does not exist inside enviroment
 	// (i) : Content is found inside the enviroment

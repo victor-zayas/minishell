@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/01 15:09:48 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:57:27 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_cmd(t_cmd	*cmd)
 	if (!cmd->cmd)
 		return ;
 	cmd->atrb = (char **)malloc(sizeof(char *)
-			* (find_pipe(cmd->args, find_pipe(cmd->args, 0)) + 1));
+			* (find_pipe(cmd->args, (find_pipe(cmd->args, 0) + 1)) + 1));
 	if (!cmd->atrb)
 		return ;
 }

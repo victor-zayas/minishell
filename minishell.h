@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/02 11:39:52 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:58:44 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@ int		ft_exit(t_cmd *args);
 bool	ft_cd(t_cmd *args, t_env *env);
 
 	//EXPORT
-void	ft_export(t_env	*env, char *content);
-int		content_check(t_env	*env, char *content);
+void	ft_export(t_env	*env, char *content, char	*cmd);
+int		content_check(t_env	*env, char	*content, char	*cmd);
 void	print_export(char **env);
 
 	//UNSET
