@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/28 16:06:42 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/03 12:42:13 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,7 @@ void	exec(char	**cmd, char	**enviroment)
 	}
 	if (aux)
 		execve(aux, cmd, enviroment);
-	write(2, "bash:", 6);
-	write(2, *cmd, ft_strlen(*cmd));
-	write(2, ": command not found\n", 21);
+	isDirectory(*cmd);
 	exit(1);
 }
 
