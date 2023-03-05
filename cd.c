@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:20:31 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/01 15:35:23 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/05 11:23:23 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,13 @@ static void	ft_rewrite_pwd(t_env *env)
 	free(env->pwd);
 }
 
-bool	ft_cd(t_cmd *args, t_env *env)
+bool	ft_cd(char	**cmd, t_cmd	*args, t_env *env)
 {
 	char	*aux;
+	int		i;
 
-	if (!args->args[1])
+	i = 1;
+	if (!cmd[i])
 	{
 		aux = ft_find_home("HOME=", env);
 		chdir(aux);
@@ -60,15 +62,17 @@ bool	ft_cd(t_cmd *args, t_env *env)
 		return (0);
 	}
 	get_oldpwd(env);
-	args->flag = chdir(args->args[1]);
+	args->flag = chdir(cmd[i]);
 	if (args->flag == -1)
 	{
 		if (errno == EACCES)
-			printf("bash: cd: %s: Permission denied\n", args->args[1]);
+			printf("bash: cd: %s: Permission denied\n", cmd[i]);
 		else if (errno == ENOENT)
-			printf("cd: %s: No such file or directory\n", args->args[1]);
+			printf("cd: %s: No such file or directory\n", cmd[i]);
+		else if (errno == ENOTDIR)
+			printf("cd: %s: Not a directory\n", cmd[i]);
 		else
-			printf("cd: %s: No such file or directory\n", args->args[1]);
+			printf("cd: %s: No such file or directory\n", cmd[i]);
 		free(env->oldpwd);
 		return (1);
 	}

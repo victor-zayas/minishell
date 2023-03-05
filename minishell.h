@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/03 12:43:48 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/05 11:16:46 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@
 # include "libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
-//# include <sys/wait.h>
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 # include <fcntl.h>
 
 typedef struct s_it
@@ -117,7 +119,7 @@ int		ft_builtings(char	**args, t_cmd	*cmd, t_env *env);
 void	ft_pwd(void);
 
 	//ECHO
-void	ft_echo(t_cmd *args);
+void	ft_echo(char	**cmd);
 
 	//ENV
 void	ft_env(t_env *env);
@@ -125,10 +127,10 @@ int		get_name_len(char	*str);
 char	*ft_find_home(char	*str, t_env	*env);
 
 	//EXIT
-int		ft_exit(t_cmd *args);
+int		ft_exit(char	**cmd);
 
 	//CD
-bool	ft_cd(t_cmd *args, t_env *env);
+bool	ft_cd(char	**cmd, t_cmd	*args, t_env *env);
 int 	isDirectory(char *path);
 
 	//EXPORT
