@@ -6,22 +6,22 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/03 12:43:02 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/05 11:31:02 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int isDirectory(char *path)
+int	isDirectory(char	*path)
 {
-   struct stat statbuf;
+	struct stat	statbuf;
 
-   	write(2, "bash: ", 7);
+	write(2, "bash: ", 7);
 	write(2, path, ft_strlen(path));
-   if (stat(path, &statbuf) != 0)
-       return (write(2, ": command not found\n", 21));
+	if (stat(path, &statbuf) != 0)
+		return (write(2, ": command not found\n", 21));
 	write(2, ": Is a directory\n", 18);
-	return S_ISDIR(statbuf.st_mode);
+	return (S_ISDIR(statbuf.st_mode));
 }
 
 void	init_cmd(t_cmd	*cmd)

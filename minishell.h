@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/05 11:16:46 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/05 11:35:45 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,12 +153,10 @@ void	ft_input(t_cmd	*cmd, int i);
 	//  __attribute__((unused)) -> Variables not used
 
 	// TO _ DO
-		// 1. BUILTINGS:
-			// echo "$PWD" | wc -l (Fixed).
-		// 2. REDIRECCIONES
+		// 1. REDIRECCIONES
 			//format : "[in_command / out_command] [output / input]".
-		// 3. EXIT STATUS
-		// 4. PARSEO
+		// 2. EXIT STATUS
+		// 3. PARSEO
 			// lexer-> double quotes: [echo "$PWD $USER $TERM ..." | wc]
 
 	// DONE
@@ -194,11 +192,13 @@ void	ft_input(t_cmd	*cmd, int i);
 	//execve(path, args, env);
 
 	//FALLOS
-	// export enviroment does not change when child process executes, we need to return a value from child process
 	// can't open minishell on minishell
-	// ./ va al execve pero muestra error cmd en vez de error dir
+		// to open minishell on minishell you need to give the executable name directly:
+		// pathname must be either a binary executable, or a script starting
+        // with a line of the form:
+
+		// so we need to trim the "./" when executable exists and is not a directoy
 	// ruta absoluta de comando env no va
-	// echo -n -n -n -n only do first one
 	// export test show test in export but not in env
 	// unset tes= delete var in env, shoul not | bash: unset: `prueba=': not a valid identifier
 	//
