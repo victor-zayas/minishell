@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/06 17:12:25 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/06 17:46:47 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	exec_cmd(char	**cmd, char	**enviroment)
 		if (!aux)
 		{
 			if (execve(*cmd, cmd, NULL) == -1)
-			exit(error_code(*cmd, aux, 3));
+				exit(error_code(*cmd));
+			exit(error_code(*cmd));
 		}
 		path = ft_split(aux, ':');
 		free (aux);
@@ -74,7 +75,7 @@ void	exec_cmd(char	**cmd, char	**enviroment)
 		}
 		if (aux && path[i] && !access(aux, X_OK))
 			execve(aux, cmd, enviroment);
-		exit (error_code(*cmd, path[i], 0));
+		exit (error_code(*cmd));
 	}
 	wait(&i);
 	//printf("exit value -> %d\n", WEXITSTATUS(i));

@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/06 17:11:29 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/06 17:50:36 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,9 @@ void	exec(char	**cmd, char	**enviroment)
 			break ;
 		free (aux);
 	}
-	for (int j = 0; cmd[j]; j++)
-		printf("cmd[%d] -> [%s]", j, cmd[j]);
 	if (aux)
 		execve(aux, cmd, enviroment);
-	exit (error_code(*cmd, path[i], 0));
+	exit (error_code(*cmd));
 }
 
 void	ft_child(t_cmd	*cmd, t_env	*env, int	*fd)
