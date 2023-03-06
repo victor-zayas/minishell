@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/05 11:35:45 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:57:27 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct s_env
 	char	*pwd;
 	char	**env;
 }	t_env;
-
 
 	// MAIN
 void	init_args(t_cmd	*new);
@@ -131,7 +130,7 @@ int		ft_exit(char	**cmd);
 
 	//CD
 bool	ft_cd(char	**cmd, t_cmd	*args, t_env *env);
-int 	isDirectory(char *path);
+int		is_directory(char	*path);
 
 	//EXPORT
 void	ft_export(t_env	*env, char *content, char	*cmd);
@@ -165,6 +164,7 @@ void	ft_input(t_cmd	*cmd, int i);
 			// Bash executes the last command no matter 
 			// what the input it is given by a pipe!
 			// So we have it as we should -> Check.
+
 	// STEPS TO MAKE MINISHELL
 		//lexer(); //comillas simples, comillas dobles, pipes, redirecciones
 		// 1.er paso
@@ -195,17 +195,12 @@ void	ft_input(t_cmd	*cmd, int i);
 	// can't open minishell on minishell
 		// to open minishell on minishell you need to give the executable name directly:
 		// pathname must be either a binary executable, or a script starting
-        // with a line of the form:
-
+		// with a line of the form:
 		// so we need to trim the "./" when executable exists and is not a directoy
 	// ruta absoluta de comando env no va
 	// export test show test in export but not in env
-	// unset tes= delete var in env, shoul not | bash: unset: `prueba=': not a valid identifier
-	//
+	// unset tes= delete var in env, shoul not | bash: unset: 'prueba=': not a valid identifier
 
 	//OPTIONAL
 	// delete ctrl c on signal
 	// cmd options interpretate all exec options & ignore inextents
-	//
-	
-	

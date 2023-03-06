@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/03 12:42:13 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:50:06 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	exec(char	**cmd, char	**enviroment)
 	}
 	if (aux)
 		execve(aux, cmd, enviroment);
-	isDirectory(*cmd);
+	is_directory(*cmd);
 	exit(1);
 }
 
@@ -79,4 +79,16 @@ char	*ft_path(char	**enviroment_path)
 		i++;
 	}
 	return (ret);
+}
+
+int	find_pipe(char	**args, int i)
+{
+	while (args[i])
+	{
+		if (ft_strchr(args[i], '|') || ft_strchr(args[i], '<')
+			|| ft_strchr(args[i], '>'))
+			break ;
+		i++;
+	}
+	return (i);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/05 11:31:02 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:31:36 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	isDirectory(char	*path)
+int	is_directory(char	*path)
 {
 	struct stat	statbuf;
 
@@ -82,7 +82,7 @@ void	exec_cmd(char	**cmd, char	**enviroment)
 		}
 		if (aux && path[i] && !access(aux, X_OK))
 			execve(aux, cmd, enviroment);
-		isDirectory(*cmd);
+		is_directory(*cmd);
 		exit (1);
 	}
 	waitpid(pid, NULL, 0);

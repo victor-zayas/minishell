@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:20:31 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/05 11:28:06 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:49:37 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ bool	ft_cd(char	**cmd, t_cmd	*args, t_env *env)
 	{
 		aux = ft_find_home("HOME=", env);
 		chdir(aux);
-		free(aux);
-		return (0);
+		return (free(aux), 0);
 	}
 	get_oldpwd(env);
 	args->flag = chdir(cmd[i]);
@@ -73,9 +72,7 @@ bool	ft_cd(char	**cmd, t_cmd	*args, t_env *env)
 			printf("cd: %s: Not a directory\n", cmd[i]);
 		else
 			printf("cd: %s: No such file or directory\n", cmd[i]);
-		free(env->oldpwd);
-		return (1);
+		return (free(env->oldpwd), 1);
 	}
-	ft_rewrite_pwd(env);
-	return (0);
+	return (ft_rewrite_pwd(env), 0);
 }

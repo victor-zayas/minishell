@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:36:07 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/01 15:35:45 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:52:06 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ char	*ft_find_home(char	*str, t_env	*env)
 	{
 		if (!ft_strncmp(env->env[start], str, ft_strlen(str)))
 		{
-			aux = ft_substr(env->env[start], get_name_len(str) + 1, ft_strlen(env->env[start]) - get_name_len(str));
+			aux = ft_substr(env->env[start], get_name_len(str) + 1,
+					ft_strlen(env->env[start]) - get_name_len(str));
 			return (aux);
 		}
 	}

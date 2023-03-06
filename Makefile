@@ -43,7 +43,6 @@ SRCS = main.c \
 	pipes.c \
 	utils_pipes.c \
 	cmd.c \
-	utils_cmd.c \
 	redir.c \
 	print.c 
 

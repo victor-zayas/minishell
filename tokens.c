@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/28 17:22:40 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:52:27 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	init_args(t_cmd	*cmd)
 	cmd->dollars = 0;
 	cmd->double_redir = 0;
 	cmd->flag = 0;
-
 	cmd->i.i1 = 0;
 	cmd->i.i2 = 0;
 	cmd->i.i3 = 0;
