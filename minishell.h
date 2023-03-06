@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/06 13:57:27 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/06 17:11:03 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	exec_cmd(char **cmd, char **enviroment);
 char	*ft_stephen_jokin(t_cmd	*cmd, int i);
 int		find_pipe(char **args, int i);
 void	ft_pipe(t_cmd *cmd, t_env *env, int pos);
+int     error_code(char *cmd, char *path, int flag);
 
 	// PIPEX
 void	exec(char **cmd, char **env);

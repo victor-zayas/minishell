@@ -6,23 +6,11 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/06 13:31:36 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/06 17:12:25 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	is_directory(char	*path)
-{
-	struct stat	statbuf;
-
-	write(2, "bash: ", 7);
-	write(2, path, ft_strlen(path));
-	if (stat(path, &statbuf) != 0)
-		return (write(2, ": command not found\n", 21));
-	write(2, ": Is a directory\n", 18);
-	return (S_ISDIR(statbuf.st_mode));
-}
 
 void	init_cmd(t_cmd	*cmd)
 {
@@ -59,21 +47,25 @@ void	exec_cmd(char	**cmd, char	**enviroment)
 		aux = ft_path(enviroment);
 		if (!aux)
 		{
-			write(2, "bash: ", 7);
-			write(2, *cmd, ft_strlen(*cmd));
-			if (!ft_strncmp(*cmd, "/", 1))
-				write(2, ": Is a directory\n", 18);
-			else
-				write(2, ": command not found\n", 21);
-			exit (1);
+			if (execve(*cmd, cmd, NULL) == -1)
+			exit(error_code(*cmd, aux, 3));
 		}
 		path = ft_split(aux, ':');
 		free (aux);
 		while (path[i] != NULL)
 		{
 			aux = ft_strjoin(path[i], "/");
-			free (path[i]);
-			path[i] = ft_strjoin(aux, *cmd);
+			if (access(*cmd, X_OK) == 0)
+			{
+				free(aux);
+				aux = ft_strdup(*cmd);
+				break ;
+			}
+			else
+			{
+				free (path[i]);
+				path[i] = ft_strjoin(aux, *cmd);
+			}
 			free (aux);
 			aux = ft_strdup(path[i++]);
 			if (access(aux, X_OK) == 0)
@@ -82,10 +74,10 @@ void	exec_cmd(char	**cmd, char	**enviroment)
 		}
 		if (aux && path[i] && !access(aux, X_OK))
 			execve(aux, cmd, enviroment);
-		is_directory(*cmd);
-		exit (1);
+		exit (error_code(*cmd, path[i], 0));
 	}
-	waitpid(pid, NULL, 0);
+	wait(&i);
+	//printf("exit value -> %d\n", WEXITSTATUS(i));
 	return ;
 }
 

@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/06 13:50:06 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/06 17:11:29 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,28 @@ void	exec(char	**cmd, char	**enviroment)
 	while (path[i] != NULL)
 	{
 		aux = ft_strjoin(path[i], "/");
-		free (path[i]);
-		path[i] = ft_strjoin(aux, *cmd);
+		if (access(*cmd, X_OK) == 0)
+		{
+			free(aux);
+			aux = ft_strdup(*cmd);
+			break ;
+		}
+		else
+		{
+			free (path[i]);
+			path[i] = ft_strjoin(aux, *cmd);
+		}
 		free (aux);
 		aux = ft_strdup(path[i++]);
 		if (access(aux, X_OK) == 0)
 			break ;
 		free (aux);
 	}
+	for (int j = 0; cmd[j]; j++)
+		printf("cmd[%d] -> [%s]", j, cmd[j]);
 	if (aux)
 		execve(aux, cmd, enviroment);
-	is_directory(*cmd);
-	exit(1);
+	exit (error_code(*cmd, path[i], 0));
 }
 
 void	ft_child(t_cmd	*cmd, t_env	*env, int	*fd)

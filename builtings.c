@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:25:36 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/05 11:17:26 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:41:08 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_builtings(char	**args, t_cmd	*cmd, t_env *env)
 	else if (ft_strncmp(*args, "export", 6) == 0)
 		ft_export(env, *(args + 1), *args);
 	else if (ft_strncmp(*args, "unset", 5) == 0)
-		ft_unset(env, *(args));
+		ft_unset(env, *(args + 1));
 	else
 		return (1);
 	return (0);
