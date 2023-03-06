@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/06 17:46:17 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/06 17:54:20 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,9 +153,10 @@ void	ft_input(t_cmd	*cmd, int i);
 	//  __attribute__((unused)) -> Variables not used
 
 	// TO _ DO
-		// 1. REDIRECCIONES
+		// 0. Error code.
+		// 1. EXIT STATUS
+		// 2. REDIRECCIONES
 			//format : "[in_command / out_command] [output / input]".
-		// 2. EXIT STATUS
 		// 3. PARSEO
 			// lexer-> double quotes: [echo "$PWD $USER $TERM ..." | wc]
 
@@ -198,8 +199,6 @@ void	ft_input(t_cmd	*cmd, int i);
 		// pathname must be either a binary executable, or a script starting
 		// with a line of the form:
 		// so we need to trim the "./" when executable exists and is not a directoy
-	// ruta absoluta de comando env no va
-	// export test show test in export but not in env
 	// unset tes= delete var in env, shoul not | bash: unset: 'prueba=': not a valid identifier
 
 	//OPTIONAL
