@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 16:27:27 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/03/06 17:47:24 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/08 11:03:05 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ int	is_directory(char *path)
 		return (126);
 	}
 	write(2, ": Is a directory\n", 18);
-	printf("value of directory -> %d\n", S_ISDIR(statbuf.st_mode));
 	return (127);
 }

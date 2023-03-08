@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/08 10:44:28 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/08 11:09:45 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 			else if (!ft_strncmp(cmd->args[i], ">", 1)
 					|| !ft_strncmp(cmd->args[i], "<", 1))
 			{
+				if (cmd->output == 1 && cmd->input == 0)
+					j = i;
 				if (!cmd->args[i + 1])
 				{
 					write(2, "bash: syntax error near unexpected token ", 42);
@@ -133,7 +135,6 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 				if (!ft_strncmp(cmd->args[i], "<", 1))
 					ft_input(cmd, i + 1);
 				i++;
-				j = i + 1;
 			}
 			else
 				cmd->cmd[i] = ft_stephen_jokin(cmd, i);
