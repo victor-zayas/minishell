@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:22:45 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/06 13:37:08 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/08 12:37:59 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	content_check(t_env	*env, char	*content, char	*cmd)
 	return (-2); // if not found, return value for creating a new variable
 }
 
-void	print_export(char	**env)
+void	print_export(char **env)
 {
 	int	i;
 
@@ -52,7 +52,7 @@ void	print_export(char	**env)
 		printf("declare -x %s\n", env[i]);
 }
 
-void	ft_export(t_env	*env, char *content, char	*cmd)
+void	ft_export(t_env *env, char *content, char *cmd)
 {
 	int		i;
 	int		flag;
@@ -98,7 +98,7 @@ void	ft_export(t_env	*env, char *content, char	*cmd)
 	ft_doublefree(aux); // free the auxiliar array of strings to avoid leaks
 }
 
-void	ft_unset(t_env	*env, char *content)
+void	ft_unset(t_env *env, char *content)
 {
 	int		i;
 	char	*mem;

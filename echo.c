@@ -6,13 +6,13 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 18:24:42 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/06 13:38:40 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/08 12:42:31 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_echo(char	**cmd)
+void	ft_echo(char **cmd)
 {
 	int	i;
 	int	flag;

@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/06 17:50:36 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/08 12:37:15 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	error(char	*error)
 	exit(EXIT_FAILURE);
 }
 
-void	exec(char	**cmd, char	**enviroment)
+void	exec(char **cmd, char **enviroment)
 {
 	char	**path;
 	char	*aux;

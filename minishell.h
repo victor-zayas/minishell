@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/08 10:39:29 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/08 15:13:03 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,23 @@ typedef struct s_cmd
 	char	**args;
 	char	**cmd;
 	char	**atrb;
+
 	int		n_cmd;
 	int		size;
 	int		flag;
 
 	int		words;
 	int		quotes;
-	int		double_quotes;
+	int		dollars;
 	int		pipes;
+	int		double_quotes;
 	int		lesser;
 	int		greater;
-	int		dollars;
 	int		double_redir;
 
 	int		input;
 	int		output;
-}		t_cmd;
+}	t_cmd;
 
 typedef struct s_env
 {
@@ -70,13 +71,14 @@ typedef struct s_env
 }	t_env;
 
 	// MAIN
-void	init_args(t_cmd	*new);
+void	init_shell(t_cmd	*new, t_env	*env, char	**envp);
 void	print(t_cmd	*cmd);
 void	ft_choped(t_cmd	*args, t_env *env, char	*prompt);
+void	my_signal(int sig);
 
 	//LEXER
 	// GET_TOKEN
-void	get_token(t_cmd	*cmd, char	*prompt);
+void	get_token(t_cmd	*cmd, char *prompt);
 void	get_inter(t_cmd *cmd, t_env *env);
 
 	// GET_DATA
@@ -84,7 +86,7 @@ int		get_data(t_cmd	*args, char	*prompt);
 int		i_cwords(t_cmd *cmd, char *prompt, int pos);
 int		i_qwords(t_cmd *cmd, char *prompt, int pos);
 int		i_dqwords(t_cmd	*cmd, char *prompt, int pos);
-int		i_sp(t_cmd	*cmd, char	*prompt, int i);
+int		i_sp(t_cmd *cmd, char *prompt, int i);
 int		i_dollars(t_cmd	*cmd, char *prompt, int pos);
 
 	// LEXER
@@ -92,8 +94,8 @@ char	*clean_words(t_cmd *cmd, char *prompt, int pos);
 char	*quotes_lexer(t_cmd	*cmd, char *prompt, int pos);
 char	*double_quotes_lexer(t_cmd *cmd, char *prompt, int pos);
 char	*pipes_lexer(t_cmd *cmd, char *prompt, int pos);
-char	*one_lexer(t_cmd	*cmd, char	*prompt, int pos);
-char	*two_lexer(t_cmd	*cmd, char	*prompt, int pos);
+char	*one_lexer(t_cmd *cmd, char *prompt, int pos);
+char	*two_lexer(t_cmd *cmd, char	*prompt, int pos);
 
 	// CMD
 void	ft_selector(t_cmd *cmd, t_env *env);
@@ -105,7 +107,7 @@ int		error_code(char *cmd);
 
 	// PIPEX
 void	exec(char **cmd, char **env);
-void	ft_child(t_cmd	*cmd, t_env	*env, int	*fd);
+void	ft_child(t_cmd *cmd, t_env *env, int *fd);
 char	*ft_path(char **enviroment_path);
 char	*get_cmd(char *arguments, char **enviroment);
 void	error(char *error);
@@ -116,29 +118,29 @@ int		find_env(int p_ar, int p_str, t_cmd	*cmd, t_env	*env);
 void	free_args(t_cmd	*args);
 
 	//BUILTINGS
-int		ft_builtings(char	**args, t_cmd	*cmd, t_env *env);
+int		ft_builtings(char **args, t_cmd *cmd, t_env *env);
 
 	//PWD
 void	ft_pwd(void);
 
 	//ECHO
-void	ft_echo(char	**cmd);
+void	ft_echo(char **cmd);
 
 	//ENV
 void	ft_env(t_env *env);
-int		get_name_len(char	*str);
-char	*ft_find_home(char	*str, t_env	*env);
+int		get_name_len(char *str);
+char	*ft_find_home(char *str, t_env *env);
 
 	//EXIT
-int		ft_exit(char	**cmd);
+int		ft_exit(char **cmd);
 
 	//CD
-bool	ft_cd(char	**cmd, t_cmd	*args, t_env *env);
-int		is_directory(char	*path);
+bool	ft_cd(char **cmd, t_cmd *args, t_env *env);
+int		is_directory(char *path);
 
 	//EXPORT
-void	ft_export(t_env	*env, char *content, char	*cmd);
-int		content_check(t_env	*env, char	*content, char	*cmd);
+void	ft_export(t_env *env, char *content, char *cmd);
+int		content_check(t_env *env, char *content, char *cmd);
 void	print_export(char **env);
 
 	//UNSET

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/08 11:09:45 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/08 12:46:43 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	init_cmd(t_cmd	*cmd)
 		return ;
 }
 
-void	exec_cmd(char	**cmd, char	**enviroment)
+void	exec_cmd(char **cmd, char **enviroment)
 {
 	char	**path;
 	char	*aux;
@@ -78,7 +78,6 @@ void	exec_cmd(char	**cmd, char	**enviroment)
 		exit (error_code(*cmd));
 	}
 	wait(&i);
-	//printf("exit value -> %d\n", WEXITSTATUS(i));
 	return ;
 }
 
@@ -92,8 +91,8 @@ char	*ft_stephen_jokin(t_cmd *cmd, int i)
 
 void	ft_selector(t_cmd *cmd, t_env *env)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	pid_t	pid;
 
 	pid = fork();
@@ -119,7 +118,7 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 				return ;
 			}
 			else if (!ft_strncmp(cmd->args[i], ">", 1)
-					|| !ft_strncmp(cmd->args[i], "<", 1))
+				|| !ft_strncmp(cmd->args[i], "<", 1))
 			{
 				if (cmd->output == 1 && cmd->input == 0)
 					j = i;

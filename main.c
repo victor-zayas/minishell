@@ -6,18 +6,19 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/06 13:45:25 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/08 15:12:23 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 
 void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 {
 	char	*aux;
 
 	aux = prompt;
-	init_args(args);
+	init_shell(args, env, env->env);
 	add_history(aux);
 	if (get_data(args, aux) == -1)
 	{
@@ -49,11 +50,7 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd	args;
 	char	*prompt;
 
-	env.env = ft_env_strdup(envp);
-	env.oldpwd = NULL;
-	init_args(&args);
-	signal(SIGINT, my_signal);
-	signal(SIGQUIT, SIG_IGN);
+	init_shell(&args, &env, envp);
 	while (1 && argc && argv)
 	{
 		prompt = readline("MiniHell=▸");
