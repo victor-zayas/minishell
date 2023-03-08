@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/08 15:13:03 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/08 17:20:52 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,12 @@ typedef struct s_env
 	char	*oldpwd;
 	char	*pwd;
 	char	**env;
+	int		exit_value;
 }	t_env;
 
 	// MAIN
 void	init_shell(t_cmd	*new, t_env	*env, char	**envp);
+void	init_args(t_cmd	*cmd);
 void	print(t_cmd	*cmd);
 void	ft_choped(t_cmd	*args, t_env *env, char	*prompt);
 void	my_signal(int sig);
@@ -199,12 +201,7 @@ void	ft_input(t_cmd	*cmd, int i);
 	//execve(path, args, env);
 
 	//FALLOS
-	// can't open minishell on minishell
-		// to open minishell on minishell you need to give the executable name directly:
-		// pathname must be either a binary executable, or a script starting
-		// with a line of the form:
-		// so we need to trim the "./" when executable exists and is not a directoy
-	// unset tes= delete var in env, shoul not | bash: unset: 'prueba=': not a valid identifier
+	//SHLVL doesn't aument
 
 	//OPTIONAL
 	// delete ctrl c on signal

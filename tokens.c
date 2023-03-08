@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/08 15:11:21 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/08 17:22:31 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,14 @@ void	init_shell(t_cmd *cmd, t_env *env, char	**envp)
 {
 	env->env = ft_env_strdup(envp);
 	env->oldpwd = NULL;
+	env->exit_value = 0;
 	signal(SIGINT, my_signal);
 	signal(SIGQUIT, SIG_IGN);
+	init_args(cmd);
+}
+
+void	init_args(t_cmd *cmd)
+{
 	cmd->size = 0;
 	cmd->words = 0;
 	cmd->quotes = 0;

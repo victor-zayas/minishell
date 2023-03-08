@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/08 16:42:57 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/08 17:20:30 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 	char	*aux;
 
 	aux = prompt;
-	init_shell(args, env, env->env);
+	init_args(args);
 	add_history(aux);
 	if (get_data(args, aux) == -1)
 	{

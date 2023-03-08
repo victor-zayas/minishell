@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:22:45 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/08 12:37:59 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/08 17:23:11 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,10 @@ void	ft_unset(t_env *env, char *content)
 	char	**aux;
 
 	if (!content)
+	{
+		write(2, "unset: not enough arguments\n", 29);
 		return ;
+	}
 	aux = malloc(sizeof(char *) * (ft_doublestrlen(env->env) + 1));
 	mem = NULL;
 	if (!content)
@@ -113,7 +116,15 @@ void	ft_unset(t_env *env, char *content)
 	i = -1;
 	while (env->env[++i])
 	{
-		if (!strncmp(env->env[i], content, ft_strlen(content)) && env->env[i])
+		if (ft_strchr(content, '='))
+		{
+			write(2, "bash: unset: ", 14);
+			write(2, content, ft_strlen(content));
+			write(2, "not a valid identifier ", 24);
+			write(2, "\n", 2);
+			return ;
+		}
+		if (!ft_strncmp(env->env[i], content, ft_strlen(content)))
 		{
 			mem = ft_strdup(env->env[i]);
 			if (!env->env[i + 1])
