@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/07 19:03:53 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/08 10:44:28 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,10 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 	pid = fork();
 	if (pid == 0)
 	{
-		i = -1;
+		i = 0;
 		j = 0;
 		init_cmd(cmd);
-		while (cmd->args[++i])
+		while (cmd->args[i])
 		{
 			if (!ft_strncmp(cmd->args[i], "|", 1) && i > 0)
 			{
@@ -119,33 +119,44 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 				return ;
 			}
 			else if (!ft_strncmp(cmd->args[i], ">", 1)
-				|| !ft_strncmp(cmd->args[i], "<", 1))
+					|| !ft_strncmp(cmd->args[i], "<", 1))
 			{
 				if (!cmd->args[i + 1])
-					return ;
+				{
+					write(2, "bash: syntax error near unexpected token ", 42);
+					write(2, cmd->args[i], 1);
+					write(2, "\n", 2);
+					exit (2);
+				}
 				if (!ft_strncmp(cmd->args[i], ">", 1))
 					ft_output(cmd, i + 1);
 				if (!ft_strncmp(cmd->args[i], "<", 1))
 					ft_input(cmd, i + 1);
 				i++;
+				j = i + 1;
 			}
 			else
 				cmd->cmd[i] = ft_stephen_jokin(cmd, i);
+			i++;
 		}
-		cmd->cmd[i] = NULL;
-		if (!cmd->flag)
-			free(cmd->atrb);
 		if (!ft_strncmp(*cmd->cmd, "|", 1) && ft_strlen(*cmd->cmd) == 1)
 		{
 			write(2, "bash: syntax error near unexpected token ", 42);
 			write(2, *cmd->cmd, 1);
 			write(2, "\n", 2);
-			ft_doublefree(cmd->cmd);
-			return ;
+			exit (1);
 		}
+		if (j > 0)
+			cmd->cmd[j] = NULL;
+		if (!j)
+			cmd->cmd[i] = NULL;
+		if (!cmd->flag)
+			free(cmd->atrb);
 		if (ft_builtings(cmd->cmd, cmd, env) == 1)
 			exec_cmd(cmd->cmd, env->env);
 		ft_doublefree(cmd->cmd);
+		close(cmd->input);
+		close(cmd->output);
 		exit (0);
 	}
 	waitpid(pid, NULL, 0);
