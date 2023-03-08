@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:01 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/03/01 16:04:34 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/08 18:21:36 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	print(t_cmd *cmd)
 	printf("				Output Redirect		: %d\n", cmd->greater);
 	printf("				Input Redirect		: %d\n", cmd->lesser);
 	printf("				Dollars			: %d\n", cmd->dollars);
-	printf("				Double Redirections		: %d\n", cmd->double_redir);
+	printf("				Double Redirections	: %d\n", cmd->double_redir);
 }

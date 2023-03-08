@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/08 17:20:52 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/08 18:07:03 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,14 +101,14 @@ char	*two_lexer(t_cmd *cmd, char	*prompt, int pos);
 
 	// CMD
 void	ft_selector(t_cmd *cmd, t_env *env);
-void	exec_cmd(char **cmd, char **enviroment);
+void	exec_cmd(char **cmd, t_env	*env);
 char	*ft_stephen_jokin(t_cmd	*cmd, int i);
 int		find_pipe(char **args, int i);
 void	ft_pipe(t_cmd *cmd, t_env *env, int pos);
-int		error_code(char *cmd);
+int		error_code(char *cmd, t_env	*env);
 
 	// PIPEX
-void	exec(char **cmd, char **env);
+void	exec(char **cmd, t_env	*env);
 void	ft_child(t_cmd *cmd, t_env *env, int *fd);
 char	*ft_path(char **enviroment_path);
 char	*get_cmd(char *arguments, char **enviroment);
@@ -138,7 +138,7 @@ int		ft_exit(char **cmd);
 
 	//CD
 bool	ft_cd(char **cmd, t_cmd *args, t_env *env);
-int		is_directory(char *path);
+int		is_directory(char *path, t_env *env);
 
 	//EXPORT
 void	ft_export(t_env *env, char *content, char *cmd);
@@ -160,7 +160,6 @@ void	ft_input(t_cmd	*cmd, int i);
 	//  __attribute__((unused)) -> Variables not used
 
 	// TO _ DO
-		// 0. Error code.
 		// 1. EXIT STATUS
 		// 2. REDIRECCIONES
 			//format : "[in_command / out_command] [output / input]".

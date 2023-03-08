@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/02 20:37:41 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/08 17:36:03 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pos)
 			pos = find_pipe(cmd->args, pos);
 		}
 		if (ft_builtings(cmd->atrb, cmd, env) == 1)
-			exec(cmd->atrb, env->env);
+			exec(cmd->atrb, env);
 		ft_doublefree(cmd->atrb);
 		exit (1);
 	}

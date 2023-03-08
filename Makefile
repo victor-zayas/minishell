@@ -16,7 +16,7 @@ NAME = minishell
 
 # COMPILATION #
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 RM = /bin/rm -rf
 LREADLINE_FLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib/
 READLINE = -I/Users/$(USER)/.brew/opt/readline/include/

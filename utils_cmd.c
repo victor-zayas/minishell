@@ -6,18 +6,18 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 16:27:27 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/03/08 17:19:02 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/08 18:02:22 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
-int	error_code(char *cmd)
+int	error_code(char *cmd, t_env	*env)
 {
-	return (is_directory(cmd));
+	return (is_directory(cmd, env));
 }
 
-int	is_directory(char *path)
+int	is_directory(char *path, t_env *env)
 {
 	struct stat	statbuf;
 
@@ -26,8 +26,10 @@ int	is_directory(char *path)
 	if (stat(path, &statbuf) != 0)
 	{
 		write(2, ": command not found\n", 21);
-		return (126);
+		env->exit_value = 127;
+		return (0);
 	}
 	write(2, ": Is a directory\n", 18);
-	return (127);
+	env->exit_value = 126;
+	return (0);
 }

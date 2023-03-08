@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/08 12:37:15 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/08 17:38:49 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	error(char	*error)
 	exit(EXIT_FAILURE);
 }
 
-void	exec(char **cmd, char **enviroment)
+void	exec(char **cmd, t_env	*env)
 {
 	char	**path;
 	char	*aux;
@@ -31,7 +31,7 @@ void	exec(char **cmd, char **enviroment)
 	i = 0;
 	if (!cmd)
 		return ;
-	aux = ft_path(enviroment);
+	aux = ft_path(env->env);
 	path = ft_split(aux, ':');
 	free (aux);
 	while (path[i] != NULL)
@@ -55,8 +55,8 @@ void	exec(char **cmd, char **enviroment)
 		free (aux);
 	}
 	if (aux)
-		execve(aux, cmd, enviroment);
-	exit (error_code(*cmd));
+		execve(aux, cmd, env->env);
+	exit (error_code(*cmd, env));
 }
 
 void	ft_child(t_cmd	*cmd, t_env	*env, int	*fd)
@@ -65,7 +65,7 @@ void	ft_child(t_cmd	*cmd, t_env	*env, int	*fd)
 	dup2(fd[1], STDOUT_FILENO);
 	close(fd[1]);
 	if (ft_builtings(cmd->cmd, cmd, env) == 1)
-		exec(cmd->cmd, env->env);
+		exec(cmd->cmd, env);
 	exit (1);
 }
 
