@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/08 12:46:43 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/08 16:42:42 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	init_cmd(t_cmd	*cmd)
 		return ;
 }
 
-void	exec_cmd(char **cmd, char **enviroment)
+void	exec_cmd(char	**cmd, char	**enviroment)
 {
 	char	**path;
 	char	*aux;
@@ -78,6 +78,7 @@ void	exec_cmd(char **cmd, char **enviroment)
 		exit (error_code(*cmd));
 	}
 	wait(&i);
+	//printf("exit value -> %d\n", WEXITSTATUS(i));
 	return ;
 }
 
@@ -91,73 +92,58 @@ char	*ft_stephen_jokin(t_cmd *cmd, int i)
 
 void	ft_selector(t_cmd *cmd, t_env *env)
 {
-	int		i;
-	int		j;
-	pid_t	pid;
+	int	i;
+	int	check;
 
-	pid = fork();
-	if (pid == 0)
+	i = -1;
+	check = 0;
+	init_cmd(cmd);
+	while (cmd->args[++i])
 	{
-		i = 0;
-		j = 0;
-		init_cmd(cmd);
-		while (cmd->args[i])
+		if (!ft_strncmp(cmd->args[i], "|", 1) && i > 0)
 		{
-			if (!ft_strncmp(cmd->args[i], "|", 1) && i > 0)
+			cmd->cmd[i] = NULL;
+			while (cmd->args[++i] && ft_strncmp(cmd->args[i], "|", 1))
+				cmd->atrb[check++] = ft_stephen_jokin(cmd, i);
+			cmd->atrb[check] = NULL;
+			ft_pipe(cmd, env, i);
+			ft_doublefree(cmd->atrb);
+			ft_doublefree(cmd->cmd);
+			return ;
+		}
+		else if (!ft_strncmp(cmd->args[i], ">", 1)
+			|| !ft_strncmp(cmd->args[i], "<", 1))
+		{
+			if (cmd->output == 1 && cmd->input == 0)
+				check = i;
+			if (!cmd->args[i + 1])
 			{
-				cmd->cmd[i] = NULL;
-				while (cmd->args[++i] && ft_strncmp(cmd->args[i], "|", 1))
-				{
-					cmd->atrb[j] = ft_stephen_jokin(cmd, i);
-					j++;
-				}
-				cmd->atrb[j] = NULL;
-				ft_pipe(cmd, env, i);
-				ft_doublefree(cmd->atrb);
-				ft_doublefree(cmd->cmd);
-				return ;
+				write(2, "bash: syntax error near unexpected token ", 42);
+				write(2, cmd->args[i], 1);
+				write(2, "\n", 2);
+				exit (2);
 			}
-			else if (!ft_strncmp(cmd->args[i], ">", 1)
-				|| !ft_strncmp(cmd->args[i], "<", 1))
-			{
-				if (cmd->output == 1 && cmd->input == 0)
-					j = i;
-				if (!cmd->args[i + 1])
-				{
-					write(2, "bash: syntax error near unexpected token ", 42);
-					write(2, cmd->args[i], 1);
-					write(2, "\n", 2);
-					exit (2);
-				}
-				if (!ft_strncmp(cmd->args[i], ">", 1))
-					ft_output(cmd, i + 1);
-				if (!ft_strncmp(cmd->args[i], "<", 1))
-					ft_input(cmd, i + 1);
-				i++;
-			}
-			else
-				cmd->cmd[i] = ft_stephen_jokin(cmd, i);
+			if (!ft_strncmp(cmd->args[i], ">", 1))
+				ft_output(cmd, i + 1);
+			if (!ft_strncmp(cmd->args[i], "<", 1))
+				ft_input(cmd, i + 1);
 			i++;
 		}
-		if (!ft_strncmp(*cmd->cmd, "|", 1) && ft_strlen(*cmd->cmd) == 1)
-		{
-			write(2, "bash: syntax error near unexpected token ", 42);
-			write(2, *cmd->cmd, 1);
-			write(2, "\n", 2);
-			exit (1);
-		}
-		if (j > 0)
-			cmd->cmd[j] = NULL;
-		if (!j)
-			cmd->cmd[i] = NULL;
-		if (!cmd->flag)
-			free(cmd->atrb);
-		if (ft_builtings(cmd->cmd, cmd, env) == 1)
-			exec_cmd(cmd->cmd, env->env);
-		ft_doublefree(cmd->cmd);
-		close(cmd->input);
-		close(cmd->output);
-		exit (0);
+		else
+			cmd->cmd[i] = ft_stephen_jokin(cmd, i);
 	}
-	waitpid(pid, NULL, 0);
+	if (check)
+		cmd->cmd[check] = NULL;
+	else
+		cmd->cmd[i] = NULL;
+	if (!ft_strncmp(*cmd->cmd, "|", 1) && ft_strlen(*cmd->cmd) == 1)
+	{
+		write(2, "bash: syntax error near unexpected token ", 42);
+		write(2, *cmd->cmd, 1);
+		write(2, "\n", 2);
+		exit (1);
+	}
+	if (ft_builtings(cmd->cmd, cmd, env) == 1)
+		exec_cmd(cmd->cmd, env->env);
+	ft_doublefree(cmd->cmd);
 }
