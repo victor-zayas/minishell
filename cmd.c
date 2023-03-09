@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/08 17:33:26 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/09 16:41:58 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	init_cmd(t_cmd	*cmd)
 		return ;
 }
 
-void	exec_cmd(char **cmd, t_env *env)
+int		exec_cmd(char **cmd, t_env *env)
 {
 	char	**path;
 	char	*aux;
@@ -41,8 +41,6 @@ void	exec_cmd(char **cmd, t_env *env)
 		perror("fork");
 	else if (pid == 0)
 	{
-		if (!cmd)
-			return ;
 		i = 0;
 		aux = ft_path(env->env);
 		if (!aux)
@@ -78,8 +76,7 @@ void	exec_cmd(char **cmd, t_env *env)
 		exit (error_code(*cmd, env));
 	}
 	wait(&i);
-	//printf("exit value -> %d\n", WEXITSTATUS(i));
-	return ;
+	return (WEXITSTATUS(i));
 }
 
 char	*ft_stephen_jokin(t_cmd *cmd, int i)
@@ -144,6 +141,6 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 		exit (1);
 	}
 	if (ft_builtings(cmd->cmd, cmd, env) == 1)
-		exec_cmd(cmd->cmd, env);
+		env->exit_value = exec_cmd(cmd->cmd, env);
 	ft_doublefree(cmd->cmd);
 }

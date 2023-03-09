@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/08 18:07:03 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/09 17:16:35 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char	*two_lexer(t_cmd *cmd, char	*prompt, int pos);
 
 	// CMD
 void	ft_selector(t_cmd *cmd, t_env *env);
-void	exec_cmd(char **cmd, t_env	*env);
+int		exec_cmd(char **cmd, t_env	*env);
 char	*ft_stephen_jokin(t_cmd	*cmd, int i);
 int		find_pipe(char **args, int i);
 void	ft_pipe(t_cmd *cmd, t_env *env, int pos);
@@ -154,13 +154,26 @@ void	ft_input(t_cmd	*cmd, int i);
 
 #endif
 
-// ls -l | wc | cat -e | wc -l | cat -e
-
 	//  __unused -> Variables not used
 	//  __attribute__((unused)) -> Variables not used
 
 	// TO _ DO
 		// 1. EXIT STATUS
+			// Exit Status can return a variety of differet numbers, depending on the outcome of the input:
+			// How can we get the Exit Status of an Executed Command?
+			// Simple, we just need to transfer the exit value of the child process (responsible for executing the command),
+			// to the parent process.
+
+			// To do this, reading some lines of the wait(2) manual of Linux is preferible.
+			// We basically use a paramater inside wait & waitpid functions (int &wstatus), an integer that is most useful when we need to handle errors
+			// With this integer and some macros, we can inspect the value that the child process WAS EXITED WITH!
+
+			// We just need to put this value inside our structure, so to do that, we need to make the "exec_cmd" function return the value for the structure to handle it from above
+			// or just give a pointer to the function.
+
+			// Personally, I prefer to make it return the integer, so the type of the function is taken advantage of.
+			// So it would look like this:
+			// int	exec_cmd(char **cmd, t_env *env)
 		// 2. REDIRECCIONES
 			//format : "[in_command / out_command] [output / input]".
 		// 3. PARSEO
