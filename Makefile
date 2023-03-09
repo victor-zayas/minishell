@@ -20,7 +20,7 @@ CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 RM = /bin/rm -rf
 LREADLINE_FLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib/
 READLINE = -I/Users/$(USER)/.brew/opt/readline/include/
-#LINUX_READLINE = -lreadline -L/usr/lib/x86_64-linux-gnu/
+LINUX_READLINE = -lreadline -L/usr/lib/x86_64-linux-gnu/
 
 # OBJS #
 OBJS = $(SRCS:.c=.o)
@@ -93,7 +93,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C libft all
-	 $(CC) $(CFLAGS) $(LREADLINE_FLAGS) $(READLINE) libft/libft.a $^ -o $(NAME)
+	$(CC) $(CFLAGS) $(LREADLINE_FLAGS) $(READLINE) libft/libft.a $^ -o $(NAME)
 #	$(CC) $(CFLAGS) $^ $(LREADLINE_FLAGS) $(LINUX_READLINE) libft/libft.a -o $(NAME)
 	echo "$(BLUE)༺ library created༻$(END)"
 	echo "$$MINISHELL"

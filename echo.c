@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 18:24:42 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/08 16:31:31 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/09 15:42:17 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,19 @@ void	ft_echo(char **cmd)
 	int	i;
 	int	flag;
 
-	i = 0;
+	i = 1;
 	flag = 0;
 	if (cmd[i] && !ft_strncmp(cmd[i], "$", 1)
 		&& ft_strlen(cmd[i++]) > 1)
+	{
 		printf("\n");
-	else if (cmd[i] && !ft_strncmp(cmd[i++], "-n", 2))
-		flag = 1;
+		flag -= 1;
+	}
+	else if (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
+	{
+		flag += 1;
+		i++;
+	}
 	while (cmd[i])
 	{
 		if (cmd[i] && !ft_strncmp(cmd[i], "-n", 2) && flag == 1)
