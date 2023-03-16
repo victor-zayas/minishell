@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/08 18:05:32 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/16 15:08:28 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	init_args(t_cmd *cmd)
 	cmd->dollars = 0;
 	cmd->double_redir = 0;
 	cmd->flag = 0;
-	cmd->input = 0;
-	cmd->output = 1;
+	cmd->in_it = 0;
+	cmd->out_it = 0;
 	cmd->i.i1 = 0;
 	cmd->i.i2 = 0;
 	cmd->i.i3 = 0;
@@ -89,4 +89,6 @@ void	free_args(t_cmd	*args)
 	while (args->args[i])
 		free(args->args[i++]);
 	free(args->args);
+	free(args->input);
+	free(args->output);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/08 17:38:49 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/16 15:11:17 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,7 @@ int	find_pipe(char	**args, int i)
 {
 	while (args[i])
 	{
-		if (ft_strchr(args[i], '|') || ft_strchr(args[i], '<')
-			|| ft_strchr(args[i], '>'))
+		if (ft_strchr(args[i], '|'))
 			break ;
 		i++;
 	}

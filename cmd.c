@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/09 16:41:58 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/16 15:14:38 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	init_cmd(t_cmd	*cmd)
 		return ;
 }
 
-int		exec_cmd(char **cmd, t_env *env)
+int		exec_cmd(t_cmd	*cmd, t_env	*env)
 {
 	char	**path;
 	char	*aux;
@@ -45,25 +45,25 @@ int		exec_cmd(char **cmd, t_env *env)
 		aux = ft_path(env->env);
 		if (!aux)
 		{
-			if (execve(*cmd, cmd, NULL) == -1)
-				exit(error_code(*cmd, env));
-			exit(error_code(*cmd, env));
+			if (execve(*cmd->cmd, cmd->cmd, NULL) == -1)
+				exit(error_code(*cmd->cmd, env));
+			exit(error_code(*cmd->cmd, env));
 		}
 		path = ft_split(aux, ':');
 		free (aux);
 		while (path[i] != NULL)
 		{
 			aux = ft_strjoin(path[i], "/");
-			if (access(*cmd, X_OK) == 0)
+			if (access(*cmd->cmd, X_OK) == 0)
 			{
 				free(aux);
-				aux = ft_strdup(*cmd);
+				aux = ft_strdup(*cmd->cmd);
 				break ;
 			}
 			else
 			{
 				free (path[i]);
-				path[i] = ft_strjoin(aux, *cmd);
+				path[i] = ft_strjoin(aux, *cmd->cmd);
 			}
 			free (aux);
 			aux = ft_strdup(path[i++]);
@@ -72,8 +72,8 @@ int		exec_cmd(char **cmd, t_env *env)
 			free (aux);
 		}
 		if (aux && path[i] && !access(aux, X_OK))
-			execve(aux, cmd, env->env);
-		exit (error_code(*cmd, env));
+			execve(aux, cmd->cmd, env->env);
+		exit (error_code(*cmd->cmd, env));
 	}
 	wait(&i);
 	return (WEXITSTATUS(i));
@@ -111,8 +111,6 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 		else if (!ft_strncmp(cmd->args[i], ">", 1)
 			|| !ft_strncmp(cmd->args[i], "<", 1))
 		{
-			if (cmd->output == 1 && cmd->input == 0)
-				check = i;
 			if (!cmd->args[i + 1])
 			{
 				write(2, "bash: syntax error near unexpected token ", 42);
@@ -141,6 +139,6 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 		exit (1);
 	}
 	if (ft_builtings(cmd->cmd, cmd, env) == 1)
-		env->exit_value = exec_cmd(cmd->cmd, env);
+		env->exit_value = exec_cmd(cmd, env);
 	ft_doublefree(cmd->cmd);
 }
