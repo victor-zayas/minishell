@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/16 15:14:38 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/16 15:33:34 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int		exec_cmd(t_cmd	*cmd, t_env	*env)
 	else if (pid == 0)
 	{
 		i = 0;
+		open_fd(cmd);
 		aux = ft_path(env->env);
 		if (!aux)
 		{
@@ -119,9 +120,15 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 				exit (2);
 			}
 			if (!ft_strncmp(cmd->args[i], ">", 1))
-				ft_output(cmd, i + 1);
+			{
+				cmd->output[cmd->out_it] = i + 1;
+				cmd->out_it++;
+			}
 			if (!ft_strncmp(cmd->args[i], "<", 1))
-				ft_input(cmd, i + 1);
+			{
+				cmd->input[cmd->in_it] = i;
+				cmd->in_it++;
+			}
 			i++;
 		}
 		else
