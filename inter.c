@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:55 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/20 13:45:20 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:20:24 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	expand_dollars(int p_ar, t_cmd	*cmd, t_env	*env)
 			&& ft_strlen(cmd->args[p_ar]) == 2)
 		{
 			free(cmd->args[p_ar]);
-			printf("exit value -> %d\n", env->exit_value);
 			cmd->args[p_ar] = ft_itoa(env->exit_value);
 			return ;
 		}
