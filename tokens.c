@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/20 15:38:49 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:40:19 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	init_shell(t_cmd *cmd, t_env *env, char	**envp)
 	env->env = ft_env_strdup(envp);
 	env->oldpwd = NULL;
 	env->exit_value = 0;
+	env->shell_lvl = 1;
 	signal(SIGINT, my_signal);
 	signal(SIGQUIT, SIG_IGN);
 	init_args(cmd);

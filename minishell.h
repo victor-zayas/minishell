@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/20 17:56:07 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:39:12 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_env
 	char	**env;
 	char	**aux;
 	int		exit_value;
+	int		shell_lvl;
 }	t_env;
 
 	// MAIN

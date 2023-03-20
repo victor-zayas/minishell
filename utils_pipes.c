@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/16 15:11:17 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/20 19:01:53 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ void	exec(char **cmd, t_env	*env)
 	if (!cmd)
 		return ;
 	aux = ft_path(env->env);
+	if (!aux)
+	{
+		if (execve(*cmd, cmd, NULL) == -1)
+			exit(error_code(*cmd, env));
+		exit(error_code(*cmd, env));
+	}
 	path = ft_split(aux, ':');
 	free (aux);
 	while (path[i] != NULL)
@@ -54,7 +60,7 @@ void	exec(char **cmd, t_env	*env)
 			break ;
 		free (aux);
 	}
-	if (aux)
+	if (aux && path[i] && !access(aux, X_OK))
 		execve(aux, cmd, env->env);
 	exit (error_code(*cmd, env));
 }
