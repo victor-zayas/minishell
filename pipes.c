@@ -3,14 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/08 17:36:03 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/20 12:22:30 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_adult(t_cmd	*cmd, t_env	*env, int pos)
+{
+	int	i;
+
+	i = 0;
+	ft_fd(cmd, env);
+	while (cmd->args[pos])
+	{
+		pos++;
+		ft_doublefree(cmd->cmd);
+		cmd->cmd = ft_doublestrdup(cmd->atrb);
+		ft_doublefree(cmd->atrb);
+		cmd->atrb = (char **)malloc(sizeof(char *)
+				* (find_pipe(cmd->args, find_pipe(cmd->args, pos))) + 1);
+		while (cmd->args[pos + i]
+			&& ft_strncmp(cmd->args[pos + i], "|", 1))
+		{
+			cmd->atrb[i] = ft_stephen_jokin(cmd, pos + i);
+			i++;
+		}
+		cmd->atrb[i] = NULL;
+		ft_fd(cmd, env);
+		pos = find_pipe(cmd->args, pos);
+	}
+}
 
 void	ft_fd(t_cmd	*cmd, t_env	*env)
 {
@@ -37,34 +63,13 @@ void	ft_fd(t_cmd	*cmd, t_env	*env)
 void	ft_pipe(t_cmd *cmd, t_env *env, int pos)
 {
 	pid_t	pid;
-	int		i;
 
-	i = -1;
 	pid = fork();
 	if (pid < 0)
 		perror("Error");
 	if (pid == 0)
 	{
-		ft_fd(cmd, env);
-		while (cmd->args[pos])
-		{
-			pos++;
-			ft_doublefree(cmd->cmd);
-			cmd->cmd = ft_doublestrdup(cmd->atrb);
-			ft_doublefree(cmd->atrb);
-			i = 0;
-			cmd->atrb = (char **)malloc(sizeof(char *)
-					* (find_pipe(cmd->args, find_pipe(cmd->args, pos))) + 1);
-			while (cmd->args[pos + i]
-				&& ft_strncmp(cmd->args[pos + i], "|", 1))
-			{
-				cmd->atrb[i] = ft_stephen_jokin(cmd, pos + i);
-				i++;
-			}
-			cmd->atrb[i] = NULL;
-			ft_fd(cmd, env);
-			pos = find_pipe(cmd->args, pos);
-		}
+		ft_adult(cmd, env, pos);
 		if (ft_builtings(cmd->atrb, cmd, env) == 1)
 			exec(cmd->atrb, env);
 		ft_doublefree(cmd->atrb);

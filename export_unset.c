@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_unset.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:22:45 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/08 17:26:48 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/20 13:34:41 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	content_check(t_env	*env, char	*content, char	*cmd)
 	if (!content)
 	{
 		print_export(env->env);
-		return (-1); // return value for exiting
+		return (-1);
 	}
 	if (ft_isdigit(*content))
 	{
@@ -32,15 +32,15 @@ int	content_check(t_env	*env, char	*content, char	*cmd)
 		write(2, content, ft_strlen(content));
 		write(2, "': not a valid identifier\n", 27);
 	}
-	while (content[++len]) // get length of content until '='
+	while (content[++len])
 		if (content[len] == '=')
 			break ;
 	if (!content[len])
-		return (-1); // return value for exiting
+		return (-1);
 	while (env->env[++i])
-		if (!ft_strncmp(env->env[i], content, len)) // if it is found any variable with the same name and length of content
-			return (i); // return the position of the string in the enviroment
-	return (-2); // if not found, return value for creating a new variable
+		if (!ft_strncmp(env->env[i], content, len))
+			return (i);
+	return (-2);
 }
 
 void	print_export(char **env)
@@ -97,7 +97,6 @@ void	ft_export(t_env *env, char *content, char *cmd)
 void	ft_unset(t_env *env, char *content)
 {
 	int		i;
-	char	*mem;
 	char	**aux;
 
 	if (!content)
@@ -106,7 +105,6 @@ void	ft_unset(t_env *env, char *content)
 		return ;
 	}
 	aux = malloc(sizeof(char *) * (ft_doublestrlen(env->env) + 1));
-	mem = NULL;
 	if (!content)
 		return ;
 	i = -1;
@@ -122,12 +120,10 @@ void	ft_unset(t_env *env, char *content)
 		}
 		if (!ft_strncmp(env->env[i], content, ft_strlen(content)))
 		{
-			mem = ft_strdup(env->env[i]);
 			if (!env->env[i + 1])
 				break ;
 			free(env->env[i]);
 			env->env[i] = ft_strdup(env->env[i + 1]);
-			free(mem);
 		}
 		aux[i] = ft_strdup(env->env[i]);
 	}

@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_strdup.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:24:50 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/06 13:54:00 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/20 12:08:13 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+char	**ft_env_aux(char	**str)
+{
+	int		i;
+	char	**aux;
+
+	aux = (char **)malloc(sizeof(char *) * (ft_doublestrlen(str) + 1));
+	if (!aux)
+		return (NULL);
+	i = -1;
+	while (str[++i])
+		if (ft_strncmp(str[i], "OLDPWD=", 7))
+			aux[i] = ft_strdup(str[i]);
+	aux[i] = NULL;
+	return (aux);
+}
 
 char	**ft_env_strdup(char **str)
 {
@@ -32,13 +48,6 @@ char	**ft_env_strdup(char **str)
 			return (aux);
 		}
 	}
-	aux = (char **)malloc(sizeof(char *) * (ft_doublestrlen(str) + 1));
-	if (!aux)
-		return (NULL);
-	i = -1;
-	while (str[++i])
-		if (ft_strncmp(str[i], "OLDPWD=", 7))
-			aux[i] = ft_strdup(str[i]);
-	aux[i] = NULL;
+	aux = ft_env_aux(str);
 	return (aux);
 }

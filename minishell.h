@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/16 15:26:35 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/20 13:32:59 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_env
 	char	*oldpwd;
 	char	*pwd;
 	char	**env;
+	char	**aux;
 	int		exit_value;
 }	t_env;
 

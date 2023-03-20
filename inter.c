@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:55 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/09 15:37:24 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/20 13:45:20 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	expand_dollars(int p_ar, t_cmd	*cmd, t_env	*env)
 	i = -1;
 	while (cmd->args[p_ar][++i] && cmd->args[p_ar])
 	{
-		if (!ft_strncmp(cmd->args[p_ar], "$?", 2) && ft_strlen(cmd->args[p_ar]) == 2)
+		if (!ft_strncmp(cmd->args[p_ar], "$?", 2)
+			&& ft_strlen(cmd->args[p_ar]) == 2)
 		{
 			free(cmd->args[p_ar]);
 			printf("exit value -> %d\n", env->exit_value);
@@ -59,8 +60,7 @@ void	expand_dollars(int p_ar, t_cmd	*cmd, t_env	*env)
 			&& ft_isalpha(cmd->args[p_ar][i + 1]))
 		{
 			i = find_env(p_ar, i, cmd, env);
-			if (!cmd->args[p_ar][i])
-				return ;
+			return ;
 		}
 	}
 }

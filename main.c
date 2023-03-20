@@ -6,12 +6,11 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/16 15:10:04 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/20 12:17:28 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 {
@@ -29,7 +28,7 @@ void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 	args->output = (int *)malloc(sizeof(int *) * args->lesser);
 	get_token(args, aux);
 	get_inter(args, env);
-	print(args);
+	//print(args);
 	ft_selector(args, env);
 	free_args(args);
 }
