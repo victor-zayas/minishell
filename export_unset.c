@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:22:45 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/20 15:35:04 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:58:11 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	print_export(char **env)
 		printf("declare -x %s\n", env[i]);
 }
 
-void	ft_export(t_env *env, char *content, char *cmd)
+int	ft_export(t_env *env, char *content, char *cmd)
 {
 	int		i;
 	int		flag;
@@ -61,13 +61,13 @@ void	ft_export(t_env *env, char *content, char *cmd)
 	i = -1;
 	flag = content_check(env, content, cmd);
 	if (flag == -1)
-		return ;
+		return (0);
 	if (flag == -2)
 		aux = malloc(sizeof(char *) * (ft_doublestrlen(env->env) + 2));
 	else
 		aux = malloc(sizeof(char *) * (ft_doublestrlen(env->env) + 1));
 	if (!aux)
-		return ;
+		return (1);
 	while (env->env[++i])
 	{
 		aux[i] = ft_strdup(env->env[i]);
@@ -92,9 +92,10 @@ void	ft_export(t_env *env, char *content, char *cmd)
 		env->env[i] = ft_strdup(aux[i]);
 	env->env[i] = NULL;
 	ft_doublefree(aux);
+	return (0);
 }
 
-void	ft_unset(t_env *env, char *content)
+int	ft_unset(t_env *env, char *content)
 {
 	int		i;
 	char	**aux;
@@ -102,11 +103,11 @@ void	ft_unset(t_env *env, char *content)
 	if (!content)
 	{
 		write(2, "unset: not enough arguments\n", 29);
-		return ;
+		return (0);
 	}
 	aux = malloc(sizeof(char *) * (ft_doublestrlen(env->env) + 1));
 	if (!content)
-		return ;
+		return (1);
 	i = -1;
 	while (env->env[++i])
 	{
@@ -117,7 +118,7 @@ void	ft_unset(t_env *env, char *content)
 			write(2, "not a valid identifier ", 24);
 			write(2, "\n", 2);
 			free (aux);
-			return ;
+			return (0);
 		}
 		if (!ft_strncmp(env->env[i], content, ft_strlen(content))
 			&& get_name_len(env->env[i]) == (int)ft_strlen(content))
@@ -137,4 +138,5 @@ void	ft_unset(t_env *env, char *content)
 		env->env[i] = ft_strdup(aux[i]);
 	env->env[i] = NULL;
 	ft_doublefree(aux);
+	return (0);
 }

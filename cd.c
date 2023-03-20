@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:20:31 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/06 13:49:37 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:56:14 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	ft_rewrite_pwd(t_env *env)
 	free(env->pwd);
 }
 
-bool	ft_cd(char	**cmd, t_cmd	*args, t_env *env)
+int	ft_cd(char	**cmd, t_cmd	*args, t_env *env)
 {
 	char	*aux;
 	int		i;
@@ -57,6 +57,8 @@ bool	ft_cd(char	**cmd, t_cmd	*args, t_env *env)
 	if (!cmd[i])
 	{
 		aux = ft_find_home("HOME=", env);
+		if (aux == NULL)
+			return (1);
 		chdir(aux);
 		return (free(aux), 0);
 	}

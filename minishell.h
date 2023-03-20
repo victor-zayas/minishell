@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/20 15:37:37 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:56:07 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,13 +128,13 @@ void	free_args(t_cmd	*args);
 int		ft_builtings(char **args, t_cmd *cmd, t_env *env);
 
 	//PWD
-void	ft_pwd(void);
+int		ft_pwd(void);
 
 	//ECHO
-void	ft_echo(char **cmd);
+int		ft_echo(char **cmd);
 
 	//ENV
-void	ft_env(t_env *env);
+int		ft_env(t_env *env);
 int		get_name_len(char *str);
 char	*ft_find_home(char *str, t_env *env);
 
@@ -142,16 +142,16 @@ char	*ft_find_home(char *str, t_env *env);
 int		ft_exit(char **cmd);
 
 	//CD
-bool	ft_cd(char **cmd, t_cmd *args, t_env *env);
+int		ft_cd(char **cmd, t_cmd *args, t_env *env);
 int		is_directory(char *path, t_env *env);
 
 	//EXPORT
-void	ft_export(t_env *env, char *content, char *cmd);
+int		ft_export(t_env *env, char *content, char *cmd);
 int		content_check(t_env *env, char *content, char *cmd);
 void	print_export(char **env);
 
 	//UNSET
-void	ft_unset(t_env *env, char *content);
+int		ft_unset(t_env *env, char *content);
 
 	// REDIRECTIONS
 void	ft_output(t_cmd	*cmd, int i);

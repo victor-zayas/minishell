@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:36:07 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/06 13:52:06 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:51:18 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ char	*ft_find_home(char	*str, t_env	*env)
 	return (aux);
 }
 
-void	ft_env(t_env *env)
+int	ft_env(t_env *env)
 {
 	int	i;
 
 	i = -1;
 	while (env->env[++i])
 		printf("%s\n", env->env[i]);
+	return (0);
 }

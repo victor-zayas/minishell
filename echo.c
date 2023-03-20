@@ -6,13 +6,13 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 18:24:42 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/16 14:56:29 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:51:07 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_echo(char **cmd)
+int	ft_echo(char **cmd)
 {
 	int	i;
 	int	flag;
@@ -41,4 +41,5 @@ void	ft_echo(char **cmd)
 	}
 	if (!flag)
 		printf("\n");
+	return (0);
 }
