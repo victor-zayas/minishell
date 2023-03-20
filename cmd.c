@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/16 15:33:34 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/20 16:19:14 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 			}
 			if (!ft_strncmp(cmd->args[i], "<", 1))
 			{
-				cmd->input[cmd->in_it] = i;
+				cmd->input[cmd->in_it] = i + 1;
 				cmd->in_it++;
 			}
 			i++;

@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/16 15:08:28 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/20 15:38:49 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	init_args(t_cmd *cmd)
 	cmd->lesser = 0;
 	cmd->greater = 0;
 	cmd->dollars = 0;
-	cmd->double_redir = 0;
+	cmd->double_in = 0;
+	cmd->double_out = 0;
 	cmd->flag = 0;
 	cmd->in_it = 0;
 	cmd->out_it = 0;
@@ -75,7 +76,8 @@ void	get_token(t_cmd	*cmd, char	*prompt)
 {
 	cmd->args = (char **)malloc(sizeof(char *) * (cmd->words + cmd->quotes
 				+ cmd->double_quotes + cmd->pipes + cmd->lesser
-				+ cmd->greater + cmd->dollars + cmd->double_redir + 1));
+				+ cmd->greater + cmd->dollars + cmd->double_in
+				+ cmd->double_out + 1));
 	ft_lexer(cmd, prompt);
 	cmd->args[cmd->size] = NULL;
 	cmd->size = 0;

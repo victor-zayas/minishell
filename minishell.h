@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/20 13:32:59 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/20 15:37:37 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ typedef struct s_cmd
 	int		double_quotes;
 	int		lesser;
 	int		greater;
-	int		double_redir;
+	int		double_in;
+	int		double_out;
 
 	int		*input;
 	int		in_it;

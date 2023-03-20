@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:01 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/03/08 18:21:36 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/20 15:40:28 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	print(t_cmd *cmd)
 	printf("				Output Redirect		: %d\n", cmd->greater);
 	printf("				Input Redirect		: %d\n", cmd->lesser);
 	printf("				Dollars			: %d\n", cmd->dollars);
-	printf("				Double Redirections	: %d\n", cmd->double_redir);
+	printf("				Double Input Redirection	: %d\n", cmd->double_in);
+	printf("				Double Output Redirect	: %d\n", cmd->double_out);
 }
