@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:22:45 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/20 13:34:41 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/20 15:35:04 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,11 @@ void	ft_unset(t_env *env, char *content)
 			write(2, content, ft_strlen(content));
 			write(2, "not a valid identifier ", 24);
 			write(2, "\n", 2);
+			free (aux);
 			return ;
 		}
-		if (!ft_strncmp(env->env[i], content, ft_strlen(content)))
+		if (!ft_strncmp(env->env[i], content, ft_strlen(content))
+			&& get_name_len(env->env[i]) == (int)ft_strlen(content))
 		{
 			if (!env->env[i + 1])
 				break ;
