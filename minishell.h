@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/21 18:09:30 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/21 18:52:41 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ typedef struct s_cmd
 	int		dollars;
 	int		pipes;
 	int		double_quotes;
-	int		lesser;
-	int		greater;
+	int		out;
+	int		in;
 	int		double_in;
 	int		double_out;
 

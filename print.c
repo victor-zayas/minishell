@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:01 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/03/20 15:40:28 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/21 18:52:41 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	print(t_cmd *cmd)
 	printf("				Quotes	   		: %d\n", cmd->quotes);
 	printf("				Double quotes		: %d\n", cmd->double_quotes);
 	printf("				Pipes			: %d\n", cmd->pipes);
-	printf("				Output Redirect		: %d\n", cmd->greater);
-	printf("				Input Redirect		: %d\n", cmd->lesser);
+	printf("				Output Redirect		: %d\n", cmd->in);
+	printf("				Input Redirect		: %d\n", cmd->out);
 	printf("				Dollars			: %d\n", cmd->dollars);
 	printf("				Double Input Redirection	: %d\n", cmd->double_in);
 	printf("				Double Output Redirect	: %d\n", cmd->double_out);
