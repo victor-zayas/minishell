@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:56:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/20 16:20:03 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:07:12 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,25 +67,23 @@ void	open_fd(t_cmd	*cmd)
 	cmd->in_it = 0;
 	cmd->out_it = 0;
 	i = 0;
-	while (cmd->args[++i] && (cmd->greater >= 1 || cmd->lesser >= 1
+	while (cmd->args[i] && (cmd->greater >= 1 || cmd->lesser >= 1
 			|| cmd->double_in >= 1 || cmd->double_out >= 1))
 	{
-		if (i == cmd->input[cmd->in_it])
+		if (cmd->input || cmd->output)
 		{
-			//printf("[%d]\n", cmd->input[cmd->in_it]);
-			/* if (!ft_strncmp(cmd->args[i], "<<", 2))
-				ft_dinput(cmd, i); */
-			ft_input(cmd, i);
-			cmd->in_it++;
+			if (cmd->input && i == cmd->input[cmd->in_it])
+			{
+				ft_input(cmd, i);
+				cmd->in_it++;
+			}
+			else if (cmd->output && i == cmd->output[cmd->out_it])
+			{
+				ft_output(cmd, i);
+				cmd->out_it++;
+			}
 		}
-		else if (i == cmd->output[cmd->out_it])
-		{
-			//printf("[%d]\n", cmd->output[cmd->out_it]);
-			/* if (!ft_strncmp(cmd->args[i], ">>", 2))
-				ft_doutput(cmd, i); */
-			ft_output(cmd, i);
-			cmd->out_it++;
-		}
+		i++;
 	}
 }
 

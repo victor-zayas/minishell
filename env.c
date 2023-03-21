@@ -6,11 +6,42 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:36:07 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/20 17:51:18 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/20 19:45:20 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	get_name_end(char	*str)
+{
+	int	i;
+
+	i = -1;
+	while(str[++i] && str[i] != '"')
+	{
+		if (str[i] == '$')
+		{
+			i++;
+			while (str[i] && ft_isalpha(str[i]))
+				i++;
+			break ;
+		}
+	}
+	return (i);
+}
+
+int	get_name_start(char	*str)
+{
+	int	i;
+
+	i = -1;
+	while(str[++i] && str[i] != '"')
+	{
+		if (str[i] == '$')
+			break ;
+	}
+	return (i);
+}
 
 int	get_name_len(char	*str)
 {

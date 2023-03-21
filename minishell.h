@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/20 18:39:12 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:50:40 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ typedef struct s_env
 	char	**env;
 	char	**aux;
 	int		exit_value;
-	int		shell_lvl;
 }	t_env;
 
 	// MAIN
@@ -121,6 +120,8 @@ char	*get_cmd(char *arguments, char **enviroment);
 void	error(char *error);
 void	ft_fd(t_cmd	*cmd, t_env	*env);
 int		find_env(int p_ar, int p_str, t_cmd	*cmd, t_env	*env);
+int		get_name_end(char	*str);
+int		get_name_start(char	*str);
 
 	// FREE_ARGS
 void	free_args(t_cmd	*args);

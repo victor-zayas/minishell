@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:16:59 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/02/28 17:21:20 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/20 19:58:14 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,13 @@ char	*quotes_lexer(t_cmd	*cmd, char	*prompt, int pos)
 	start = (pos);
 	(pos)++;
 	while (prompt[pos] != '\'' && prompt[pos])
-				(pos)++;
+		(pos)++;
+	if (pos == 1)
+	{
+		tmp = ft_substr(prompt, (pos + 1), ft_strlen(prompt) - pos + 1);
+		free(prompt);
+		return (tmp);
+	}
 	cmd->args[cmd->size++] = ft_substr(prompt, (start), pos - start + 1);
 	tmp = ft_substr(prompt, (pos + 1), ft_strlen(prompt) - pos + 1);
 	free(prompt);
@@ -95,22 +101,7 @@ char	*double_quotes_lexer(t_cmd	*cmd, char	*prompt, int pos)
 	start = (pos);
 	(pos)++;
 	while (prompt[pos] != '"' && prompt[pos])
-	{
-		/* if (prompt[pos] == '$' && prompt[pos])
-		{
-			pos = ft_append(cmd, prompt, pos);
-			if (!prompt[pos + 1])
-			{
-				free(prompt);
-				return (ft_strdup(""));
-			}
-			tmp = ft_append2(prompt, pos + 1);
-			printf("tmp -> %s\n", tmp);
-			free(prompt);
-			return (tmp);
-		} */
 		(pos)++;
-	}
 	cmd->args[cmd->size++] = ft_substr(prompt, start, pos - start + 1);
 	tmp = ft_substr(prompt, (pos + 1), ft_strlen(prompt) - pos + 1);
 	free(prompt);

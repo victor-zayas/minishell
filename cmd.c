@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/20 17:47:35 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:56:56 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 		else if (!ft_strncmp(cmd->args[i], ">", 1)
 			|| !ft_strncmp(cmd->args[i], "<", 1))
 		{
+			check = i;
+			free(cmd->atrb);
 			if (!cmd->args[i + 1])
 			{
 				write(2, "bash: syntax error near unexpected token ", 42);
@@ -130,6 +132,7 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 				cmd->in_it++;
 			}
 			i++;
+			break ;
 		}
 		else
 			cmd->cmd[i] = ft_stephen_jokin(cmd, i);
@@ -138,7 +141,7 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 		cmd->cmd[check] = NULL;
 	else
 		cmd->cmd[i] = NULL;
-	if (!ft_strncmp(*cmd->cmd, "|", 1) && ft_strlen(*cmd->cmd) == 1)
+	if (*cmd->cmd && !ft_strncmp(*cmd->cmd, "|", 1) && ft_strlen(*cmd->cmd) == 1)
 	{
 		write(2, "bash: syntax error near unexpected token ", 42);
 		write(2, *cmd->cmd, 1);

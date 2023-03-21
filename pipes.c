@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/20 18:30:49 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/21 16:41:58 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_adult(t_cmd	*cmd, t_env	*env, int pos)
 		i = 0;
 		while(cmd->args[pos + i] && ft_strncmp(cmd->args[pos + i], "|", 1))
 			i++;
-		cmd->atrb = (char **)malloc(sizeof(char *) * i + 1);
+		cmd->atrb = (char **)malloc(sizeof(char *) * (i + 1));
 		i = 0;
 		while (cmd->args[pos + i]
 			&& ft_strncmp(cmd->args[pos + i], "|", 1))

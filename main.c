@@ -6,31 +6,11 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/20 18:52:22 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:49:06 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	shell_level(t_cmd	*cmd, t_env	*env)
-{
-	int		i;
-	char	*aux;
-
-	i = 0;
-	while(cmd->args[i])
-	{
-		if (!ft_strncmp(cmd->args[i], "./minishell", 11))
-		{
-			(env->shell_lvl)++;
-			aux = ft_strjoin("SHLVL=", ft_itoa((env->shell_lvl)));
-			ft_export(env, aux, "export");
-			free(aux);
-			return ;
-		}
-		i++;
-	}
-}
 
 void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 {
@@ -44,12 +24,13 @@ void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 		free(prompt);
 		return ;
 	}
-	args->input = (int *)malloc(sizeof(int *) * args->greater);
-	args->output = (int *)malloc(sizeof(int *) * args->lesser);
+	if (args->greater)
+		args->input = (int *)malloc(sizeof(int *) * (args->greater + 1));
+	if (args->lesser)
+		args->output = (int *)malloc(sizeof(int *) * (args->lesser + 1));
 	get_token(args, aux);
 	get_inter(args, env);
 	//print(args);
-	shell_level(args, env);
 	ft_selector(args, env);
 	free_args(args);
 }
@@ -86,6 +67,7 @@ int	main(int argc, char **argv, char **envp)
 			return (ft_doublefree(env.env), free(env.oldpwd),
 				ft_putstr_fd("Syntax error BRO U ARE STUPID\n", 2), 1);
 		ft_choped(&args, &env, prompt);
+		
 	}
 	ft_doublefree(env.env);
 	free(env.oldpwd);

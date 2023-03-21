@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/20 19:01:53 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:19:05 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	find_pipe(char	**args, int i)
 {
 	while (args[i])
 	{
-		if (ft_strchr(args[i], '|'))
+		if (ft_strchr(args[i], '|') || ft_strchr(args[i], '>') || ft_strchr(args[i], '<'))
 			break ;
 		i++;
 	}

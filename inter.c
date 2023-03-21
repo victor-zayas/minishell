@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:55 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/20 17:20:24 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/20 19:44:10 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	find_env(int p_ar, int p_str, t_cmd	*cmd, t_env	*env)
 	while (env->env[++start])
 	{
 		if (!ft_strncmp(env->env[start], aux, get_name_len(env->env[start]))
-			&& (int)ft_strlen(aux) == get_name_len(env->env[start]))
+			&& (get_name_end(cmd->args[p_ar]) - get_name_start(cmd->args[p_ar])
+			- 1 == get_name_len(env->env[start])))
 		{
 			free(cmd->args[p_ar]);
 			cmd->args[p_ar] = ft_substr(env->env[start],
