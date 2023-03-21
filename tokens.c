@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/21 17:51:27 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/21 18:36:41 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,10 @@ void	get_token(t_cmd	*cmd, char	*prompt)
 				+ cmd->double_quotes + cmd->pipes + cmd->lesser
 				+ cmd->greater + cmd->dollars + cmd->double_in
 				+ cmd->double_out + 1));
+	if (cmd->greater + cmd->double_out)
+		cmd->input = (int *)malloc(sizeof(int *) * (cmd->greater + cmd->double_out + 1));
+	if (cmd->lesser + cmd->double_in)
+		cmd->output = (int *)malloc(sizeof(int *) * (cmd->lesser + cmd->double_in + 1));
 	ft_lexer(cmd, prompt);
 	cmd->args[cmd->size] = NULL;
 	cmd->size = 0;

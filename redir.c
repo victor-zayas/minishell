@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:56:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/21 17:07:12 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/21 18:43:12 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,18 @@ void	open_fd(t_cmd	*cmd)
 		{
 			if (cmd->input && i == cmd->input[cmd->in_it])
 			{
-				ft_input(cmd, i);
+				if (!ft_strncmp(cmd->args[i], "<<", 3))
+					ft_dinput(cmd, i);
+				else
+					ft_input(cmd, i);
 				cmd->in_it++;
 			}
 			else if (cmd->output && i == cmd->output[cmd->out_it])
 			{
-				ft_output(cmd, i);
+				if (!ft_strncmp(cmd->args[i], ">>", 3))
+					ft_doutput(cmd, i);
+				else
+					ft_output(cmd, i);
 				cmd->out_it++;
 			}
 		}

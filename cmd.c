@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/21 17:56:56 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/21 18:42:54 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,18 +121,17 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 				write(2, "\n", 2);
 				exit (2);
 			}
-			if (!ft_strncmp(cmd->args[i], ">", 1))
+			if (!ft_strncmp(cmd->args[i], ">", 2) || !ft_strncmp(cmd->args[i], ">>", 3))
 			{
 				cmd->output[cmd->out_it] = i + 1;
 				cmd->out_it++;
 			}
-			if (!ft_strncmp(cmd->args[i], "<", 1))
+			if (!ft_strncmp(cmd->args[i], "<", 2) || !ft_strncmp(cmd->args[i], "<<", 3))
 			{
 				cmd->input[cmd->in_it] = i + 1;
 				cmd->in_it++;
 			}
 			i++;
-			break ;
 		}
 		else
 			cmd->cmd[i] = ft_stephen_jokin(cmd, i);
