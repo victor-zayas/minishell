@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/21 19:48:37 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:54:22 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ char	*ft_stephen_jokin(t_cmd	*cmd, int i);
 int		find_pipe(char **args, int i);
 void	ft_pipe(t_cmd *cmd, t_env *env, int pos, int check);
 int		error_code(char *cmd, t_env	*env);
-void    pipe_error(t_cmd    *cmd, t_env *env);
+void	pipe_error(t_cmd	*cmd, t_env *env);
 
 	// PIPEX
 void	exec(t_cmd	*args, char **cmd, t_env	*env);
