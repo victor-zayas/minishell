@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/22 17:42:58 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:56:04 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ void	ft_adult(t_cmd	*cmd, t_env	*env, int pos)
 
 	i = 0;
 	check = 0;
-	ft_fd(cmd, env);
+	ft_fd(cmd, env); // child
 	while (cmd->args[pos])
 	{
-		printf("entered\n");
 		pos++;
 		ft_doublefree(cmd->cmd);
 		cmd->cmd = ft_doublestrdup(cmd->atrb);

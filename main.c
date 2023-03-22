@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/21 19:44:11 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:45:58 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	main(int argc, char **argv, char **envp)
 			return (ft_doublefree(env.env), free(env.oldpwd),
 				ft_putstr_fd("Syntax error BRO U ARE STUPID\n", 2), 1);
 		ft_choped(&args, &env, prompt);
-		
 	}
 	ft_doublefree(env.env);
 	free(env.oldpwd);
