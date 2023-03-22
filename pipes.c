@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/21 19:48:31 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:42:58 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,30 @@ void	ft_adult(t_cmd	*cmd, t_env	*env, int pos)
 	ft_fd(cmd, env);
 	while (cmd->args[pos])
 	{
+		printf("entered\n");
 		pos++;
 		ft_doublefree(cmd->cmd);
 		cmd->cmd = ft_doublestrdup(cmd->atrb);
 		ft_doublefree(cmd->atrb);
 		i = 0;
-		while(cmd->args[pos + i] && ft_strncmp(cmd->args[pos + i], "|", 1))
+		while (cmd->args[pos + i] && ft_strncmp(cmd->args[pos + i], "|", 1)
+			&& ft_strncmp(cmd->args[pos + i], ">", 1)
+			&& ft_strncmp(cmd->args[pos + i], "<", 1))
 			i++;
 		cmd->atrb = (char **)malloc(sizeof(char *) * (i + 1));
 		i = 0;
 		while (cmd->args[pos + i]
 			&& ft_strncmp(cmd->args[pos + i], "|", 1))
 		{
-			printf("cmd inside pipe -> [%s]\n", cmd->args[pos + i]);
+			if (!ft_strncmp(cmd->args[pos + i], ">", 1)
+				|| !ft_strncmp(cmd->args[pos + i], "<", 1))
+			{
+				cmd->i.i7 = check;
+				ft_redir(pos + i, cmd->args, cmd, &check);
+				check = cmd->i.i7;
+				i += 2;
+				break ;
+			}
 			cmd->atrb[i] = ft_stephen_jokin(cmd, pos + i);
 			i++;
 		}
@@ -72,24 +83,42 @@ void	ft_fd(t_cmd	*cmd, t_env	*env)
 void	ft_pipe(t_cmd *cmd, t_env *env, int pos, int check)
 {
 	pid_t	pid;
+	int		i;
 
+	i = 0;
 	pid = fork();
 	cmd->cmd[pos] = NULL;
 	while (cmd->args[++pos] && ft_strncmp(cmd->args[pos], "|", 1))
-		cmd->atrb[check++] = ft_stephen_jokin(cmd, pos);
-	cmd->atrb[check] = NULL;
+	{
+		if (!ft_strncmp(cmd->args[pos], ">", 1)
+			|| !ft_strncmp(cmd->args[pos], "<", 1))
+		{
+			i = check;
+			ft_redir(pos, cmd->args, cmd, &check);
+			check = i + 2;
+			pos += 2;
+			break ;
+		}
+		else
+			cmd->atrb[check++] = ft_stephen_jokin(cmd, pos);
+	}
+	if (i)
+		cmd->atrb[i] = NULL;
+	else
+		cmd->atrb[check] = NULL;
 	if (pid < 0)
 		perror("Error");
 	if (pid == 0)
 	{
 		ft_adult(cmd, env, pos);
-		if (ft_builtings(cmd->atrb, cmd, env) == 1)
-			exec(cmd, cmd->atrb, env);
+		open_fd(cmd);
+		if (ft_builtings(cmd->atrb, cmd, env, 1) == 1)
+			exec_cmd(cmd, env, cmd->atrb);
 		ft_doublefree(cmd->atrb);
 		exit (1);
 	}
 	else
 		waitpid(pid, NULL, 0);
-	ft_doublefree(cmd->atrb);
 	ft_doublefree(cmd->cmd);
+	ft_doublefree(cmd->atrb);
 }

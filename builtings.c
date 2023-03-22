@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:25:36 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/21 18:42:42 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:26:13 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_checker(char	*str)
 	return (1);
 }
 
-int	ft_builtings(char	**args, t_cmd	*cmd, t_env *env)
+int	ft_builtings(char	**args, t_cmd	*cmd, t_env *env, int open)
 {
 	pid_t	pid;
 	int		i;
@@ -46,7 +46,8 @@ int	ft_builtings(char	**args, t_cmd	*cmd, t_env *env)
 	{
 		if (ft_checker(*args))
 			exit (1);
-		open_fd(cmd);
+		if (open)
+			open_fd(cmd);
 		if (ft_strncmp(*args, "pwd", 3) == 0)
 			env->exit_value = ft_pwd();
 		else if (ft_strncmp(*args, "env", 3) == 0)
