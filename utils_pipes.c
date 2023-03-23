@@ -6,13 +6,13 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/23 17:38:52 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/23 19:07:38 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_string_trader(t_cmd *cmd, int start)
+int	ft_string_trader(t_cmd *cmd, int start)
 {
 	int	len;
 
@@ -25,6 +25,17 @@ void	ft_string_trader(t_cmd *cmd, int start)
 		&& ft_strncmp(cmd->args[start + len], "<", 1))
 		len++;
 	cmd->atrb = (char **)malloc(sizeof(char *) * (len + 1));
+	len = 0;
+	while (cmd->args[start + len]
+		&& ft_strncmp(cmd->args[start + len], "|", 1)
+		&& ft_strncmp(cmd->args[start + len], ">", 1)
+		&& ft_strncmp(cmd->args[start + len], "<", 1))
+	{
+		cmd->atrb[len] = ft_stephen_jokin(cmd, start + len);
+		len++;
+	}
+	cmd->atrb[len] = NULL;
+	return (len);
 }
 
 void	error(char	*error)

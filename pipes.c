@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/23 16:28:51 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/23 19:16:43 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,7 @@ void	ft_adult(t_cmd	*cmd, t_env	*env, int pos)
 	ft_fd(cmd, env);
 	while (cmd->args[pos++])
 	{
-		ft_string_trader(cmd, pos);
-		i = 0;
-		while (cmd->args[pos + i]
-			&& ft_strncmp(cmd->args[pos + i], "|", 1)
-			&& ft_strncmp(cmd->args[pos + i], ">", 1)
-			&& ft_strncmp(cmd->args[pos + i], "<", 1))
-		{
-			cmd->atrb[i] = ft_stephen_jokin(cmd, pos + i);
-			i++;
-		}
-		cmd->atrb[i] = NULL;
+		i = ft_string_trader(cmd, pos);
 		while (cmd->args[pos + i] && (!ft_strncmp(cmd->args[pos + i], ">", 1)
 				|| !ft_strncmp(cmd->args[pos + i], "<", 1)))
 		{
@@ -41,7 +31,10 @@ void	ft_adult(t_cmd	*cmd, t_env	*env, int pos)
 			cmd->flag = 1;
 		}
 		if (cmd->flag == 1)
+		{
 			pos += i;
+			//ft_string_trader(cmd, pos);
+		}
 		ft_fd(cmd, env);
 		pos = find_pipe(cmd->args, pos);
 	}
