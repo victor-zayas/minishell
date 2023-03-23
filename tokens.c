@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/23 16:38:56 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:20:25 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ void	free_args(t_cmd	*args)
 	while (args->args[i])
 		free(args->args[i++]);
 	free(args->args);
-	if (args->in || args->double_in)
+	if (args->in_it)
 		free(args->input);
-	if (args->out || args->double_out)
+	if (args->out_it)
 		free(args->output);
 }

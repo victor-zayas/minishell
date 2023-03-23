@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/23 15:57:02 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:26:39 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,19 @@ typedef struct s_it
 	int	i7;
 }	t_it;
 
+typedef struct s_env
+{
+	char	*oldpwd;
+	char	*pwd;
+	char	**env;
+	char	**aux;
+	int		exit_value;
+}	t_env;
+
 typedef struct s_cmd
 {
 	t_it	i;
+	t_env	*env;
 	char	**args;
 	char	**cmd;
 	char	**atrb;
@@ -66,14 +76,6 @@ typedef struct s_cmd
 	int		out_it;
 }	t_cmd;
 
-typedef struct s_env
-{
-	char	*oldpwd;
-	char	*pwd;
-	char	**env;
-	char	**aux;
-	int		exit_value;
-}	t_env;
 
 	// MAIN
 void	init_shell(t_cmd *new, t_env *env, char	**envp);
@@ -109,6 +111,7 @@ int		exec_cmd(t_cmd *cmd, t_env *env, char **args);
 void	open_fd(t_cmd *cmd);
 char	*ft_stephen_jokin(t_cmd	*cmd, int i);
 int		find_pipe(char **args, int i);
+int		find_sp(char	**args, int i);
 void	ft_pipe(t_cmd *cmd, t_env *env, int pos, int check);
 int		error_code(char *cmd, t_env	*env);
 void	pipe_error(t_cmd *cmd, t_env *env);
@@ -158,9 +161,12 @@ void	print_export(char **env);
 	//UNSET
 int		ft_unset(t_env *env, char *content);
 
-	// REDIRECTIONS
-void	ft_output(t_cmd	*cmd, int i);
-void	ft_input(t_cmd	*cmd, int i);
+	// OUTPUT
+int		ft_output(t_cmd	*cmd, int i);
+int		ft_doutput(t_cmd	*cmd, int i);
+	// INPUT
+int		ft_input(t_cmd	*cmd, int i);
+int		ft_dinput(t_cmd	*cmd, int i);
 
 #endif
 

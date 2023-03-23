@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/23 16:40:06 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:40:55 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,11 @@ void	init_cmd(t_cmd	*cmd)
 	cmd->cmd = (char **)malloc(sizeof(char *) * (find_pipe(cmd->args, 0) + 1));
 	if (!cmd->cmd)
 		return ;
-	if (find_pipe(cmd->args, 0) == 0)
+	if (!cmd->args[find_pipe(cmd->args, 0)])
 		return ;
-	if (!cmd->args[find_pipe(cmd->args, (find_pipe(cmd->args, 0)))])
-	{
-		cmd->flag = 1;
-		return ;
-	}
 	cmd->atrb = (char **)malloc(sizeof(char *)
-			* (find_pipe(cmd->args, (find_pipe(cmd->args, 0) + 1) + 1))
-			- (find_pipe(cmd->args, 0) + 1) + 1);
+			* (find_sp(cmd->args, (find_sp(cmd->args, 0) + 1) + 1))
+			- (find_sp(cmd->args, 0) + 1) + 1);
 	if (!cmd->atrb)
 		return ;
 }
@@ -133,7 +128,8 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 		else
 			cmd->cmd[i] = ft_stephen_jokin(cmd, i);
 	}
-	if (*cmd->cmd && !ft_strncmp(*cmd->cmd, "|", 1) && ft_strlen(*cmd->cmd) == 1)
+	if (*cmd->cmd && !ft_strncmp(*cmd->cmd, "|", 1)
+		&& ft_strlen(*cmd->cmd) == 1)
 		return (pipe_error(cmd, env));
 	else if (check)
 		cmd->cmd[check] = NULL;

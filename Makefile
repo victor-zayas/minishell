@@ -46,7 +46,9 @@ SRCS = main.c \
 	redir.c \
 	print.c \
 	utils_cmd.c \
-	error.c
+	error.c \
+	input.c \
+	output.c
 
 # MAKEFILE ART #
 # COLORS #
