@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/23 18:26:39 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/23 19:16:50 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	ft_fd(t_cmd	*cmd, t_env	*env);
 int		find_env(int p_ar, int p_str, t_cmd	*cmd, t_env	*env);
 int		get_name_end(char *str);
 int		get_name_start(char	*str);
-void	ft_string_trader(t_cmd *cmd, int start);
+int		ft_string_trader(t_cmd *cmd, int start);
 
 	// FREE_ARGS
 void	free_args(t_cmd	*args);

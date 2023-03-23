@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/23 17:40:55 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/23 19:29:42 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_cmd(t_cmd	*cmd)
 {
-	cmd->cmd = (char **)malloc(sizeof(char *) * (find_pipe(cmd->args, 0) + 1));
+	cmd->cmd = (char **)malloc(sizeof(char *) * (find_sp(cmd->args, 0) + 1));
 	if (!cmd->cmd)
 		return ;
 	if (!cmd->args[find_pipe(cmd->args, 0)])
@@ -70,7 +70,7 @@ int	exec_cmd(t_cmd	*cmd, t_env	*env, char	**args)
 				break ;
 			free (aux);
 		}
-		if (aux && path[i] && !access(aux, X_OK))
+		if (aux && path[i] && *args && !access(aux, X_OK))
 			execve(aux, args, env->env);
 		exit (error_code(*args, env));
 	}
