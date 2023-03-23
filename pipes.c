@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/22 17:56:04 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:28:51 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,39 +19,29 @@ void	ft_adult(t_cmd	*cmd, t_env	*env, int pos)
 
 	i = 0;
 	check = 0;
-	ft_fd(cmd, env); // child
-	while (cmd->args[pos])
+	ft_fd(cmd, env);
+	while (cmd->args[pos++])
 	{
-		pos++;
-		ft_doublefree(cmd->cmd);
-		cmd->cmd = ft_doublestrdup(cmd->atrb);
-		ft_doublefree(cmd->atrb);
-		i = 0;
-		while (cmd->args[pos + i] && ft_strncmp(cmd->args[pos + i], "|", 1)
-			&& ft_strncmp(cmd->args[pos + i], ">", 1)
-			&& ft_strncmp(cmd->args[pos + i], "<", 1))
-			i++;
-		cmd->atrb = (char **)malloc(sizeof(char *) * (i + 1));
+		ft_string_trader(cmd, pos);
 		i = 0;
 		while (cmd->args[pos + i]
-			&& ft_strncmp(cmd->args[pos + i], "|", 1))
+			&& ft_strncmp(cmd->args[pos + i], "|", 1)
+			&& ft_strncmp(cmd->args[pos + i], ">", 1)
+			&& ft_strncmp(cmd->args[pos + i], "<", 1))
 		{
-			if (!ft_strncmp(cmd->args[pos + i], ">", 1)
-				|| !ft_strncmp(cmd->args[pos + i], "<", 1))
-			{
-				cmd->i.i7 = check;
-				ft_redir(pos + i, cmd->args, cmd, &check);
-				check = cmd->i.i7;
-				i += 2;
-				break ;
-			}
 			cmd->atrb[i] = ft_stephen_jokin(cmd, pos + i);
 			i++;
 		}
-		if (check)
-			cmd->atrb[check] = NULL;
-		else
-			cmd->atrb[i] = NULL;
+		cmd->atrb[i] = NULL;
+		while (cmd->args[pos + i] && (!ft_strncmp(cmd->args[pos + i], ">", 1)
+				|| !ft_strncmp(cmd->args[pos + i], "<", 1)))
+		{
+			ft_redir(pos + i, cmd->args, cmd, &check);
+			i = i + 2;
+			cmd->flag = 1;
+		}
+		if (cmd->flag == 1)
+			pos += i;
 		ft_fd(cmd, env);
 		pos = find_pipe(cmd->args, pos);
 	}

@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:33:36 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/21 18:52:41 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:38:07 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	i_sp(t_cmd	*cmd, char	*prompt, int i)
 		cmd->double_in += 1;
 		return (i + 2);
 	}
-	else if (prompt[i] == '>' && prompt[i + 1] && prompt[i + 1] != '>')
+	else if (prompt[i] == '>')
 		cmd->out += 1;
-	else if (prompt[i] == '<' && prompt[i + 1] && prompt[i + 1] != '<')
+	else if (prompt[i] == '<')
 		cmd->in += 1;
 	return (i + 1);
 }

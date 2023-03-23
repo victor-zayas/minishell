@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/23 13:36:54 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:57:31 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_string_trader(t_cmd *cmd, int start)
+{
+	int	len;
+
+	ft_doublefree(cmd->cmd);
+	cmd->cmd = ft_doublestrdup(cmd->atrb);
+	ft_doublefree(cmd->atrb);
+	len = 0;
+	while (cmd->args[start + len] && ft_strncmp(cmd->args[start + len], "|", 1)
+		&& ft_strncmp(cmd->args[start + len], ">", 1)
+		&& ft_strncmp(cmd->args[start + len], "<", 1))
+		len++;
+	cmd->atrb = (char **)malloc(sizeof(char *) * (len + 1));
+}
 
 void	error(char	*error)
 {

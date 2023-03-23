@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:56:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/23 13:35:19 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:32:26 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	open_fd(t_cmd *cmd)
 					ft_input(cmd, i);
 				cmd->in_it++;
 			}
-			else if (cmd->output && i == cmd->output[cmd->out_it])
+			if (cmd->output && i == cmd->output[cmd->out_it])
 			{
 				if (!ft_strncmp(cmd->args[i - 1], ">>", 3))
 					ft_doutput(cmd, i);
@@ -98,6 +98,7 @@ void	ft_input(t_cmd	*cmd, int i)
 	int	fd;
 
 	fd = open(cmd->args[i], O_RDONLY);
+	printf("fd value before exit -> [%d]\n", fd);
 	if (fd < 0)
 		exit (EXIT_FAILURE);
 	while (cmd->args[i + 1] && !ft_strncmp(cmd->args[i + 1], "<", 1))

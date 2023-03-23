@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/22 17:45:58 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:37:24 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 	}
 	get_token(args, aux);
 	get_inter(args, env);
-	//print(args);
+	print(args);
 	ft_selector(args, env);
 	free_args(args);
 }
