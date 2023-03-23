@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:56:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/23 18:37:33 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:43:56 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 void	ft_descriptor_error(t_cmd	*cmd, int i)
 {
-	int	i;
-
-	i = 0;
 	write(2, "bash: ", 7);
 	write(2, cmd->args[i], ft_strlen(cmd->args[i]));
 	write(2, ": No such file or directory\n", 29);
+	i = 0;
 	while (cmd->args[i])
 		free(cmd->args[i++]);
 	free(cmd->args);
