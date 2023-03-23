@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:36:07 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/20 19:45:20 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/23 13:27:46 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	get_name_end(char	*str)
 	int	i;
 
 	i = -1;
-	while(str[++i] && str[i] != '"')
+	while (str[++i] && str[i] != '"')
 	{
 		if (str[i] == '$')
 		{
@@ -35,7 +35,7 @@ int	get_name_start(char	*str)
 	int	i;
 
 	i = -1;
-	while(str[++i] && str[i] != '"')
+	while (str[++i] && str[i] != '"')
 	{
 		if (str[i] == '$')
 			break ;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 09:43:15 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/20 17:35:03 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/23 13:30:12 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_exit(char	**cmd)
+int	ft_exit(char **cmd)
 {
 	int	i;
 

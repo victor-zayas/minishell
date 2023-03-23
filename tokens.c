@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/21 19:00:00 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/23 13:36:18 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,11 @@ void	get_token(t_cmd	*cmd, char	*prompt)
 				+ cmd->in + cmd->dollars + cmd->double_in
 				+ cmd->double_out + 1));
 	if (cmd->in || cmd->double_in)
-		cmd->input = (int *)malloc(sizeof(int *) * (cmd->in + cmd->double_in + 1));
+		cmd->input = (int *)malloc(sizeof(int *)
+				* (cmd->in + cmd->double_in + 1));
 	if (cmd->out + cmd->double_out)
-		cmd->output = (int *)malloc(sizeof(int *) * (cmd->out + cmd->double_out + 1));
+		cmd->output = (int *)malloc(sizeof(int *)
+				* (cmd->out + cmd->double_out + 1));
 	ft_lexer(cmd, prompt);
 	cmd->args[cmd->size] = NULL;
 	cmd->size = 0;

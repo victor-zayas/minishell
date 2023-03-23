@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/22 17:01:16 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/23 13:36:54 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	error(char	*error)
 	exit(EXIT_FAILURE);
 }
 
-void	exec(char **cmd, t_env	*env)
+void	exec(char **cmd, t_env *env)
 {
 	char	**path;
 	char	*aux;
@@ -75,7 +75,7 @@ void	ft_child(t_cmd	*cmd, t_env	*env, int	*fd)
 	exit (1);
 }
 
-char	*ft_path(char	**enviroment_path)
+char	*ft_path(char **enviroment_path)
 {
 	char	*ret;
 	int		i;
@@ -99,7 +99,8 @@ int	find_pipe(char	**args, int i)
 {
 	while (args[i])
 	{
-		if (ft_strchr(args[i], '|') || ft_strchr(args[i], '>') || ft_strchr(args[i], '<'))
+		if (ft_strchr(args[i], '|') || ft_strchr(args[i], '>')
+			|| ft_strchr(args[i], '<'))
 			break ;
 		i++;
 	}

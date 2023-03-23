@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:56:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/22 17:20:16 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/23 13:35:19 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_doutput(t_cmd	*cmd, int i)
 	dup2(fd, 1);
 }
 
-void	open_fd(t_cmd	*cmd)
+void	open_fd(t_cmd *cmd)
 {
 	int	i;
 
@@ -92,7 +92,6 @@ void	open_fd(t_cmd	*cmd)
 		i++;
 	}
 }
-
 
 void	ft_input(t_cmd	*cmd, int i)
 {

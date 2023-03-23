@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/22 17:08:40 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/23 13:33:34 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct s_env
 }	t_env;
 
 	// MAIN
-void	init_shell(t_cmd	*new, t_env	*env, char	**envp);
+void	init_shell(t_cmd *new, t_env *env, char	**envp);
 void	init_args(t_cmd	*cmd);
 void	print(t_cmd	*cmd);
 void	ft_choped(t_cmd	*args, t_env *env, char	*prompt);
@@ -88,7 +88,7 @@ void	get_token(t_cmd	*cmd, char *prompt);
 void	get_inter(t_cmd *cmd, t_env *env);
 
 	// GET_DATA
-int		get_data(t_cmd	*args, char	*prompt);
+int		get_data(t_cmd *args, char *prompt);
 int		i_cwords(t_cmd *cmd, char *prompt, int pos);
 int		i_qwords(t_cmd *cmd, char *prompt, int pos);
 int		i_dqwords(t_cmd	*cmd, char *prompt, int pos);
@@ -105,14 +105,14 @@ char	*two_lexer(t_cmd *cmd, char	*prompt, int pos);
 
 	// CMD
 void	ft_selector(t_cmd *cmd, t_env *env);
-int		exec_cmd(t_cmd	*cmd, t_env	*env, char	**args);
-void	open_fd(t_cmd	*cmd);
+int		exec_cmd(t_cmd *cmd, t_env *env, char **args);
+void	open_fd(t_cmd *cmd);
 char	*ft_stephen_jokin(t_cmd	*cmd, int i);
 int		find_pipe(char **args, int i);
 void	ft_pipe(t_cmd *cmd, t_env *env, int pos, int check);
 int		error_code(char *cmd, t_env	*env);
-void	pipe_error(t_cmd	*cmd, t_env *env);
-int		ft_redir(int pos, char	**args, t_cmd	*cmd, int	*checker);
+void	pipe_error(t_cmd *cmd, t_env *env);
+int		ft_redir(int pos, char	**args, t_cmd *cmd, int	*checker);
 
 	// PIPEX
 void	exec(char **cmd, t_env	*env);
@@ -122,7 +122,7 @@ char	*get_cmd(char *arguments, char **enviroment);
 void	error(char *error);
 void	ft_fd(t_cmd	*cmd, t_env	*env);
 int		find_env(int p_ar, int p_str, t_cmd	*cmd, t_env	*env);
-int		get_name_end(char	*str);
+int		get_name_end(char *str);
 int		get_name_start(char	*str);
 
 	// FREE_ARGS
