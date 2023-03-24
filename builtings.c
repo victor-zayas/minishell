@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:25:36 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/24 12:02:57 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/24 13:29:34 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,20 @@ int	ft_builtings(char	**args, t_cmd	*cmd, t_env *env, int open)
 	if (ft_checker(*args))
 		return (1);
 	if (ft_strncmp(*args, "pwd", 3) == 0)
-		return (ft_pwd(cmd, open));
+		ft_pwd(cmd, open);
 	else if (ft_strncmp(*args, "env", 3) == 0)
-		return (ft_env(cmd, env, open));
+		ft_env(cmd, env, open);
 	else if (*args && ft_strncmp(*args, "echo", 4) == 0)
-		return (ft_echo(cmd, args, open));
+		ft_echo(cmd, args, open);
 	else if (*args && ft_strncmp(*args, "exit", 4) == 0)
-		return (ft_exit(cmd, args, open));
+		ft_exit(cmd, args, open);
 	else if (*args && ft_strncmp(*args, "cd", 2) == 0)
-		return (ft_cd(args, cmd, env));
+		ft_cd(args, cmd, env);
 	else if (*args && ft_strncmp(*args, "export", 6) == 0)
-		return (ft_export(env, *(args + 1), *args));
+		ft_export(env, *(args + 1), *args);
 	else if (*args && ft_strncmp(*args, "unset", 5) == 0)
-		return (ft_unset(env, *(args + 1)));
-	return (1);
+		ft_unset(env, *(args + 1));
+	else
+		return (1);
+	return (0);
 }
