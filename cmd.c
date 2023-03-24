@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/24 12:09:44 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/24 14:55:16 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ int	ft_redir(int pos, char	**args, t_cmd	*cmd, int	*checker)
 		write(2, "bash: syntax error near unexpected token ", 42);
 		write(2, args[pos], 1);
 		write(2, "\n", 2);
-		exit (2);
+		*checker = -1;
+		return (pos);
 	}
 	if (!ft_strncmp(args[pos], ">", 2) || !ft_strncmp(args[pos], ">>", 3))
 	{
@@ -118,7 +119,7 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 	i = -1;
 	check = 0;
 	init_cmd(cmd);
-	while (cmd->args[++i])
+	while (check != -1 && cmd->args[++i])
 	{
 		if (!ft_strncmp(cmd->args[i], "|", 1) && i > 0)
 			return (ft_pipe(cmd, env, i, check));
@@ -127,6 +128,12 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 			i = ft_redir(i, cmd->args, cmd, &check);
 		else
 			cmd->cmd[i] = ft_stephen_jokin(cmd, i);
+	}
+	if (check == -1)
+	{
+		cmd->cmd[i] = NULL;
+		ft_doublefree(cmd->cmd);
+		return ;
 	}
 	if (*cmd->cmd && !ft_strncmp(*cmd->cmd, "|", 1)
 		&& ft_strlen(*cmd->cmd) == 1)

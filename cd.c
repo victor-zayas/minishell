@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:20:31 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/24 13:28:23 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/24 14:30:07 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	ft_rewrite_pwd(t_env *env)
 	free(env->pwd);
 }
 
-void	cd_error_flag(t_env	*env, char	*str, int flag)
+int	cd_error_flag(t_env	*env, char	*str, int flag)
 {
 	if (flag == -1)
 	{
@@ -62,13 +62,15 @@ void	cd_error_flag(t_env	*env, char	*str, int flag)
 			printf("cd: %s: No such file or directory\n", str);
 		free(env->oldpwd);
 		env->exit_value = 1;
-		return ;
+		return (1);
 	}
+	return (0);
 }
 
 int	ft_cd(char	**cmd, t_cmd	*args, t_env *env)
 {
 	char	*aux;
+	int		flag;
 	int		i;
 
 	i = 1;
@@ -82,6 +84,6 @@ int	ft_cd(char	**cmd, t_cmd	*args, t_env *env)
 	}
 	get_oldpwd(env);
 	args->flag = chdir(cmd[i]);
-	cd_error_flag(env, cmd[i], args->flag);
-	return (ft_rewrite_pwd(env), 0);
+	flag = cd_error_flag(env, cmd[i], args->flag);
+	return (ft_rewrite_pwd(env), flag);
 }

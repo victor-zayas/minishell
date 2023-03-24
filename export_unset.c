@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:22:45 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/20 17:58:11 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/24 14:32:45 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_export(t_env *env, char *content, char *cmd)
 	i = -1;
 	flag = content_check(env, content, cmd);
 	if (flag == -1)
-		return (0);
+		return (1);
 	if (flag == -2)
 		aux = malloc(sizeof(char *) * (ft_doublestrlen(env->env) + 2));
 	else
@@ -101,10 +101,7 @@ int	ft_unset(t_env *env, char *content)
 	char	**aux;
 
 	if (!content)
-	{
-		write(2, "unset: not enough arguments\n", 29);
 		return (0);
-	}
 	aux = malloc(sizeof(char *) * (ft_doublestrlen(env->env) + 1));
 	if (!content)
 		return (1);
