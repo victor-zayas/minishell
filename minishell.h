@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/23 19:16:50 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/24 10:09:34 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ int		ft_builtings(char **args, t_cmd *cmd, t_env *env, int open);
 int		ft_pwd(void);
 
 	//ECHO
-int		ft_echo(char **cmd);
+int		ft_echo(t_cmd	*args, char **cmd, int open);
 
 	//ENV
 int		ft_env(t_env *env);

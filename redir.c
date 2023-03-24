@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:56:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/23 18:43:56 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/23 21:41:36 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	ft_descriptor_error(t_cmd	*cmd, int i)
 	if (cmd->out || cmd->double_out)
 		free(cmd->output);
 	//cmd->env->exit_value = 1;
-	exit (1);
+	if (cmd->atrb)
+		exit (1);
 }
 
 void	input_handle(t_cmd	*cmd, int i)
