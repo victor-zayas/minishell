@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/24 10:09:34 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/24 12:04:15 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,18 +136,18 @@ void	free_args(t_cmd	*args);
 int		ft_builtings(char **args, t_cmd *cmd, t_env *env, int open);
 
 	//PWD
-int		ft_pwd(void);
+int		ft_pwd(t_cmd	*cmd, int open);
 
 	//ECHO
 int		ft_echo(t_cmd	*args, char **cmd, int open);
 
 	//ENV
-int		ft_env(t_env *env);
+int		ft_env(t_cmd	*cmd, t_env *env, int open);
 int		get_name_len(char *str);
 char	*ft_find_home(char *str, t_env *env);
 
 	//EXIT
-int		ft_exit(char **cmd);
+int		ft_exit(t_cmd	*args, char **cmd, int open);
 
 	//CD
 int		ft_cd(char **cmd, t_cmd *args, t_env *env);

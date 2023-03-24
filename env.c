@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:36:07 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/23 13:27:46 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/24 11:55:24 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,24 @@ char	*ft_find_home(char	*str, t_env	*env)
 	return (aux);
 }
 
-int	ft_env(t_env *env)
+int	ft_env(t_cmd	*cmd, t_env *env, int open)
 {
-	int	i;
+	int		i;
+	pid_t	pid;
 
 	i = -1;
+	if (open)
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			open_fd(cmd);
+			ft_env(cmd, env, 0);
+			exit (0);
+		}
+		waitpid(pid, NULL, 0);
+		return (0);
+	}
 	while (env->env[++i])
 		printf("%s\n", env->env[i]);
 	return (0);
