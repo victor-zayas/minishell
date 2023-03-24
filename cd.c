@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:20:31 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/24 14:30:07 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/24 15:47:54 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,26 @@ int	cd_error_flag(t_env	*env, char	*str, int flag)
 	return (0);
 }
 
+int	check_option(t_env	*env, char	**cmd)
+{
+	int	flag;
+	int	i;
+	char	*str;
+
+	i = 1;
+	if (!ft_strncmp(cmd[i], "-", 1) && ft_strlen(cmd[i]) == 1)
+	{
+		flag = content_check(env, "OLDPWD=", "export");
+		if (flag < 0 || !env->env[flag])
+			return(ft_putstr_fd("bash: cd: OLDPWD not set\n", 2), 2);
+		str = ft_substr(env->env[flag], get_name_len(env->env[flag]) + 1, ft_strlen(env->env[flag]));
+		get_oldpwd(env);
+		chdir(str);
+		return (ft_rewrite_pwd(env), 1);
+	}
+	return (0);
+}
+
 int	ft_cd(char	**cmd, t_cmd	*args, t_env *env)
 {
 	char	*aux;
@@ -82,6 +102,11 @@ int	ft_cd(char	**cmd, t_cmd	*args, t_env *env)
 		chdir(aux);
 		return (free(aux), 0);
 	}
+	flag = check_option(env, cmd);
+	if (flag == 1)
+		return (0);
+	if (flag == 2)
+		return (1);
 	get_oldpwd(env);
 	args->flag = chdir(cmd[i]);
 	flag = cd_error_flag(env, cmd[i], args->flag);

@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/23 18:25:38 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/24 15:13:00 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,9 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		if (!ft_isnot_empty_str(prompt))
 			continue ;
-		if (ft_chr_in_set(';', prompt))
-			return (ft_doublefree(env.env), free(env.oldpwd),
+		if (ft_chr_in_set(';', prompt) || !ft_strncmp(prompt, "||", 2)
+			|| !ft_strncmp(prompt, "&&", 2) || ft_chr_in_set('*', prompt))
+			return (ft_doublefree(env.env), free(env.oldpwd), free(prompt),
 				ft_putstr_fd("Syntax error BRO U ARE STUPID\n", 2), 1);
 		ft_choped(&args, &env, prompt);
 	}

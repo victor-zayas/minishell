@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/24 14:55:16 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/24 15:05:32 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,9 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 
 	i = -1;
 	check = 0;
+	if (*cmd->args && !ft_strncmp(*cmd->args, "|", 1)
+		&& ft_strlen(*cmd->args) == 1)
+		return (pipe_error(cmd, env));
 	init_cmd(cmd);
 	while (check != -1 && cmd->args[++i])
 	{
@@ -135,9 +138,6 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 		ft_doublefree(cmd->cmd);
 		return ;
 	}
-	if (*cmd->cmd && !ft_strncmp(*cmd->cmd, "|", 1)
-		&& ft_strlen(*cmd->cmd) == 1)
-		return (pipe_error(cmd, env));
 	else if (check)
 		cmd->cmd[check] = NULL;
 	else
