@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:36:07 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/24 11:55:24 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/24 12:46:09 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ char	*ft_find_home(char	*str, t_env	*env)
 int	ft_env(t_cmd	*cmd, t_env *env, int open)
 {
 	int		i;
+	int		flag;
 	pid_t	pid;
 
 	i = -1;
@@ -86,12 +87,12 @@ int	ft_env(t_cmd	*cmd, t_env *env, int open)
 		pid = fork();
 		if (pid == 0)
 		{
-			open_fd(cmd);
-			ft_env(cmd, env, 0);
-			exit (0);
+			if (open_fd(cmd))
+				exit (1);
+			exit (ft_env(cmd, env, 0));
 		}
-		waitpid(pid, NULL, 0);
-		return (0);
+		waitpid(pid, &flag, 0);
+		return (WEXITSTATUS(flag));
 	}
 	while (env->env[++i])
 		printf("%s\n", env->env[i]);

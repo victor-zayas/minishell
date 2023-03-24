@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:56:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/23 21:41:36 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/24 12:44:35 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	ft_descriptor_error(t_cmd	*cmd, int i)
 		exit (1);
 }
 
-void	input_handle(t_cmd	*cmd, int i)
+int	input_handle(t_cmd	*cmd, int i)
 {
 	if (cmd->in + cmd->double_in == 0)
-		return ;
+		return (0);
 	if (i == cmd->input[cmd->in_it])
 	{
 		if (!ft_strncmp(cmd->args[i - 1], "<<", 3))
@@ -41,15 +41,19 @@ void	input_handle(t_cmd	*cmd, int i)
 		else
 			cmd->flag = ft_input(cmd, i);
 		if (cmd->flag == 1)
+		{
 			ft_descriptor_error(cmd, i);
+			return (1);
+		}
 		cmd->in_it++;
 	}
+	return (0);
 }
 
-void	output_handle(t_cmd	*cmd, int i)
+int	output_handle(t_cmd	*cmd, int i)
 {
 	if (cmd->out + cmd->double_out == 0)
-		return ;
+		return (0);
 	if (i == cmd->output[cmd->out_it])
 	{
 		if (!ft_strncmp(cmd->args[i - 1], ">>", 3))
@@ -57,12 +61,16 @@ void	output_handle(t_cmd	*cmd, int i)
 		else
 			cmd->flag = ft_output(cmd, i);
 		if (cmd->flag == 1)
+		{
 			ft_descriptor_error(cmd, i);
+			return (1);
+		}
 		cmd->out_it++;
 	}
+	return (0);
 }
 
-void	open_fd(t_cmd *cmd)
+int	open_fd(t_cmd *cmd)
 {
 	int	i;
 
@@ -73,8 +81,11 @@ void	open_fd(t_cmd *cmd)
 	while (cmd->args[i] && (cmd->in >= 1 || cmd->out >= 1
 			|| cmd->double_in >= 1 || cmd->double_out >= 1))
 	{
-		input_handle(cmd, i);
-		output_handle(cmd, i);
+		if (input_handle(cmd, i))
+			return (1);
+		if (output_handle(cmd, i))
+			return (1);
 		i++;
 	}
+	return (0);
 }

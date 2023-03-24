@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 20:50:36 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/24 12:01:46 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/24 12:45:09 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	ft_pwd(t_cmd	*cmd, int open)
 {
 	char	*pwd;
+	int		flag;
 	pid_t	pid;
 
 	if (open)
@@ -22,18 +23,18 @@ int	ft_pwd(t_cmd	*cmd, int open)
 		pid = fork();
 		if (pid == 0)
 		{
-			open_fd(cmd);
-			ft_pwd(cmd, 0);
-			exit (0);
+			if (open_fd(cmd))
+				exit (1);
+			exit(ft_pwd(cmd, 0));
 		}
-		waitpid(pid, NULL, 0);
-		return (0);
+		waitpid(pid, &flag, 0);
+		return (WEXITSTATUS(flag));
 	}
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
 	{
 		printf("%s\n", strerror(errno));
-		return (0);
+		return (1);
 	}
 	printf("%s\n", pwd);
 	free(pwd);

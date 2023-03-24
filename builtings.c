@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:25:36 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/24 13:29:34 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/24 12:57:45 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ int	ft_builtings(char	**args, t_cmd	*cmd, t_env *env, int open)
 	if (ft_checker(*args))
 		return (1);
 	if (ft_strncmp(*args, "pwd", 3) == 0)
-		ft_pwd(cmd, open);
+		env->exit_value = ft_pwd(cmd, open);
 	else if (ft_strncmp(*args, "env", 3) == 0)
-		ft_env(cmd, env, open);
+		env->exit_value = ft_env(cmd, env, open);
 	else if (*args && ft_strncmp(*args, "echo", 4) == 0)
-		ft_echo(cmd, args, open);
+		env->exit_value = ft_echo(cmd, args, open);
 	else if (*args && ft_strncmp(*args, "exit", 4) == 0)
-		ft_exit(cmd, args, open);
+		env->exit_value = ft_exit(cmd, args, open);
 	else if (*args && ft_strncmp(*args, "cd", 2) == 0)
 		ft_cd(args, cmd, env);
 	else if (*args && ft_strncmp(*args, "export", 6) == 0)

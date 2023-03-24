@@ -6,32 +6,41 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 18:24:42 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/24 10:10:02 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/24 12:54:18 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_echo(t_cmd	*args, char **cmd, int open)
+int	check_open(t_cmd	*args, char	**cmd, int open)
 {
-	int		i;
-	int		flag;
 	pid_t	pid;
+	int		flag;
 
-	i = 1;
-	flag = 0;
 	if (open)
 	{
 		pid = fork();
 		if (pid == 0)
 		{
-			open_fd(args);
-			ft_echo(args, cmd, 0);
-			exit (0);
+			if (open_fd(args))
+				exit (1);
+			exit(ft_echo(args, cmd, 0));
 		}
-		waitpid(pid, NULL, 0);
-		return (0);
+		waitpid(pid, &flag, 0);
+		return (WEXITSTATUS(flag));
 	}
+	return (0);
+}
+
+int	ft_echo(t_cmd	*args, char **cmd, int open)
+{
+	int		i;
+	int		flag;
+
+	i = 1;
+	flag = 0;
+	if (open)
+		return (check_open(args, cmd, open));
 	if (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
 	{
 		flag += 1;
