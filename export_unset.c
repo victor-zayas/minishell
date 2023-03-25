@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   export_unset.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:22:45 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/24 14:32:45 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/25 11:49:48 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	error_msg(char *content, char *cmd)
+{
+	write(2, "bash: ", 7);
+	write(2, cmd, ft_strlen(cmd));
+	write(2, ": `", 4);
+	write(2, content, ft_strlen(content));
+	write(2, "': not a valid identifier\n", 27);
+}
 
 int	content_check(t_env	*env, char	*content, char	*cmd)
 {
@@ -26,11 +35,7 @@ int	content_check(t_env	*env, char	*content, char	*cmd)
 	}
 	if (ft_isdigit(*content))
 	{
-		write(2, "bash: ", 7);
-		write(2, cmd, ft_strlen(cmd));
-		write(2, ": `", 4);
-		write(2, content, ft_strlen(content));
-		write(2, "': not a valid identifier\n", 27);
+		error_msg(content, cmd);
 	}
 	while (content[++len])
 		if (content[len] == '=')

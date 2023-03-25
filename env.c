@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:36:07 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/24 12:46:09 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/25 11:47:41 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	get_name_end(char	*str)
+int	get_name_end(char *str)
 {
 	int	i;
 
@@ -56,7 +56,7 @@ int	get_name_len(char	*str)
 	return (0);
 }
 
-char	*ft_find_home(char	*str, t_env	*env)
+char	*ft_find_home(char *str, t_env *env)
 {
 	char	*aux;
 	int		start;
@@ -75,7 +75,7 @@ char	*ft_find_home(char	*str, t_env	*env)
 	return (aux);
 }
 
-int	ft_env(t_cmd	*cmd, t_env *env, int open)
+int	ft_env(t_cmd *cmd, t_env *env, int open)
 {
 	int		i;
 	int		flag;

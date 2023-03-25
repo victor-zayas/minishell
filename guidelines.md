@@ -1,3 +1,7 @@
+	
+	//  __unused -> Variables not used
+	//  __attribute__((unused)) -> Variables not used
+	
 	// TO _ DO
 		// 1. EXIT STATUS
 			// Exit Status can return a variety of differet numbers, depending on the outcome of the input:

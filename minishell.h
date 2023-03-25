@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/24 15:00:29 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/25 11:57:07 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ typedef struct s_cmd
 	int		out_it;
 }	t_cmd;
 
-
 	// MAIN
 void	init_shell(t_cmd *new, t_env *env, char	**envp);
 void	init_args(t_cmd	*cmd);
@@ -111,7 +110,7 @@ int		exec_cmd(t_cmd *cmd, t_env *env, char **args);
 int		open_fd(t_cmd *cmd);
 char	*ft_stephen_jokin(t_cmd	*cmd, int i);
 int		find_pipe(char **args, int i);
-int		find_sp(char	**args, int i);
+int		find_sp(char **args, int i);
 void	ft_pipe(t_cmd *cmd, t_env *env, int pos, int check);
 int		error_code(char *cmd, t_env	*env);
 void	pipe_error(t_cmd *cmd, t_env *env);
@@ -136,18 +135,18 @@ void	free_args(t_cmd	*args);
 int		ft_builtings(char **args, t_cmd *cmd, t_env *env, int open);
 
 	//PWD
-int		ft_pwd(t_cmd	*cmd, int open);
+int		ft_pwd(t_cmd *cmd, int open);
 
 	//ECHO
-int		ft_echo(t_cmd	*args, char **cmd, int open);
+int		ft_echo(t_cmd *args, char **cmd, int open);
 
 	//ENV
-int		ft_env(t_cmd	*cmd, t_env *env, int open);
+int		ft_env(t_cmd *cmd, t_env *env, int open);
 int		get_name_len(char *str);
 char	*ft_find_home(char *str, t_env *env);
 
 	//EXIT
-int		ft_exit(t_cmd	*args, char **cmd, int open);
+int		ft_exit(t_cmd *args, char **cmd, int open);
 
 	//CD
 int		ft_cd(char **cmd, t_cmd *args, t_env *env);
@@ -163,12 +162,9 @@ int		ft_unset(t_env *env, char *content);
 
 	// OUTPUT
 int		ft_output(t_cmd	*cmd, int i);
-int		ft_doutput(t_cmd	*cmd, int i);
+int		ft_doutput(t_cmd *cmd, int i);
 	// INPUT
-int		ft_input(t_cmd	*cmd, int i);
+int		ft_input(t_cmd *cmd, int i);
 int		ft_dinput(t_cmd	*cmd, int i);
 
 #endif
-
-	//  __unused -> Variables not used
-	//  __attribute__((unused)) -> Variables not used

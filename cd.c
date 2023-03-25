@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:20:31 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/24 15:47:54 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/25 11:45:22 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int	cd_error_flag(t_env	*env, char	*str, int flag)
 
 int	check_option(t_env	*env, char	**cmd)
 {
-	int	flag;
-	int	i;
+	int		flag;
+	int		i;
 	char	*str;
 
 	i = 1;
@@ -78,8 +78,9 @@ int	check_option(t_env	*env, char	**cmd)
 	{
 		flag = content_check(env, "OLDPWD=", "export");
 		if (flag < 0 || !env->env[flag])
-			return(ft_putstr_fd("bash: cd: OLDPWD not set\n", 2), 2);
-		str = ft_substr(env->env[flag], get_name_len(env->env[flag]) + 1, ft_strlen(env->env[flag]));
+			return (ft_putstr_fd("bash: cd: OLDPWD not set\n", 2), 2);
+		str = ft_substr(env->env[flag],
+				get_name_len(env->env[flag]) + 1, ft_strlen(env->env[flag]));
 		get_oldpwd(env);
 		chdir(str);
 		return (ft_rewrite_pwd(env), 1);

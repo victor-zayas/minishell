@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 18:24:42 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/24 12:54:18 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/25 11:47:16 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_open(t_cmd	*args, char	**cmd, int open)
+int	check_open(t_cmd *args, char **cmd, int open)
 {
 	pid_t	pid;
 	int		flag;
@@ -32,7 +32,7 @@ int	check_open(t_cmd	*args, char	**cmd, int open)
 	return (0);
 }
 
-int	ft_echo(t_cmd	*args, char **cmd, int open)
+int	ft_echo(t_cmd *args, char **cmd, int open)
 {
 	int		i;
 	int		flag;
