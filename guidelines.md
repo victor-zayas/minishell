@@ -3,27 +3,9 @@
 	//  __attribute__((unused)) -> Variables not used
 	
 	// TO _ DO
-		// 1. EXIT STATUS
-			// Exit Status can return a variety of differet numbers, depending on the outcome of the input:
-			// How can we get the Exit Status of an Executed Command?
-			// Simple, we just need to transfer the exit value of the child process (responsible for executing the command),
-			// to the parent process.
-
-			// To do this, reading some lines of the wait(2) manual of Linux is preferible.
-			// We basically use a paramater inside wait & waitpid functions (int &wstatus), an integer that is most useful when we need to handle errors
-			// With this integer and some macros, we can inspect the value that the child process WAS EXITED WITH!
-
-			// We just need to put this value inside our structure, so to do that, we need to make the "exec_cmd" function return the value for the structure to handle it from above
-			// or just give a pointer to the function.
-
-			// Personally, I prefer to make it return the integer, so the type of the function is taken advantage of.
-			// So it would look like this:
-			// int	exec_cmd(char **cmd, t_env *env)
-		// 2. REDIRECCIONES
-			//format : "[in_command / out_command] [output / input]".
-		// 3. PARSEO
-			// lexer-> double quotes: [echo "$PWD $USER $TERM ..." | wc]
-
+		1. Solve redir between pipes
+		2. Add malloc to $ variables for more than one with echo
+		3. Bombardear ALSA
 	// DONE
 		// add int in exec funct to controll cmd error, if 1 fail, pipes stop.
 			// Not needed anymore!

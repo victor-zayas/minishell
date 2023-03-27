@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/23 18:33:49 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/27 15:43:07 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_shell(t_cmd *cmd, t_env *env, char	**envp)
+void	init_shell(t_cmd *cmd, t_env *env, char	**envp, int *stdio)
 {
 	env->env = ft_env_strdup(envp);
 	env->oldpwd = NULL;
@@ -20,6 +20,7 @@ void	init_shell(t_cmd *cmd, t_env *env, char	**envp)
 	signal(SIGINT, my_signal);
 	signal(SIGQUIT, SIG_IGN);
 	init_args(cmd);
+	getstdio(stdio);
 }
 
 void	init_args(t_cmd *cmd)

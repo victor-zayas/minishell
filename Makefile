@@ -20,7 +20,7 @@ CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
 RM = /bin/rm -rf
 LREADLINE_FLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib/
 READLINE = -I/Users/$(USER)/.brew/opt/readline/include/
-LINUX_READLINE = -lreadline -L/usr/lib/x86_64-linux-gnu/
+#LINUX_READLINE = -lreadline -L/usr/lib/x86_64-linux-gnu/
 
 # OBJS #
 OBJS = $(SRCS:.c=.o)
@@ -48,7 +48,8 @@ SRCS = main.c \
 	utils_cmd.c \
 	error.c \
 	input.c \
-	output.c
+	output.c \
+	utils_fd.c
 
 # MAKEFILE ART #
 # COLORS #

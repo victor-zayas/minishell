@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/25 11:57:07 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/27 15:42:34 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,13 @@ typedef struct s_cmd
 }	t_cmd;
 
 	// MAIN
-void	init_shell(t_cmd *new, t_env *env, char	**envp);
+void	init_shell(t_cmd *cmd, t_env *env, char	**envp, int *stdio);
 void	init_args(t_cmd	*cmd);
 void	print(t_cmd	*cmd);
 void	ft_choped(t_cmd	*args, t_env *env, char	*prompt);
 void	my_signal(int sig);
+void	getstdio(int *stdio);
+void	resetstdio(int *stdio);
 
 	//LEXER
 	// GET_TOKEN
