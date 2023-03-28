@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/27 15:42:34 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/28 16:55:47 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	pipe_error(t_cmd *cmd, t_env *env);
 int		ft_redir(int pos, char	**args, t_cmd *cmd, int	*checker);
 
 	// PIPEX
-void	exec(char **cmd, t_env	*env);
+void		exec(char **cmd, t_env	*env);
 void	ft_child(t_cmd *cmd, t_env *env, int *fd);
 char	*ft_path(char **enviroment_path);
 char	*get_cmd(char *arguments, char **enviroment);

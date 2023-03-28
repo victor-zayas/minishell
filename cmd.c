@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/25 11:45:44 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/28 16:57:36 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,10 @@ int	ft_redir(int pos, char	**args, t_cmd	*cmd, int	*checker)
 
 void	ft_selector(t_cmd *cmd, t_env *env)
 {
-	int	i;
-	int	check;
+	pid_t	pid;
+	int		rt;
+	int		i;
+	int		check;
 
 	i = -1;
 	check = 0;
@@ -143,6 +145,13 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 	else
 		cmd->cmd[i] = NULL;
 	if (ft_builtings(cmd->cmd, cmd, env, 1) == 1)
-		env->exit_value = exec_cmd(cmd, env, cmd->cmd);
+	{
+		pid = fork();
+		if (pid == 0)
+			exec(cmd->cmd, env);
+		waitpid(pid, &rt, 0);
+		rt = WEXITSTATUS(rt);
+		env->exit_value = rt;
+	}
 	ft_doublefree(cmd->cmd);
 }

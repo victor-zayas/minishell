@@ -104,7 +104,7 @@ $(NAME): $(OBJS)
 	echo "Special thanks to $(GREEN)༺ HELECHO༻$(END)  & $(GREEN)༺ Arteria༻$(END)"
 ifeq ($(USER), $(filter $(USER), jaizpuru))
 		echo $$JOKIN
-		osascript -e "set Volume 2"
+		osascript -e "set Volume 10"
 		say --voice="Luciana" O líder do ginásio Jokin the calisthenics desafia você.
 endif
 

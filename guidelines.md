@@ -7,11 +7,6 @@
 		2. Add malloc to $ variables for more than one with echo
 		3. Bombardear ALSA
 	// DONE
-		// add int in exec funct to controll cmd error, if 1 fail, pipes stop.
-			// Not needed anymore!
-			// Bash executes the last command no matter 
-			// what the input it is given by a pipe!
-			// So we have it as we should -> Check.
 
 	// STEPS TO MAKE MINISHELL
 		//lexer(); //comillas simples, comillas dobles, pipes, redirecciones
@@ -40,7 +35,6 @@
 	//execve(path, args, env);
 
 	//FALLOS
-	//SHLVL doesn't aument
 
 	//OPTIONAL
 	// delete ctrl c on signal

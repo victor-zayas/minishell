@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 16:27:27 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/03/23 17:39:07 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/28 15:37:57 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	is_directory(char *path, t_env *env)
 	return (126);
 }
 
-int	find_pipe(char	**args, int i)
+int	find_pipe(char **args, int i)
 {
 	while (args[i])
 	{
@@ -45,7 +45,7 @@ int	find_pipe(char	**args, int i)
 	return (i);
 }
 
-int	find_sp(char	**args, int i)
+int	find_sp(char **args, int i)
 {
 	while (args[i])
 	{

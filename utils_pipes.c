@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/23 19:34:54 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/28 16:55:58 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_string_trader(t_cmd *cmd, int start)
 	return (len);
 }
 
-void	error(char	*error)
+void	error(char *error)
 {
 	size_t	len;
 
@@ -93,11 +93,22 @@ void	exec(char **cmd, t_env *env)
 
 void	ft_child(t_cmd	*cmd, t_env	*env, int	*fd)
 {
+	pid_t	pid;
+	int		rt;
+
 	close(fd[0]);
 	dup2(fd[1], STDOUT_FILENO);
 	close(fd[1]);
-	if (ft_builtings(cmd->cmd, cmd, env, 0) == 1)
-		exec(cmd->cmd, env);
+	if (*cmd->cmd && ft_builtings(cmd->cmd, cmd, env, 0) == 1)
+	{
+		pid = fork();
+		if (pid == 0)
+			exec(cmd->cmd, env);
+		waitpid(pid, &rt, 0);
+		rt = WEXITSTATUS(rt);
+		env->exit_value = rt;
+		exit(env->exit_value);
+	}
 	exit (1);
 }
 

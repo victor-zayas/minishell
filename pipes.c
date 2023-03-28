@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/27 15:53:37 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/28 17:03:11 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,7 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pos, int check)
 		ft_adult(cmd, env, pos);
 		open_fd(cmd);
 		if (ft_builtings(cmd->atrb, cmd, env, 1) == 1)
-			exec_cmd(cmd, env, cmd->atrb);
-		ft_doublefree(cmd->atrb);
-		exit (1);
+			exec(cmd->atrb, env); 
 	}
 	else
 		waitpid(pid, NULL, 0);
