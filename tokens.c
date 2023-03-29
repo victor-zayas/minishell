@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/27 15:43:07 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/29 17:45:30 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	init_args(t_cmd *cmd)
 	cmd->flag = 0;
 	cmd->in_it = 0;
 	cmd->out_it = 0;
+	cmd->cmd_start = 0;
 	cmd->i.i1 = 0;
 	cmd->i.i2 = 0;
 	cmd->i.i3 = 0;

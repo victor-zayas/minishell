@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/28 16:55:47 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/29 17:57:26 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ typedef struct s_cmd
 	int		in_it;
 	int		*output;
 	int		out_it;
+
+	int		cmd_start;
 }	t_cmd;
 
 	// MAIN
@@ -119,16 +121,17 @@ void	pipe_error(t_cmd *cmd, t_env *env);
 int		ft_redir(int pos, char	**args, t_cmd *cmd, int	*checker);
 
 	// PIPEX
-void		exec(char **cmd, t_env	*env);
-void	ft_child(t_cmd *cmd, t_env *env, int *fd);
+void	exec(char **cmd, t_env	*env);
+void	ft_child(t_cmd *cmd, t_env *env, int *fd, int cmd_start);
 char	*ft_path(char **enviroment_path);
 char	*get_cmd(char *arguments, char **enviroment);
 void	error(char *error);
-void	ft_fd(t_cmd	*cmd, t_env	*env);
+void	ft_fd(t_cmd	*cmd, t_env	*env, int cmd_pos);
 int		find_env(int p_ar, int p_str, t_cmd	*cmd, t_env	*env);
 int		get_name_end(char *str);
 int		get_name_start(char	*str);
 int		ft_string_trader(t_cmd *cmd, int start);
+int		ft_check_redir(char **cmd, int cmd_start);
 
 	// FREE_ARGS
 void	free_args(t_cmd	*args);

@@ -6,6 +6,7 @@
 		1. Solve redir between pipes
 		2. Add malloc to $ variables for more than one with echo
 		3. Bombardear ALSA
+
 	// DONE
 
 	// STEPS TO MAKE MINISHELL
@@ -35,6 +36,7 @@
 	//execve(path, args, env);
 
 	//FALLOS
+	// redir doesn't work with pipes
 
 	//OPTIONAL
 	// delete ctrl c on signal

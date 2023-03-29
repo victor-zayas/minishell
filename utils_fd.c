@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 15:35:38 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/03/27 16:00:13 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/29 18:04:52 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,49 @@ void	resetstdio(int *stdio)
 {
 	dup2(stdio[0], STDIN_FILENO);
 	dup2(stdio[1], STDOUT_FILENO);
+}
+
+int	ft_pipe_redir_output(char *str)
+{
+	int	fd;
+
+	fd = open(str, O_CREAT | O_RDWR | O_TRUNC, 0600);
+	if (fd < 0)
+		return (EXIT_FAILURE);
+	dup2(fd, STDOUT_FILENO);
+	return (EXIT_SUCCESS);
+}
+
+int	ft_pipe_redir_input(char *str)
+{
+	int	fd;
+
+	fd = open(str, O_RDONLY);
+	if (fd < 0)
+		return (EXIT_FAILURE);
+	dup2(fd, STDIN_FILENO);
+	return (EXIT_SUCCESS);
+}
+
+int	ft_check_redir(char **cmd, int cmd_start)
+{
+	int	flag;
+
+	flag = 0;
+	while (cmd[cmd_start] && ft_strncmp(cmd[cmd_start], "|", 1))
+	{
+		if (!ft_strncmp(cmd[cmd_start], ">", 1)
+			|| !ft_strncmp(cmd[cmd_start], "<", 1))
+		{
+			if (!ft_strncmp(cmd[cmd_start], ">", 1))
+			{	
+				ft_pipe_redir_output(cmd[cmd_start + 1]);
+				flag = 1;
+			}
+			else if (!ft_strncmp(cmd[cmd_start], "<", 1))
+				ft_pipe_redir_input(cmd[cmd_start + 1]);
+		}
+		cmd_start++;
+	}
+	return (flag);
 }

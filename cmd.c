@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/28 16:57:36 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/29 17:57:17 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,58 +24,6 @@ void	init_cmd(t_cmd	*cmd)
 			- (find_sp(cmd->args, 0) + 1) + 1);
 	if (!cmd->atrb)
 		return ;
-}
-
-int	exec_cmd(t_cmd *cmd, t_env *env, char **args)
-{
-	char	**path;
-	char	*aux;
-	int		i;
-	pid_t	pid;
-
-	i = 0;
-	pid = fork();
-	if (pid == -1)
-		perror("fork");
-	else if (pid == 0)
-	{
-		i = 0;
-		open_fd(cmd);
-		aux = ft_path(env->env);
-		if (!aux)
-		{
-			if (execve(*args, args, NULL) == -1)
-				exit(error_code(*args, env));
-			exit(error_code(*args, env));
-		}
-		path = ft_split(aux, ':');
-		free (aux);
-		while (path[i] != NULL)
-		{
-			aux = ft_strjoin(path[i], "/");
-			if (access(*args, X_OK) == 0)
-			{
-				free(aux);
-				aux = ft_strdup(*args);
-				break ;
-			}
-			else
-			{
-				free (path[i]);
-				path[i] = ft_strjoin(aux, *args);
-			}
-			free (aux);
-			aux = ft_strdup(path[i++]);
-			if (access(aux, X_OK) == 0)
-				break ;
-			free (aux);
-		}
-		if (aux && path[i] && *args && !access(aux, X_OK))
-			execve(aux, args, env->env);
-		exit (error_code(*args, env));
-	}
-	wait(&i);
-	return (WEXITSTATUS(i));
 }
 
 char	*ft_stephen_jokin(t_cmd *cmd, int i)

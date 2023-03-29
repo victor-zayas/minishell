@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/28 16:55:58 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/29 18:04:13 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ void	exec(char **cmd, t_env *env)
 	int		i;
 
 	i = 0;
-	if (!cmd)
-		return ;
 	aux = ft_path(env->env);
 	if (!aux)
 	{
@@ -91,14 +89,19 @@ void	exec(char **cmd, t_env *env)
 	exit (error_code(*cmd, env));
 }
 
-void	ft_child(t_cmd	*cmd, t_env	*env, int	*fd)
+void	ft_child(t_cmd	*cmd, t_env	*env, int	*fd, int cmd_start)
 {
 	pid_t	pid;
 	int		rt;
 
 	close(fd[0]);
-	dup2(fd[1], STDOUT_FILENO);
-	close(fd[1]);
+	if (!ft_check_redir(cmd->args, cmd_start))
+	{
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[1]);
+	}
+	else
+		close(fd[1]);
 	if (*cmd->cmd && ft_builtings(cmd->cmd, cmd, env, 0) == 1)
 	{
 		pid = fork();
@@ -107,7 +110,6 @@ void	ft_child(t_cmd	*cmd, t_env	*env, int	*fd)
 		waitpid(pid, &rt, 0);
 		rt = WEXITSTATUS(rt);
 		env->exit_value = rt;
-		exit(env->exit_value);
 	}
 	exit (1);
 }
