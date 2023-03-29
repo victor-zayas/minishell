@@ -4,8 +4,10 @@
 	
 	// TO _ DO
 		1. Solve redir between pipes
-		2. Add malloc to $ variables for more than one with echo
-		3. Bombardear ALSA
+		2. Remove doube iterator in (pipes.c maybe) or counting 2 times check || pos
+		IGNORE //3. remove ft_redir, use the warning message//
+		4. Add malloc to $ variables for more than one with echo
+		5. Bombardear ALSA
 
 	// DONE
 

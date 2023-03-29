@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/29 18:07:49 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/29 18:30:45 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_fd(t_cmd	*cmd, t_env	*env, int cmd_pos)
 	{
 		waitpid (pid, NULL, 0);
 		close(fd[1]);
-		printf("xd\n");
+		printf("ALERTA POR SUBNORMAL -> [%d]\n", STDIN_FILENO);
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
 	}

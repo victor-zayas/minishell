@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 15:35:38 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/03/29 18:04:52 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/29 18:16:34 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	ft_pipe_redir_output(char *str)
 	if (fd < 0)
 		return (EXIT_FAILURE);
 	dup2(fd, STDOUT_FILENO);
+	close(fd);
 	return (EXIT_SUCCESS);
 }
 
@@ -43,6 +44,7 @@ int	ft_pipe_redir_input(char *str)
 	if (fd < 0)
 		return (EXIT_FAILURE);
 	dup2(fd, STDIN_FILENO);
+	close(fd);
 	return (EXIT_SUCCESS);
 }
 
