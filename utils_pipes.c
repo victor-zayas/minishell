@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/30 17:25:13 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/30 23:29:52 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ void	ft_child(t_cmd	*cmd, t_env	*env, int	*fd, int cmd_start)
 	int		rt;
 
 	close(fd[0]);
-	if (!ft_check_redir(cmd->args, cmd_start))
+	if (cmd->args[cmd_start] && !ft_check_redir(cmd->args, cmd_start))
 		dup2(fd[1], STDOUT_FILENO);
+	close(fd[1]);
 	if (*cmd->cmd && ft_builtings(cmd->cmd, cmd, env, 0) == 1)
 	{
 		pid = fork();
@@ -74,7 +75,6 @@ void	ft_child(t_cmd	*cmd, t_env	*env, int	*fd, int cmd_start)
 		rt = WEXITSTATUS(rt);
 		env->exit_value = rt;
 	}
-	close(fd[1]);
 	exit (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:01 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/03/23 16:38:33 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/30 23:12:52 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 void	print(t_cmd *cmd)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	printf("\n				ARGS INSIDE THE STRUCTURE:\n");
+	printf("				ARGS -> ");
 	while (cmd->args[i])
-		printf("				ARG N.%d ->> [%s]\n", j++, cmd->args[i++]);
+		printf("[%s] ", cmd->args[i++]);
 	printf("\n				\n");
 	printf("\n				DATA INSIDE THE STRUCTURE:\n");
 	printf("				Clean words		: %d\n", cmd->words);

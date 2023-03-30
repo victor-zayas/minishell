@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/30 17:34:59 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/30 23:45:36 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,22 @@
 void	ft_adult(t_cmd *cmd, t_env *env, int pos)
 {
 	int	i;
-	int	check;
 
 	i = 0;
-	check = 0;
-	ft_fd(cmd, env, pos + 1);
+	ft_fd(cmd, env, pos);
 	while (cmd->args[pos++])
 	{
 		i = ft_string_trader(cmd, pos);
 		while (cmd->args[pos + i] && (!ft_strncmp(cmd->args[pos + i], ">", 1)
 				|| !ft_strncmp(cmd->args[pos + i], "<", 1)))
-		{
-			ft_redir(pos + i, cmd->args, cmd, &check);
 			i = i + 2;
+		if (!ft_strncmp(cmd->args[pos - 1], "|", 1) && cmd->args[pos] == NULL)
+		{
+			ft_doublefree(cmd->cmd);
+			cmd->flag = -1;
+			return ;
 		}
-		ft_fd(cmd, env, pos + 1);
+		ft_fd(cmd, env, pos);
 		pos = find_pipe(cmd->args, pos);
 	}
 }
@@ -68,7 +69,14 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pipe_pos, int block_pos)
 
 	redir_end = 0;
 	block_pos2 = 0;
+	cmd->flag = 0;
 	close_str(cmd->cmd, pipe_pos, block_pos);
+	if (!ft_strncmp(cmd->args[pipe_pos], "|", 1) && cmd->args[pipe_pos + 1] == NULL)
+	{
+		ft_doublefree(cmd->cmd);
+		free(cmd->atrb);
+		return ;
+	}
 	atrb_fill(cmd, pipe_pos, block_pos2, redir_end);
 	close_str(cmd->atrb, cmd->block_pos, cmd->redir_end);
 	pid = fork();
@@ -77,6 +85,8 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pipe_pos, int block_pos)
 	if (pid == 0)
 	{
 		ft_adult(cmd, env, cmd->pipe_pos);
+		if (cmd->flag == -1)
+			exit (139);
 		if (ft_builtings(cmd->atrb, cmd, env, 0) == 1)
 			exec(cmd->atrb, env);
 	}
