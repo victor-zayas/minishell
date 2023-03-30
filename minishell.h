@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/30 10:50:05 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:50:44 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ typedef struct s_cmd
 	int		out_it;
 
 	int		cmd_start;
+	int		pipe_pos;
+	int		block_pos;
+	int		redir_end;
 }	t_cmd;
 
 	// MAIN
@@ -113,26 +116,27 @@ void	ft_selector(t_cmd *cmd, t_env *env);
 int		exec_cmd(t_cmd *cmd, t_env *env, char **args);
 int		open_fd(t_cmd *cmd);
 char	*ft_stephen_jokin(t_cmd	*cmd, int i);
-int		find_pipe(char **args, int i);
 int		find_sp(char **args, int i);
-void	ft_pipe(t_cmd *cmd, t_env *env, int pos, int check);
 int		error_code(char *cmd, t_env	*env);
-void	pipe_error(t_cmd *cmd, t_env *env);
 int		ft_redir(int pos, char	**args, t_cmd *cmd, int	*checker);
-
-	// PIPEX
-void	exec(char **cmd, t_env	*env);
-void	ft_child(t_cmd *cmd, t_env *env, int *fd, int cmd_start);
-char	*ft_path(char **enviroment_path);
-char	*get_cmd(char *arguments, char **enviroment);
-void	error(char *error);
-void	ft_fd(t_cmd	*cmd, t_env	*env, int cmd_pos);
-int		find_env(int p_ar, int p_str, t_cmd	*cmd, t_env	*env);
-int		get_name_end(char *str);
-int		get_name_start(char	*str);
-int		ft_string_trader(t_cmd *cmd, int start);
 void	close_str(char	**ar, int end, int sp);
 int		ft_check_redir(char **cmd, int cmd_start);
+int		find_env(int p_ar, int p_str, t_cmd	*cmd, t_env	*env);
+int		get_name_start(char	*str);
+int		get_name_end(char *str);
+
+	// PIPEX
+void	ft_pipe(t_cmd *cmd, t_env *env, int pos, int check);
+int		find_pipe(char **args, int i);
+void	ft_fd(t_cmd	*cmd, t_env	*env, int cmd_pos);
+void	ft_child(t_cmd *cmd, t_env *env, int *fd, int cmd_start);
+void	exec(char **cmd, t_env	*env);
+char	*ft_path(char **enviroment_path);
+void	pipe_error(t_cmd *cmd, t_env *env);
+char	*get_cmd(char *arguments, char **enviroment);
+int		ft_string_trader(t_cmd *cmd, int start);
+void	atrb_fill(t_cmd	*cmd, int pipe_pos, int block_pos, int redir_end);
+void	error(char *error);
 
 	// FREE_ARGS
 void	free_args(t_cmd	*args);

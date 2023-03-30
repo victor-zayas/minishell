@@ -6,11 +6,30 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/30 11:31:03 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:51:05 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	atrb_fill(t_cmd	*cmd, int pipe_pos, int block_pos, int redir_end)
+{
+	while (cmd->args[++pipe_pos] && ft_strncmp(cmd->args[pipe_pos], "|", 1)) //fill the next command
+	{
+		if (!ft_strncmp(cmd->args[pipe_pos], ">", 1) // if redirection is found
+			|| !ft_strncmp(cmd->args[pipe_pos], "<", 1))
+		{
+			redir_end = block_pos; // we grab with i the value of string termination
+			if (cmd->args[pipe_pos])
+				pipe_pos += 1;
+		}
+		else
+			cmd->atrb[block_pos++] = ft_stephen_jokin(cmd, pipe_pos);
+	}
+	cmd->pipe_pos = pipe_pos;
+	cmd->block_pos = block_pos;
+	cmd->redir_end = redir_end;
+}
 
 int	ft_string_trader(t_cmd *cmd, int start)
 {
@@ -38,57 +57,6 @@ int	ft_string_trader(t_cmd *cmd, int start)
 	return (len);
 }
 
-void	error(char *error)
-{
-	size_t	len;
-
-	len = ft_strlen(error);
-	write(1, error, len);
-	write(1, "\n", 1);
-	exit(EXIT_FAILURE);
-}
-
-void	exec(char **cmd, t_env *env)
-{
-	char	**path;
-	char	*aux;
-	int		i;
-
-	i = 0;
-	aux = ft_path(env->env);
-	if (!aux)
-	{
-		if (execve(*cmd, cmd, NULL) == -1)
-			exit(error_code(*cmd, env));
-		exit(error_code(*cmd, env));
-	}
-	path = ft_split(aux, ':');
-	free (aux);
-	while (path[i] != NULL)
-	{
-		aux = ft_strjoin(path[i], "/");
-		if (access(*cmd, X_OK) == 0)
-		{
-			free(aux);
-			aux = ft_strdup(*cmd);
-			break ;
-		}
-		else
-		{
-			free (path[i]);
-			path[i] = ft_strjoin(aux, *cmd);
-		}
-		free (aux);
-		aux = ft_strdup(path[i++]);
-		if (access(aux, X_OK) == 0)
-			break ;
-		free (aux);
-	}
-	if (aux && path[i] && !access(aux, X_OK))
-		execve(aux, cmd, env->env);
-	exit (error_code(*cmd, env));
-}
-
 void	ft_child(t_cmd	*cmd, t_env	*env, int	*fd, int cmd_start)
 {
 	pid_t	pid;
@@ -110,22 +78,25 @@ void	ft_child(t_cmd	*cmd, t_env	*env, int	*fd, int cmd_start)
 	exit (1);
 }
 
-char	*ft_path(char **enviroment_path)
+int	find_pipe(char **args, int i)
 {
-	char	*ret;
-	int		i;
-
-	i = 0;
-	ret = NULL;
-	while (enviroment_path[i])
+	while (args[i])
 	{
-		ret = ft_strnstr(enviroment_path[i], "PATH=", 5);
-		if (ret)
-		{
-			ret = ft_substr(enviroment_path[i], 5, ft_strlen(ret));
+		if (ft_strchr(args[i], '|'))
 			break ;
-		}
 		i++;
 	}
-	return (ret);
+	return (i);
+}
+
+int	find_sp(char **args, int i)
+{
+	while (args[i])
+	{
+		if (ft_strchr(args[i], '|') || ft_strchr(args[i], '>')
+			|| ft_strchr(args[i], '<'))
+			break ;
+		i++;
+	}
+	return (i);
 }

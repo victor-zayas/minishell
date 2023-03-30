@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/29 17:45:30 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:51:53 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ void	init_args(t_cmd *cmd)
 	cmd->in_it = 0;
 	cmd->out_it = 0;
 	cmd->cmd_start = 0;
+	cmd->pipe_pos = 0;
+	cmd->block_pos = 0;
+	cmd->redir_end = 0;
 	cmd->i.i1 = 0;
 	cmd->i.i2 = 0;
 	cmd->i.i3 = 0;

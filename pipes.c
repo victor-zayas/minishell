@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/30 11:31:18 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:51:21 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,33 +64,21 @@ void	ft_fd(t_cmd	*cmd, t_env	*env, int cmd_pos)
 	return ;
 }
 
-void	ft_pipe(t_cmd *cmd, t_env *env, int pos, int check)
+void	ft_pipe(t_cmd *cmd, t_env *env, int pipe_pos, int block_pos)
 {
 	pid_t	pid;
-	int		i;
+	int		redir_end;
 
-	i = 0;
-	close_str(cmd->cmd, pos, check); // close leftmost command
-
-	while (cmd->args[++pos] && ft_strncmp(cmd->args[pos], "|", 1)) //fill the next command
-	{
-		if (!ft_strncmp(cmd->args[pos], ">", 1) // if redirection is found
-			|| !ft_strncmp(cmd->args[pos], "<", 1))
-		{
-			i = check; // we grab with i the value of string termination
-			if (cmd->args[pos])
-				pos++;
-		}
-		else
-			cmd->atrb[check++] = ft_stephen_jokin(cmd, pos);
-	}
-	close_str(cmd->atrb, check, i);
+	redir_end = 0;
+	close_str(cmd->cmd, pipe_pos, block_pos); // close leftmost command
+	atrb_fill(cmd, pipe_pos, block_pos, redir_end);
+	close_str(cmd->atrb, cmd->block_pos, cmd->redir_end);
 	pid = fork();
 	if (pid < 0)
 		perror("Error");
 	if (pid == 0)
 	{
-		ft_adult(cmd, env, pos);
+		ft_adult(cmd, env, cmd->pipe_pos);
 		//open_fd(cmd);
 		if (ft_builtings(cmd->atrb, cmd, env, 0) == 1)
 			exec(cmd->atrb, env); 
