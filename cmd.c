@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/30 16:13:46 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/30 16:31:59 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 void	init_cmd(t_cmd	*cmd)
 {
 	cmd->cmd = (char **)malloc(sizeof(char *) * (find_sp(cmd->args, 0) + 1));
-	if (!cmd->cmd)
-		return ;
+	if (!find_sp(cmd->args, 0))
+	{
+		cmd->flag = 1;
+		return (free(cmd->cmd));
+	}
 	if (!cmd->args[find_pipe(cmd->args, 0)])
 		return ;
 	cmd->atrb = (char **)malloc(sizeof(char *)
@@ -118,13 +121,8 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 	i = -1;
 	check = 0;
 	init_cmd(cmd);
-	if (*cmd->cmd && !ft_strncmp(*cmd->cmd, "|", 1)
-		&& ft_strlen(*cmd->cmd) == 1)
-	{
-		free(cmd->cmd);
-		free(cmd->atrb);
+	if (cmd->flag)
 		return (pipe_error(cmd, env));
-	}
 	while (cmd->args[++i])
 	{
 		if (!ft_strncmp(cmd->args[i], "|", 1) && i > 0)
