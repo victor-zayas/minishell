@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/29 18:29:46 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/30 10:50:05 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ int		find_env(int p_ar, int p_str, t_cmd	*cmd, t_env	*env);
 int		get_name_end(char *str);
 int		get_name_start(char	*str);
 int		ft_string_trader(t_cmd *cmd, int start);
+void	close_str(char	**ar, int end, int sp);
 int		ft_check_redir(char **cmd, int cmd_start);
 
 	// FREE_ARGS

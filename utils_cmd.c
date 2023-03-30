@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 16:27:27 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/03/28 15:37:57 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/30 10:49:51 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,12 @@ int	find_sp(char **args, int i)
 		i++;
 	}
 	return (i);
+}
+
+void	close_str(char	**ar, int end, int sp)
+{
+	if (sp)
+		ar[sp] = NULL;
+	else
+		ar[end] = NULL;
 }

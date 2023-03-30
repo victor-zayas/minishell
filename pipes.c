@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/29 18:30:45 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:31:18 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ void	ft_adult(t_cmd *cmd, t_env *env, int pos)
 	while (cmd->args[pos++])
 	{
 		i = ft_string_trader(cmd, pos);
+		for (int h = 0; cmd->cmd[h]; h++)
+			printf("cmd-> [%s]\n", cmd->cmd[h]);
+		for (int y = 0; cmd->atrb[y]; y++)
+			printf("atrb-> [%s]\n", cmd->atrb[y]);
 		while (cmd->args[pos + i] && (!ft_strncmp(cmd->args[pos + i], ">", 1)
 				|| !ft_strncmp(cmd->args[pos + i], "<", 1)))
 		{
@@ -54,7 +58,6 @@ void	ft_fd(t_cmd	*cmd, t_env	*env, int cmd_pos)
 	{
 		waitpid (pid, NULL, 0);
 		close(fd[1]);
-		printf("ALERTA POR SUBNORMAL -> [%d]\n", STDIN_FILENO);
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
 	}
@@ -67,25 +70,21 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pos, int check)
 	int		i;
 
 	i = 0;
-	cmd->cmd[pos] = NULL;
-	while (cmd->args[++pos] && ft_strncmp(cmd->args[pos], "|", 1))
+	close_str(cmd->cmd, pos, check); // close leftmost command
+
+	while (cmd->args[++pos] && ft_strncmp(cmd->args[pos], "|", 1)) //fill the next command
 	{
-		if (!ft_strncmp(cmd->args[pos], ">", 1)
+		if (!ft_strncmp(cmd->args[pos], ">", 1) // if redirection is found
 			|| !ft_strncmp(cmd->args[pos], "<", 1))
 		{
-			i = check;
-			ft_redir(pos, cmd->args, cmd, &check);
-			check = i + 2;
-			pos += 2;
-			break ;
+			i = check; // we grab with i the value of string termination
+			if (cmd->args[pos])
+				pos++;
 		}
 		else
 			cmd->atrb[check++] = ft_stephen_jokin(cmd, pos);
 	}
-	if (i)
-		cmd->atrb[i] = NULL;
-	else
-		cmd->atrb[check] = NULL;
+	close_str(cmd->atrb, check, i);
 	pid = fork();
 	if (pid < 0)
 		perror("Error");
