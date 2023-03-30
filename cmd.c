@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/30 16:31:59 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/30 17:34:08 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,8 @@ void	init_cmd(t_cmd	*cmd)
 		return ;
 }
 
-int	exec_cmd(t_cmd	*cmd, t_env	*env, char	**args)
+int	exec_cmd(t_cmd	*cmd, t_env	*env)
 {
-	char	**path;
-	char	*aux;
 	int		i;
 	pid_t	pid;
 
@@ -42,40 +40,8 @@ int	exec_cmd(t_cmd	*cmd, t_env	*env, char	**args)
 		perror("fork");
 	else if (pid == 0)
 	{
-		i = 0;
 		open_fd(cmd);
-		aux = ft_path(env->env);
-		if (!aux)
-		{
-			if (execve(*args, args, NULL) == -1)
-				exit(error_code(*args, env));
-			exit(error_code(*args, env));
-		}
-		path = ft_split(aux, ':');
-		free (aux);
-		while (path[i] != NULL)
-		{
-			aux = ft_strjoin(path[i], "/");
-			if (access(*args, X_OK) == 0)
-			{
-				free(aux);
-				aux = ft_strdup(*args);
-				break ;
-			}
-			else
-			{
-				free (path[i]);
-				path[i] = ft_strjoin(aux, *args);
-			}
-			free (aux);
-			aux = ft_strdup(path[i++]);
-			if (access(aux, X_OK) == 0)
-				break ;
-			free (aux);
-		}
-		if (aux && path[i] && *args && !access(aux, X_OK))
-			execve(aux, args, env->env);
-		exit (error_code(*args, env));
+		exec(cmd->cmd, env);
 	}
 	wait(&i);
 	return (WEXITSTATUS(i));
@@ -126,7 +92,7 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 	while (cmd->args[++i])
 	{
 		if (!ft_strncmp(cmd->args[i], "|", 1) && i > 0)
-			return (ft_pipe(cmd, env, i, 0));
+			return (ft_pipe(cmd, env, i, check));
 		else if (!ft_strncmp(cmd->args[i], ">", 1)
 			|| !ft_strncmp(cmd->args[i], "<", 1))
 			i = ft_redir(i, cmd->args, cmd, &check);
@@ -135,6 +101,6 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 	}
 	close_str(cmd->cmd, i, check);
 	if (ft_builtings(cmd->cmd, cmd, env, 1) == 1)
-		env->exit_value = exec_cmd(cmd, env, cmd->cmd);
+		env->exit_value = exec_cmd(cmd, env);
 	ft_doublefree(cmd->cmd);
 }

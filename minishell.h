@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/30 14:39:00 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/30 17:15:45 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ char	*two_lexer(t_cmd *cmd, char	*prompt, int pos);
 
 	// CMD
 void	ft_selector(t_cmd *cmd, t_env *env);
-int		exec_cmd(t_cmd *cmd, t_env *env, char **args);
+int		exec_cmd(t_cmd *cmd, t_env *env);
 int		open_fd(t_cmd *cmd);
 char	*ft_stephen_jokin(t_cmd	*cmd, int i);
 int		find_sp(char **args, int i);

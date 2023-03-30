@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/30 14:34:14 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/30 17:34:59 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@ void	ft_adult(t_cmd *cmd, t_env *env, int pos)
 	while (cmd->args[pos++])
 	{
 		i = ft_string_trader(cmd, pos);
-		for (int h = 0; cmd->cmd[h]; h++)
-			printf("cmd-> [%s]\n", cmd->cmd[h]);
-		for (int y = 0; cmd->atrb[y]; y++)
-			printf("atrb-> [%s]\n", cmd->atrb[y]);
 		while (cmd->args[pos + i] && (!ft_strncmp(cmd->args[pos + i], ">", 1)
 				|| !ft_strncmp(cmd->args[pos + i], "<", 1)))
 		{
@@ -67,11 +63,13 @@ void	ft_fd(t_cmd	*cmd, t_env	*env, int cmd_pos)
 void	ft_pipe(t_cmd *cmd, t_env *env, int pipe_pos, int block_pos)
 {
 	pid_t	pid;
+	int		block_pos2;
 	int		redir_end;
 
 	redir_end = 0;
-	close_str(cmd->cmd, pipe_pos, block_pos); // close leftmost command
-	atrb_fill(cmd, pipe_pos, block_pos, redir_end);
+	block_pos2 = 0;
+	close_str(cmd->cmd, pipe_pos, block_pos);
+	atrb_fill(cmd, pipe_pos, block_pos2, redir_end);
 	close_str(cmd->atrb, cmd->block_pos, cmd->redir_end);
 	pid = fork();
 	if (pid < 0)
@@ -79,7 +77,6 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pipe_pos, int block_pos)
 	if (pid == 0)
 	{
 		ft_adult(cmd, env, cmd->pipe_pos);
-		//open_fd(cmd);
 		if (ft_builtings(cmd->atrb, cmd, env, 0) == 1)
 			exec(cmd->atrb, env);
 	}

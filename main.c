@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/27 15:43:32 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/30 17:27:06 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1 && argc && argv)
 	{
 		prompt = readline("MiniHell=▸");
+		resetstdio(stdio);
 		if (!prompt)
 			break ;
 		if (!prompt[0])
@@ -65,7 +66,6 @@ int	main(int argc, char **argv, char **envp)
 			|| !ft_strncmp(prompt, "&&", 2) || ft_chr_in_set('*', prompt))
 			return (ft_doublefree(env.env), free(env.oldpwd), free(prompt),
 				ft_putstr_fd("Syntax error BRO U ARE STUPID\n", 2), 1);
-		resetstdio(stdio);
 		ft_choped(&args, &env, prompt);
 	}
 	ft_doublefree(env.env);

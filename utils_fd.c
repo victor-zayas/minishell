@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_fd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 15:35:38 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/03/29 18:16:34 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/03/30 17:24:52 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int	ft_check_redir(char **cmd, int cmd_start)
 			|| !ft_strncmp(cmd[cmd_start], "<", 1))
 		{
 			if (!ft_strncmp(cmd[cmd_start], ">", 1))
-			{	
+			{
+				write(2, "hola", 5);
 				ft_pipe_redir_output(cmd[cmd_start + 1]);
 				flag = 1;
 			}
