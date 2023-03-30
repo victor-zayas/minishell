@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/30 17:15:45 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/30 18:08:10 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_cmd
 	int		block_pos;
 	int		redir_end;
 }	t_cmd;
+
 
 	// MAIN
 void	init_shell(t_cmd *cmd, t_env *env, char	**envp, int *stdio);
