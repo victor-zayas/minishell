@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/30 11:51:21 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/30 14:34:14 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pipe_pos, int block_pos)
 		ft_adult(cmd, env, cmd->pipe_pos);
 		//open_fd(cmd);
 		if (ft_builtings(cmd->atrb, cmd, env, 0) == 1)
-			exec(cmd->atrb, env); 
+			exec(cmd->atrb, env);
 	}
 	else
 		waitpid(pid, NULL, 0);

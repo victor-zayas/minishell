@@ -1,4 +1,5 @@
 	
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=readline_supp
 	//  __unused -> Variables not used
 	//  __attribute__((unused)) -> Variables not used
 	

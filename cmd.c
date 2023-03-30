@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/30 11:34:16 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/30 16:13:46 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,13 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 	i = -1;
 	check = 0;
 	init_cmd(cmd);
+	if (*cmd->cmd && !ft_strncmp(*cmd->cmd, "|", 1)
+		&& ft_strlen(*cmd->cmd) == 1)
+	{
+		free(cmd->cmd);
+		free(cmd->atrb);
+		return (pipe_error(cmd, env));
+	}
 	while (cmd->args[++i])
 	{
 		if (!ft_strncmp(cmd->args[i], "|", 1) && i > 0)
@@ -128,9 +135,6 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 		else
 			cmd->cmd[i] = ft_stephen_jokin(cmd, i);
 	}
-	if (*cmd->cmd && !ft_strncmp(*cmd->cmd, "|", 1)
-		&& ft_strlen(*cmd->cmd) == 1)
-		return (pipe_error(cmd, env));
 	close_str(cmd->cmd, i, check);
 	if (ft_builtings(cmd->cmd, cmd, env, 1) == 1)
 		env->exit_value = exec_cmd(cmd, env, cmd->cmd);
