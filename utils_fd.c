@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 15:35:38 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/03/31 10:55:24 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/31 11:46:01 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_pipe_redir_input(char *str)
 
 int	ft_check_redir(char **cmd, int cmd_start)
 {
-	int	flag;
+	int		flag;
 
 	flag = 0;
 	while (cmd[cmd_start] && ft_strncmp(cmd[cmd_start], "|", 1))

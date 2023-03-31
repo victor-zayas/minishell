@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/31 10:52:39 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/31 11:45:57 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	ft_adult(t_cmd *cmd, t_env *env, int pos)
 	int	i;
 
 	i = 0;
-	ft_fd(cmd, env, pos);
+	cmd->i.i5 = 0;
+	ft_fd(cmd, env, cmd->i.i5);
 	while (cmd->args[pos++])
 	{
 		i = ft_string_trader(cmd, pos);
@@ -30,7 +31,8 @@ void	ft_adult(t_cmd *cmd, t_env *env, int pos)
 			cmd->flag = -1;
 			return ;
 		}
-		ft_fd(cmd, env, pos);
+		cmd->i.i5 = find_pipe(cmd->args, cmd->i.i5);
+		ft_fd(cmd, env, ++cmd->i.i5);
 		pos = find_pipe(cmd->args, pos);
 	}
 }
