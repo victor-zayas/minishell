@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/30 23:45:36 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/31 10:52:39 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ void	ft_fd(t_cmd	*cmd, t_env	*env, int cmd_pos)
 	{
 		waitpid (pid, NULL, 0);
 		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
+		if (!ft_checker(*cmd->atrb))
+			close(fd[0]);
+		else
+			dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
 	}
 	return ;
@@ -89,6 +92,7 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pipe_pos, int block_pos)
 			exit (139);
 		if (ft_builtings(cmd->atrb, cmd, env, 0) == 1)
 			exec(cmd->atrb, env);
+		exit (1);
 	}
 	else
 		waitpid(pid, NULL, 0);

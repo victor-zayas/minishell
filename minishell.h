@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/30 18:08:10 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/31 10:51:02 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ void	pipe_error(t_cmd *cmd, t_env *env);
 char	*get_cmd(char *arguments, char **enviroment);
 int		ft_string_trader(t_cmd *cmd, int start);
 void	atrb_fill(t_cmd	*cmd, int pipe_pos, int block_pos, int redir_end);
+int		ft_checker(char	*str);
 void	error(char *error);
 
 	// FREE_ARGS
