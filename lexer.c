@@ -6,51 +6,70 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:16:59 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/20 19:58:14 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/31 23:03:45 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_append2(char	*str, int i)
+char	*ft_append_left_side(char	*str)
 {
 	char	*aux;
-	int		pos;
-	int		start;
+	int		i;
 
-	start = i;
-	pos = -1;
+	i = 0;
+	if (ft_strlen(str) == 1 && *str == '"')
+		return (free(str), ft_strdup(""));
+	aux = malloc(sizeof(char) * (ft_strlen(str) + 2));
+	aux[0] = '"';
 	while (str[i])
+	{
+		aux[i + 1] = str[i];
 		i++;
-	aux = (char *)malloc(sizeof(char) * (i));
-	while (i >= start)
-		aux[++pos] = str[start++];
-	aux[pos] = '\0';
+	}
+	free(str);
 	return (aux);
 }
 
-int	ft_append(t_cmd	*cmd, char	*str, int i)
+char	*ft_append_both_sides(char	*str)
 {
 	char	*aux;
-	int		pos;
-	int		i2;
+	int		i;
 
-	i2 = 0;
-	pos = i;
-	pos++;
-	aux = (char *)malloc(sizeof(char) * (ft_strlen(str) + 3));
-	while (str[pos] != '\'' && str[pos] != '"' && str[pos] != ' '
-		&& str[pos] != '|' && str[pos] != '>' && str[pos] != '\t'
-		&& str[pos] != '<' && str[pos] != '$' && str[pos] != '\0')
-				pos++;
-	aux[i2] = '\"';
-	while (pos >= i)
-		aux[++i2] = str[i++];
-	aux[i2] = '\"';
-	aux[i2 + 1] = '\0';
+	i = 0;
+	if (ft_strlen(str) == 1 && *str == '"')
+		return (free(str), ft_strdup(""));
+	aux = malloc(sizeof(char) * (ft_strlen(str) + 3));
+	aux[0] = '"';
+	while (str[i])
+	{
+		aux[i + 1] = str[i];
+		i++;
+	}
+	aux[i + 1] = '"';
+	free(str);
+	return (aux);
+}
+
+char	*ft_getdollar(t_cmd	*cmd, char	*prompt, int i)
+{
+	int		start;
+	char	*aux;
+	int		len;
+
+	start = i;
+	aux = 0;
+	while (prompt[i] && prompt[i] != '"' && prompt[i] != '<'
+		&& prompt[i] != '|' && prompt[i] != '>' && prompt[i] != '\''
+		&& prompt[i] != ' ' && prompt[i] != '\t')
+		i++;
+	aux = ft_append_both_sides(ft_substr(prompt, start, i - start + 1));
+	cmd->i.i1 = 0;
 	cmd->args[cmd->size++] = ft_strdup(aux);
-	free (aux);
-	return (pos);
+	free(aux);
+	cmd->i.i1 = i;
+	len = ft_strlen(prompt) - i + 1;
+	return (ft_append_left_side(ft_substr(prompt, (i), len)));
 }
 
 char	*clean_words(t_cmd	*cmd, char *prompt, int pos)
@@ -98,10 +117,22 @@ char	*double_quotes_lexer(t_cmd	*cmd, char	*prompt, int pos)
 	char	*tmp;
 	int		start;
 
+	tmp = 0;
 	start = (pos);
 	(pos)++;
+	if (!prompt)
+		return (free(prompt), ft_strdup(""));
 	while (prompt[pos] != '"' && prompt[pos])
+	{
+		if (prompt[pos] == '$')
+		{
+			tmp = ft_getdollar(cmd, prompt, pos);
+			pos = cmd->i.i1;
+			free(prompt);
+			return (tmp);
+		}
 		(pos)++;
+	}
 	cmd->args[cmd->size++] = ft_substr(prompt, start, pos - start + 1);
 	tmp = ft_substr(prompt, (pos + 1), ft_strlen(prompt) - pos + 1);
 	free(prompt);

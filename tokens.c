@@ -6,13 +6,13 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/30 23:10:26 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/31 23:05:47 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int sig_exit;
+extern int	g_sig_exit;
 
 void	init_shell(t_cmd *cmd, t_env *env, char	**envp, int *stdio)
 {
@@ -20,8 +20,8 @@ void	init_shell(t_cmd *cmd, t_env *env, char	**envp, int *stdio)
 	env->oldpwd = NULL;
 	env->exit_value = 0;
 	signal(SIGINT, my_signal);
-	if (sig_exit)
-		env->exit_value = sig_exit;
+	if (g_sig_exit)
+		env->exit_value = g_sig_exit;
 	signal(SIGQUIT, SIG_IGN);
 	init_args(cmd);
 	getstdio(stdio);
@@ -29,7 +29,7 @@ void	init_shell(t_cmd *cmd, t_env *env, char	**envp, int *stdio)
 
 void	init_args(t_cmd *cmd)
 {
-	cmd = ft_memset(cmd,0, sizeof(t_cmd));
+	cmd = ft_memset(cmd, 0, sizeof(t_cmd));
 	cmd->size = 0;
 	cmd->words = 0;
 	cmd->quotes = 0;
@@ -87,7 +87,7 @@ void	get_token(t_cmd	*cmd, char	*prompt)
 	cmd->args = (char **)malloc(sizeof(char *) * (cmd->words + cmd->quotes
 				+ cmd->double_quotes + cmd->pipes + cmd->out
 				+ cmd->in + cmd->dollars + cmd->double_in
-				+ cmd->double_out + 1));
+				+ cmd->double_out + 3));
 	if (cmd->in || cmd->double_in)
 		cmd->input = (int *)malloc(sizeof(int *)
 				* (cmd->in + cmd->double_in + 1));

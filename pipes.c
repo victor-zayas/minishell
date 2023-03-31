@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/31 12:52:28 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/31 23:07:54 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pipe_pos, int block_pos)
 	block_pos2 = 0;
 	cmd->flag = 0;
 	close_str(cmd->cmd, pipe_pos, block_pos);
-	if (!ft_strncmp(cmd->args[pipe_pos], "|", 1) && cmd->args[pipe_pos + 1] == NULL)
+	if (!ft_strncmp(cmd->args[pipe_pos], "|", 1)
+		&& cmd->args[pipe_pos + 1] == NULL)
 	{
 		ft_doublefree(cmd->cmd);
 		free(cmd->atrb);

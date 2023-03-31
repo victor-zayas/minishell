@@ -6,13 +6,13 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/31 10:07:33 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/31 23:05:45 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	sig_exit;
+int	g_sig_exit;
 
 void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 {
@@ -28,8 +28,8 @@ void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 		return ;
 	}
 	get_token(args, aux);
-	if (sig_exit)
-		env->exit_value = sig_exit;
+	if (g_sig_exit)
+		env->exit_value = g_sig_exit;
 	get_inter(args, env);
 	//print(args);
 	ft_selector(args, env);
@@ -45,7 +45,7 @@ void	my_signal(int sig)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
-		sig_exit = 130;
+		g_sig_exit = 130;
 	}
 }
 
@@ -72,7 +72,7 @@ int	main(int argc, char **argv, char **envp)
 			return (ft_doublefree(env.env), free(env.oldpwd), free(prompt),
 				ft_putstr_fd("Syntax error BRO U ARE STUPID\n", 2), 1);
 		ft_choped(&args, &env, prompt);
-		sig_exit = 0;
+		g_sig_exit = 0;
 	}
 	ft_doublefree(env.env);
 	free(env.oldpwd);
