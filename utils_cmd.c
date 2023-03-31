@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 16:27:27 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/03/30 11:41:07 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/31 12:53:11 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,27 @@ void	exec(char **cmd, t_env *env)
 	if (aux && path[i] && !access(aux, X_OK))
 		execve(aux, cmd, env->env);
 	exit (error_code(*cmd, env));
+}
+
+int	get_last_redir(char	**str, int pos)
+{
+	int	flag;
+
+	flag = 0;
+	while(str[pos])
+	{
+		pos = find_pipe(str, pos);
+		if (str[pos] && str[pos + 1])
+			pos++;
+	}
+	while (str[pos - 1] && ft_strncmp(str[pos - 1], "|", 1))
+	{
+		pos--;
+		if (!ft_strncmp(str[pos], ">", 1)
+			|| !ft_strncmp(str[pos], "<", 1))
+			flag = 1;
+	}
+	if (flag)
+		return (pos);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/31 11:45:57 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/31 12:52:28 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pipe_pos, int block_pos)
 		ft_adult(cmd, env, cmd->pipe_pos);
 		if (cmd->flag == -1)
 			exit (139);
+		cmd->i.i5 = get_last_redir(cmd->args, 0);
+		if (cmd->i.i5)
+			ft_check_redir(cmd->args, cmd->i.i5);
 		if (ft_builtings(cmd->atrb, cmd, env, 0) == 1)
 			exec(cmd->atrb, env);
 		exit (1);
