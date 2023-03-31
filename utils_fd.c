@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 15:35:38 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/03/30 17:24:52 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/31 10:55:24 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	ft_check_redir(char **cmd, int cmd_start)
 		{
 			if (!ft_strncmp(cmd[cmd_start], ">", 1))
 			{
-				write(2, "hola", 5);
 				ft_pipe_redir_output(cmd[cmd_start + 1]);
 				flag = 1;
 			}
