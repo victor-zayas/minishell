@@ -4,11 +4,8 @@
 	//  __attribute__((unused)) -> Variables not used
 	
 	// TO _ DO
-		1. Solve redir between pipes
-		2. Remove doube iterator in (pipes.c maybe) or counting 2 times check || pos
-		IGNORE //3. remove ft_redir, use the warning message//
-		4. Add malloc to $ variables for more than one with echo
-		5. Bombardear ALSA
+		1. Add malloc to $ variables for more than one with echo
+		2. Bombardear ALSA
 
 	// DONE
 

@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/31 12:58:15 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/03/31 13:03:39 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	init_cmd(t_cmd	*cmd)
 		cmd->flag = 1;
 		return (free(cmd->cmd));
 	}
-	if (!cmd->args[find_pipe(cmd->args, 0)] || !cmd->args[find_pipe(cmd->args, 0) + 1])
+	if (!cmd->args[find_pipe(cmd->args, 0)]
+		|| !cmd->args[find_pipe(cmd->args, 0) + 1])
 		return ;
 	cmd->atrb = (char **)malloc(sizeof(char *)
 			* (find_sp(cmd->args, (find_sp(cmd->args, 0) + 1) + 1))
