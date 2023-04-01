@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:16:59 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/31 23:03:45 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/01 23:45:54 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,9 @@ char	*double_quotes_lexer(t_cmd	*cmd, char	*prompt, int pos)
 		(pos)++;
 	}
 	cmd->args[cmd->size++] = ft_substr(prompt, start, pos - start + 1);
+	if (ft_strlen(cmd->args[cmd->size - 1]) == 1)
+		return (free(cmd->args[--cmd->size]), free(prompt),
+			(ft_substr(prompt, pos + 1, ft_strlen(prompt) - pos + 1)));
 	tmp = ft_substr(prompt, (pos + 1), ft_strlen(prompt) - pos + 1);
 	free(prompt);
 	return (tmp);
