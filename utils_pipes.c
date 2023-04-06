@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/31 11:46:10 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/06 10:44:33 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,8 @@ void	ft_child(t_cmd	*cmd, t_env	*env, int	*fd, int cmd_start)
 		if (pid == 0)
 			exec(cmd->cmd, env);
 		waitpid(pid, &rt, 0);
-		rt = WEXITSTATUS(rt);
-		env->exit_value = rt;
 	}
-	exit (1);
+	exit (WEXITSTATUS(rt));
 }
 
 int	find_pipe(char **args, int i)

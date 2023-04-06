@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/31 23:06:30 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/06 11:02:28 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <signal.h>
 # include <unistd.h>
+# include <termios.h>
 # include <string.h>
 # include <errno.h>
 # include <stdbool.h>

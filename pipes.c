@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/06 10:22:53 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/06 10:45:28 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	ft_fd(t_cmd	*cmd, t_env	*env, int cmd_pos)
 		ft_child(cmd, env, fd, cmd->cmd_start);
 	else
 	{
-		waitpid (pid, NULL, 0);
+		waitpid (pid, &env->exit_value, 0);
+		env->exit_value = WEXITSTATUS(env->exit_value);
 		close(fd[1]);
 		if (!ft_checker(*cmd->atrb))
 			close(fd[0]);

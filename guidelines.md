@@ -4,7 +4,8 @@
 	//  __attribute__((unused)) -> Variables not used
 	
 	// TO _ DO
-		1. Add malloc to $ variables for more than one with echo
+		1. Add '<<' redirection, use read(STDIN)
+			https://dev.to/oyagci/shell-redirections-explained-2h9 
 		2. Bombardear ALSA
 
 	// DONE
