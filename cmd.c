@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/31 13:03:39 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/06 13:31:27 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,8 @@ int	ft_redir(int pos, char	**args, t_cmd	*cmd, int	*checker)
 	*checker = pos;
 	if (!args[pos + 1])
 	{
-		write(2, "bash: syntax error near unexpected token ", 42);
-		write(2, args[pos], 1);
-		write(2, "\n", 2);
-		exit (2);
+		write(2, "bash: syntax error near unexpected token `newline'\n", 52);
+		return (-1);
 	}
 	if (!ft_strncmp(args[pos], ">", 2) || !ft_strncmp(args[pos], ">>", 3))
 	{
@@ -100,6 +98,8 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 			i = ft_redir(i, cmd->args, cmd, &check);
 		else
 			cmd->cmd[i] = ft_stephen_jokin(cmd, i);
+		if (i == -1)
+			return ;
 	}
 	close_str(cmd->cmd, i, check);
 	if (ft_builtings(cmd->cmd, cmd, env, 1) == 1)
