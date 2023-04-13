@@ -102,11 +102,11 @@ $(NAME): $(OBJS)
 	echo "$(BLUE)༺ library created༻$(END)"
 	echo "$$MINISHELL"
 	echo "Special thanks to $(GREEN)༺ HELECHO༻$(END)  & $(GREEN)༺ Arteria༻$(END)"
-ifeq ($(USER), $(filter $(USER), jaizpuru))
-		echo $$JOKIN
-		osascript -e "set Volume 10"
-		say --voice="Luciana" O líder do ginásio Jokin the calisthenics desafia você.
-endif
+# ifeq ($(USER), $(filter $(USER), jaizpuru))
+#		echo $$JOKIN
+#		osascript -e "set Volume 10"
+#		say --voice="Luciana" O líder do ginásio Jokin the calisthenics desafia você.
+#endif
 
 clean:
 	make -C libft clean

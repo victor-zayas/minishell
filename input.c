@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:44:17 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/06 13:50:19 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/13 17:28:19 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,36 @@ int	ft_input(t_cmd *cmd, int i)
 	return (EXIT_SUCCESS);
 }
 
-int	ft_dinput(__attribute__((unused)) t_cmd	*cmd, __attribute__((unused)) int i)
+int	ft_dinput(t_cmd	*cmd, int i)
 {
-	char 	str[1024];
+	pid_t	pid;
+	int		fd[2];
+	char 	*str;
 
-	while(read(STDIN_FILENO, &str, 1024) > 0)
+	pipe(fd);
+	pid = fork();
+	if (pid == 0)
 	{
-		// If string readen is equal to argument that follows '<<' return
-		if (!ft_strncmp(str, cmd->args[i - 1], ft_strlen(str)))
-			return (EXIT_SUCCESS);
-		printf("string entered -> [%s]", str);
-		printf("string to compare -> [%s]", cmd->args[i - 1]);
-		// Else, keep reading
+		close(fd[1]);
+		dup2(fd[0], STDOUT_FILENO);
+		close(fd[0]);
+		while (1)
+		{
+			str = readline("heredoc> ");
+			if (ft_strlen(str) == ft_strlen(cmd->args[i])
+				&& !ft_strncmp(str, cmd->args[i], ft_strlen(str)))
+				break ;
+			write(fd[0], str, ft_strlen(str));
+			write(fd[0], "\n", 2);
+			free (str);
+		}
+		free(str);
+		exit (0);
 	}
+	waitpid(pid, NULL, 0);
+	close(fd[0]);
+	dup2(fd[1], STDIN_FILENO);
+/* 	char	*args[] = { "bin/cat", NULL };
+	exec(args, NULL); */
 	return (EXIT_SUCCESS);
 }
