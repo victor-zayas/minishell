@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/06 13:31:27 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/16 09:26:33 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ int	exec_cmd(t_cmd	*cmd, t_env	*env)
 	else if (pid == 0)
 	{
 		open_fd(cmd);
-		exec(cmd->cmd, env);
+		if (*cmd->cmd && ft_strlen(*cmd->cmd) > 0)
+			exec(cmd->cmd, env);
+		exit (0);
 	}
 	wait(&i);
 	return (WEXITSTATUS(i));
@@ -104,5 +106,6 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 	close_str(cmd->cmd, i, check);
 	if (ft_builtings(cmd->cmd, cmd, env, 1) == 1)
 		env->exit_value = exec_cmd(cmd, env);
-	ft_doublefree(cmd->cmd);
+	if (*cmd->cmd && ft_strlen(*cmd->cmd) > 0)
+		ft_doublefree(cmd->cmd);
 }

@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:44:17 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/13 17:28:19 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/16 09:22:35 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	exec_cat()
+{
+	char	**args;
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		args = malloc(sizeof(char *) * 3);
+		args[0] = "cat";
+		args[1] = "heredoc_tmp";
+		args[2] = NULL;
+		execve("/bin/cat", args, NULL);
+	}
+	waitpid(pid, NULL, 0);
+	return ;
+}
 
 int	ft_input(t_cmd *cmd, int i)
 {
@@ -40,33 +58,32 @@ int	ft_input(t_cmd *cmd, int i)
 int	ft_dinput(t_cmd	*cmd, int i)
 {
 	pid_t	pid;
-	int		fd[2];
+	int		fd;
 	char 	*str;
 
-	pipe(fd);
 	pid = fork();
 	if (pid == 0)
 	{
-		close(fd[1]);
-		dup2(fd[0], STDOUT_FILENO);
-		close(fd[0]);
+		fd = open("heredoc_tmp", O_CREAT | O_RDWR | O_TRUNC, 0600);
 		while (1)
 		{
 			str = readline("heredoc> ");
 			if (ft_strlen(str) == ft_strlen(cmd->args[i])
 				&& !ft_strncmp(str, cmd->args[i], ft_strlen(str)))
 				break ;
-			write(fd[0], str, ft_strlen(str));
-			write(fd[0], "\n", 2);
+			write(fd, str, ft_strlen(str));
+			write(fd, "\n", 2);
 			free (str);
 		}
+		close(fd);
 		free(str);
 		exit (0);
 	}
 	waitpid(pid, NULL, 0);
-	close(fd[0]);
-	dup2(fd[1], STDIN_FILENO);
-/* 	char	*args[] = { "bin/cat", NULL };
-	exec(args, NULL); */
+	fd = open("heredoc_tmp", O_RDONLY);
+	dup2(fd, STDIN_FILENO);
+	close(fd);
+	exec_cat();
+	unlink("heredoc_tmp");
 	return (EXIT_SUCCESS);
 }
