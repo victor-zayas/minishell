@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:44:17 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/16 09:22:35 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/17 17:28:25 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int	ft_dinput(t_cmd	*cmd, int i)
 	fd = open("heredoc_tmp", O_RDONLY);
 	dup2(fd, STDIN_FILENO);
 	close(fd);
-	exec_cat();
 	unlink("heredoc_tmp");
 	return (EXIT_SUCCESS);
 }
