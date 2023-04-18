@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:20:31 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/25 11:45:22 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/04/18 17:59:55 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int	check_option(t_env	*env, char	**cmd)
 		str = ft_substr(env->env[flag],
 				get_name_len(env->env[flag]) + 1, ft_strlen(env->env[flag]));
 		get_oldpwd(env);
-		chdir(str);
+		if (!chdir(str))
+			free(str);
 		return (ft_rewrite_pwd(env), 1);
 	}
 	return (0);

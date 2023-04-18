@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/31 23:05:45 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/18 17:57:41 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,16 @@ void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 	//print(args);
 	ft_selector(args, env);
 	free_args(args);
+}
+
+void	cut_stdio(int	sig)
+{
+	char	n;
+
+	n = sig + '0';
+	write(2, "Quit: ", 7);
+	write(2, &n, 1);
+	write(2, "\n", 2);
 }
 
 void	my_signal(int sig)

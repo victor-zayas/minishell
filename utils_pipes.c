@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/06 10:44:33 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/18 18:17:19 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	find_pipe(char **args, int i)
 {
 	while (args[i])
 	{
-		if (ft_strchr(args[i], '|'))
+		if (!ft_strncmp(args[i], "|", 2))
 			break ;
 		i++;
 	}
@@ -91,8 +91,11 @@ int	find_sp(char **args, int i)
 {
 	while (args[i])
 	{
-		if (ft_strchr(args[i], '|') || ft_strchr(args[i], '>')
-			|| ft_strchr(args[i], '<'))
+		if (!strncmp(args[i], " ", 2) && ft_strlen(args[i]) == 1)
+			return (0);
+		if ((!ft_strncmp(args[i], "|", 2) || !ft_strncmp(args[i], "||", 3)
+			|| !ft_strncmp(args[i], ">", 2) || !ft_strncmp(args[i], "<", 2)
+				|| !ft_strncmp(args[i], "<<", 3) || !ft_strncmp(args[i], ">>", 3)))
 			break ;
 		i++;
 	}

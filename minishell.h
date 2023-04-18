@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/04/06 11:02:28 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/18 16:54:59 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	init_args(t_cmd	*cmd);
 void	print(t_cmd	*cmd);
 void	ft_choped(t_cmd	*args, t_env *env, char	*prompt);
 void	my_signal(int sig);
+void	cut_stdio(int	sig);
 void	getstdio(int *stdio);
 void	resetstdio(int *stdio);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/16 09:26:33 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/18 18:18:40 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	init_cmd(t_cmd	*cmd)
 {
 	cmd->cmd = (char **)malloc(sizeof(char *) * (find_sp(cmd->args, 0) + 1));
+	printf("size of cmd -> [%d]\n", ((find_sp(cmd->args, 0) + 1)));
 	if (!find_pipe(cmd->args, 0))
 	{
 		cmd->flag = 1;
@@ -108,4 +109,6 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 		env->exit_value = exec_cmd(cmd, env);
 	if (*cmd->cmd && ft_strlen(*cmd->cmd) > 0)
 		ft_doublefree(cmd->cmd);
+	else if (cmd->cmd)
+		free(cmd->cmd);
 }
