@@ -4,9 +4,11 @@
 	//  __attribute__((unused)) -> Variables not used
 	
 	// TO _ DO
-		1. Add '<<' redirection, use read(STDIN)
-			https://dev.to/oyagci/shell-redirections-explained-2h9 
-		2. Bombardear ALSA
+	1. solve << && >> crash
+	2. add cd - message
+	3. add unset $PATH error mssg 
+	4. Bombardear ALSA
+
 
 	// DONE
 
