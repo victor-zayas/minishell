@@ -1,6 +1,9 @@
+
+# LIB #
 NAME = libft.a
 
-SRCS = ft_isalnum.c \
+# SRCS #
+SRC = ft_isalnum.c \
 		ft_isalpha.c \
 		ft_isascii.c \
 		ft_isdigit.c \
@@ -40,35 +43,43 @@ SRCS = ft_isalnum.c \
 		ft_doublefree.c \
 		ft_isspace.c \
 		ft_isnot_empty_str.c \
-		ft_chr_in_set.c 
+		ft_chr_in_set.c \
+		ft_lstnew.c \
+		ft_lstadd_front.c \
+		ft_lstsize.c \
+		ft_lstlast.c \
+		ft_lstadd_back.c \
+		ft_lstdelone.c \
+		ft_lstclear.c \
+		ft_lstiter.c \
+		ft_lstmap.c
 
-SRC_BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
+# RULES #
+OBJDIR = libft_objs/
+OBJS := $(addprefix $(OBJDIR), $(SRC:.c=.o))
+SRCDIR = ./
 
-OBJECTS = $(SRCS:.c=.o)
-
-OBJ_BONUS = $(SRC_BONUS:.c=.o)
-
+# FLAGS #
 CFLAGS = -Wall -Wextra -Werror
 
+# INCLUDES #
+INCLUDES = -I ../includes/
+
+# COMPILATION #
 all: $(NAME)
 
-$(NAME): $(OBJECTS)
-	ar rc $(NAME) $(OBJECTS)
+$(OBJDIR)%.o: $(SRCDIR)%.c
+	mkdir -p $(OBJDIR)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $^ -o $@
 
-$(OBJECTS): $(SRCS)
-	gcc $(CFLAGS) -c $(SRCS)
-
-$(OBJ_BONUS): $(SRCS) $(SRC_BONUS)
-	gcc $(CFLAGS) -c $(SRCS) $(SRC_BONUS)
-
-bonus: $(OBJECTS) $(OBJ_BONUS)
-	ar rc $(NAME) $(OBJECTS) $(OBJ_BONUS)
+$(NAME): $(OBJS)
+	ar rc $(NAME) $(OBJS)
 
 clean:
-	@rm -f $(OBJECTS) $(OBJ_BONUS)
+	@rm -rf $(OBJDIR) $(OBJ_BONUS)
 
 fclean: clean
-	@rm -f $(OBJECTS) $(OBJ_BONUS) $(NAME)
+	@rm -f $(OBJS) $(OBJ_BONUS) $(NAME)
 
 re: fclean all
 

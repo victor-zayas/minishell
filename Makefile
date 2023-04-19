@@ -14,44 +14,55 @@
 # NAME #
 NAME = minishell
 
-# COMPILATION #
+# FLAGS #
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
 RM = /bin/rm -rf
+
+# READLINE #
 LREADLINE_FLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib/
 READLINE = -I/Users/$(USER)/.brew/opt/readline/include/
 #LINUX_READLINE = -lreadline -L/usr/lib/x86_64-linux-gnu/
 
+# INCLUDES #
+INCDIR = includes/
+INCLUDES = -I $(INCDIR)
+
 # OBJS #
 OBJS = $(SRCS:.c=.o)
 
-# SRC #
-SRCS = main.c \
-	get_data.c \
-	utils_iterator.c \
-	tokens.c \
-	lexer.c \
-	lexer2.c \
-	builtings.c \
-	pwd.c \
-	env.c \
-	echo.c \
-	exit.c \
-	cd.c \
-	export_unset.c \
-	inter.c \
-	pipes.c \
-	utils_pipes.c \
-	cmd.c \
-	redir.c \
-	print.c \
-	utils_cmd.c \
-	error.c \
-	input.c \
-	output.c \
-	utils_fd.c
+OBJDIR := objs/
+SRCDIR := src/
 
-# MAKEFILE ART #
+# SRCS #
+SRCS =	main.c \
+		get_data.c \
+		utils_iterator.c \
+		tokens.c \
+		lexer.c \
+		lexer2.c \
+		builtings.c \
+		pwd.c \
+		env.c \
+		echo.c \
+		exit.c \
+		cd.c \
+		export_unset.c \
+		inter.c \
+		pipes.c \
+		utils_pipes.c \
+		cmd.c \
+		redir.c \
+		print.c \
+		utils_cmd.c \
+		error.c \
+		input.c \
+		output.c \
+		utils_fd.c
+
+SRC := $(addprefix $(SRCDIR), $(SRCS))
+OBJS := $(addprefix $(OBJDIR), $(OBJS))
+
 # COLORS #
 BLACK=\033[0;30m
 RED=\033[0;31m
@@ -64,6 +75,7 @@ WHITE=\033[0;37m
 PAPYRUS=\033[38;5;223m
 END=\033[0m
 
+# MAKEFILE ART #
 define MINISHELL
 $(RED)
 
@@ -78,33 +90,26 @@ $(END)
 endef
 export MINISHELL
 
-define JOKIN
-	  ▄▌▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌\n
-   ▄▄██▌█ BEEP! BEEP!					   \n
-▄▄▄▌▐██▌█ -3 Evaluations points DELIVERY   \n
-███████▌█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌\n
-▀(⊙)▀▀▀▀▀▀▀(⊙)(⊙)▀▀▀▀▀▀▀▀▀▀(⊙)(⊙)▀▀▀▀▀(⊙)▀ \n
-endef
-export JOKIN
-
-# RULES #
+# COMPILATION #
 .SILENT:
 
 all: $(NAME)
 
-%.o: %.c
-	$(CC) $(CFLAGS) $(READLINE) -c $^ -o $@
+$(OBJDIR)%.o: $(SRCDIR)%.c
+	mkdir -p $(OBJDIR)
+	$(CC) $(CFLAGS) $(READLINE) $(INCLUDES) -c $^ -o $@
 
 $(NAME): $(OBJS)
 	make -C libft all
-#	$(CC) $(CFLAGS) $(LREADLINE_FLAGS) $(READLINE) libft/libft.a $^ -o $(NAME)
-	$(CC) $(CFLAGS) $^ $(LREADLINE_FLAGS) $(LINUX_READLINE) libft/libft.a -o $(NAME)
+	$(CC) $(CFLAGS) $(LREADLINE_FLAGS) $(READLINE) libft/libft.a $^ -o $(NAME)
+#	$(CC) $(CFLAGS) $^ $(LREADLINE_FLAGS) $(LINUX_READLINE) libft/libft.a -o $(NAME)
 	echo "$(BLUE)༺ library created༻$(END)"
 	echo "$$MINISHELL"
 	echo "Special thanks to $(GREEN)༺ HELECHO༻$(END)  & $(GREEN)༺ Arteria༻$(END)"
 
 clean:
 	make -C libft clean
+	rm -rf $(OBJDIR)
 	$(RM) $(OBJS)
 		echo "$(RED)༺ Objs deleted༻$(END)"
 
