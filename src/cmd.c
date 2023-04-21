@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/21 09:49:54 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/21 10:07:10 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,19 @@ int	init_cmd(t_cmd	*cmd, t_env	*env)
 	if (flag == -1)
 		return (pipe_error(cmd, env), 1);
 	else if (flag == 0)
+	{
+		ft_redir(0, cmd->args, cmd, &cmd->flag);
+		int pid;
+		
+		pid = fork();
+		if (pid == 0)
+		{
+			open_fd(cmd);
+			exit(0);
+		}
+		waitpid(pid, NULL, 0);
 		return (1);
+	}
 	else
 		cmd->cmd = (char **)malloc(sizeof(char *) * (find_sp(cmd->args, 0) + 1));
 	printf("find_sp -> [%d]\n", (find_sp(cmd->args, 0)));
@@ -97,6 +109,7 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 	check = 0;
 	if (init_cmd(cmd, env))
 		return ;
+	printf("hola\n");
 	if (cmd->flag)
 		return (pipe_error(cmd, env));
 	while (cmd->args[i])
@@ -114,11 +127,14 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 		}
 		i++;
 	}
-	close_str(cmd->cmd, len, check);
-	if (ft_builtings(cmd->cmd, cmd, env, 1) == 1)
-		env->exit_value = exec_cmd(cmd, env);
-	if (*cmd->cmd && ft_strlen(*cmd->cmd) > 0)
-		ft_doublefree(cmd->cmd);
-	else if (cmd->cmd)
-		free(cmd->cmd);
+	if (cmd->cmd)
+	{
+		close_str(cmd->cmd, len, check);
+		if (ft_builtings(cmd->cmd, cmd, env, 1) == 1)
+			env->exit_value = exec_cmd(cmd, env);
+		if (*cmd->cmd && ft_strlen(*cmd->cmd) > 0)
+			ft_doublefree(cmd->cmd);
+		else if (cmd->cmd)
+			free(cmd->cmd);
+	}
 }
