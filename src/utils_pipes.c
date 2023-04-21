@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/18 18:17:19 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/21 09:36:53 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,25 @@ int	find_pipe(char **args, int i)
 
 int	find_sp(char **args, int i)
 {
+	int	len;
+
+	len = 0;
 	while (args[i])
 	{
-		if (!strncmp(args[i], " ", 2) && ft_strlen(args[i]) == 1)
-			return (0);
-		if ((!ft_strncmp(args[i], "|", 2) || !ft_strncmp(args[i], "||", 3)
-			|| !ft_strncmp(args[i], ">", 2) || !ft_strncmp(args[i], "<", 2)
-				|| !ft_strncmp(args[i], "<<", 3) || !ft_strncmp(args[i], ">>", 3)))
+		if (!ft_strncmp(args[i], "|", 2) || !ft_strncmp(args[i], "||", 3))
 			break ;
+		else if (!ft_strncmp(args[i], ">", 2) || !ft_strncmp(args[i], "<", 2)
+				|| !ft_strncmp(args[i], "<<", 3) || !ft_strncmp(args[i], ">>", 3))
+		{
+			if (args[i + 1])
+				i++;
+			else
+				return (write(2, "bash: syntax error near unexpected token `newline'\n", 52), 0);
+			len += 2;
+		}
 		i++;
 	}
-	return (i);
+	if (args[i] && !ft_strncmp(args[i], "|", 2) && !args[i + 1])
+		return (-1);
+	return (i - len);
 }

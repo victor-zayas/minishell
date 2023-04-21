@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/04/18 17:57:41 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/21 09:22:49 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 	if (g_sig_exit)
 		env->exit_value = g_sig_exit;
 	get_inter(args, env);
-	//print(args);
+	print(args);
 	ft_selector(args, env);
 	free_args(args);
 }

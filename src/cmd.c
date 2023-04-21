@@ -3,32 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/19 15:25:17 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/04/21 09:49:54 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_cmd(t_cmd	*cmd)
+int	init_cmd(t_cmd	*cmd, t_env	*env)
 {
-	cmd->cmd = (char **)malloc(sizeof(char *) * (find_sp(cmd->args, 0) + 1));
+	int	flag;
+
+	flag = find_sp(cmd->args, 0);
+	if (flag == -1)
+		return (pipe_error(cmd, env), 1);
+	else if (flag == 0)
+		return (1);
+	else
+		cmd->cmd = (char **)malloc(sizeof(char *) * (find_sp(cmd->args, 0) + 1));
+	printf("find_sp -> [%d]\n", (find_sp(cmd->args, 0)));
 	//printf("size of cmd -> [%d]\n", ((find_sp(cmd->args, 0) + 1)));
-	if (!find_pipe(cmd->args, 0))
-	{
-		cmd->flag = 1;
-		return (free(cmd->cmd));
-	}
-	if (!cmd->args[find_pipe(cmd->args, 0)]
-		|| !cmd->args[find_pipe(cmd->args, 0) + 1])
-		return ;
+	if (!cmd->args[find_pipe(cmd->args, 0)])
+		return (0);
 	cmd->atrb = (char **)malloc(sizeof(char *)
 			* (find_sp(cmd->args, (find_sp(cmd->args, 0) + 1) + 1))
 			- (find_sp(cmd->args, 0) + 1) + 1);
 	if (!cmd->atrb)
-		return ;
+		return (1);
+	return (0);
 }
 
 int	exec_cmd(t_cmd	*cmd, t_env	*env)
@@ -84,27 +88,33 @@ int	ft_redir(int pos, char	**args, t_cmd	*cmd, int	*checker)
 void	ft_selector(t_cmd *cmd, t_env *env)
 {
 	int	i;
+	int	len;
 	int	check;
 
-	i = -1;
+	i = 0;
+	len = 0;
 	cmd->flag = 0;
 	check = 0;
-	init_cmd(cmd);
+	if (init_cmd(cmd, env))
+		return ;
 	if (cmd->flag)
 		return (pipe_error(cmd, env));
-	while (cmd->args[++i])
+	while (cmd->args[i])
 	{
-		if (!ft_strncmp(cmd->args[i], "|", 1) && i > 0)
-			return (ft_pipe(cmd, env, i, check));
+		if (!ft_strncmp(cmd->args[len], "|", 1))
+			return (ft_pipe(cmd, env, len, check));
 		else if (!ft_strncmp(cmd->args[i], ">", 1)
 			|| !ft_strncmp(cmd->args[i], "<", 1))
 			i = ft_redir(i, cmd->args, cmd, &check);
 		else
-			cmd->cmd[i] = ft_stephen_jokin(cmd, i);
-		if (i == -1)
-			return ;
+		{
+			cmd->cmd[len] = ft_stephen_jokin(cmd, i);
+			printf("cmd->cmd[%d] -> [%s]\n", len, cmd->cmd[len]);
+			len++;
+		}
+		i++;
 	}
-	close_str(cmd->cmd, i, check);
+	close_str(cmd->cmd, len, check);
 	if (ft_builtings(cmd->cmd, cmd, env, 1) == 1)
 		env->exit_value = exec_cmd(cmd, env);
 	if (*cmd->cmd && ft_strlen(*cmd->cmd) > 0)
