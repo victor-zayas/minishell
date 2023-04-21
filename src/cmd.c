@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/21 10:07:10 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/21 10:09:42 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ int	init_cmd(t_cmd	*cmd, t_env	*env)
 	}
 	else
 		cmd->cmd = (char **)malloc(sizeof(char *) * (find_sp(cmd->args, 0) + 1));
-	printf("find_sp -> [%d]\n", (find_sp(cmd->args, 0)));
-	//printf("size of cmd -> [%d]\n", ((find_sp(cmd->args, 0) + 1)));
 	if (!cmd->args[find_pipe(cmd->args, 0)])
 		return (0);
 	cmd->atrb = (char **)malloc(sizeof(char *)
@@ -109,7 +107,6 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 	check = 0;
 	if (init_cmd(cmd, env))
 		return ;
-	printf("hola\n");
 	if (cmd->flag)
 		return (pipe_error(cmd, env));
 	while (cmd->args[i])
@@ -122,7 +119,6 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 		else
 		{
 			cmd->cmd[len] = ft_stephen_jokin(cmd, i);
-			printf("cmd->cmd[%d] -> [%s]\n", len, cmd->cmd[len]);
 			len++;
 		}
 		i++;
