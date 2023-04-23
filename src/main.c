@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/04/23 15:38:35 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/23 16:57:12 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 	free_args(args);
 }
 
-void	cut_stdio(int	sig)
+void	cut_stdio(int sig)
 {
 	char	n;
 
@@ -72,8 +72,6 @@ int	main(int argc, char **argv, char **envp)
 		resetstdio(stdio);
 		if (!prompt)
 			break ;
-		if (!prompt[0])
-			continue ;
 		if (!ft_isnot_empty_str(prompt))
 			continue ;
 		if (ft_chr_in_set(';', prompt) || !ft_strncmp(prompt, "||", 2)

@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/04/21 21:52:43 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/23 20:54:00 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ int		i_sp(t_cmd *cmd, char *prompt, int i);
 int		i_dollars(t_cmd	*cmd, char *prompt, int pos);
 
 	// LEXER
+char	*ft_append_both_sides(char	*str);
+char	*ft_append_left_side(char	*str);
 char	*clean_words(t_cmd *cmd, char *prompt, int pos);
 char	*quotes_lexer(t_cmd	*cmd, char *prompt, int pos);
 char	*double_quotes_lexer(t_cmd *cmd, char *prompt, int pos);
@@ -115,6 +117,8 @@ char	*two_lexer(t_cmd *cmd, char	*prompt, int pos);
 
 	// CMD
 void	ft_selector(t_cmd *cmd, t_env *env);
+int		init_cmd(t_cmd	*cmd, t_env	*env);
+void	exec(char **cmd, t_env *env);
 int		exec_cmd(t_cmd *cmd, t_env *env);
 int		open_fd(t_cmd *cmd);
 char	*ft_stephen_jokin(t_cmd	*cmd, int i);
@@ -130,12 +134,10 @@ int		get_name_end(char *str);
 	// PIPEX
 void	ft_pipe(t_cmd *cmd, t_env *env, int pos, int check);
 int		find_pipe(char **args, int i);
-void	ft_fd(t_cmd	*cmd, t_env	*env, int cmd_pos);
+void	ft_adult(t_cmd	*cmd, t_env	*env, int cmd_pos);
 void	ft_child(t_cmd *cmd, t_env *env, int *fd, int cmd_start);
-void	exec(char **cmd, t_env	*env);
 char	*ft_path(char **enviroment_path);
 void	pipe_error(t_cmd *cmd, t_env *env);
-char	*get_cmd(char *arguments, char **enviroment);
 int		ft_string_trader(t_cmd *cmd, int start);
 void	atrb_fill(t_cmd	*cmd, int pipe_pos, int block_pos, int redir_end);
 int		ft_checker(char	*str);
@@ -175,6 +177,7 @@ void	print_export(char **env);
 int		ft_unset(t_env *env, char *content);
 
 	// OUTPUT
+void	ft_descriptor_error(t_cmd	*cmd, int i);
 int		ft_output(t_cmd	*cmd, int i);
 int		ft_doutput(t_cmd *cmd, int i);
 	// INPUT

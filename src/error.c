@@ -6,11 +6,28 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 19:50:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/31 10:09:36 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/23 20:30:34 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_descriptor_error(t_cmd	*cmd, int i)
+{
+	write(2, "bash: ", 7);
+	write(2, cmd->args[i], ft_strlen(cmd->args[i]));
+	write(2, ": No such file or directory\n", 29);
+	i = 0;
+	while (cmd->args[i])
+		free(cmd->args[i++]);
+	free(cmd->args);
+	if (cmd->in || cmd->double_in)
+		free(cmd->input);
+	if (cmd->out || cmd->double_out)
+		free(cmd->output);
+	if (cmd->atrb)
+		exit (1);
+}
 
 void	pipe_error(t_cmd	*cmd, t_env	*env)
 {

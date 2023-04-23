@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/21 10:07:28 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/23 20:15:03 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	atrb_fill(t_cmd	*cmd, int pipe_pos, int block_pos, int redir_end)
 {
-	while (cmd->args[++pipe_pos] && ft_strncmp(cmd->args[pipe_pos], "|", 1)) //fill the next command
+	while (cmd->args[++pipe_pos] && ft_strncmp(cmd->args[pipe_pos], "|", 1))
 	{
-		if (!ft_strncmp(cmd->args[pipe_pos], ">", 1) // if redirection is found
+		if (!ft_strncmp(cmd->args[pipe_pos], ">", 1)
 			|| !ft_strncmp(cmd->args[pipe_pos], "<", 1))
 		{
-			redir_end = block_pos; // we grab with i the value of string termination
+			redir_end = block_pos;
 			if (cmd->args[pipe_pos])
 				pipe_pos += 1;
 		}
@@ -97,12 +97,12 @@ int	find_sp(char **args, int i)
 		if (!ft_strncmp(args[i], "|", 2) || !ft_strncmp(args[i], "||", 3))
 			break ;
 		else if (!ft_strncmp(args[i], ">", 2) || !ft_strncmp(args[i], "<", 2)
-				|| !ft_strncmp(args[i], "<<", 3) || !ft_strncmp(args[i], ">>", 3))
+			|| !ft_strncmp(args[i], "<<", 3) || !ft_strncmp(args[i], ">>", 3))
 		{
 			if (args[i + 1])
 				i++;
 			else
-				return (write(2, "bash: syntax error near unexpected token `newline'\n", 52), 0);
+				return (0);
 			len += 2;
 		}
 		i++;

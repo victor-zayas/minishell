@@ -6,28 +6,30 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:44:17 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/21 10:05:08 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/23 16:45:10 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_cat()
+void	ft_get_heredoc(char	*arg)
 {
-	char	**args;
-	pid_t	pid;
+	int		fd;
+	char	*input;
 
-	pid = fork();
-	if (pid == 0)
+	fd = open("heredoc_tmp", O_CREAT | O_RDWR | O_TRUNC, 0600);
+	while (1)
 	{
-		args = malloc(sizeof(char *) * 3);
-		args[0] = "cat";
-		args[1] = "heredoc_tmp";
-		args[2] = NULL;
-		execve("/bin/cat", args, NULL);
+		input = readline("heredoc> ");
+		if (ft_strlen(input) == ft_strlen(arg)
+			&& !ft_strncmp(input, arg, ft_strlen(input)))
+			break ;
+		write(fd, input, ft_strlen(input));
+		write(fd, "\n", 2);
+		free (input);
 	}
-	waitpid(pid, NULL, 0);
-	return ;
+	close(fd);
+	free(input);
 }
 
 int	ft_input(t_cmd *cmd, int i)
@@ -59,24 +61,11 @@ int	ft_dinput(t_cmd	*cmd, int i)
 {
 	pid_t	pid;
 	int		fd;
-	char 	*str;
 
 	pid = fork();
 	if (pid == 0)
 	{
-		fd = open("heredoc_tmp", O_CREAT | O_RDWR | O_TRUNC, 0600);
-		while (1)
-		{
-			str = readline("heredoc> ");
-			if (ft_strlen(str) == ft_strlen(cmd->args[i])
-				&& !ft_strncmp(str, cmd->args[i], ft_strlen(str)))
-				break ;
-			write(fd, str, ft_strlen(str));
-			write(fd, "\n", 2);
-			free (str);
-		}
-		close(fd);
-		free(str);
+		ft_get_heredoc(cmd->args[i]);
 		exit (0);
 	}
 	waitpid(pid, NULL, 0);
