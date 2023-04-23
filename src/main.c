@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/04/21 10:08:40 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:38:35 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ void	my_signal(int sig)
 {
 	if (sig == 2)
 	{
-		write(1, "MiniHell=▸", 13);
-		write(1, "\n", 1);
+		printf("\b\b  \b\b\b\b\b\n");
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();

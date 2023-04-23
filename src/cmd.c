@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/21 10:09:42 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:53:04 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	init_cmd(t_cmd	*cmd, t_env	*env)
 			* (find_sp(cmd->args, (find_sp(cmd->args, 0) + 1) + 1))
 			- (find_sp(cmd->args, 0) + 1) + 1);
 	if (!cmd->atrb)
-		return (1);
+		return (ft_doublefree(cmd->cmd), 1);
 	return (0);
 }
 
