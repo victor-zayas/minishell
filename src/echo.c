@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 18:24:42 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/25 11:47:16 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/04/24 17:30:26 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,19 @@ int	check_open(t_cmd *args, char **cmd, int open)
 	return (0);
 }
 
+void	ft_dash_echo(char	**cmd, int i)
+{
+	while (cmd[i])
+	{
+		if (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
+			i++;
+		else if ((i > 2))
+			printf(" %s", cmd[i++]);
+		else
+			printf("%s", cmd[i++]);
+	}
+}
+
 int	ft_echo(t_cmd *args, char **cmd, int open)
 {
 	int		i;
@@ -41,21 +54,18 @@ int	ft_echo(t_cmd *args, char **cmd, int open)
 	flag = 0;
 	if (open)
 		return (check_open(args, cmd, open));
-	if (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
+	if (cmd[i] && !ft_strncmp(cmd[i], "-n", 2) && ft_strlen(cmd[i]) == 2)
 	{
-		flag += 1;
-		i++;
+		ft_dash_echo(cmd, ++i);
+		return (0);
 	}
 	while (cmd[i])
 	{
-		if (cmd[i] && !ft_strncmp(cmd[i], "-n", 2) && flag == 1)
-			i++;
-		else if ((i > 1))
+		if ((i > 1))
 			printf(" %s", cmd[i++]);
 		else
 			printf("%s", cmd[i++]);
 	}
-	if (!flag)
-		printf("\n");
+	printf("\n");
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/04/23 16:57:12 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/24 17:19:48 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 	if (g_sig_exit)
 		env->exit_value = g_sig_exit;
 	get_inter(args, env);
-	//print(args);
 	ft_selector(args, env);
 	free_args(args);
 }
@@ -50,7 +49,7 @@ void	my_signal(int sig)
 {
 	if (sig == 2)
 	{
-		printf("\b\b  \b\b\b\b\b\n");
+		printf("\b\b\n");
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
@@ -73,11 +72,12 @@ int	main(int argc, char **argv, char **envp)
 		if (!prompt)
 			break ;
 		if (!ft_isnot_empty_str(prompt))
+		{
+			free(prompt);
 			continue ;
-		if (ft_chr_in_set(';', prompt) || !ft_strncmp(prompt, "||", 2)
-			|| !ft_strncmp(prompt, "&&", 2) || ft_chr_in_set('*', prompt))
-			return (ft_doublefree(env.env), free(env.oldpwd), free(prompt),
-				ft_putstr_fd("Syntax error BRO U ARE STUPID\n", 2), 1);
+		}
+		if (ft_check_prompt(&env, prompt))
+			return (1);
 		ft_choped(&args, &env, prompt);
 		g_sig_exit = 0;
 	}

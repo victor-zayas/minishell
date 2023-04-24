@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 08:07:56 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/23 20:58:39 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/24 17:12:18 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,31 @@ char	*ft_path(char **enviroment_path)
 	return (ret);
 }
 
-char	*check_path(char	**env, char	*str)
+char	*check_path(char **path, char *str)
 {
 	int		i;
+	char	*ret;
 	char	*aux;
 
-	aux = 0;
 	i = 0;
-	while (env[i] != NULL)
+	ret = NULL;
+	aux = malloc(sizeof(char *));
+	while (path[i] != NULL)
 	{
-		aux = ft_strjoin(env[i], "/");
-		free (env[i]);
-		env[i] = ft_strjoin(aux, str);
 		free (aux);
-		aux = ft_strdup(env[i++]);
+		aux = ft_strjoin(path[i], "/");
+		if (access(str, X_OK) == 0)
+		{
+			free(aux);
+			aux = ft_strdup(str);
+			break ;
+		}
+		free (path[i]);
+		path[i] = ft_strjoin(aux, str);
+		free (aux);
+		aux = ft_strdup(path[i++]);
 		if (access(aux, X_OK) == 0)
 			break ;
-		free (aux);
 	}
 	return (aux);
 }
@@ -69,13 +77,7 @@ void	exec(char **cmd, t_env *env)
 	}
 	path = ft_split(aux, ':');
 	free (aux);
-	if (access(*cmd, X_OK) == 0)
-	{
-		free(aux);
-		aux = ft_strdup(*cmd);
-	}
-	else
-		aux = check_path(path, *cmd);
+	aux = check_path(path, *cmd);
 	if (aux && path[i] && !access(aux, X_OK))
 		execve(aux, cmd, env->env);
 	exit (error_code(*cmd, env));
@@ -87,16 +89,19 @@ int	exec_cmd(t_cmd	*cmd, t_env	*env)
 	pid_t	pid;
 
 	i = 0;
+	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == -1)
 		perror("fork");
 	else if (pid == 0)
 	{
+		signal(SIGINT, my_signal);
 		open_fd(cmd);
 		if (cmd->cmd && cmd->cmd[0] && ft_strlen(*cmd->cmd) > 0)
 			exec(cmd->cmd, env);
 		exit (0);
 	}
 	wait(&i);
+	signal(SIGINT, my_signal);
 	return (WEXITSTATUS(i));
 }

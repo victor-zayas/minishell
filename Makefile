@@ -47,7 +47,7 @@ SRCS =	main.c \
 		echo.c \
 		exit.c \
 		cd.c \
-		export_unset.c \
+		unset.c \
 		inter.c \
 		pipes.c \
 		utils_pipes.c \
@@ -58,7 +58,12 @@ SRCS =	main.c \
 		error.c \
 		input.c \
 		output.c \
-		utils_fd.c
+		utils_fd.c \
+		token_append.c \
+		init_cmd.c \
+		exec.c \
+		export.c \
+		main_error.c
 
 SRC := $(addprefix $(SRCDIR), $(SRCS))
 OBJS := $(addprefix $(OBJDIR), $(OBJS))
