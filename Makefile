@@ -16,7 +16,7 @@ NAME = minishell
 
 # FLAGS #
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 RM = /bin/rm -rf
 
 # READLINE #

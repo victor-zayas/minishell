@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/25 13:43:30 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/25 16:26:03 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@ void	ft_grandfather(t_cmd *cmd, t_env *env, int pos)
 	int	i;
 
 	i = 0;
-	cmd->i.i5 = 0;
-	ft_adult(cmd, env, cmd->i.i5);
-	while (cmd->args[pos + 1] && cmd->args[find_pipe(cmd->args, pos + 1)])
+	ft_adult(cmd, env, 0);
+	while (cmd->args[pos + 1] && cmd->args[pos++])
 	{
 		i = ft_string_trader(cmd, pos);
 		while (cmd->args[pos + i] && (!ft_strncmp(cmd->args[pos + i], ">", 1)
@@ -94,26 +93,25 @@ void	ft_fork_pipe(t_cmd	*cmd, t_env	*env)
 	env->exit_value = WEXITSTATUS(cmd->flag);
 }
 
-void	ft_pipe(t_cmd *cmd, t_env *env, int pipe_pos, int block_pos)
+void	ft_pipe(t_cmd *cmd, t_env *env, int pipe_end, int sp_end)
 {
-	int		block_pos2;
+	int		it_atrb;
 	int		redir_end;
 
-	redir_end = 0;
-	block_pos2 = 0;
 	cmd->flag = 0;
-	close_str(cmd->cmd, pipe_pos, block_pos);
-	if (ft_strncmp(cmd->args[pipe_pos], "|", 2))
-		while (ft_strncmp(cmd->args[pipe_pos], "|", 2))
-			pipe_pos++;
-	if (!ft_strncmp(cmd->args[pipe_pos], "|", 1)
-		&& cmd->args[pipe_pos + 1] == NULL)
+	redir_end = 0;
+	it_atrb = 0;
+	close_str(cmd->cmd, pipe_end, sp_end);
+	while (cmd->args[pipe_end] && ft_strncmp(cmd->args[pipe_end], "|", 2))
+		pipe_end++;
+	if (!ft_strncmp(cmd->args[pipe_end], "|", 1)
+		&& cmd->args[pipe_end + 1] == NULL)
 	{
 		ft_doublefree(cmd->cmd);
 		free(cmd->atrb);
 		return ;
 	}
-	atrb_fill(cmd, pipe_pos, block_pos2, redir_end);
+	atrb_fill(cmd, pipe_end, it_atrb, redir_end);
 	close_str(cmd->atrb, cmd->block_pos, cmd->redir_end);
 	ft_fork_pipe(cmd, env);
 	ft_doublefree(cmd->cmd);
