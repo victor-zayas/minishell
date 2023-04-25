@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 18:24:42 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/04/24 17:30:26 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/25 11:23:43 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,8 @@ void	ft_dash_echo(char	**cmd, int i)
 int	ft_echo(t_cmd *args, char **cmd, int open)
 {
 	int		i;
-	int		flag;
 
 	i = 1;
-	flag = 0;
 	if (open)
 		return (check_open(args, cmd, open));
 	if (cmd[i] && !ft_strncmp(cmd[i], "-n", 2) && ft_strlen(cmd[i]) == 2)

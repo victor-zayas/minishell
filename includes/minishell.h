@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/04/24 17:19:41 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/25 11:23:26 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	get_token(t_cmd	*cmd, char *prompt);
 void	get_inter(t_cmd *cmd, t_env *env);
 
 	// GET_DATA
-int		get_data(t_cmd *args, char *prompt);
+int		get_data(t_cmd	*args, char	*prompt, int it);
 int		i_cwords(t_cmd *cmd, char *prompt, int pos);
 int		i_qwords(t_cmd *cmd, char *prompt, int pos);
 int		i_dqwords(t_cmd	*cmd, char *prompt, int pos);

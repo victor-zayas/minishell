@@ -6,37 +6,37 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:33:36 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/03/23 16:38:07 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/25 11:27:44 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	get_data(t_cmd	*args, char	*prompt)
+int	get_data(t_cmd	*args, char	*prompt, int it)
 {
-	while (prompt[args->i.i1] && args->i.i1 >= 0)
+	while (it != -1 && prompt[it])
 	{
-		while (prompt[args->i.i1] == ' ' || prompt[args->i.i1] == '\t')
-			args->i.i1++;
-		if ((prompt[args->i.i1] != '\'') && (prompt[args->i.i1] != '"')
-			&& (prompt[args->i.i1] != '>') && (prompt[args->i.i1] != '<')
-			&& (prompt[args->i.i1] != '|') && (prompt[args->i.i1] != '$')
-			&& prompt[args->i.i1])
-			args->i.i1 = i_cwords(args, prompt, args->i.i1);
-		if ((prompt[args->i.i1] == '\'') && prompt[args->i.i1])
-			args->i.i1 = i_qwords(args, prompt, args->i.i1);
-		if (prompt[args->i.i1] == '"' && prompt[args->i.i1])
-			args->i.i1 = i_dqwords(args, prompt, args->i.i1);
-		if (prompt[args->i.i1] == '|' && prompt[args->i.i1])
-			args->i.i1 = i_sp(args, prompt, args->i.i1);
-		if (prompt[args->i.i1] == '<' && prompt[args->i.i1])
-			args->i.i1 = i_sp(args, prompt, args->i.i1);
-		if (prompt[args->i.i1] == '>' && prompt[args->i.i1])
-			args->i.i1 = i_sp(args, prompt, args->i.i1);
-		if (prompt[args->i.i1] == '$' && prompt[args->i.i1])
-			args->i.i1 = i_dollars(args, prompt, args->i.i1);
+		while (prompt[it] == ' ' || prompt[it] == '\t')
+			it++;
+		if ((prompt[it] != '\'') && (prompt[it] != '"')
+			&& (prompt[it] != '>') && (prompt[it] != '<')
+			&& (prompt[it] != '|') && (prompt[it] != '$')
+			&& prompt[it])
+			it = i_cwords(args, prompt, it);
+		if ((prompt[it] == '\'') && prompt[it])
+			it = i_qwords(args, prompt, it);
+		if (it != -1 && prompt[it] == '"' && prompt[it])
+			it = i_dqwords(args, prompt, it);
+		if (it != -1 && prompt[it] == '|' && prompt[it])
+			it = i_sp(args, prompt, it);
+		if (it != -1 && prompt[it] == '<' && prompt[it])
+			it = i_sp(args, prompt, it);
+		if (it != -1 && prompt[it] == '>' && prompt[it])
+			it = i_sp(args, prompt, it);
+		if (it != -1 && prompt[it] == '$' && prompt[it])
+			it = i_dollars(args, prompt, it);
 	}
-	return (args->i.i1);
+	return (it);
 }
 
 int	i_sp(t_cmd	*cmd, char	*prompt, int i)
