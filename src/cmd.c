@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/25 11:29:37 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/25 13:33:48 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	get_cmd(t_cmd	*cmd, t_env	*env, int	*check)
 	len = 0;
 	while (cmd->args[i])
 	{
-		if (!ft_strncmp(cmd->args[len], "|", 1))
+		if (!ft_strncmp(cmd->args[i], "|", 1))
 			return (ft_pipe(cmd, env, len, *check), -1);
 		else if (!ft_strncmp(cmd->args[i], ">", 1)
 			|| !ft_strncmp(cmd->args[i], "<", 1))

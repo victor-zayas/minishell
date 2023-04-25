@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/23 20:40:05 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/25 13:43:30 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_grandfather(t_cmd *cmd, t_env *env, int pos)
 	i = 0;
 	cmd->i.i5 = 0;
 	ft_adult(cmd, env, cmd->i.i5);
-	while (cmd->args[pos++])
+	while (cmd->args[pos + 1] && cmd->args[find_pipe(cmd->args, pos + 1)])
 	{
 		i = ft_string_trader(cmd, pos);
 		while (cmd->args[pos + i] && (!ft_strncmp(cmd->args[pos + i], ">", 1)
@@ -103,6 +103,9 @@ void	ft_pipe(t_cmd *cmd, t_env *env, int pipe_pos, int block_pos)
 	block_pos2 = 0;
 	cmd->flag = 0;
 	close_str(cmd->cmd, pipe_pos, block_pos);
+	if (ft_strncmp(cmd->args[pipe_pos], "|", 2))
+		while (ft_strncmp(cmd->args[pipe_pos], "|", 2))
+			pipe_pos++;
 	if (!ft_strncmp(cmd->args[pipe_pos], "|", 1)
 		&& cmd->args[pipe_pos + 1] == NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/23 20:15:03 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/25 13:43:44 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,16 @@ int	ft_string_trader(t_cmd *cmd, int start)
 	cmd->cmd = ft_doublestrdup(cmd->atrb);
 	ft_doublefree(cmd->atrb);
 	len = 0;
-	while (cmd->args[start + len] && ft_strncmp(cmd->args[start + len], "|", 1)
-		&& ft_strncmp(cmd->args[start + len], ">", 1)
-		&& ft_strncmp(cmd->args[start + len], "<", 1))
-		len++;
+	while (cmd->args[start + len] && ft_strncmp(cmd->args[start + len], "|", 2)
+		&& ft_strncmp(cmd->args[start + len], ">", 2)
+		&& ft_strncmp(cmd->args[start + len], "<", 2))
+		len += 1;
 	cmd->atrb = (char **)malloc(sizeof(char *) * (len + 1));
 	len = 0;
 	while (cmd->args[start + len]
-		&& ft_strncmp(cmd->args[start + len], "|", 1)
-		&& ft_strncmp(cmd->args[start + len], ">", 1)
-		&& ft_strncmp(cmd->args[start + len], "<", 1))
+		&& ft_strncmp(cmd->args[start + len], "|", 2)
+		&& ft_strncmp(cmd->args[start + len], ">", 2)
+		&& ft_strncmp(cmd->args[start + len], "<", 2))
 	{
 		cmd->atrb[len] = ft_stephen_jokin(cmd, start + len);
 		len++;
