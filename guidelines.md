@@ -4,10 +4,10 @@
 	//  __attribute__((unused)) -> Variables not used
 	
 	// TO _ DO
-	1. solve << && >> crash
-	2. add cd - message
-	3. add unset $PATH error mssg 
-	4. Bombardear ALSA
+	1. heredoc doesn't print
+		-quit^3 se imprime en el prompt normal
+		- -n -n hace espacios || -nnnnnnnn da nwl
+	2. Bombardear ALSA
 
 
 	// DONE
