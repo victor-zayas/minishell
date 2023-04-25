@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/18 16:55:09 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/25 11:42:40 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,30 +54,30 @@ void	init_args(t_cmd *cmd)
 	cmd->i.i5 = 0;
 }
 
-void	ft_lexer(t_cmd	*args, char	*prompt)
+void	ft_lexer(t_cmd	*args, char	*prompt, int it)
 {
-	while (prompt[args->i.i2])
+	while (prompt[it])
 	{
-		while (prompt[args->i.i2] == ' ' || prompt[args->i.i2] == '\t')
-			args->i.i2++;
-		if ((prompt[args->i.i2] != '\'') && (prompt[args->i.i2] != '"')
-			&& (prompt[args->i.i2] != '>') && (prompt[args->i.i2] != '<')
-			&& (prompt[args->i.i2] != '|'))
-				prompt = clean_words(args, prompt, args->i.i2);
-		else if ((prompt[args->i.i2] == '\'') && prompt[args->i.i2])
-			prompt = quotes_lexer(args, prompt, args->i.i2);
-		else if (prompt[args->i.i2] == '"' && prompt[args->i.i2])
-			prompt = double_quotes_lexer(args, prompt, args->i.i2);
-		else if (prompt[args->i.i2] == '|' && prompt[args->i.i2])
-			prompt = one_lexer(args, prompt, args->i.i2);
-		else if (((prompt[args->i.i2] == '<' && prompt[args->i.i2 + 1] == '<')
-				|| (prompt[args->i.i2] == '>'
-					&& prompt[args->i.i2 + 1] == '>')) && prompt[args->i.i2])
-			prompt = two_lexer(args, prompt, args->i.i2);
-		else if ((prompt[args->i.i2] == '<'
-				|| prompt[args->i.i2] == '>') && prompt[args->i.i2])
-			prompt = one_lexer(args, prompt, args->i.i2);
-		args->i.i2 = 0;
+		while (prompt[it] == ' ' || prompt[it] == '\t')
+			it++;
+		if ((prompt[it] != '\'') && (prompt[it] != '"')
+			&& (prompt[it] != '>') && (prompt[it] != '<')
+			&& (prompt[it] != '|'))
+				prompt = clean_words(args, prompt, it);
+		else if ((prompt[it] == '\'') && prompt[it])
+			prompt = quotes_lexer(args, prompt, it);
+		else if (prompt[it] == '"' && prompt[it])
+			prompt = double_quotes_lexer(args, prompt, it);
+		else if (prompt[it] == '|' && prompt[it])
+			prompt = one_lexer(args, prompt, it);
+		else if (((prompt[it] == '<' && prompt[it + 1] == '<')
+				|| (prompt[it] == '>'
+					&& prompt[it + 1] == '>')) && prompt[it])
+			prompt = two_lexer(args, prompt, it);
+		else if ((prompt[it] == '<'
+				|| prompt[it] == '>') && prompt[it])
+			prompt = one_lexer(args, prompt, it);
+		it = 0;
 	}
 	free(prompt);
 }
@@ -94,7 +94,7 @@ void	get_token(t_cmd	*cmd, char	*prompt)
 	if (cmd->out || cmd->double_out)
 		cmd->output = (int *)malloc(sizeof(int *)
 				* (cmd->out + cmd->double_out + 1));
-	ft_lexer(cmd, prompt);
+	ft_lexer(cmd, prompt, 0);
 	cmd->args[cmd->size] = NULL;
 	cmd->size = 0;
 }

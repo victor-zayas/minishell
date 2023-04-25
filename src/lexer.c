@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:16:59 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/23 20:09:59 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/25 11:52:59 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,20 @@ char	*clean_words(t_cmd	*cmd, char *prompt, int pos)
 	return (tmp);
 }
 
+char	*quotes_checker(char	*prompt, int pos)
+{
+	char	*tmp;
+
+	tmp = 0;
+	if (pos == 1)
+	{
+		tmp = ft_substr(prompt, (pos + 1), ft_strlen(prompt) - pos + 1);
+		free(prompt);
+		return (tmp);
+	}
+	return (tmp);
+}
+
 char	*quotes_lexer(t_cmd	*cmd, char	*prompt, int pos)
 {
 	char	*tmp;
@@ -81,8 +95,6 @@ char	*double_quotes_lexer(t_cmd	*cmd, char	*prompt, int pos)
 	tmp = 0;
 	start = (pos);
 	(pos)++;
-	if (!prompt)
-		return (free(prompt), ft_strdup(""));
 	while (prompt[pos] != '"' && prompt[pos])
 	{
 		if (prompt[pos] == '$')
@@ -94,6 +106,8 @@ char	*double_quotes_lexer(t_cmd	*cmd, char	*prompt, int pos)
 		}
 		(pos)++;
 	}
+	if (pos == 1)
+		return (quotes_checker(prompt, pos));
 	cmd->args[cmd->size++] = ft_substr(prompt, start, pos - start + 1);
 	tmp = ft_substr(prompt, (pos + 1), ft_strlen(prompt) - pos + 1);
 	free(prompt);

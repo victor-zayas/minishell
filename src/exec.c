@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 08:07:56 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/24 17:12:18 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/25 11:34:25 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,9 @@ char	*ft_path(char **enviroment_path)
 char	*check_path(char **path, char *str)
 {
 	int		i;
-	char	*ret;
 	char	*aux;
 
 	i = 0;
-	ret = NULL;
 	aux = malloc(sizeof(char *));
 	while (path[i] != NULL)
 	{

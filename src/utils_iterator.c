@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:10:57 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/25 11:26:30 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/25 11:41:04 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ int	i_qwords(t_cmd	*cmd, char	*prompt, int pos)
 
 int	i_dqwords(t_cmd	*cmd, char	*prompt, int pos)
 {
+	if (!prompt[pos + 1])
+		return (-1);
 	cmd->flag = 1;
-	while (prompt[++pos] != '"' && prompt[pos])
+	pos++;
+	while (prompt[pos] != '"' && prompt[pos])
 	{
 		if (prompt[pos] == '$')
 		{
@@ -49,6 +52,7 @@ int	i_dqwords(t_cmd	*cmd, char	*prompt, int pos)
 			else
 				cmd->flag = 0;
 		}
+		pos++;
 	}
 	if (prompt[pos] == '"')
 		cmd->double_quotes += 1;
