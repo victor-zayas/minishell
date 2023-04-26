@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/04/25 11:54:05 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/26 12:55:46 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	cut_stdio(int sig)
 	char	n;
 
 	n = sig + '0';
-	write(2, "Quit: ", 7);
-	write(2, &n, 1);
-	write(2, "\n", 2);
+	write(1, "Quit: ", 7);
+	write(1, &n, 1);
+	write(1, "\n", 2);
 }
 
 void	my_signal(int sig)

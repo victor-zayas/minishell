@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 18:24:42 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/04/25 11:23:43 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/26 12:58:21 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_echo(t_cmd *args, char **cmd, int open)
 	i = 1;
 	if (open)
 		return (check_open(args, cmd, open));
-	if (cmd[i] && !ft_strncmp(cmd[i], "-n", 2) && ft_strlen(cmd[i]) == 2)
+	if (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
 	{
 		ft_dash_echo(cmd, ++i);
 		return (0);

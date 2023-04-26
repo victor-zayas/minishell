@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/25 11:42:40 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/26 12:54:46 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_shell(t_cmd *cmd, t_env *env, char	**envp, int *stdio)
 	signal(SIGINT, my_signal);
 	if (g_sig_exit)
 		env->exit_value = g_sig_exit;
-	signal(SIGQUIT, cut_stdio);
+	signal(SIGQUIT, SIG_IGN);
 	init_args(cmd);
 	getstdio(stdio);
 }
