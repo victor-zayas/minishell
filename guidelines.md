@@ -5,8 +5,8 @@
 	
 	// TO _ DO
 	1. heredoc doesn't print
-		-quit^3 se imprime en el prompt normal
-		- -n -n hace espacios || -nnnnnnnn da nwl
+		-quit^3 se imprime en el prompt normal fuera del modo interactivo, pierde el simbolo ^
+		- -n -n separado no imprime -n pero mete espacios en nwl || -nnnnnnnn printea la opcion de comando tantas veces como sale
 	2. Bombardear ALSA
 
 
