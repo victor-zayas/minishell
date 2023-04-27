@@ -4,9 +4,13 @@
 	//  __attribute__((unused)) -> Variables not used
 	
 	// TO _ DO
-	- cd - duplica el OLDPWD
-	-quit^3 se imprime en el prompt normal fuera del modo interactivo, pierde el simbolo ^
-	- -n -n separado no imprime -n pero mete espacios en nwl || -nnnnnnnn printea la opcion de comando tantas veces como sale
+	- || and special characters exit minishell;
+	- ls |  | revienta y traba la shell;
+	- echo $USER | echo $USER '' < segfault;
+	- cat << a > h doesn't work;
+	- << >> should not work;
+	- commands interactivo no retorna valor de salida;
+	- echo hola > | ls :leak should send error,
 	2. Bombardear ALSA
 
 
