@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/04/27 21:59:16 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/27 22:16:20 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 	if (g_sig_exit)
 		env->exit_value = g_sig_exit;
 	get_inter(args, env);
-	print(args);
+	//print(args);
 	if (*args->args)
 		ft_selector(args, env);
 	free_args(args);
