@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/27 15:44:10 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/27 16:30:42 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,9 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 
 	cmd->flag = 0;
 	len = 0;
-	if (init_cmd(cmd, env))
+	if (init_cmd(cmd, env)) // Error handling & Initialization
 		return ;
-	if (cmd->flag)
-		return (pipe_error(cmd, env));
-	len = get_cmd(cmd, env);
+	len = get_cmd(cmd, env); // Get command
 	if (len == -1)
 		return ;
 	if (*cmd->cmd)
