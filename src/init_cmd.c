@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 20:06:25 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/23 21:01:57 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/27 15:44:29 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_init_flags(t_cmd	*cmd)
 		return (2);
 	else if (flag == 0)
 	{
-		ft_redir(0, cmd->args, cmd, &cmd->flag);
+		ft_redir(0, cmd->args, cmd);
 		pid = fork();
 		if (pid == 0)
 		{

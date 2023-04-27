@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/04/27 15:40:48 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/27 15:51:50 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void	ft_child(t_cmd *cmd, t_env *env, int *fd, int cmd_start);
 char	*ft_path(char **enviroment_path);
 void	pipe_error(t_cmd *cmd, t_env *env);
 int		ft_string_trader(t_cmd *cmd, int start);
-void	atrb_fill(t_cmd	*cmd, int pipe_pos, int block_pos, int redir_end);
+void	atrb_fill(t_cmd	*cmd, int pipe_pos, int block_pos);
 int		ft_checker(char	*str);
 int		get_last_redir(char	**str, int pos);
 void	error(char *error);
