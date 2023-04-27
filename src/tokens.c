@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 20:00:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/26 12:54:46 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/27 12:31:22 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ extern int	g_sig_exit;
 void	init_shell(t_cmd *cmd, t_env *env, char	**envp, int *stdio)
 {
 	env->env = ft_env_strdup(envp);
+	ft_unset(env, "OLDPWD");
 	env->oldpwd = NULL;
 	env->exit_value = 0;
 	signal(SIGINT, my_signal);

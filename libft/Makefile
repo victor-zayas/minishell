@@ -39,7 +39,6 @@ SRC = ft_isalnum.c \
 		ft_putnbr_fd.c \
 		ft_doublestrlen.c \
 		ft_doublestrdup.c \
-		ft_env_strdup.c \
 		ft_doublefree.c \
 		ft_isspace.c \
 		ft_isnot_empty_str.c \

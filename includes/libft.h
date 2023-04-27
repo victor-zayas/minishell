@@ -25,7 +25,6 @@ typedef struct s_list
 
 void	ft_doublefree(char **str);
 char	**ft_doublestrdup(char **str);
-char	**ft_env_strdup(char **str);
 int		ft_doublestrlen(char **str);
 int		ft_isalnum(int number);
 int		ft_isalpha(int number);

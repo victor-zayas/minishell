@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_strdup.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:24:50 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/20 12:08:13 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/27 12:31:29 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
 char	**ft_env_aux(char	**str)
 {

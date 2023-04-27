@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/04/25 16:35:23 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/27 12:31:15 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ int		ft_pwd(t_cmd *cmd, int open);
 int		ft_echo(t_cmd *args, char **cmd, int open);
 
 	//ENV
+char	**ft_env_strdup(char **str);
 int		ft_env(t_cmd *cmd, t_env *env, int open);
 int		get_name_len(char *str);
 char	*ft_find_home(char *str, t_env *env);
