@@ -6,11 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 20:06:25 by jaizpuru          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2023/04/27 16:41:46 by jaizpuru         ###   ########.fr       */
-=======
-/*   Updated: 2023/04/27 21:59:06 by jaizpuru         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2023/04/27 22:07:50 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,33 +40,20 @@ int	ft_init_flags(t_cmd	*cmd)
 
 int	init_cmd(t_cmd	*cmd, t_env	*env)
 {
-<<<<<<< Updated upstream
-	int	cmd_flag;
-=======
 	int	flag;
->>>>>>> Stashed changes
 	int	atrb_size;
 
-	cmd_flag = ft_init_flags(cmd);
-	if (cmd_flag == 2) // [pipe_error] case
+	flag = ft_init_flags(cmd);
+	if (flag == 2) // [pipe_error] case
 		return (pipe_error(cmd, env), 1);
-	else if (cmd_flag == 1) // heredoc case
+	else if (flag == 1) // heredoc case
 		return (1);
 	if (!cmd->args[find_pipe(cmd->args, 0)]) // if no pipe found on args
 		return (0);
-<<<<<<< Updated upstream
-	atrb_size = (find_sp(cmd->args, (cmd_flag + 1) + 1)) // calculate size for atrb
-			- (cmd_flag + 1);
-	if (atrb_size > 0)
-		cmd->atrb = (char **)malloc(sizeof(char *) * (atrb_size + 1)); // allocate size for atrb
-	else
-		return (ft_doublefree(cmd->cmd), 1); // if no command found after pipe, free cmd->cmd
-=======
 	flag = find_sp(cmd->args, 0);
 	atrb_size = (find_sp(cmd->args, (flag + 1))) - (flag + 1);
 	cmd->atrb = (char **)malloc(sizeof(char *) * (atrb_size + 1));
 	if (!cmd->atrb)
 		return (ft_doublefree(cmd->cmd), 1);
->>>>>>> Stashed changes
 	return (0);
 }
