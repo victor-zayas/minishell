@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/27 16:36:31 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/27 22:04:13 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ int	find_sp(char **args, int i)
 		}
 		i++;
 	}
-	if (args[i] && !ft_strncmp(args[i], "|", 2) && !args[i + 1])
-		return (-1); // expected command (-1)
+	if (args[i] && !ft_strncmp(args[i], "|", 2)
+		&& (!args[i + 1] || !ft_strncmp(args[i + 1], "|", 2)))
+		return (-1);
 	return (i - len);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/04/27 12:31:26 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/04/27 21:59:16 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 	if (g_sig_exit)
 		env->exit_value = g_sig_exit;
 	get_inter(args, env);
+	print(args);
 	if (*args->args)
 		ft_selector(args, env);
 	free_args(args);
@@ -77,8 +78,8 @@ int	main(int argc, char **argv, char **envp)
 			free(prompt);
 			continue ;
 		}
-		if (ft_check_prompt(&env, prompt))
-			return (1);
+		if (ft_check_prompt(prompt))
+			continue ;
 		ft_choped(&args, &env, prompt);
 		g_sig_exit = 0;
 	}

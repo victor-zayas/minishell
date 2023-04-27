@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/04/27 15:51:50 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/27 21:43:48 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	my_signal(int sig);
 void	cut_stdio(int sig);
 void	getstdio(int *stdio);
 void	resetstdio(int *stdio);
-int		ft_check_prompt(t_env *env, char *prompt);
+int		ft_check_prompt(char *prompt);
 
 	// GET_TOKEN
 void	get_token(t_cmd	*cmd, char *prompt);
@@ -146,6 +146,7 @@ void	atrb_fill(t_cmd	*cmd, int pipe_pos, int block_pos);
 int		ft_checker(char	*str);
 int		get_last_redir(char	**str, int pos);
 void	error(char *error);
+int		check_pipe_error(t_cmd	*cmd, t_env	*env, int pipe_end);
 
 	// FREE_ARGS
 void	free_args(t_cmd	*args);
