@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/04/27 12:31:15 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/04/27 15:40:48 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int		open_fd(t_cmd *cmd);
 char	*ft_stephen_jokin(t_cmd	*cmd, int i);
 int		find_sp(char **args, int i);
 int		error_code(char *cmd, t_env	*env);
-int		ft_redir(int pos, char	**args, t_cmd *cmd, int	*checker);
+int		ft_redir(int pos, char	**args, t_cmd *cmd);
 void	close_str(char	**ar, int end, int sp);
 int		ft_check_redir(char **cmd, int cmd_start);
 int		find_env(int p_ar, int p_str, t_cmd	*cmd, t_env	*env);
