@@ -6,20 +6,20 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/25 16:34:12 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/04/27 16:02:48 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	atrb_fill(t_cmd	*cmd, int pipe_pos, int block_pos, int redir_end)
+void	atrb_fill(t_cmd	*cmd, int pipe_pos, int block_pos)
 {
 	while (cmd->args[++pipe_pos] && ft_strncmp(cmd->args[pipe_pos], "|", 1))
 	{
 		if (!ft_strncmp(cmd->args[pipe_pos], ">", 1)
 			|| !ft_strncmp(cmd->args[pipe_pos], "<", 1))
 		{
-			redir_end = block_pos;
+			cmd->redir_end = block_pos;
 			if (cmd->args[pipe_pos])
 				pipe_pos += 1;
 		}
@@ -28,7 +28,6 @@ void	atrb_fill(t_cmd	*cmd, int pipe_pos, int block_pos, int redir_end)
 	}
 	cmd->pipe_pos = pipe_pos;
 	cmd->block_pos = block_pos;
-	cmd->redir_end = redir_end;
 }
 
 int	ft_string_trader(t_cmd *cmd, int start)
