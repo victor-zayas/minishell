@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:25:36 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/03/31 10:51:54 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/02 01:37:10 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/**
+ * @brief This function checks if the prompt is correct.
+ * 
+ * @param str Returns int value if that string is a valid command.
+ * @return int 
+ */
 int	ft_checker(char	*str)
 {
 	if (!str)
@@ -33,6 +39,15 @@ int	ft_checker(char	*str)
 	return (1);
 }
 
+/**
+ * @brief This funnction call the builtings, checking the length of names.
+ * 
+ * @param args Arguments received from prompt.
+ * @param cmd Command constructed with prompt.
+ * @param env Modified enviroment for get exit value.
+ * @param open Int for checks field descriptor.
+ * @return int 
+ */
 int	ft_builtings(char	**args, t_cmd	*cmd, t_env *env, int open)
 {
 	if (ft_checker(*args))

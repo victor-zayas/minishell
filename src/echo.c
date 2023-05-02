@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 18:24:42 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/04/26 12:58:21 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/02 01:44:11 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/**
+ * @brief This function check if there is redir in "echo" builting.
+ * 
+ * @param args 
+ * @param cmd Command with option.
+ * @param open Int for open the file descriptor
+ * @return int 
+ */
 int	check_open(t_cmd *args, char **cmd, int open)
 {
 	pid_t	pid;

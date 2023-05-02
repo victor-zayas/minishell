@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:20:31 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/04/18 17:59:55 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/02 01:40:47 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/**
+ * @brief Get the oldpwd PATH
+ * 
+ * @param env Copied enviroment.
+ */
 void	get_oldpwd(t_env *env)
 {
 	int		i;
@@ -31,6 +36,11 @@ void	get_oldpwd(t_env *env)
 	}
 }
 
+/**
+ * @brief This function rewrite PWD in case it change.
+ * 
+ * @param env Copied enviroment to modified.
+ */
 static void	ft_rewrite_pwd(t_env *env)
 {
 	int	i;
@@ -48,6 +58,15 @@ static void	ft_rewrite_pwd(t_env *env)
 	free(env->pwd);
 }
 
+/**
+ * @brief This function check if command flag and send an error message
+ * 		  if it's an error.
+ * 
+ * @param env Copied enviroment.
+ * @param str Command received.
+ * @param flag Int of flag command.
+ * @return int 
+ */
 int	cd_error_flag(t_env	*env, char	*str, int flag)
 {
 	if (flag == -1)
@@ -67,6 +86,13 @@ int	cd_error_flag(t_env	*env, char	*str, int flag)
 	return (0);
 }
 
+/**
+ * @brief This funciton checks the "-" flag of cd builting.
+ * 
+ * @param env Copied enviroment.
+ * @param cmd Command "cd" with option.
+ * @return int 
+ */
 int	check_option(t_env	*env, char	**cmd)
 {
 	int		flag;
@@ -89,6 +115,15 @@ int	check_option(t_env	*env, char	**cmd)
 	return (0);
 }
 
+/**
+ * @brief This function, replicate the "CD" builting wich move you
+ * between directories, (Change Directory).
+ * 
+ * @param cmd Commands from prompt.
+ * @param args Option command.
+ * @param env Copied enviroment to change the $PWD value.
+ * @return int 
+ */
 int	ft_cd(char	**cmd, t_cmd	*args, t_env *env)
 {
 	char	*aux;

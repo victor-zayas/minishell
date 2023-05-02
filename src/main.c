@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/04/27 12:31:26 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/05/02 01:40:30 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 int	g_sig_exit;
 
+/**
+ * @brief This function defines the order in which the minishell is executed.
+ * 
+ * @param args Command info structure.
+ * @param env Enviroment of minishell.
+ * @param prompt Commands from the prompt.
+ */
 void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 {
 	char	*aux;
@@ -36,6 +43,12 @@ void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 	free_args(args);
 }
 
+/**
+ * @brief This function rewrite the prompt
+ * 		  with signals that interrupt the process.
+ * 
+ * @param sig Int of signal to be printed in prompt.
+ */
 void	cut_stdio(int sig)
 {
 	char	n;
@@ -46,6 +59,11 @@ void	cut_stdio(int sig)
 	write(1, "\n", 2);
 }
 
+/**
+ * @brief This function rewrite the prompt with new line.
+ * 
+ * @param sig Int of signal to replace prompt.
+ */
 void	my_signal(int sig)
 {
 	if (sig == 2)
@@ -58,6 +76,14 @@ void	my_signal(int sig)
 	}
 }
 
+/**
+ * @brief Main function of Minishell.
+ * 
+ * @param argc Nb of arguments.
+ * @param argvCcontent of the arguments (prompt received).
+ * @param envp Original enviroment to be copied.
+ * @return int 
+ */
 int	main(int argc, char **argv, char **envp)
 {
 	t_env	env;
