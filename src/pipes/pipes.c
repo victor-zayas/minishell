@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/27 16:03:26 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/03 08:46:23 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	ft_fork_pipe(t_cmd	*cmd, t_env	*env)
 void	ft_pipe(t_cmd *cmd, t_env *env, int pipe_end, int sp_end)
 {
 	int		it_atrb;
-	
+
 	cmd->flag = 0;
 	it_atrb = 0;
 	close_str(cmd->cmd, pipe_end, sp_end);

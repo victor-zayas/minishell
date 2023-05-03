@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/05/02 01:40:30 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/05/03 08:43:41 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,39 +41,6 @@ void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 	if (*args->args)
 		ft_selector(args, env);
 	free_args(args);
-}
-
-/**
- * @brief This function rewrite the prompt
- * 		  with signals that interrupt the process.
- * 
- * @param sig Int of signal to be printed in prompt.
- */
-void	cut_stdio(int sig)
-{
-	char	n;
-
-	n = sig + '0';
-	write(1, "Quit: ", 7);
-	write(1, &n, 1);
-	write(1, "\n", 2);
-}
-
-/**
- * @brief This function rewrite the prompt with new line.
- * 
- * @param sig Int of signal to replace prompt.
- */
-void	my_signal(int sig)
-{
-	if (sig == 2)
-	{
-		printf("\b\b\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
-		g_sig_exit = 130;
-	}
 }
 
 /**

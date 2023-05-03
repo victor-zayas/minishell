@@ -29,45 +29,58 @@ INCDIR = includes/
 INCLUDES = -I $(INCDIR)
 
 # OBJS #
-OBJS = $(SRCS:.c=.o)
 
-OBJDIR := objs/
+OBJ = $(addsuffix .o, $(BUILTINS)) \
+	  $(addsuffix .o, $(MAIN)) \
+	  $(addsuffix .o, $(MAS)) \
+	  $(addsuffix .o, $(PIPES)) \
+	  $(addsuffix .o, $(REDIR)) \
+	  $(addsuffix .o, $(LEXER)) \
+	  $(addsuffix .o, $(CMD))
+
 SRCDIR := src/
 
 # SRCS #
-SRCS =	main.c \
-		get_data.c \
-		utils_iterator.c \
-		tokens.c \
-		lexer.c \
-		lexer2.c \
-		builtings.c \
-		pwd.c \
-		env.c \
-		echo.c \
-		exit.c \
-		cd.c \
-		unset.c \
-		inter.c \
-		pipes.c \
-		utils_pipes.c \
-		cmd.c \
-		redir.c \
-		print.c \
-		utils_cmd.c \
-		error.c \
-		input.c \
-		output.c \
-		utils_fd.c \
-		token_append.c \
-		init_cmd.c \
-		exec.c \
-		export.c \
-		main_error.c \
-		ft_env_strdup.c 
+
+BUILTINS = builtings cd echo env exit export ft_env_strdup pwd unset
+
+MAIN = ft_check_prompt init_struct main print rstio signal
+
+MAS = get_data utils_iterator
+
+PIPES = pipes utils_pipe_fd utils_pipes error
+
+REDIR = input output redir
+
+CMD = cmd exec init_cmd utils_cmd
+
+LEXER = inter lexer lexer2 token_append tokens
+
+# SRCS #
+
+BUILTINS = builtings cd echo env exit export ft_env_strdup pwd unset
+
+MAIN = ft_check_prompt init_struct main print rstio signal
+
+MAS = get_data utils_iterator
+
+PIPES = pipes utils_pipe_fd utils_pipes error
+
+REDIR = input output redir
+
+CMD = cmd exec init_cmd utils_cmd
+
+LEXER = inter lexer lexer2 token_append tokens
+
+SRCS := $(addsuffix .c, $(addprefix src/builtings/, $(BUILTINS))) \
+	  $(addsuffix .c, $(addprefix src/main/, $(MAIN))) \
+	  $(addsuffix .c, $(addprefix src/mas/, $(MAS))) \
+	  $(addsuffix .c, $(addprefix src/pipes/, $(PIPES))) \
+	  $(addsuffix .c, $(addprefix src/redir/, $(REDIR))) \
+	  $(addsuffix .c, $(addprefix src/lexer/, $(LEXER))) \
+	  $(addsuffix .c, $(addprefix src/cmd/, $(CMD)))
 
 SRC := $(addprefix $(SRCDIR), $(SRCS))
-OBJS := $(addprefix $(OBJDIR), $(OBJS))
 
 # COLORS #
 BLACK=\033[0;30m
@@ -97,26 +110,25 @@ endef
 export MINISHELL
 
 # COMPILATION #
-.SILENT:
+#.SILENT:
 
 all: $(NAME)
 
-$(OBJDIR)%.o: $(SRCDIR)%.c
-	mkdir -p $(OBJDIR)
-	$(CC) $(CFLAGS) $(READLINE) $(INCLUDES) -c $^ -o $@
+$(OBJ) : $(SRCS)
+	$(CC) $(CFLAGS) $(READLINE) $(INCLUDES) -c $^
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJ)
 	make -C libft all
-	$(CC) $(CFLAGS) $(LREADLINE_FLAGS) $(READLINE) libft/libft.a $^ -o $(NAME)
-#	$(CC) $(CFLAGS) $^ $(LREADLINE_FLAGS) $(LINUX_READLINE) libft/libft.a -o $(NAME)
+	mv $(OBJ) objs/
+#	$(CC) $(CFLAGS) $(LREADLINE_FLAGS) $(READLINE) libft/libft.a $^ -o $(NAME)
+	$(CC) $(CFLAGS) $(addprefix objs/, $(OBJ)) $(LREADLINE_FLAGS) $(LINUX_READLINE) libft/libft.a -o $(NAME)
 	echo "$(BLUE)༺ library created༻$(END)"
 	echo "$$MINISHELL"
 	echo "Special thanks to $(GREEN)༺ HELECHO༻$(END)  & $(GREEN)༺ Arteria༻$(END)"
 
 clean:
 	make -C libft clean
-	rm -rf $(OBJDIR)
-	$(RM) $(OBJS)
+	$(RM) $(addprefix objs/, $(OBJ))
 		echo "$(RED)༺ Objs deleted༻$(END)"
 
 fclean: clean
