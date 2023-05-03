@@ -117,7 +117,10 @@ all: $(NAME)
 $(OBJ) : $(SRCS)
 	$(CC) $(CFLAGS) $(READLINE) $(INCLUDES) -c $^
 
-$(NAME): $(OBJ)
+objs/ :
+	mkdir objs/
+
+$(NAME): $(OBJ) objs/
 	make -C libft all
 	mv $(OBJ) objs/
 #	$(CC) $(CFLAGS) $(LREADLINE_FLAGS) $(READLINE) libft/libft.a $^ -o $(NAME)
