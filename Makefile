@@ -22,13 +22,15 @@ RM = /bin/rm -rf
 # READLINE #
 LREADLINE_FLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib/
 READLINE = -I/Users/$(USER)/.brew/opt/readline/include/
-#LINUX_READLINE = -lreadline -L/usr/lib/x86_64-linux-gnu/
+LINUX_READLINE = -lreadline -L/usr/lib/x86_64-linux-gnu/
 
 # INCLUDES #
 INCDIR = includes/
 INCLUDES = -I $(INCDIR)
 
 # OBJS #
+
+OBJS = $(addprefix objs/, $(OBJ))
 
 OBJ = $(addsuffix .o, $(BUILTINS)) \
 	  $(addsuffix .o, $(MAIN)) \
@@ -72,7 +74,7 @@ CMD = cmd exec init_cmd utils_cmd
 
 LEXER = inter lexer lexer2 token_append tokens
 
-SRCS := $(addsuffix .c, $(addprefix src/builtings/, $(BUILTINS))) \
+SRCS = $(addsuffix .c, $(addprefix src/builtings/, $(BUILTINS))) \
 	  $(addsuffix .c, $(addprefix src/main/, $(MAIN))) \
 	  $(addsuffix .c, $(addprefix src/mas/, $(MAS))) \
 	  $(addsuffix .c, $(addprefix src/pipes/, $(PIPES))) \
@@ -80,7 +82,6 @@ SRCS := $(addsuffix .c, $(addprefix src/builtings/, $(BUILTINS))) \
 	  $(addsuffix .c, $(addprefix src/lexer/, $(LEXER))) \
 	  $(addsuffix .c, $(addprefix src/cmd/, $(CMD)))
 
-SRC := $(addprefix $(SRCDIR), $(SRCS))
 
 # COLORS #
 BLACK=\033[0;30m
@@ -114,20 +115,20 @@ export MINISHELL
 
 all: $(NAME)
 
-$(OBJ) : $(SRCS)
-	$(CC) $(CFLAGS) $(READLINE) $(INCLUDES) -c $^
-
-objs/ :
-	mkdir objs/
-
-$(NAME): $(OBJ) objs/
+$(NAME): $(addprefix objs/, $(OBJ))
 	make -C libft all
-	mv $(OBJ) objs/
 #	$(CC) $(CFLAGS) $(LREADLINE_FLAGS) $(READLINE) libft/libft.a $^ -o $(NAME)
-	$(CC) $(CFLAGS) $(addprefix objs/, $(OBJ)) $(LREADLINE_FLAGS) $(LINUX_READLINE) libft/libft.a -o $(NAME)
+	$(CC) $(CFLAGS) $(addprefix objs/, $(OBJ)) $(LINUX_READLINE) libft/libft.a -o $(NAME)
 	echo "$(BLUE)༺ library created༻$(END)"
 	echo "$$MINISHELL"
 	echo "Special thanks to $(GREEN)༺ HELECHO༻$(END)  & $(GREEN)༺ Arteria༻$(END)"
+
+$(addprefix objs/, $(OBJ)) : $(SRCS)
+	$(CC) $(CFLAGS) $(READLINE) $(INCLUDES) -c $^
+	mv $(OBJ) objs/
+
+objs/ :
+	mkdir objs/
 
 clean:
 	make -C libft clean
