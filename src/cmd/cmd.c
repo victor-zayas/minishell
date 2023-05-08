@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/27 15:44:10 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/08 10:00:41 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ void	ft_selector(t_cmd *cmd, t_env *env)
 	len = get_cmd(cmd, env);
 	if (len == -1)
 		return ;
-	if (*cmd->cmd)
+	else if (len == -2)
+		exit (0);
+	else if (*cmd->cmd)
 	{
 		close_str(cmd->cmd, len, 0);
 		if (ft_builtings(cmd->cmd, cmd, env, 1) == 1)

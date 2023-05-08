@@ -6,23 +6,24 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 20:06:25 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/27 15:44:29 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/08 10:04:12 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_init_flags(t_cmd	*cmd)
+int	ft_init_flags(t_cmd	*cmd, t_env	*env)
 {
 	int		flag;
 	pid_t	pid;
 
 	flag = find_sp(cmd->args, 0);
 	if (flag == -1)
-		return (2);
+		return (pipe_error(cmd, env), 2);
 	else if (flag == 0)
 	{
-		ft_redir(0, cmd->args, cmd);
+		if (ft_redir(0, cmd->args, cmd) == -1)
+			return (2);
 		pid = fork();
 		if (pid == 0)
 		{
@@ -42,9 +43,9 @@ int	init_cmd(t_cmd	*cmd, t_env	*env)
 {
 	int	flag;
 
-	flag = ft_init_flags(cmd);
+	flag = ft_init_flags(cmd, env);
 	if (flag == 2)
-		return (pipe_error(cmd, env), 1);
+		return (env->exit_value = 2, 2);
 	else if (flag == 1)
 		return (1);
 	if (!cmd->args[find_pipe(cmd->args, 0)])

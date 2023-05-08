@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 08:07:56 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/04/26 12:56:38 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/08 09:59:49 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ int	exec_cmd(t_cmd	*cmd, t_env	*env)
 	{
 		signal(SIGINT, my_signal);
 		signal(SIGQUIT, cut_stdio);
-		open_fd(cmd);
+		if (open_fd(cmd))
+			exit (2);
 		if (cmd->cmd && cmd->cmd[0] && ft_strlen(*cmd->cmd) > 0)
 			exec(cmd->cmd, env);
 		exit (0);
