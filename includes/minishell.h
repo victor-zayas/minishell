@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/05/11 07:28:53 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 08:27:34 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	resetstdio(int *stdio);
 		// SIGNAL_RELATED
 void	cut_stdio(int sig);
 void	my_signal(int sig);
+void	my_signal_mod(int sig);
 
 		// BONUS_FORMAT_CHECKER
 int		ft_check_prompt(t_env *env, char *prompt);
