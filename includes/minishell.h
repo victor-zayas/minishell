@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/05/11 11:34:41 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/05/11 11:16:24 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	resetstdio(int *stdio);
 void	cut_stdio(int sig);
 void	my_signal(int sig);
 void	my_signal_mod(int sig);
+void	my_signal_exit(int sig);
 
 	// BONUS_FORMAT_CHECKER
 int		ft_check_prompt(char *prompt);
