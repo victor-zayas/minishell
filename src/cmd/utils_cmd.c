@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 16:27:27 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/05/11 06:48:38 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 10:30:14 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	get_last_redir(char	**str, int pos)
 		pos = find_pipe(str, pos);
 		if (str[pos] && str[pos + 1])
 			pos++;
+		else if (str[pos] && !str[pos + 1])
+			return (pipe_error(), -1);
 	}
 	while (str[pos - 1] && ft_strncmp(str[pos - 1], "|", 1))
 	{

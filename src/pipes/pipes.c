@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 06:49:24 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 10:30:09 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ void	ft_fork_pipe(t_cmd	*cmd, t_env	*env)
 		if (cmd->flag == -1)
 			exit (130);
 		cmd->i.i5 = get_last_redir(cmd->args, 0);
+		if (cmd->i.i5 == -1)
+			exit (2);
 		if (cmd->i.i5)
 			ft_check_redir(cmd->args, cmd->i.i5);
 		if (ft_builtings(cmd->atrb, cmd, env, 0) == 1)
