@@ -16,30 +16,20 @@ NAME = minishell
 
 # FLAGS #
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
 RM = /bin/rm -rf
 
 # READLINE #
 LREADLINE_FLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib/
 READLINE = -I/Users/$(USER)/.brew/opt/readline/include/
-LINUX_READLINE = -lreadline -L/usr/lib/x86_64-linux-gnu/
+#LINUX_READLINE = -lreadline -L/usr/lib/x86_64-linux-gnu/
 
 # INCLUDES #
 INCDIR = includes/
 INCLUDES = -I $(INCDIR)
 
 # OBJS #
-
-OBJS = $(addprefix objs/, $(OBJ))
-
-OBJ = $(addsuffix .o, $(BUILTINS)) \
-	  $(addsuffix .o, $(MAIN)) \
-	  $(addsuffix .o, $(MAS)) \
-	  $(addsuffix .o, $(PIPES)) \
-	  $(addsuffix .o, $(REDIR)) \
-	  $(addsuffix .o, $(LEXER)) \
-	  $(addsuffix .o, $(CMD))
-
+OBJDIR := objs/
 SRCDIR := src/
 
 # SRCS #
@@ -51,14 +41,16 @@ REDIR = input output redir
 CMD = cmd exec init_cmd utils_cmd
 LEXER = inter lexer lexer2 token_append tokens
 
-SRCS = $(addsuffix .c, $(addprefix src/builtings/, $(BUILTINS))) \
-	  $(addsuffix .c, $(addprefix src/main/, $(MAIN))) \
-	  $(addsuffix .c, $(addprefix src/mas/, $(MAS))) \
-	  $(addsuffix .c, $(addprefix src/pipes/, $(PIPES))) \
-	  $(addsuffix .c, $(addprefix src/redir/, $(REDIR))) \
-	  $(addsuffix .c, $(addprefix src/lexer/, $(LEXER))) \
-	  $(addsuffix .c, $(addprefix src/cmd/, $(CMD)))
+PLAIN_SRCS =	$(addsuffix .c, $(addprefix builtings/, $(BUILTINS)))	\
+				$(addsuffix .c, $(addprefix main/, $(MAIN)))			\
+				$(addsuffix .c, $(addprefix mas/, $(MAS)))				\
+				$(addsuffix .c, $(addprefix pipes/, $(PIPES)))			\
+				$(addsuffix .c, $(addprefix redir/, $(REDIR)))			\
+				$(addsuffix .c, $(addprefix lexer/, $(LEXER)))			\
+				$(addsuffix .c, $(addprefix cmd/, $(CMD)))
 
+SRCS := $(addprefix $(SRCDIR), $(PLAIN_SRCS))
+OBJS := $(addprefix $(OBJDIR), $(PLAIN_SRCS:.c=.o))
 
 # COLORS #
 BLACK=\033[0;30m
@@ -88,28 +80,26 @@ endef
 export MINISHELL
 
 # COMPILATION #
-#.SILENT:
+.SILENT:
 
 all: $(NAME)
 
-$(NAME): $(addprefix objs/, $(OBJ))
+$(OBJDIR)%.o: $(SRCDIR)%.c
+	mkdir -p $(@D)
+	$(CC) $(CFLAGS) $(READLINE) $(INCLUDES) -c $< -o $@
+
+$(NAME): $(OBJS)
 	make -C libft all
-	$(CC) $(CFLAGS) $(LREADLINE_FLAGS) $(addprefix objs/, $(OBJ)) $(READLINE) libft/libft.a -o $(NAME)
-#	$(CC) $(CFLAGS) $(LINUX_READLINE) $(addprefix objs/, $(OBJ)) libft/libft.a -o $(NAME)
+	$(CC) $(CFLAGS) $(LREADLINE_FLAGS) $(READLINE) libft/libft.a $^ -o $(NAME)
+#	$(CC) $(CFLAGS) $^ $(LREADLINE_FLAGS) $(LINUX_READLINE) libft/libft.a -o $(NAME)
 	echo "$(BLUE)༺ library created༻$(END)"
 	echo "$$MINISHELL"
 	echo "Special thanks to $(GREEN)༺ HELECHO༻$(END)  & $(GREEN)༺ Arteria༻$(END)"
 
-$(addprefix objs/, $(OBJ)) : $(SRCS)
-	$(CC) $(CFLAGS) $(READLINE) $(INCLUDES) -c $^
-	mv $(OBJ) objs/
-
-objs/ :
-	mkdir objs/
-
 clean:
 	make -C libft clean
-	$(RM) $(addprefix objs/, $(OBJ))
+	rm -rf $(OBJDIR)
+	$(RM) $(OBJS)
 		echo "$(RED)༺ Objs deleted༻$(END)"
 
 fclean: clean
