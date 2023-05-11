@@ -6,8 +6,7 @@
 	//Doxygen Documentation Generator. for create documentation in fuctions.
 	
 	// TO _ DO
-	- || and special characters exit minishell;
-	- ls |  | revienta y traba la shell;
+	- [ls | wc | ..]revienta y traba la shell;
 	- echo $USER | echo $USER '' < segfault;
 	- cat << a > h doesn't work;
 	- << >> should not work;
