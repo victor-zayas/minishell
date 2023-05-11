@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 18:24:42 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/05/11 11:04:14 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 13:26:40 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,27 @@ void	ft_dash_echo(char	**cmd, int i)
 	}
 }
 
+void	ft_echo_trim(char	**cmd)
+{
+	int		len;
+	char	*str;
+
+	len = 0;
+	str = NULL;
+	while (cmd[len])
+	{
+		str = ft_strdup(cmd[len]);
+		if (ft_strchr(cmd[len], '\"') || ft_strchr(cmd[len], '\''))
+			free(cmd[len]);
+		if (ft_strchr(str, '\"'))
+			cmd[len] = ft_strtrim(str, "\"");
+		else if (ft_strchr(str, '\''))
+			cmd[len] = ft_strtrim(str, "\'");
+		free(str);
+		len++;
+	}
+}
+
 int	ft_echo(t_cmd *args, char **cmd, int open)
 {
 	int		i;
@@ -60,6 +81,7 @@ int	ft_echo(t_cmd *args, char **cmd, int open)
 	i = 1;
 	if (open)
 		return (check_open(args, cmd, open));
+	ft_echo_trim(cmd);
 	if (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
 	{
 		ft_dash_echo(cmd, ++i);

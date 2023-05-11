@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:55 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 06:49:24 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 13:15:25 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,9 @@ void	ft_quote_trim(t_cmd	*cmd, t_env	*env, int i)
 	else
 		cmd->flag = 0;
 	aux = ft_strdup(cmd->args[i]);
+	if (ft_strchr(cmd->args[i], '>') || ft_strchr(cmd->args[i], '<')
+		|| ft_strchr(cmd->args[i], '|'))
+		return (free (aux));
 	free(cmd->args[i]);
 	if (cmd->flag == 1)
 		cmd->args[i] = ft_strtrim(aux, "\"");
