@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 20:06:25 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 09:15:40 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 10:03:34 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	init_cmd(t_cmd	*cmd, t_env	*env)
 		return (0);
 	if ((find_sp(cmd->args, (find_sp(cmd->args, 0) + 1) + 1))
 		- (find_sp(cmd->args, 0) + 1) + 1 < 0)
-		return (pipe_error(), env->exit_value = 2, 2);
+		return (free(cmd->cmd), pipe_error(), env->exit_value = 2, 2);
 	cmd->atrb = (char **)malloc(sizeof(char *)
 			* (find_sp(cmd->args, (find_sp(cmd->args, 0) + 1) + 1))
 			- (find_sp(cmd->args, 0) + 1) + 1);
