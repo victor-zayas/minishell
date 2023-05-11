@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 08:07:56 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 11:04:57 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 11:29:18 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,15 +93,13 @@ int	exec_cmd(t_cmd	*cmd, t_env	*env)
 	fd_open = 0;
 	signal(SIGINT, my_signal_mod);
 	pid = fork();
-	if (pid == -1)
-		perror("fork");
-	else if (pid == 0)
+	if (pid == 0)
 	{
-		signal(SIGINT, my_signal);
-		signal(SIGQUIT, cut_stdio);
 		fd_open = open_fd(cmd);
 		if (fd_open)
 			exit (2);
+		signal(SIGINT, my_signal);
+		signal(SIGQUIT, cut_stdio);
 		if (cmd->cmd && cmd->cmd[0] && ft_strlen(*cmd->cmd) > 0)
 			exec(cmd->cmd, env);
 		exit (0);
