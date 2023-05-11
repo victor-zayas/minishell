@@ -6,11 +6,11 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 20:06:25 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/08 10:04:12 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 06:49:24 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 int	ft_init_flags(t_cmd	*cmd, t_env	*env)
 {

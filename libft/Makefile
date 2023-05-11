@@ -1,86 +1,47 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/04/04 13:52:17 by jaizpuru          #+#    #+#              #
+#    Updated: 2023/05/11 06:55:13 by jaizpuru         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-# LIB #
 NAME = libft.a
 
-# SRCS #
-SRC = ft_isalnum.c \
-		ft_isalpha.c \
-		ft_isascii.c \
-		ft_isdigit.c \
-		ft_isprint.c \
-		ft_strlen.c \
-		ft_bzero.c \
-		ft_memcpy.c \
-		ft_memset.c \
-		ft_memmove.c \
-		ft_strlcpy.c \
-		ft_strlcat.c \
-		ft_toupper.c \
-		ft_tolower.c \
-		ft_strchr.c \
-		ft_strrchr.c \
-		ft_strncmp.c \
-		ft_memchr.c \
-		ft_memcmp.c \
-		ft_strnstr.c \
-		ft_atoi.c \
-		ft_calloc.c \
-		ft_strdup.c \
-		ft_substr.c \
-		ft_strjoin.c \
-		ft_strtrim.c \
-		ft_split.c \
-		ft_itoa.c \
-		ft_strmapi.c \
-		ft_striteri.c \
-		ft_putchar_fd.c \
-		ft_putstr_fd.c \
-		ft_putendl_fd.c \
-		ft_putnbr_fd.c \
-		ft_doublestrlen.c \
-		ft_doublestrdup.c \
-		ft_doublefree.c \
-		ft_isspace.c \
-		ft_isnot_empty_str.c \
-		ft_chr_in_set.c \
-		ft_lstnew.c \
-		ft_lstadd_front.c \
-		ft_lstsize.c \
-		ft_lstlast.c \
-		ft_lstadd_back.c \
-		ft_lstdelone.c \
-		ft_lstclear.c \
-		ft_lstiter.c \
-		ft_lstmap.c
+SRCS = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_strlen.c ft_bzero.c ft_memcpy.c ft_memset.c ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_doublestrdup.c ft_doublestrlen.c ft_doublefree.c ft_isnot_empty_str.c ft_chr_in_set.c ft_isspace.c
 
-# RULES #
-OBJDIR = libft_objs/
-OBJS := $(addprefix $(OBJDIR), $(SRC:.c=.o))
-SRCDIR = ./
+SRC_BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
-# FLAGS #
+OBJECTS = $(SRCS:.c=.o)
+
+OBJ_BONUS = $(SRC_BONUS:.c=.o)
+
 CFLAGS = -Wall -Wextra -Werror
 
-# INCLUDES #
-INCLUDES = -I ../includes/
-
-# COMPILATION #
 all: $(NAME)
 
-$(OBJDIR)%.o: $(SRCDIR)%.c
-	mkdir -p $(OBJDIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $^ -o $@
+$(NAME): $(OBJECTS)
+	ar rc $(NAME) $(OBJECTS)
 
-$(NAME): $(OBJS)
-	ar rc $(NAME) $(OBJS)
+$(OBJECTS): $(SRCS)
+	gcc $(CFLAGS) -c $(SRCS)
+
+$(OBJ_BONUS): $(SRCS) $(SRC_BONUS)
+	gcc $(CFLAGS) -c $(SRCS) $(SRC_BONUS)
+
+bonus: $(OBJECTS) $(OBJ_BONUS)
+	ar rc $(NAME) $(OBJECTS) $(OBJ_BONUS)
 
 clean:
-	@rm -rf $(OBJDIR) $(OBJ_BONUS)
+	@rm -f $(OBJECTS) $(OBJ_BONUS)
 
 fclean: clean
-	@rm -f $(OBJS) $(OBJ_BONUS) $(NAME)
+	@rm -f $(OBJECTS) $(OBJ_BONUS) $(NAME)
 
 re: fclean all
 
 .PHONY: all clean fclean re
-

@@ -118,7 +118,7 @@ all: $(NAME)
 $(NAME): $(addprefix objs/, $(OBJ))
 	make -C libft all
 #	$(CC) $(CFLAGS) $(LREADLINE_FLAGS) $(READLINE) libft/libft.a $^ -o $(NAME)
-	$(CC) $(CFLAGS) $(addprefix objs/, $(OBJ)) $(LINUX_READLINE) libft/libft.a -o $(NAME)
+	$(CC) $(CFLAGS) $(LINUX_READLINE) $(addprefix objs/, $(OBJ)) libft/libft.a -o $(NAME)
 	echo "$(BLUE)༺ library created༻$(END)"
 	echo "$$MINISHELL"
 	echo "Special thanks to $(GREEN)༺ HELECHO༻$(END)  & $(GREEN)༺ Arteria༻$(END)"

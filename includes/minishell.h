@@ -6,13 +6,14 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/05/03 08:57:39 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 06:50:49 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "../libft/libft.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <signal.h>
@@ -22,7 +23,6 @@
 # include <string.h>
 # include <errno.h>
 # include <stdbool.h>
-# include "libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/wait.h>

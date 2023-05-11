@@ -72,4 +72,9 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_isspace(unsigned char c);
 int		ft_isnot_empty_str(const char *str);
 int		ft_chr_in_set(char c, const char *set);
+void	ft_doublefree(char **str);
+char	**ft_doublestrdup(char **str);
+int		ft_doublestrlen(char **str);
+int		ft_isnot_empty_str(const char *str);
+
 #endif
