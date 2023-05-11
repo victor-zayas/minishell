@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:44:17 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 07:49:56 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 11:12:50 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,24 @@ int	ft_dinput(t_cmd	*cmd, int i)
 {
 	pid_t	pid;
 	int		fd;
+	int		flag;
 
+	flag = 0;
+	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == 0)
 	{
+		signal(SIGINT, my_signal_exit);
 		ft_get_heredoc(cmd->args[i]);
 		exit (0);
 	}
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &flag, 0);
 	fd = open("heredoc_tmp", O_RDONLY);
 	dup2(fd, STDIN_FILENO);
 	close(fd);
 	unlink("heredoc_tmp");
+	signal(SIGINT, my_signal);
+	if (WEXITSTATUS(flag) == 130)
+		return (2);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 08:42:24 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 08:27:22 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 10:57:55 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,10 @@ void	my_signal_mod(int sig)
 {
 	if (sig == 2)
 		g_sig_exit = 130;
+}
+
+void	my_signal_exit(int sig)
+{
+	if (sig == 2)
+		exit(130);
 }

@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:56:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 06:49:24 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 11:06:12 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	input_handle(t_cmd	*cmd, int i)
 			ft_descriptor_error(cmd, i);
 			return (1);
 		}
+		if (cmd->flag == 1)
+			return (1);
 		cmd->in_it++;
 	}
 	return (0);
@@ -47,6 +49,8 @@ int	output_handle(t_cmd	*cmd, int i)
 			ft_descriptor_error(cmd, i);
 			return (1);
 		}
+		if (cmd->flag == 2)
+			return (2);
 		cmd->out_it++;
 	}
 	return (0);
@@ -55,17 +59,23 @@ int	output_handle(t_cmd	*cmd, int i)
 int	open_fd(t_cmd *cmd)
 {
 	int	i;
+	int	input_flag;
+	int	output_flag;
 
 	i = 0;
+	input_flag = 0;
+	output_flag = 0;
 	cmd->flag = 0;
 	cmd->in_it = 0;
 	cmd->out_it = 0;
 	while (cmd->args[i] && (cmd->in >= 1 || cmd->out >= 1
 			|| cmd->double_in >= 1 || cmd->double_out >= 1))
 	{
-		if (input_handle(cmd, i))
+		input_flag = input_handle(cmd, i);
+		if (input_flag == 1)
 			return (1);
-		if (output_handle(cmd, i))
+		output_flag = output_handle(cmd, i);
+		if (output_flag == 1)
 			return (1);
 		i++;
 	}
