@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:56:16 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 11:06:12 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 14:05:58 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ int	input_handle(t_cmd	*cmd, int i)
 		return (0);
 	if (i == cmd->input[cmd->in_it])
 	{
+		if (cmd->args[i] && (!ft_strncmp(cmd->args[i], ">>", 3)
+				|| !ft_strncmp(cmd->args[i], "<<", 3)))
+			return (write(2,
+					"bash: syntax error near unexpected token `newline'\n",
+					52), 1);
 		if (!ft_strncmp(cmd->args[i - 1], "<<", 3))
 			cmd->flag = ft_dinput(cmd, i);
 		else
@@ -40,6 +45,11 @@ int	output_handle(t_cmd	*cmd, int i)
 		return (0);
 	if (i == cmd->output[cmd->out_it])
 	{
+		if (cmd->args[i] && (!ft_strncmp(cmd->args[i], ">>", 3)
+				|| !ft_strncmp(cmd->args[i], "<<", 3)))
+			return (write(2,
+					"bash: syntax error near unexpected token `newline'\n",
+					52), 1);
 		if (!ft_strncmp(cmd->args[i - 1], ">>", 3))
 			cmd->flag = ft_doutput(cmd, i);
 		else
