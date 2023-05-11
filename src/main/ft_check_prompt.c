@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 17:17:08 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 07:27:07 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 08:38:16 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
  * @return int 
  */
 
-int	ft_check_prompt(t_env	*env, char *prompt)
+int	ft_check_prompt(char *prompt)
 {
 	if (ft_chr_in_set(';', prompt) || !ft_strncmp(prompt, "||", 2)
 		|| !ft_strncmp(prompt, "&&", 2) || ft_chr_in_set('*', prompt))
-		return (ft_doublefree(env->env), free(env->oldpwd), free(prompt),
+		return (free(prompt),
 			ft_putstr_fd("syntax error: special character\n", 2), 1);
 	else
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/05/11 08:32:27 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 08:38:23 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	my_signal(int sig);
 void	my_signal_mod(int sig);
 
 		// BONUS_FORMAT_CHECKER
-int		ft_check_prompt(t_env *env, char *prompt);
+int		ft_check_prompt(char *prompt);
 
 		// PRINT
 void	print(t_cmd	*cmd);

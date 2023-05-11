@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/05/11 07:28:26 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 08:38:30 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ int	main(int argc, char **argv, char **envp)
 			free(prompt);
 			continue ;
 		}
-		if (ft_check_prompt(&env, prompt))
-			return (1);
+		if (ft_check_prompt(prompt))
+			continue ;
 		ft_choped(&args, &env, prompt);
 		g_sig_exit = 0;
 	}
