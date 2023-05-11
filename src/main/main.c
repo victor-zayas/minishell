@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/05/11 06:49:24 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 07:28:26 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_choped(t_cmd *args, t_env *env, char *prompt)
 
 	aux = prompt;
 	args->env = env;
-	init_args(args);
+	args = ft_memset(args, 0, sizeof(t_cmd));
 	add_history(aux);
 	if (get_data(args, aux, 0) == -1)
 	{

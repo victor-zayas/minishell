@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/05/11 06:50:49 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 07:28:53 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@
 	// MAIN
 		// INIT
 void	init_shell(t_cmd *cmd, t_env *env, char	**envp, int *stdio);
-void	init_args(t_cmd	*cmd);
 
 		// STDIO_RELATED
 void	getstdio(int *stdio);

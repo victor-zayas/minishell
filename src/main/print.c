@@ -6,11 +6,18 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:01 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/03/30 23:12:52 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 07:36:12 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
+
+/**
+ * @brief Used to know how many blocks were allocated and what values
+ * 	does each token get whenever we inset some input to the prompt.
+ * 
+ * @param cmd 
+ */
 
 void	print(t_cmd *cmd)
 {

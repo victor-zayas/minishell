@@ -6,17 +6,32 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 08:38:39 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 06:49:24 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 07:38:54 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/**
+ * @brief We get the STDIN & STDOUT values inside an array, just to be sure
+ * 	we do not lose them (although we know they are ussualy 0 for STDIN & 1
+ * 	for STDOUT).
+ * 
+ * @param stdio 
+ */
 
 void	getstdio(int *stdio)
 {
 	stdio[0] = dup(STDIN_FILENO);
 	stdio[1] = dup(STDOUT_FILENO);
 }
+
+/**
+ * @brief In this function, we reset the values of both STDIN & STDOUT to
+ * 	start, it is used in case we use any redirection for input/output purposes.
+ * 
+ * @param stdio 
+ */
 
 void	resetstdio(int *stdio)
 {

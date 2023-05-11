@@ -6,11 +6,47 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:44:17 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 06:49:24 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 07:49:56 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/**
+ * @brief This function needs two arguments to work, (<<) && (delimiter),
+ * 	Basically, it is responsible of reading the users input once the command
+ * 	is executed, until the delimiter that you have given is found in the input.
+ * 	// Introduction
+ * 	Once the delimiter is found, heredoc just stops reading the input and
+ * 	DOES NOT PRINT NOTHING ON SCREEN, NOTHING BUT A NEWLINE.
+ * 
+ * 	Of course, if you give it a command like [cat], before the heredoc, it will
+ * 	print the read values until the last one (not included).
+ * 	// Input-> open/fd/unlink
+ * 	Every programmer should know that if we have an input, we have something
+ * 	that we can read, so in this case, since we want to keep the input (do not
+ * 	ask me why, heredoc just works like that) we need something to keep it.
+ * 
+ * 	In our program, we have used a file to store the input, I have given it the
+ * 	name: "heredoc_tmp".
+ * 	Basically, all the input recieved that does not match the delimiter, is
+ * 	directly stored in there separated with a newline.
+ * 
+ * 	Once we have readen the delimited, we use the new "unlink" function,
+ * 	that closes "heredoc_tmp" and leaves no race of our actions.
+ * 	// Loop
+ * 	How do we know if the given argument is the demiliter?
+ * 	Easy, we just use "readline" function along with a never-ending loop,
+ * 	the returning value of readline is the string we need to compare with
+ * 	the delimiter.
+ * 
+ * 	We do that with ft_strlen and ft_strncmp, if the input is concordant
+ * 	with the delimiter, we break the loop.
+ * 
+ * 	Else,
+ * 	We just write the string ONTO THE OPENED FILE!! NOT STDOUT!!
+ * @param arg 
+ */
 
 void	ft_get_heredoc(char	*arg)
 {

@@ -6,11 +6,23 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 17:17:08 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 06:49:24 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 07:27:07 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/**
+ * @brief Checks whether there is any special character involving 
+ * 			the Bonus Part inside the Prompt given by the user
+ * 
+ * 			In case, there is, the enviroment structure and its corresponding
+ * 			values are freed and an error message is returned to the user.
+ * 
+ * @param env 
+ * @param prompt 
+ * @return int 
+ */
 
 int	ft_check_prompt(t_env	*env, char *prompt)
 {

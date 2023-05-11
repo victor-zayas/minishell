@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 08:34:47 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 06:49:24 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 07:35:16 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,23 @@
 
 extern int	g_sig_exit;
 
-void	init_args(t_cmd *cmd)
-{
-	cmd = ft_memset(cmd, 0, sizeof(t_cmd));
-	cmd->size = 0;
-	cmd->words = 0;
-	cmd->quotes = 0;
-	cmd->double_quotes = 0;
-	cmd->pipes = 0;
-	cmd->out = 0;
-	cmd->in = 0;
-	cmd->dollars = 0;
-	cmd->double_in = 0;
-	cmd->double_out = 0;
-	cmd->flag = 0;
-	cmd->in_it = 0;
-	cmd->out_it = 0;
-	cmd->cmd_start = 0;
-	cmd->pipe_pos = 0;
-	cmd->block_pos = 0;
-	cmd->redir_end = 0;
-	cmd->i.i1 = 0;
-	cmd->i.i2 = 0;
-	cmd->i.i3 = 0;
-	cmd->i.i4 = 0;
-	cmd->i.i5 = 0;
-}
+/**
+ * @brief There are a lot of things happening here:
+ * 	1. Enviroment is copied with ft_env_strdup
+ * 	2. OLDPWD variable is unset from the Enviroment, since it cannot appear
+ * 	3. Some values of env structure are initialized to zero.
+ * 	4. We use signal function to control signal behaviour
+ * 	5. In case the global value is true, it means that a child process
+ * 		has exited with that value.
+ * 	6. We initialize the cmd structure with ft_memset
+ * 	7. To be sure, we get the STDIN & STDOUT values inside a local two block
+ * 	sized array, to be able to retrieve the values later on when changed.
+ * 
+ * @param cmd 
+ * @param env 
+ * @param envp 
+ * @param stdio 
+ */
 
 void	init_shell(t_cmd *cmd, t_env *env, char	**envp, int *stdio)
 {
@@ -51,6 +42,6 @@ void	init_shell(t_cmd *cmd, t_env *env, char	**envp, int *stdio)
 	if (g_sig_exit)
 		env->exit_value = g_sig_exit;
 	signal(SIGQUIT, SIG_IGN);
-	init_args(cmd);
+	cmd = ft_memset(cmd, 0, sizeof(t_cmd));
 	getstdio(stdio);
 }
