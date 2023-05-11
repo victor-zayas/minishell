@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/05/11 08:27:34 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 08:32:27 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	ft_child(t_cmd *cmd, t_env *env, int *fd, int cmd_start);
 
 		// ERROR RELATED
 void	error(char *error);
-void	pipe_error(t_cmd *cmd, t_env *env);
+void	pipe_error(void);
 
 		// TOKEN
 int		ft_string_trader(t_cmd *cmd, int start);

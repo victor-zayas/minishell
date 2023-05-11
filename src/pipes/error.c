@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 19:50:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 06:49:24 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/11 08:31:58 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,9 @@ void	ft_descriptor_error(t_cmd	*cmd, int i)
 		exit (1);
 }
 
-void	pipe_error(t_cmd	*cmd, t_env	*env)
+void	pipe_error(void)
 {
-	write(2, "bash: syntax error near unexpected token ", 42);
-	write(2, *cmd->args, 1);
-	write(2, "\n", 2);
-	env->exit_value = 1;
+	write(2, "bash: syntax error near unexpected token `|'\n", 46);
 	return ;
 }
 
