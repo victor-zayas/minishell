@@ -43,35 +43,12 @@ OBJ = $(addsuffix .o, $(BUILTINS)) \
 SRCDIR := src/
 
 # SRCS #
-
 BUILTINS = builtings cd echo env exit export ft_env_strdup pwd unset
-
 MAIN = ft_check_prompt init_struct main print rstio signal
-
 MAS = get_data utils_iterator
-
 PIPES = pipes utils_pipe_fd utils_pipes error
-
 REDIR = input output redir
-
 CMD = cmd exec init_cmd utils_cmd
-
-LEXER = inter lexer lexer2 token_append tokens
-
-# SRCS #
-
-BUILTINS = builtings cd echo env exit export ft_env_strdup pwd unset
-
-MAIN = ft_check_prompt init_struct main print rstio signal
-
-MAS = get_data utils_iterator
-
-PIPES = pipes utils_pipe_fd utils_pipes error
-
-REDIR = input output redir
-
-CMD = cmd exec init_cmd utils_cmd
-
 LEXER = inter lexer lexer2 token_append tokens
 
 SRCS = $(addsuffix .c, $(addprefix src/builtings/, $(BUILTINS))) \
@@ -117,8 +94,8 @@ all: $(NAME)
 
 $(NAME): $(addprefix objs/, $(OBJ))
 	make -C libft all
-#	$(CC) $(CFLAGS) $(LREADLINE_FLAGS) $(READLINE) libft/libft.a $^ -o $(NAME)
-	$(CC) $(CFLAGS) $(LINUX_READLINE) $(addprefix objs/, $(OBJ)) libft/libft.a -o $(NAME)
+	$(CC) $(CFLAGS) $(LREADLINE_FLAGS) $(addprefix objs/, $(OBJ)) $(READLINE) libft/libft.a -o $(NAME)
+#	$(CC) $(CFLAGS) $(LINUX_READLINE) $(addprefix objs/, $(OBJ)) libft/libft.a -o $(NAME)
 	echo "$(BLUE)༺ library created༻$(END)"
 	echo "$$MINISHELL"
 	echo "Special thanks to $(GREEN)༺ HELECHO༻$(END)  & $(GREEN)༺ Arteria༻$(END)"
