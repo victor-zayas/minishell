@@ -13,7 +13,7 @@
 #include "../../includes/minishell.h"
 
 /**
- * @brief Checks whether there is any special character involving 
+ * @brief	Checks whether there is any special character involving 
  * 			the Bonus Part inside the Prompt given by the user
  * 
  * 			In case, there is, the enviroment structure and its corresponding

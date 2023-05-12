@@ -13,8 +13,8 @@
 #include"minishell.h"
 
 /**
- * @brief Used to know how many blocks were allocated and what values
- * 	does each token get whenever we inset some input to the prompt.
+ * @brief	Used to know how many blocks were allocated and what values
+ *  		does each token get whenever we inset some input to the prompt.
  * 
  * @param cmd 
  */

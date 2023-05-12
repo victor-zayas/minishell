@@ -13,13 +13,12 @@
 #include "../../includes/minishell.h"
 
 /**
- * @brief We get the STDIN & STDOUT values inside an array, just to be sure
- * 	we do not lose them (although we know they are ussualy 0 for STDIN & 1
- * 	for STDOUT).
+ * @brief	We get the STDIN & STDOUT values inside an array, just to be sure
+ * 			we do not lose them.
+ * 			(although we know they are ussualy 0 for STDIN & 1 for STDOUT).
  * 
- * @param stdio 
+ * @param stdio File Descriptor
  */
-
 void	getstdio(int *stdio)
 {
 	stdio[0] = dup(STDIN_FILENO);
@@ -27,12 +26,12 @@ void	getstdio(int *stdio)
 }
 
 /**
- * @brief In this function, we reset the values of both STDIN & STDOUT to
- * 	start, it is used in case we use any redirection for input/output purposes.
+ * @brief	In this function, we reset the values of both STDIN & STDOUT to
+ * 			start, it is used in case we use any redirection for
+ * 			input/output purposes.
  * 
- * @param stdio 
+ * @param stdio File Descriptor
  */
-
 void	resetstdio(int *stdio)
 {
 	dup2(stdio[0], STDIN_FILENO);

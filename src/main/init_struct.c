@@ -15,7 +15,7 @@
 extern int	g_sig_exit;
 
 /**
- * @brief There are a lot of things happening here:
+ * @brief	There are a lot of things happening here:
  * 	1. Enviroment is copied with ft_env_strdup
  * 	2. OLDPWD variable is unset from the Enviroment, since it cannot appear
  * 	3. Some values of env structure are initialized to zero.

@@ -20,7 +20,7 @@
  * @param prompt String that we get from the CL.
  * @param it Int set to zero to iterate through the loop.
  */
-void	ft_lexer(t_cmd	*args, char	*prompt, int it)
+void	ft_lexer(t_cmd *args, char *prompt, int it)
 {
 	while (prompt[it])
 	{
@@ -49,14 +49,14 @@ void	ft_lexer(t_cmd	*args, char	*prompt, int it)
 }
 
 /**
- * @brief Allocation of tokens, along with input & output arrays is made
+ * @brief	Allocation of tokens, along with input & output arrays is made
  * 			by using the previously recollected data.
- * 		Tokens are filled with the content inside prompt.
+ * 			Tokens are filled with the content inside prompt.
  * 
  * @param cmd Structure holding data regarding tokens, cmds, ...
  * @param prompt String that we get from the CL.
  */
-void	get_token(t_cmd	*cmd, char	*prompt)
+void	get_token(t_cmd	*cmd, char *prompt)
 {
 	cmd->args = (char **)malloc(sizeof(char *) * (cmd->words + cmd->quotes
 				+ cmd->double_quotes + cmd->pipes + cmd->out

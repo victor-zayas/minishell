@@ -14,7 +14,7 @@
 
 
 /**
- * @brief In this function the string of the dollar token is
+ * @brief	In this function the string of the dollar token is
  * 			checked in the Enviroment.
  * 
  * 			In case it is found, the content of the token changes
@@ -54,7 +54,7 @@ void	ft_findtokenval(t_cmd *cmd, t_env *env, char *aux, int p_ar)
  * @param env Structure holding enviroment, tokens, ...
  * @return int Position of the string after the dollar token.
  */
-int	ft_gettokenval(int p_ar, int p_str, t_cmd	*cmd, t_env	*env)
+int	ft_gettokenval(int p_ar, int p_str, t_cmd *cmd, t_env *env)
 {
 	char	*aux;
 	int		start;
@@ -74,14 +74,14 @@ int	ft_gettokenval(int p_ar, int p_str, t_cmd	*cmd, t_env	*env)
 }
 
 /**
- * @brief In this function dollar tokens are expanded using
+ * @brief	In this function dollar tokens are expanded using
  * 			different sources, as [env] or [exit_val].
  * 
  * @param p_ar Position of the token inside double-str of cmd->args.
  * @param cmd Structure that holds tokens, cmd, fds...
  * @param env Structure holding enviroment, tokens, ...
  */
-void	ft_expand_dollars(int p_ar, t_cmd	*cmd, t_env	*env)
+void	ft_expand_dollars(int p_ar, t_cmd *cmd, t_env *env)
 {
 	int	i;
 
@@ -105,7 +105,7 @@ void	ft_expand_dollars(int p_ar, t_cmd	*cmd, t_env	*env)
 }
 
 /**
- * @brief This function is primarily designed for trimming quotes,
+ * @brief	This function is primarily designed for trimming quotes,
  * 			and if any dollar token is found inside a double quote
  * 			it is also expanded as the other ones.
  * 
@@ -136,9 +136,10 @@ void	ft_quote_trim(t_cmd	*cmd, t_env	*env, int i)
 }
 
 /**
- * @brief This functions cuts and expands different tokens:
+ * @brief	This functions cuts and expands different tokens:
  * 			Any closed simple & double quote is trimmed and resized
  * 			in the cmd structure.
+ * 
  * 			Any acceptable dollar token is expanded to its value, if it
  * 			is found.
  * 

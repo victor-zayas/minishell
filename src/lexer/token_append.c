@@ -13,13 +13,13 @@
 #include "../../includes/minishell.h"
 
 /**
- * @brief This function closes an open portion of the prompt that
- * 		has been cut to store a dollar token previously.
+ * @brief	This function closes an open portion of the prompt that
+ * 			has been cut to store a dollar token previously.
  * 
  * @param str A one-sided [open]double quote content inside prompt.
  * @return char* A closed double quote token.
  */
-char	*ft_append_left_side(char	*str)
+char	*ft_append_left_side(char *str)
 {
 	char	*aux;
 	int		i;
@@ -44,7 +44,7 @@ char	*ft_append_left_side(char	*str)
  * @param str A dollar token string.
  * @return char* A closed double quote dollar token.
  */
-char	*ft_append_both_sides(char	*str)
+char	*ft_append_both_sides(char *str)
 {
 	char	*aux;
 	int		i;

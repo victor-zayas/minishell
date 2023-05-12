@@ -15,8 +15,8 @@
 extern int	g_sig_exit;
 
 /**
- * @brief This function rewrite the prompt
- * 		  with signals that interrupt the process.
+ * @brief	This function rewrite the prompt
+ * 			with signals that interrupt the process.
  * 
  * @param sig Int of signal to be printed in prompt.
  */

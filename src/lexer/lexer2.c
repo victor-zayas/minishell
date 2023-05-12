@@ -23,7 +23,7 @@
  * @param pos Position of the current chr inside prompt.
  * @return char* The same prompt without sp-char is returned.
  */
-char	*one_lexer(t_cmd	*cmd, char	*prompt, int pos)
+char	*one_lexer(t_cmd *cmd, char	*prompt, int pos)
 {
 	int		aux;
 	char	*tmp;
@@ -46,7 +46,7 @@ char	*one_lexer(t_cmd	*cmd, char	*prompt, int pos)
  * @param pos Position of the current chr inside prompt.
  * @return char* The same prompt without sp-char is returned.
  */
-char	*two_lexer(t_cmd	*cmd, char	*prompt, int pos)
+char	*two_lexer(t_cmd *cmd, char *prompt, int pos)
 {
 	int		aux;
 	char	*tmp;

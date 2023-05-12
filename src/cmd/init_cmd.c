@@ -13,7 +13,7 @@
 #include "../../includes/minishell.h"
 
 /**
- * @brief Error cases such as empty pipes, redirections or no commands
+ * @brief	Error cases such as empty pipes, redirections or no commands
  * 			are handled in a correct way.
  * 
    @param cmd Structure holding data regarding tokens, cmds, ...
@@ -47,9 +47,9 @@ int	ft_init_flags(t_cmd	*cmd)
 }
 
 /**
- * @brief Initializes the strings inside [cmd] structure for execution.
- * 		There are many cases involving errors and non-terminated expressions
- * 		that have been taking into account.
+ * @brief	Initializes the strings inside [cmd] structure for execution.
+ * 			There are many cases involving errors and non-terminated expressions
+ * 			that have been taking into account.
  * 
  * @param cmd Structure holding data regarding tokens, cmds, ...
  * @param env Structure holding enviroment, tokens, ...

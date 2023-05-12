@@ -13,10 +13,11 @@
 #include "../../includes/minishell.h"
 
 /**
- * @brief This function checks if the prompt is correct.
+ * @brief	This function checks if argument from the prompt is a
+ * 			valid word to exec the builtin.
  * 
  * @param str Returns int value if that string is a valid command.
- * @return int 
+ * @return int return (0) in case of true, 1 in false
  */
 int	ft_checker(char	*str)
 {

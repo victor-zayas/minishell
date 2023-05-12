@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-int	get_cmd(t_cmd	*cmd, t_env	*env)
+int	get_cmd(t_cmd *cmd, t_env *env)
 {
 	int	i;
 	int	len;
@@ -41,7 +41,7 @@ char	*ft_stephen_jokin(t_cmd *cmd, int i)
 	return (aux);
 }
 
-int	ft_redir(int pos, char	**args, t_cmd	*cmd)
+int	ft_redir(int pos, char **args, t_cmd *cmd)
 {
 	if (!args[pos + 1])
 	{
@@ -63,7 +63,7 @@ int	ft_redir(int pos, char	**args, t_cmd	*cmd)
 }
 
 /**
- * @brief [ft_selector] is the function that initializes, allocates, fills
+ * @brief	[ft_selector] is the function that initializes, allocates, fills
  * 			and executes the necessary commands and special chrs
  * 			for the correct output.
  * 

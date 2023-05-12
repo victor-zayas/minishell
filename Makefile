@@ -52,7 +52,7 @@ PLAIN_SRCS =	$(addsuffix .c, $(addprefix builtings/, $(BUILTINS)))	\
 SRCS := $(addprefix $(SRCDIR), $(PLAIN_SRCS))
 OBJS := $(addprefix $(OBJDIR), $(PLAIN_SRCS:.c=.o))
 
-# COLORS #
+# ASCII COLORS #
 BLACK=\033[0;30m
 RED=\033[0;31m
 GREEN=\033[0;32m
@@ -100,12 +100,12 @@ clean:
 	make -C libft clean
 	rm -rf $(OBJDIR)
 	$(RM) $(OBJS)
-		echo "$(RED)༺ Objs deleted༻$(END)"
+	echo "$(RED)༺ Objs deleted༻$(END)"
 
 fclean: clean
 	make -C libft fclean
 	$(RM) $(NAME)
-		echo "$(YELLOW)༺ Executable deleted༻$(END)"
+	echo "$(YELLOW)༺ Executable deleted༻$(END)"
 
 re: fclean all
 
