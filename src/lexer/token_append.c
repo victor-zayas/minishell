@@ -6,12 +6,19 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 20:09:44 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 06:49:24 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/12 12:18:06 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * @brief This function closes an open portion of the prompt that
+ * 		has been cut to store a dollar token previously.
+ * 
+ * @param str A one-sided [open]double quote content inside prompt.
+ * @return char* A closed double quote token.
+ */
 char	*ft_append_left_side(char	*str)
 {
 	char	*aux;
@@ -31,6 +38,12 @@ char	*ft_append_left_side(char	*str)
 	return (aux);
 }
 
+/**
+ * @brief This function closes a dollar token by both sides with double quotes.
+ * 
+ * @param str A dollar token string.
+ * @return char* A closed double quote dollar token.
+ */
 char	*ft_append_both_sides(char	*str)
 {
 	char	*aux;

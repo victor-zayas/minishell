@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:30:48 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 08:32:42 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/12 12:39:12 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,14 @@ int	ft_redir(int pos, char	**args, t_cmd	*cmd)
 	return (pos);
 }
 
+/**
+ * @brief [ft_selector] is the function that initializes, allocates, fills
+ * 			and executes the necessary commands and special chrs
+ * 			for the correct output.
+ * 
+ * @param cmd Structure holding data regarding tokens, cmds, ...
+ * @param env Structure used for enviroment, OLDPWD, ...
+ */
 void	ft_selector(t_cmd *cmd, t_env *env)
 {
 	int	len;

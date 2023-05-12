@@ -6,11 +6,21 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:33:36 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 06:49:24 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/12 11:47:47 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/**
+ * @brief Function that clasifies characters from the prompt
+ * 			in order to know how many bytes we need to allocate.
+ * 
+ * @param args Structure holding data regarding tokens, cmds, ...
+ * @param prompt String that we get from the CL.
+ * @param it Int set to zero to iterate through the loop.
+ * @return int Returns (-1) when error, else (counted chrs of prompt).
+ */
 
 int	get_data(t_cmd	*args, char	*prompt, int it)
 {
@@ -39,6 +49,16 @@ int	get_data(t_cmd	*args, char	*prompt, int it)
 	return (it);
 }
 
+
+/**
+ * @brief This function collects information about what sp chars
+ * 			have been found and keeps the number inside cmd structure.
+ * 
+ * @param cmd Structure holding data regarding tokens, cmds, ...
+ * @param prompt String that we get from the CL.
+ * @param i Iterator value set to position of prompt 
+ * @return int Returns val of prompt position after sp chr.
+ */
 int	i_sp(t_cmd	*cmd, char	*prompt, int i)
 {
 	if (prompt[i] == '|')

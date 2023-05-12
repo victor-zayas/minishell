@@ -6,12 +6,21 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:10:57 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 13:12:51 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/12 11:52:51 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * @brief This function skips a number of chrs depending if any special
+ * 			chrs have been found inside the prompt.
+ * 
+ * @param cmd Structure holding data regarding tokens, cmds, ...
+ * @param prompt String that we get from the CL.
+ * @param i Iterator value set to position of prompt 
+ * @return int Returns val of prompt position after sp chr.
+ */
 int	i_cwords(t_cmd	*cmd, char	*prompt, int pos)
 {
 	while (prompt[pos] != '\'' && prompt[pos] != '"' && prompt[pos] != ' '
@@ -22,6 +31,15 @@ int	i_cwords(t_cmd	*cmd, char	*prompt, int pos)
 	return (pos);
 }
 
+/**
+ * @brief This function skips a number of chrs depending if any simple quote
+ * 			has been found inside the prompt, else (-1) error is returned.
+ * 
+ * @param cmd Structure holding data regarding tokens, cmds, ...
+ * @param prompt String that we get from the CL.
+ * @param i Iterator value set to position of prompt 
+ * @return int Returns val of prompt position after sp chr.
+ */
 int	i_qwords(t_cmd	*cmd, char	*prompt, int pos)
 {
 	if (!prompt[pos + 1])
@@ -37,6 +55,15 @@ int	i_qwords(t_cmd	*cmd, char	*prompt, int pos)
 	return (pos);
 }
 
+/**
+ * @brief This function skips a number of chrs depending if any double quote
+ * 			has been found inside the prompt, else (-1) error is returned.
+ * 
+ * @param cmd Structure holding data regarding tokens, cmds, ...
+ * @param prompt String that we get from the CL.
+ * @param i Iterator value set to position of prompt 
+ * @return int Returns val of prompt position after sp chr.
+ */
 int	i_dqwords(t_cmd	*cmd, char	*prompt, int pos)
 {
 	if (!prompt[pos + 1])
@@ -63,6 +90,14 @@ int	i_dqwords(t_cmd	*cmd, char	*prompt, int pos)
 	return (pos);
 }
 
+/**
+ * @brief This function checks for any sp chars after the dollar token.
+ * 
+ * @param cmd Structure holding data regarding tokens, cmds, ...
+ * @param prompt String that we get from the CL.
+ * @param i Iterator value set to position of prompt 
+ * @return int Returns val of prompt position after sp chr.
+ */
 int	i_dollars(t_cmd	*cmd, char	*prompt, int pos)
 {
 	while (prompt[pos] != '\'' && prompt[pos] != '"' && prompt[pos] != ' '

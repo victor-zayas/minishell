@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:11:46 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/05/12 10:16:43 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/12 11:41:09 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	g_sig_exit;
  * @brief This function defines the order in which the minishell is executed.
  * 
  * @param args Command info structure.
- * @param env Enviroment of minishell.
+ * @param env Structure involving enviroment.
  * @param prompt Commands from the prompt.
  */
 void	ft_choped(t_cmd *args, t_env *env, char *prompt)
@@ -47,7 +47,7 @@ void	ft_choped(t_cmd *args, t_env *env, char *prompt)
  * @brief Main function of Minishell.
  * 
  * @param argc Nb of arguments.
- * @param argvCcontent of the arguments (prompt received).
+ * @param argv Content of the arguments (prompt received).
  * @param envp Original enviroment to be copied.
  * @return int 
  */

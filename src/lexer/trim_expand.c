@@ -1,17 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inter.c                                            :+:      :+:    :+:   */
+/*   trim_expand.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:55 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/12 10:16:13 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/12 12:30:34 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+
+/**
+ * @brief In this function the string of the dollar token is
+ * 			checked in the Enviroment.
+ * 
+ * 			In case it is found, the content of the token changes
+ * 			to its expanded value.
+ * 
+ * @param cmd Structure that holds tokens, cmd, fds...
+ * @param env Structure holding enviroment, tokens, ...
+ * @param aux Dollar token to be expanded.
+ * @param p_ar Position[array] of the dollar token inside the array of string.
+ */
 void	ft_findtokenval(t_cmd *cmd, t_env *env, char *aux, int p_ar)
 {
 	int	start;
@@ -32,6 +45,15 @@ void	ft_findtokenval(t_cmd *cmd, t_env *env, char *aux, int p_ar)
 	}
 }
 
+/**
+ * @brief 
+ * 
+ * @param p_ar Array[array][s] position of the token variable [cmd->args].
+ * @param p_str String[a][string] position of the token variable [cmd->args].
+ * @param cmd Structure that holds tokens, cmd, fds...
+ * @param env Structure holding enviroment, tokens, ...
+ * @return int Position of the string after the dollar token.
+ */
 int	ft_gettokenval(int p_ar, int p_str, t_cmd	*cmd, t_env	*env)
 {
 	char	*aux;
@@ -51,6 +73,14 @@ int	ft_gettokenval(int p_ar, int p_str, t_cmd	*cmd, t_env	*env)
 	return (free(aux), p_str);
 }
 
+/**
+ * @brief In this function dollar tokens are expanded using
+ * 			different sources, as [env] or [exit_val].
+ * 
+ * @param p_ar Position of the token inside double-str of cmd->args.
+ * @param cmd Structure that holds tokens, cmd, fds...
+ * @param env Structure holding enviroment, tokens, ...
+ */
 void	ft_expand_dollars(int p_ar, t_cmd	*cmd, t_env	*env)
 {
 	int	i;
@@ -74,6 +104,15 @@ void	ft_expand_dollars(int p_ar, t_cmd	*cmd, t_env	*env)
 	}
 }
 
+/**
+ * @brief This function is primarily designed for trimming quotes,
+ * 			and if any dollar token is found inside a double quote
+ * 			it is also expanded as the other ones.
+ * 
+ * @param cmd Structure that holds tokens, cmd, fds...
+ * @param env Structure holding enviroment, tokens, ...
+ * @param i The position inside args that holds the string to be modified.
+ */
 void	ft_quote_trim(t_cmd	*cmd, t_env	*env, int i)
 {
 	char	*aux;
@@ -96,6 +135,16 @@ void	ft_quote_trim(t_cmd	*cmd, t_env	*env, int i)
 		ft_expand_dollars(i, cmd, env);
 }
 
+/**
+ * @brief This functions cuts and expands different tokens:
+ * 			Any closed simple & double quote is trimmed and resized
+ * 			in the cmd structure.
+ * 			Any acceptable dollar token is expanded to its value, if it
+ * 			is found.
+ * 
+ * @param cmd Structure that holds tokens, cmd, fds...
+ * @param env Structure holding enviroment, tokens, ...
+ */
 void	ft_trimexpand(t_cmd *cmd, t_env *env)
 {
 	int			i;

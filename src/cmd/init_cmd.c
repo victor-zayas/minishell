@@ -6,12 +6,19 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 20:06:25 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 10:03:34 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/12 12:37:15 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * @brief Error cases such as empty pipes, redirections or no commands
+ * 			are handled in a correct way.
+ * 
+   @param cmd Structure holding data regarding tokens, cmds, ...
+ * @return int Returns different values, depending error cases.
+ */
 int	ft_init_flags(t_cmd	*cmd)
 {
 	int		flag;
@@ -39,6 +46,15 @@ int	ft_init_flags(t_cmd	*cmd)
 	return (0);
 }
 
+/**
+ * @brief Initializes the strings inside [cmd] structure for execution.
+ * 		There are many cases involving errors and non-terminated expressions
+ * 		that have been taking into account.
+ * 
+ * @param cmd Structure holding data regarding tokens, cmds, ...
+ * @param env Structure holding enviroment, tokens, ...
+ * @return int Returns the corresponding flag in cases any error happens.
+ */
 int	init_cmd(t_cmd	*cmd, t_env	*env)
 {
 	int	flag;
