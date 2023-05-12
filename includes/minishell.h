@@ -6,7 +6,7 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:41:08 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/05/11 11:16:24 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:23:52 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_choped(t_cmd	*args, t_env *env, char	*prompt);
 
 // GET_TOKEN
 void	get_token(t_cmd	*cmd, char *prompt);
-void	get_inter(t_cmd *cmd, t_env *env);
+void	ft_trimexpand(t_cmd *cmd, t_env *env);
 
 // GET_DATA
 	// INDEX
@@ -120,6 +120,7 @@ void	ft_refill_env(t_env	*env, char	**aux, int i);
 // PIPEX
 	// INDEX
 void	ft_pipe(t_cmd *cmd, t_env *env, int pos, int check);
+void	init_cmd_pipes(t_cmd	*cmd, int pipe_end, int sp_end);
 
 	// FORK LOOP
 void	ft_adult(t_cmd	*cmd, t_env	*env, int cmd_pos);

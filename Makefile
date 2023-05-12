@@ -16,7 +16,7 @@ NAME = minishell
 
 # FLAGS #
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 RM = /bin/rm -rf
 
 # READLINE #
@@ -36,10 +36,10 @@ SRCDIR := src/
 BUILTINS = builtings cd echo env exit export ft_env_strdup pwd unset
 MAIN = ft_check_prompt init_struct main print rstio signal
 MAS = get_data utils_iterator
-PIPES = pipes utils_pipe_fd utils_pipes error
-REDIR = input output redir
+PIPES = pipes utils_pipe_fd utils_pipes error init_pipes
+REDIR = redir_input redir_output redir_index
 CMD = cmd exec init_cmd utils_cmd
-LEXER = inter lexer lexer2 token_append tokens
+LEXER = trim_expand lexer lexer2 token_append tokens
 
 PLAIN_SRCS =	$(addsuffix .c, $(addprefix builtings/, $(BUILTINS)))	\
 				$(addsuffix .c, $(addprefix main/, $(MAIN)))			\

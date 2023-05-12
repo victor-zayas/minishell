@@ -6,55 +6,11 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:14:49 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 10:20:07 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:24:29 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-void	atrb_fill(t_cmd	*cmd, int pipe_pos, int block_pos)
-{
-	while (cmd->args[++pipe_pos] && ft_strncmp(cmd->args[pipe_pos], "|", 1))
-	{
-		if (!ft_strncmp(cmd->args[pipe_pos], ">", 1)
-			|| !ft_strncmp(cmd->args[pipe_pos], "<", 1))
-		{
-			cmd->redir_end = block_pos;
-			if (cmd->args[pipe_pos])
-				pipe_pos += 1;
-		}
-		else
-			cmd->atrb[block_pos++] = ft_stephen_jokin(cmd, pipe_pos);
-	}
-	cmd->pipe_pos = pipe_pos;
-	cmd->block_pos = block_pos;
-}
-
-int	ft_string_trader(t_cmd *cmd, int start)
-{
-	int	len;
-
-	ft_doublefree(cmd->cmd);
-	cmd->cmd = ft_doublestrdup(cmd->atrb);
-	ft_doublefree(cmd->atrb);
-	len = 0;
-	while (cmd->args[start + len] && ft_strncmp(cmd->args[start + len], "|", 1)
-		&& ft_strncmp(cmd->args[start + len], ">", 1)
-		&& ft_strncmp(cmd->args[start + len], "<", 1))
-		len += 1;
-	cmd->atrb = (char **)malloc(sizeof(char *) * (len + 1));
-	len = 0;
-	while (cmd->args[start + len]
-		&& ft_strncmp(cmd->args[start + len], "|", 1)
-		&& ft_strncmp(cmd->args[start + len], ">", 1)
-		&& ft_strncmp(cmd->args[start + len], "<", 1))
-	{
-		cmd->atrb[len] = ft_stephen_jokin(cmd, start + len);
-		len++;
-	}
-	cmd->atrb[len] = NULL;
-	return (len);
-}
 
 void	ft_child(t_cmd	*cmd, t_env	*env, int	*fd, int cmd_start)
 {

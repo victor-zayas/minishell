@@ -6,13 +6,13 @@
 /*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:08:31 by jaizpuru          #+#    #+#             */
-/*   Updated: 2023/05/11 10:30:09 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:25:41 by jaizpuru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_grandfather(t_cmd *cmd, t_env *env, int pos)
+void	ft_get_pipes(t_cmd *cmd, t_env *env, int pos)
 {
 	int	i;
 
@@ -69,7 +69,7 @@ void	ft_adult(t_cmd	*cmd, t_env	*env, int cmd_pos)
 	return ;
 }
 
-void	ft_fork_pipe(t_cmd	*cmd, t_env	*env)
+void	ft_index_piper(t_cmd	*cmd, t_env	*env)
 {
 	pid_t	pid;
 
@@ -78,7 +78,7 @@ void	ft_fork_pipe(t_cmd	*cmd, t_env	*env)
 		perror("Error");
 	if (pid == 0)
 	{
-		ft_grandfather(cmd, env, cmd->pipe_pos);
+		ft_get_pipes(cmd, env, cmd->pipe_pos);
 		if (cmd->flag == -1)
 			exit (130);
 		cmd->i.i5 = get_last_redir(cmd->args, 0);
@@ -97,23 +97,9 @@ void	ft_fork_pipe(t_cmd	*cmd, t_env	*env)
 
 void	ft_pipe(t_cmd *cmd, t_env *env, int pipe_end, int sp_end)
 {
-	int		it_atrb;
-
 	cmd->flag = 0;
-	it_atrb = 0;
-	close_str(cmd->cmd, pipe_end, sp_end);
-	while (cmd->args[pipe_end] && ft_strncmp(cmd->args[pipe_end], "|", 2))
-		pipe_end++;
-	if (!ft_strncmp(cmd->args[pipe_end], "|", 1)
-		&& cmd->args[pipe_end + 1] == NULL)
-	{
-		ft_doublefree(cmd->cmd);
-		free(cmd->atrb);
-		return ;
-	}
-	atrb_fill(cmd, pipe_end, it_atrb);
-	close_str(cmd->atrb, cmd->block_pos, cmd->redir_end);
-	ft_fork_pipe(cmd, env);
+	init_cmd_pipes(cmd, pipe_end, sp_end);
+	ft_index_piper(cmd, env);
 	ft_doublefree(cmd->cmd);
 	ft_doublefree(cmd->atrb);
 }
