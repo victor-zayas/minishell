@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtings.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaizpuru <jaizpuru@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:25:36 by vzaya-s           #+#    #+#             */
-/*   Updated: 2023/05/11 06:49:24 by jaizpuru         ###   ########.fr       */
+/*   Updated: 2023/06/07 19:40:34 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,19 @@ int	ft_checker(char	*str)
 {
 	if (!str)
 		return (1);
-	if (ft_strncmp(str, "pwd", 3) == 0)
+	if (ft_strncmp(str, "pwd", ft_strlen("pwd")) == 0)
 		return (0);
-	else if (ft_strncmp(str, "env", 3) == 0)
+	else if (ft_strncmp(str, "env", ft_strlen("env")) == 0)
 		return (0);
-	else if (str && ft_strncmp(str, "echo", 4) == 0)
+	else if (str && ft_strncmp(str, "echo", ft_strlen("echo")) == 0)
 		return (0);
-	else if (str && ft_strncmp(str, "exit", 4) == 0)
+	else if (str && ft_strncmp(str, "exit", ft_strlen("exit")) == 0)
 		return (0);
-	else if (str && ft_strncmp(str, "cd", 2) == 0)
+	else if (str && ft_strncmp(str, "cd", ft_strlen("cd")) == 0)
 		return (0);
-	else if (str && ft_strncmp(str, "export", 6) == 0)
+	else if (str && ft_strncmp(str, "export", ft_strlen("export")) == 0)
 		return (0);
-	else if (str && ft_strncmp(str, "unset", 5) == 0)
+	else if (str && ft_strncmp(str, "unset", ft_strlen("unset")) == 0)
 		return (0);
 	return (1);
 }
